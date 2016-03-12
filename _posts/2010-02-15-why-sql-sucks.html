@@ -1,0 +1,491 @@
+---
+layout: post
+status: publish
+published: true
+title: Why SQL Sucks
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 414
+wordpress_url: http://blog.schauderhaft.de/?p=414
+date: '2010-02-15 00:13:42 +0100'
+date_gmt: '2010-02-14 22:13:42 +0100'
+categories:
+- Softwaredevelopment
+tags:
+- sql
+comments:
+- id: 374
+  author: C.W.Zachary
+  author_email: cwzachary@roadrunner.com
+  author_url: ''
+  date: '2010-02-16 17:40:42 +0100'
+  date_gmt: '2010-02-16 15:40:42 +0100'
+  content: "I see a lot of complaints about SQL and how it's so hard to write, etc.,
+    but I honestly don't see the problem.  If you understand ANSI SQL and understand
+    the variations your database(s) support, there should be little trouble.  If you
+    want more validation of your sql statements, make them stored procedures.  \r\n\r\nI
+    personally find that I generate many on-the-fly sql calls, based on passed-in
+    parameters.  Create methods that add to your sql statement, which would allow
+    for the re-use you mention."
+- id: 375
+  author: Jim Danby
+  author_email: jimd@gmail.com
+  author_url: ''
+  date: '2010-02-16 18:01:37 +0100'
+  date_gmt: '2010-02-16 16:01:37 +0100'
+  content: "My answers to your points...\r\n\r\nHard to parse.\r\nHardly. Intellisense
+    does a very good job of it. It's a simple language and very easy to parse with
+    simple code.\r\n\r\nHard to parse for humans.\r\nI find it quite easy. If you
+    write bad statements then you get bad readability but isn't that true of all languages?\r\n\r\nNot
+    consistent.\r\nYour argument about the HAVING clause shows lack of knowledge.
+    HAVING and WHERE are two separate and completely different statements. One is
+    for grouping, one for row filtering. They can be used together for different purposes.\r\nThere
+    is a variation between systems. Some systems allow you to use expressions wherever
+    you like, some don't. There is an ANSI SQL but people tend to go outside of this.
+    It's like HTML in that respect. Not ideal but it's up to yuo as the developer
+    to use the right stuff if you want it to be fully portable.\r\n\r\n(Almost) no
+    modularization\r\nWhat about views and functions? They do what you need. Depending
+    upon your SQL implementation you can index them too.\r\n\r\nNo decent development
+    environment appart from the target environment\r\nDepends upon your system. SQL
+    Server has a great environment provided with the software and you can use Visual
+    Studio too. Other systems may not be so good but there are open source tools out
+    there.\r\n\r\nWhy are all these things true about SQL?\r\nThey aren't."
+- id: 376
+  author: esjr
+  author_email: edmsp@hotmail.com
+  author_url: http://www.ducis.net
+  date: '2010-02-16 18:04:15 +0100'
+  date_gmt: '2010-02-16 16:04:15 +0100'
+  content: 'It appears to me you have got the title wrong. It should read : Why I
+    suck at SQL.'
+- id: 377
+  author: Vatar
+  author_email: munsey@gmail.com
+  author_url: ''
+  date: '2010-02-16 18:59:27 +0100'
+  date_gmt: '2010-02-16 16:59:27 +0100'
+  content: Or "Why people with decades old ideas flame me".
+- id: 378
+  author: Adam Zochowski
+  author_email: adam.zochowski@gmail.com
+  author_url: http://apz.nofate.com
+  date: '2010-02-16 21:27:37 +0100'
+  date_gmt: '2010-02-16 19:27:37 +0100'
+  content: "Readability:\r\n\r\nsql is very human readable\r\nsql is somewhat intelisense,
+    most problematic is that one can't use columns in select until from clause is
+    defined. (see ms-linq dialect that ensures that from clause is first)\r\n\r\n--\r\n\r\nConsistency:\r\n\r\n''On''
+    clause is used to define which records to match during join\r\n''Where'' clause
+    is used to define which records to process in aggregates\r\n''Having'' clause
+    is used to define which records to return in the resultset\r\n\r\nVery consistent!
+    \ Three ways to filter data, but each during specific purpose : \r\non : filter
+    on join\r\nwhere: filter after join before aggregate\r\nhaving: filter after aggregate.\r\n\r\nEven
+    their order says clearly which ones are processed when: On in joins, then where,
+    then you group (aka: define aggregate) then you filter on aggregate results (having
+    clause).\r\n\r\n--\r\n\r\nModularization\r\n\r\nWhat about views? inherited tables?
+    \ materialized views?  Scalar functions?  Table functions? Custom aggregate functions?
+    \ Triggers?  Relationships (PK&#47;FK)?  Computed columns? \r\n\r\n--\r\n\r\nTarget
+    environment issue\r\n\r\nYou are complaining that sql can only be tested in same
+    database with same schema as your system expects?\r\n\r\nIt is like complaining
+    that your JVM class can only be tested in java (not c++), and only if it contains
+    other classes that it inherits from.\r\n\r\nCheers\r\n\r\nAdam Zochowski"
+- id: 379
+  author: Jens Schauder
+  author_email: jens.schauder@lineas.de
+  author_url: http://blog.schauderhaft.de
+  date: '2010-02-16 22:12:26 +0100'
+  date_gmt: '2010-02-16 20:12:26 +0100'
+  content: "Wow, so many comments, what an honor for my little blog. Thanx everybody
+    for contributing\r\n\r\n@ C.W.Zachary\r\nIt's not so much that I consider SQL
+    difficult to write. Statements up to a couple hundred lines are fairly straight
+    forward to write I think. But they are a nightmare to maintain, read, reuse and
+    test. Part of the problem is the persistent nature of databases, but part of it
+    is the due to the nature of SQL"
+- id: 380
+  author: Jens Schauder
+  author_email: jens.schauder@lineas.de
+  author_url: http://blog.schauderhaft.de
+  date: '2010-02-16 22:31:08 +0100'
+  date_gmt: '2010-02-16 20:31:08 +0100'
+  content: "@Jim Danby\r\n\r\nI might be wrong on the parsing part, maybe its just
+    the tool vendors that took awfully long to come up with something usefull. I agree
+    though that the capabilities of IntelliJ IDEA are pretty impressive when it comes
+    to intellisense on SQL. Interesting though that this comes form a 'mainly Java
+    IDE'\r\n\r\nHaving and where do exactly the same thing, just at different time
+    in the processing. You can 'proof' that by replacing a having by a where clause
+    on a inner select, or replacing a where clause by a having clause after grouping
+    on all columns (assuming the rows are unique, which can be achieved by a row counting
+    column)\r\n\r\nNo, views do only very little of what I need. For an example consider
+    the sql statement in this article: <a href=\"&#47;2008&#47;08&#47;20&#47;sql-tricks-3-intervall-join\"
+    rel=\"nofollow\">&#47;2008&#47;08&#47;20&#47;sql-tricks-3-intervall-join<&#47;a>
+    (don't worry about the german noise around it and sorry for the bad formatting).
+    As you can see it contains exactly the same subsqlect just on different tables.
+    There are no easy ways to reduce this code duplication. The same applies for joins,
+    group by and combinations of columns."
+- id: 381
+  author: Jens Schauder
+  author_email: jens.schauder@lineas.de
+  author_url: http://blog.schauderhaft.de
+  date: '2010-02-16 22:43:01 +0100'
+  date_gmt: '2010-02-16 20:43:01 +0100'
+  content: "@Adam Zochowski Your comparison is only a little off. I am fine with needing
+    the execution environment (rdbms vs jvm). But yes I hate it that there is no concept
+    comparable to interfaces, which allows to exchange the tables a sql statement
+    operates on or (the currently not existing) modular pieces of a sql statement.
+    It would allow for true unit testing of sql statments (among others)\r\n\r\nOf
+    course if you rely heavily on inheritance in an class based OO language you might
+    easily end up in the same kind of mess one is stuck in with SQL."
+- id: 382
+  author: Nicolas
+  author_email: bousquet.n@gmail.com
+  author_url: ''
+  date: '2010-02-17 02:11:18 +0100'
+  date_gmt: '2010-02-17 00:11:18 +0100'
+  content: "Hard to parse for computers : Don't care i sure it's possible.\r\nHard
+    to parse for humans : Yes because SQL is very expressive and concise. So a few
+    line can do many complex things.\r\nNot consistent: Do not agree, it's logical
+    and consistent if you think at what it really does.\r\n\r\n(Almost) no modularization:
+    Don't use plain SQL. You should generate it. It's fairly esay, for example in
+    PL-SQL. That what I do all the time. But you are true, we need more modularity.\r\n\r\nNo
+    decent development environment appart from the target environment : True I know
+    what you can have when you develop java, and at least, all SQL environment i know
+    sucks. (didn't try Visual studio&acirc;&euro;&brvbar;)\r\n\r\nWhy does a curious
+    developer with over 10 years of experience in database development know some reasons
+    why SQL sucks, but can&acirc;&euro;&trade;t answer the simple question, why these
+    reasons apply?\r\n\r\nPleople don't know, don't like SQL. SQL is old fashioned.
+    But they forget, when you do do some serious data manipulation, not only on 100K
+    line, but on 10 000K line (we have 30 000K to 300 000K line in our table and have
+    to compute sum, aggregate etc on it).\r\n\r\nIn SQL it is just a few minutes hours.
+    And a few line of code. Do it with hibernate and java : hundred, thousand line
+    of code, chance you have Out of Memory Exceptions and it will be far far slower."
+- id: 383
+  author: Jens Schauder
+  author_email: jens.schauder@lineas.de
+  author_url: http://blog.schauderhaft.de
+  date: '2010-02-17 07:55:58 +0100'
+  date_gmt: '2010-02-17 05:55:58 +0100'
+  content: "@Nicolas\r\n\r\nWell PL-SQL isn't that much better then SQL when it comes
+    to the design of the language. You do get modularization but you loose the set
+    base declaritive way of thinking and working which is a strength of SQL\r\n\r\nAnd
+    I agree with your last two paragraphs. While hibernate is great for many things,
+    it sucks extremely at large volume processing. And SQL shows it powers. Yet this
+    doesn't make it a nice language."
+- id: 397
+  author: Robby
+  author_email: robby.r@gmail.com
+  author_url: ''
+  date: '2010-03-03 17:49:55 +0100'
+  date_gmt: '2010-03-03 15:49:55 +0100'
+  content: "I am shocked... SHOCKED... at how many people have commented that SQL
+    is easy to understand. SQL has been the bane of my multi-year developer career.
+    I mean how can anyone understand this little beauty:\r\n\r\n\t\t\t\tSELECT\r\n\t\t\t\t\t
+    \ COUNT(*) AS Pipeline_Count\r\n\t\t\t\t\t, SUM(CASE WHEN OP.Rating_BidderRate
+    > 3 THEN 1 ELSE 0 END) AS PipelineProbableWinCount\r\n\t\t\t\t\t, SUM(OP.EstimateAward_Value)
+    AS Pipeline_TotalValue\r\n\t\t\t\t\t, SUM(CASE WHEN OP.Rating_BidderRate > 3 THEN
+    OP.EstimateAward_Value ELSE 0 END) AS Pipeline_ProbableWinTotalValue\r\n\t\t\t\t\t,
+    SUM(CASE WHEN O.Recompete = 1 AND OP.Rating_BidderRate >= 7 THEN OP.EstimateAward_Value
+    ELSE 0 END) AS Pipeline_RecompeteIncumbentTotalValue\r\n\t\t\t\t\t, SUM(CASE WHEN
+    O.Recompete = 0 AND OP.Rating_BidderRate > 3 THEN OP.EstimateAward_Value ELSE
+    0 END) AS Pipeline_NewTotalValue\r\n\t\t\t\t\t, SUM(CASE WHEN O.Recompete = 1
+    AND OP.Rating_BidderRate BETWEEN 4 AND 6 THEN OP.EstimateAward_Value ELSE 0 END)
+    AS Pipeline_RecompeteNonIncumbentTotalValue\r\n\t\t\t\t\t, C.Id AS CompanyId\r\n\t\t\t\tFROM
+    \r\n\t\t\t\t\tdbo.OpportunityPipeline OP WITH (NOLOCK)"
+- id: 416
+  author: DingensBummens | Das Ding was Bummst &raquo; My Google Reader Shared Items
+    &#8211; Monday, February 15, 2010
+  author_email: ''
+  author_url: http://www.dingensbummens.de/2010/02/15/my-google-reader-shared-items-monday-february-15-2010/
+  date: '2010-03-29 21:31:39 +0200'
+  date_gmt: '2010-03-29 19:31:39 +0200'
+  content: "[...] Why SQL Sucks [...]"
+- id: 424
+  author: notnot
+  author_email: no@reply.com
+  author_url: ''
+  date: '2010-04-08 12:26:08 +0200'
+  date_gmt: '2010-04-08 10:26:08 +0200'
+  content: "Ich finde die Einw&Atilde;&curren;nde etwas naiv. \r\n\r\nSQL ist eine
+    relationale Sprache und ist im Umgang mit Mengen imperativen Sprachen immer &Atilde;&frac14;berlegen.
+    Sie ist mit logischen Sprachen verwandt wie RegEx oder Prolog, aber mit imperativen
+    wie Fortran. SQL ist regul&Atilde;&curren;ren Mengen und regul&Atilde;&curren;ren
+    Ausdr&Atilde;&frac14;cken daher verwandter als Imperativen und Prozeduren, gleich
+    ob SQL prozedurale Programmierung &Atilde;&curren;hnlich RegEx auf eine Art unterst&Atilde;&frac14;tzt.\r\n\r\nIch
+    empfehle dringend ein Studium Datenstrukturen und Mathematik (Mengenlehre, Relationen,
+    Abbildungen). Dann leuchten einem die Vorteile ein. Es hat Gr&Atilde;&frac14;nde,
+    warum man AIs, Graphen oder Netzwerke mit Hilfe solcher Sprachen programmiert."
+- id: 426
+  author: Jens Schauder
+  author_email: jens.schauder@lineas.de
+  author_url: http://blog.schauderhaft.de
+  date: '2010-04-09 08:10:46 +0200'
+  date_gmt: '2010-04-09 06:10:46 +0200'
+  content: "Hi notnot,\r\nich habe keinerlei Interesse SQL durch etwas imperatives
+    zu ersetzen. In der Tat ist die deklarative Natur von SQL eine St&Atilde;&curren;rke,
+    ebenso wie die mathematischen Fundamente.\r\n\r\nDas ist aber in keiner Weise
+    ein Gegenargument gegen meine Argumente. Mein Beispiel von Fortran als moderne
+    Sprache war in dieser Hinsicht vielleicht etwas ungeschickt. Es ging mir dabei
+    nur um ein Beispiel f&Atilde;&frac14;r eine Sprache, die zumindest grundlegende
+    Mechanismen der Modularisierung unterst&Atilde;&frac14;tzt."
+- id: 595
+  author: rolfen
+  author_email: superzouz@hotmail.com
+  author_url: http://weknowtoomuch.com
+  date: '2010-07-04 23:51:17 +0200'
+  date_gmt: '2010-07-04 21:51:17 +0200'
+  content: So, what's the alternative?
+- id: 656
+  author: Lee
+  author_email: indigoredster@gmail.com
+  author_url: ''
+  date: '2010-07-30 23:20:27 +0200'
+  date_gmt: '2010-07-30 21:20:27 +0200'
+  content: "I completley agree: SQL sucks. \r\nI do C,C++,Python,Pascal, embedded
+    everything etc and SQL just sucks as a language. It reminds me of the first BASIC.
+    I often just find myself dumping it all to CSV and parsing it a homebrew info-structure
+    way."
+- id: 714
+  author: Dave_Eels
+  author_email: dewetellis@gmail.com
+  author_url: ''
+  date: '2010-09-02 10:13:05 +0200'
+  date_gmt: '2010-09-02 08:13:05 +0200'
+  content: "If you cant understand that beauty. Try going back to SQL 101. \r\n\r\nThe
+    Solution is actually very simple. If you dont like SQL dont use it. If you dont
+    want to use SQL &#47; dont dislike it.  You will very soon find out how easy it
+    really is comparing to other Database Sotware. Try adding the same effort into
+    learning SQL as Complaining about it. It sometimes helps. \r\n\r\nTutorial 1\r\n
+    - Making the First Letter of a Word Uppercase. \r\n- Hold in shift and press the
+    letter. ( Dont make it difficult by turning Caps Lock on  , Press the letter and
+    turn caps lock off )\r\n\r\nEverything is Simpler if you know how to use it."
+- id: 1096
+  author: Mike
+  author_email: b2897838@lhsdv.com
+  author_url: ''
+  date: '2010-10-30 19:01:15 +0200'
+  date_gmt: '2010-10-30 17:01:15 +0200'
+  content: "Like Lee above, I have programmed in many languages, and I agree -- SQL
+    sucks.  It appears to have been designed by people who only wanted to ensure their
+    job security, like bureaucrats who create needlessly arcane processes.\r\n\r\nTo
+    Dave above: simpler is a relative term.  Because something is simple to you does
+    not mean it could not be simpler than it is."
+- id: 1196
+  author: Patatpatat
+  author_email: patatpatat@gmail.com
+  author_url: ''
+  date: '2010-11-27 08:25:57 +0100'
+  date_gmt: '2010-11-27 06:25:57 +0100'
+  content: SQL easy to understand? Perhaps. But it's a chore to perform any moderately
+    complex calculation just with SQL alone. Yes, any SQL sympathetic would say that
+    calculations is not what SQL is for. But it would make development so much easier
+    if something like the model clause was implemented more widely.
+- id: 3395
+  author: Peter Coleman
+  author_email: pcoleman@shcrein.com
+  author_url: ''
+  date: '2011-04-17 13:40:09 +0200'
+  date_gmt: '2011-04-17 11:40:09 +0200'
+  content: Well, SQL may suck that is true. A lot of things in the IT business suck.  At
+    least SQL also swallows what it sucks.
+- id: 3625
+  author: John
+  author_email: globalw2866@gmail.com
+  author_url: ''
+  date: '2011-05-31 03:12:16 +0200'
+  date_gmt: '2011-05-31 01:12:16 +0200'
+  content: "I'm glad everyone is writing about this.  I'm currently starting a PL&#47;SQL
+    class.\r\nFrankly, it's frustrating and time-consuming to learn.  The entity relationship
+    model is easy to understand in an abstract manner.  The language used to articulate
+    the model and manipulate its information is difficult.\r\nI have not gotten as
+    frustrated when learning .Net, Java, data structures, etc.  It's not that I can't
+    easily imagine solutions to problems using sql.  But I can't easily implement
+    or challenge my understanding of concepts like I can in other languages.  I can't
+    just jump right into testing my understanding of aggregate function with my own
+    made up problem as easily as I could test my knowledge of a queue, gui placement,
+    serial over bluetooth, interfaces, etc.  \r\nConstructively, do I know another(or
+    better) way? No, I don't have enough experience to know of any other way but I
+    do have enough experience to say it is frustrating."
+- id: 4111
+  author: andy
+  author_email: youdont@need2know.com
+  author_url: ''
+  date: '2011-08-22 22:08:06 +0200'
+  date_gmt: '2011-08-22 20:08:06 +0200'
+  content: "I find it curious how many commenters are actually defending SQL.\r\n\r\nSQL
+    DOES suck.  Its syntax is clunky, and outdated.  Not only that, but the syntax
+    hasn't even evolved since it was originally created.  Not one bit.  Sure, more
+    functionality has been added over time, but that's about it.\r\n\r\nI'd have to
+    single out the JOIN syntax as a key example of what I'm talking about.\r\n\r\nWith
+    Hibernate, I can simply say something like this (don't get me wrong, I hate Hibernate
+    as well):\r\n\r\nselect id \r\nfrom table1 \r\nwhere\r\ntable1.table2.table3.table4.table5.table6.something
+    = \"blah\"\r\n\r\nQuite a long and involved query, to be sure, but the above syntax
+    makes it about as succinct as it can get.\r\n\r\nCase in point -> Now consider
+    the monstrosity you'd get with the same query, in SQL:\r\n\r\nselect t1.id\r\nfrom
+    table1 as t1\r\ninner join table2 as t2\r\non t1.foo = t2.bar\r\ninner join table3
+    as t3\r\non t2.foo = t3.bar\r\ninner join table4 as t4\r\non t3.foo = t4.bar\r\ninner
+    join table5 as t5\r\non t4.foo = t5.bar\r\ninner join table6 as t6\r\non t5.foo
+    = t6.bar\r\nwhere t6..something = \"blah\"\r\n\r\nAgain, SQL's syntax is one of
+    the most obtuse I've ever encountered, and it would do well to evolve even slightly"
+- id: 4440
+  author: Jamin Ohmoto-Frederick
+  author_email: jamin1001@gmail.com
+  author_url: ''
+  date: '2011-11-08 07:31:30 +0100'
+  date_gmt: '2011-11-08 05:31:30 +0100'
+  content: I have been trying to figure this out too, as SQL has always seemed clunky
+    and unintuitive to me.  I happened across The Third Manifesto by Date &amp; Darwen
+    a few years ago, where there is a clear criticism of the current, sad state of
+    affairs. Something that was once a simple model (original Codd model based on
+    relational algebra) went astray and grew into the ugly beast of SQL.  Not only
+    that but the three-value logic that includes UNKNOWN (i.e., NULL) can lead to
+    data inconsistencies.
+- id: 5914
+  author: ragequit
+  author_email: re.reatard@tarded.info
+  author_url: ''
+  date: '2012-04-18 09:02:19 +0200'
+  date_gmt: '2012-04-18 07:02:19 +0200'
+  content: "1. Yeah, SQL uses a 1940s syntax that makes my fingers hurt and that repels
+    the mind. This is because... it is based on 1940s theory. Wow, the POWAR OV LERNING.
+    You know what else has a really ugly syntax and still gets used? Assembly. EWWW!
+    Who wants to code in assembly? Segfault amirite? OMFG SQL makes me feel soooooo
+    old, if only it had the elegance of a modern language like PHP or C#. Wait...\r\n\r\n2.
+    IDE? lol. Complaining about broken autocomplete? Double lol. \"Intuitive\"? Triple
+    lol. Go back to the Genius Bar, or reboot your copy of Windows 8 Metro on ARM,
+    or whatever. Here's a nickel, go buy a real operating system.\r\n\r\n3. SQL is
+    for storing data and altering in two dimensions and for retrieving and altering
+    it in multiple dimensions. This is all it is for. Making it Turing complete is
+    a side-effect you should try avoiding. And not everything is an Object, bro, and
+    sometimes storing it in equal horizontal relationships, rather than by inventing
+    an 'Object' hierachy for every single thing, is superior: maybe you want to perform
+    functions on data, rather than objectThing2.use ((objectThing2.retrieveForeignObject
+    (objectThing1.stuff))) for everySingleDatumYouEverNeed. SQL is only slightly less
+    clunky syntactically and far less powerful but that's because IT IS NOT FOR WRITING
+    PROGRAMS. When you treat it like it is, it's like trying to mix a drink with a
+    sledgehammer. You can, but..."
+- id: 6158
+  author: AndyF
+  author_email: Wizkids@Compuserve.com
+  author_url: ''
+  date: '2012-04-27 15:56:10 +0200'
+  date_gmt: '2012-04-27 13:56:10 +0200'
+  content: "I love it when 'experts' (or should I say) \"eck-spurts\" tell  you something
+    is easy and that you just dont understand it.  Uh, yeah, right, exactly.  Although
+    you have learned SQL well, I highly doubt you did that in ONE day.  So what people
+    are saying here (and I agree whole heartedly) is that SQL is not AT ALL intuitive
+    or even sensible.\r\n\r\nThe most clear evidence of this is that SQL was developed
+    by very very smart guys without a single lick of common sense.  When rocket designers
+    design rockets, yeah, okay, complexity and unfriendlyness is okay - they are only
+    used by rocket guys - but when you produce a database with a scripting language
+    and its intended to be used by millions, for God's sake, think of the millions
+    NOT the rocket guy siting next to you.  This is where SQL fails utterly and of
+    course, this has always been the bane of Microsoft.  They think hiring the brightest
+    guys in the world is somehow \"good\" - but look at Apple - they hire the brightest
+    people WITH common sense.\r\n\r\nThats why the iPod, iPhone, etc sell so well
+    and can be used by millions and millions around the world - because common sense
+    is always a consideration.\r\n\r\nIf Microsoft actually had any competition, believe
+    me, SQL would have died a long long long time ago - along with the rest of Microsoft."
+- id: 10336
+  author: kerry
+  author_email: kerry52301@hotmail.com
+  author_url: ''
+  date: '2013-11-19 19:27:33 +0100'
+  date_gmt: '2013-11-19 17:27:33 +0100'
+  content: "sql\r\nis old. is slow. where todays computers let you do your self with
+    your own programing much more then sql can do. sql server is prehistoric. and
+    it put all the security settings on my computer down to zero. not kidding.. to
+    0.  it modified my security when I used it. whats the main priority of a database.
+    storeing data. reading. writeing. formatting. anyone can make a beter one them
+    selves. and when you put it on the net.. ie explorer find in the edit tab does
+    a query search. just by the find command. theres more but im trying to forget
+    the experance I had with sql"
+- id: 10337
+  author: kerry
+  author_email: kerry52301@hotmail.com
+  author_url: ''
+  date: '2013-11-19 19:34:01 +0100'
+  date_gmt: '2013-11-19 17:34:01 +0100'
+  content: "ps\r\nI forgot to say\r\nI am going to build my own database with simple
+    programing.  to prove my other post"
+- id: 187257
+  author: Software Dinosaur
+  author_email: bxdobs@zeak.ca
+  author_url: ''
+  date: '2014-08-05 22:42:17 +0200'
+  date_gmt: '2014-08-05 20:42:17 +0200'
+  content: "After spending 39 years developing with various platforms like: dBase,
+    Foxpro, Access, and the last 17 years with Progress 4GL, In my humble opinion,
+    SQL usage has grown to the point that everyone is just afraid to jump ship ...
+    I argue that this isn't because SQL is the best RDBMS but rather people who have
+    invested their lives learning this monster are not open or willing to switch to
+    something better. ... based on what I have experienced,  4GL  vs SQL is like much
+    like the  Video format wars of Betamax vs VHS ... Betamax was the better format
+    but VHS won the day because Betamax Vendors, in my opinion, were shortsighted
+    (I am being Kind)...  SQL software vendors are lucky  that  companies like Progress
+    haven't taken that lesson from history and done a better job of marketing their
+    products and or making products usable for the MASSES. (again I am being Kind)
+    \r\n\r\nIt is a given that; SQL SELECT statements for simple 1 or 2 relational
+    tables are easy to understand for most people ... beyond that, SQL gets ugly real
+    quick  ... 4GL in contrast, can be easily understood to any level of relation
+    and complexity. For example, a seasoned SQL report designer recently was tasked
+    with a report requiring a 5 table join using a SQL report building tool ... he
+    gave up after several hours of pulling his hair out fighting with the Join's  ...
+    using 4GL,  joining any number of tables is trivial regardless of complexity so
+    \ this report was coded and run in minutes."
+- id: 364896
+  author: georgesjeandeni
+  author_email: twitter.georgesjeandeni@example.com
+  author_url: https://twitter.com/georgesjeandeni
+  date: '2014-12-09 19:44:46 +0100'
+  date_gmt: '2014-12-09 17:44:46 +0100'
+  content: "I totally agree. Sql is really difficult to code with. I was writing SQL
+    join statements when I decided to find people with this same problem. That's when
+    I googled \"I hate sql joins\" and fell on your blog...\r\n\r\nPlus, judging from
+    the long list of comments here, I'm glad that you provided a place for people
+    to rant."
+- id: 373415
+  author: Kevin Cochran
+  author_email: enucomp@gmail.com
+  author_url: ''
+  date: '2015-01-09 17:46:31 +0100'
+  date_gmt: '2015-01-09 15:46:31 +0100'
+  content: "Hmm. Very interesting comments. Well, I love SQL. I've been using for
+    nearly 20 years. And just FYI, I also love OO languages like C++, Java, and C#.
+    By and large, most SQL-haters simply suffer from inexperience. SQL is a tool,
+    and while there have been other attempts to communicate with a database (more
+    recently LINQ, EF, but as always there are also direct APIs), no one has come
+    close to the functionality and flexibility SQL has to offer. Can it be improved?
+    Of course! Should it be improved? Of course! But that doesn't make it a bad language!\r\n\r\nAnd
+    for all the SQL-haters: Just because you hate SQL doesn't make you right. Most
+    people who love SQL are well-beyond novices, so if you want to become a DB expert
+    in general, try embracing SQL for a year and explore all it offers. You might
+    find SQL-lovers not as stupid as you think."
+- id: 381871
+  author: Michu
+  author_email: michu@yahoo.com
+  author_url: ''
+  date: '2015-02-17 22:56:07 +0100'
+  date_gmt: '2015-02-17 20:56:07 +0100'
+  content: SQL sucks, period. If anyone doesn't agree with that, it means he didn't
+    work on project big enough to see how old fashioned SQL is. Of course you can
+    write tens or hundreds of getters, we have ORM etc. But it's just not enough.
+    SQL is always something I struggle most with. Relatively simple relations are
+    hard to describe with SQL and there is no convenient structure.
+---
+<p>About two weeks ago at work we discussed different strategies on testing databases. Although there are ways to do it, they are all more or less painful. And finally we all parted in agreeing: (SQL) databases suck, SQL sucks and testing databases and SQL sucks as well. We are only testing this crap because the only thing worse then database tests are untested databases. But complaining doesn't help. I have heard you are supposed to ask 5 times "why?" when faced with a problem. Maybe it was 7 times? Don't know lets start with asking it once:</p>
+<p><strong>Why does SQL suck?<&#47;strong></p>
+<p><strong>Hard to parse for computers<&#47;strong>: I don't know much about parsing, but it seems to be hard for a computer to identify the bits and pieces of a SQL statement, when it is not really SQL but just almost SQL. This results in really crappy IDE support, because the editor doesn't know what you are trying to write, before you finished it.</p>
+<p><strong>Hard to parse for humans<&#47;strong>: One of the ideas behind the design of SQL was to make it look almost like a sentence. While this works for trivial statements, it completely falls a part when you have some serious statement at hand. For an extremely bad example check out the <a href="&#47;2009&#47;06&#47;18&#47;building-a-turing-engine-in-oracle-sql-using-the-model-clause&#47;">turing engine implemented in Oracle SQL<&#47;a>. Side Note: aren't some fluent APIs trying to do just that.</p>
+<p><strong>Not consistent<&#47;strong>:Why does the having clause exist? Why nothing similar for group by? Who came up with the syntax of analytic functions. Why can I reference an expression defined the column list in the where clause, but not in the group by clause?</p>
+<p><strong>(Almost) no modularization<&#47;strong>: You need this real complex where condition in another select? Copy it. You need to join the same bunch of table, just with a tiny change in one condition? Copy it. You want to use the same group by clause in a different select? Copy it. There are few little things you can do to break your SQL code, but it is nothing compared to the power of a modern language like ... e.g. ... <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Fortran_66#FORTRAN_66">Fortran 66<&#47;a>.</p>
+<p><strong>No decent development environment appart from the target environment<&#47;strong> When you write a java application (and you do it the way it is supposed to be done), most of it can get compiled, and executed in a simple JVM. No web server needed, nor application server. Compare that to SQL. The only thing that can properly compile and execute a SQL statement is a database. And not just any database, but a database with all the accessed tables created and filled with data. This does not help when writing SQL code.</p>
+<p>Ok, we have some reasons for SQL sucking so badly. What's next. How about asking "Why?" again?</p>
+<p><strong>Why are all these things true about SQL?<&#47;strong></p>
+<p>That answer is easy: I have no idea. So let's step right ahead and ask again "Why"</p>
+<p><strong>Why does a curious developer with over 10 years of experience in database development know some reasons why SQL sucks, but can't answer the simple question, why these reasons apply?<&#47;strong></p>
+<p>I think it is because nobody really discusses SQL (at least not loud enough for me to hear). I know there is the No-SQL-Movement, but I happen to think that a relational database is a pretty decent solution to many things. There are also things like the Hibernate Criteria API and HQL. But those do not operate on database schemas, but on classes and objects. While this is fine when you wan't to work with classes and objects, it sucks when you just want to process large tables. When processiong 100K database records pulling each out of the database, instanciate an object, manipulating it and writing it back is not an option.</p>
+<p>Yet a way to write queries in a more modular, easy to parse and easy to test way would be highly appreciated.</p>

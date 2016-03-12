@@ -1,0 +1,41 @@
+<p>Lets assume you are tasked with testing a method with the following signature:</p>
+<p>    public int foo(int a, int b);</p>
+<p>If you know nothing else about the method, what would you use for test values? Here are the values I would choose:</p>
+<p>0, 1, -1, 4711, -2342, Integer.MIN_VALUE, Integer.MAX_VALUE</p>
+<p>Why? Well experience shows that these values cover cases where software is likely to fail.</p>
+<p>Why? Because at or between these values many algorithms and formulars behave different. Take the <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Heaviside_step_function">Heaviside-function<&#47;a> as an example. It looks like this:</p>
+<p><a href="http:&#47;&#47;upload.wikimedia.org&#47;wikipedia&#47;commons&#47;thumb&#47;2&#47;2a&#47;Heaviside.svg&#47;330px-Heaviside.svg.png"><img alt="" src="http:&#47;&#47;upload.wikimedia.org&#47;wikipedia&#47;commons&#47;thumb&#47;2&#47;2a&#47;Heaviside.svg&#47;330px-Heaviside.svg.png" title="Heaviside Step Function" class="alignnone" width="330" height="170" &#47;><&#47;a></p>
+<p>If you got the implementation right for 4711 it is probably correct for 4712 and 4713 as well, but bets for 0 and -1 are completely off. </p>
+<p>So if you reverse that thought, what does this tell you about how to design or implement your software?</p>
+<p>I think it results in two rules:</p>
+<p><strong>Avoid superfluous corner cases<&#47;strong></p>
+<p>Sometimes the way you choose to implement affects the existence of boundaries. Take for example the Standard Code Retreat programming problem of <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Conway's_Game_of_Life">Conways Game Of Life<&#47;a>. Follow the link if you don't know it, I'll wait.</p>
+<p>Welcome back. When people try to implement it for the first time, about half of them use an array (or list of lists) for representing each cell. This forces them to initialize the array. Since they don't want to waste huge amounts of memory, they typically initialize only a limited area, let's say 100x100 cells.</p>
+<p>Now we got a corner case that didn't exist in the original problem: What ever we do we have to take extra care if we do it on or next to the edge of the initialized grid.</p>
+<p>You are probably thinking: "But my problems aren't abstract thingies on infinite grids, so this doesn't apply." Sorry, you are most probably wrong. Do you loop over collections in your code? If you do you have a new boundary condition: an empty collection vs. a non-empty collection. These two go through two significant different code paths in code structured like this:</p>
+<pre lang="java" >
+<some initialization><br />
+for {<br />
+<some processing><br />
+}<br />
+<some cleanup><br />
+<&#47;pre></p>
+<p>It gets even worse when you don't use the foreach loop in the language of your choice, but iterate over an index:</p>
+<p>It introduces the following new boundaries: 1 vs many elements (maybe you used <tt>0<&#47;tt> instead of <tt>i<&#47;tt> as an index). The first vs the last vs an element in the middle.</p>
+<p>Compare this mess with something like</p>
+<pre lang="scala">
+someCollection.map(somefunction(_))<br />
+<&#47;pre></p>
+<p>It doesn't have any of the boundaries.</p>
+<p>Another example: Have you ever returned a mutable object from a method to which the owning object still had a reference? Voila, you just created another corner case: Read-Only access from the client vs. mutating access of the client.</p>
+<p>If you have mutable state accessed by multiple threads you have probably an almost infinite number of corener cases: Every ordering on byte code level (at least) of accesses from the different threads. That's basically why concurrency is so hard.</p>
+<p>On a more abstract level, some problems look like this:</p>
+<p><a href="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2012&#47;10&#47;problem.png"><img src="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2012&#47;10&#47;problem-300x225.png" alt="" title="problem" width="300" height="225" class="alignnone size-medium wp-image-1189" &#47;><&#47;a></p>
+<p>and you can choose your solution to look like this:</p>
+<p><a href="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2012&#47;10&#47;problemSol1.png"><img src="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2012&#47;10&#47;problemSol1-300x225.png" alt="" title="problemSol1" width="300" height="225" class="alignnone size-medium wp-image-1191" &#47;><&#47;a></p>
+<p>or like this: </p>
+<p><a href="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2012&#47;10&#47;problemSol2.png"><img src="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2012&#47;10&#47;problemSol2-300x225.png" alt="" title="problemSol2" width="300" height="225" class="alignnone size-medium wp-image-1192" &#47;><&#47;a> </p>
+<p>Which on is easier to check for completeness? Which is probable to need more code?</p>
+<p><strong>Make the necessary boundaries easy to test<&#47;strong></p>
+<p>Often you don't have a choice: there is a hard boundary in the requirements. Like "if the value of the transaction is larger then 1000Euro, display a warning." or "If there is unsaved data, display a * behind the title."</p>
+<p>In these cases make sure the corresponding decision is made exactly once in your code. That piece of code should probably do nothing but that distinction. Make sure you unit test it well.</p>

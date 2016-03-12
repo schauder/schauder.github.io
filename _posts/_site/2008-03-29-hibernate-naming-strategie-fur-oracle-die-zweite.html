@@ -1,0 +1,160 @@
+<p>Vor einiger Zeit habe ich eine einfache <a href="&#47;2008&#47;02&#47;22&#47;hibernate-namingstrategy-fur-oracle&#47;">Naming Strategie<&#47;a> vorgestellt, die sicherstellt, dass die generierten Namen sich an die etwas geizigen Beschr&Atilde;&curren;nkungen von Oracle h&Atilde;&curren;lt. Ich habe die Starategie noch einmal ein wenig &Atilde;&frac14;berarbeitet. Sie verteilt jetzt gro&Atilde;&Yuml;z&Atilde;&frac14;giger Underscores, so dass sie mehr Stellen hat, an denen sie einen Namen k&Atilde;&frac14;rzen kann.</p>
+<p>Nat&Atilde;&frac14;rlich gilt wieder: Benutzung auf eigene Gefahr.</p>
+<pre>
+public class OracleNamingStrategy<br />
+        extends DefaultComponentSafeNamingStrategy<br />
+{</p>
+<p>  protected static String addUnderscores(String name)<br />
+  {<br />
+    if (name == null) return null;<br />
+    StringBuffer buf = new StringBuffer(<br />
+            name.replace('.', '_')<br />
+    );<br />
+    for (int i = 1; i < buf.length() - 1; i++)<br />
+    {<br />
+      if (Character.isLowerCase(buf.charAt(i - 1)) &amp;&amp;<br />
+          Character.isUpperCase(buf.charAt(i))<br />
+      &#47;&#47; &amp;&amp; Character.isLowerCase(buf.charAt(i + 1))<br />
+      )<br />
+      {<br />
+        buf.insert(i++, '_');<br />
+      }<br />
+    }<br />
+    return buf.toString().toLowerCase();<br />
+  }</p>
+<p>  @Override<br />
+  public String collectionTableName(String ownerEntity,<br />
+      String ownerEntityTable, String associatedEntity,<br />
+      String associatedEntityTable, String propertyName)<br />
+  {<br />
+    return abbreviateName(super.collectionTableName(<br />
+        addUnderscores(ownerEntity),<br />
+        addUnderscores(ownerEntityTable),<br />
+        addUnderscores(associatedEntity),<br />
+        addUnderscores(associatedEntityTable),<br />
+        addUnderscores(propertyName)));<br />
+  }</p>
+<p>  @Override<br />
+  public String foreignKeyColumnName(String propertyName,<br />
+      String propertyEntityName, String propertyTableName,<br />
+      String referencedColumnName)<br />
+  {<br />
+    return abbreviateName(super.foreignKeyColumnName(<br />
+        addUnderscores(propertyName),<br />
+        addUnderscores(propertyEntityName),<br />
+        addUnderscores(propertyTableName),<br />
+        addUnderscores(referencedColumnName)));<br />
+  }</p>
+<p>  @Override<br />
+  public String logicalCollectionColumnName(<br />
+      String columnName,<br />
+      String propertyName, String referencedColumn)<br />
+  {<br />
+    return abbreviateName(super.logicalCollectionColumnName(<br />
+        addUnderscores(columnName),<br />
+        addUnderscores(propertyName),<br />
+        addUnderscores(referencedColumn)));<br />
+  }</p>
+<p>  @Override<br />
+  public String logicalCollectionTableName(String tableName,<br />
+      String ownerEntityTable,<br />
+      String associatedEntityTable, String propertyName)<br />
+  {<br />
+    return abbreviateName(super.logicalCollectionTableName(<br />
+        addUnderscores(tableName),<br />
+        addUnderscores(ownerEntityTable),<br />
+        addUnderscores(associatedEntityTable),<br />
+        addUnderscores(propertyName)));<br />
+  }</p>
+<p>  @Override<br />
+  public String logicalColumnName(String columnName,<br />
+        String propertyName)<br />
+  {<br />
+    return abbreviateName(super.logicalColumnName(<br />
+        addUnderscores(columnName),<br />
+        addUnderscores(propertyName)));<br />
+  }</p>
+<p>  @Override<br />
+  public String propertyToColumnName(String propertyName)<br />
+  {<br />
+    return abbreviateName(super.propertyToColumnName(<br />
+          addUnderscores(propertyName)));<br />
+  }</p>
+<p>  private static final int MAX_LENGTH = 30;</p>
+<p>  public static String abbreviateName(String someName)<br />
+  {<br />
+    if (someName.length() <= MAX_LENGTH) return someName;</p>
+<p>    String[] tokens = splitName(someName);<br />
+    shortenName(someName, tokens);</p>
+<p>    return assembleResults(tokens);<br />
+  }</p>
+<p>  private static String[] splitName(String someName)<br />
+  {<br />
+    StringTokenizer toki = new StringTokenizer(someName, "_");<br />
+    String[] tokens = new String[toki.countTokens()];<br />
+    int i = 0;<br />
+    while (toki.hasMoreTokens())<br />
+    {<br />
+      tokens[i] = toki.nextToken();<br />
+      i++;<br />
+    }<br />
+    return tokens;<br />
+  }</p>
+<p>  private static void shortenName(<br />
+       String someName, String[] tokens)<br />
+  {<br />
+    int currentLength = someName.length();<br />
+    while (currentLength > MAX_LENGTH)<br />
+    {<br />
+      int tokenIndex = getIndexOfLongest(tokens);<br />
+      String oldToken = tokens[tokenIndex];<br />
+      tokens[tokenIndex] = abbreviate(oldToken);<br />
+      currentLength -=<br />
+         oldToken.length() - tokens[tokenIndex].length();<br />
+    }<br />
+  }</p>
+<p>  private static String assembleResults(String[] tokens)<br />
+  {<br />
+    StringBuilder result = new StringBuilder(tokens[0]);<br />
+    for (int j = 1; j < tokens.length; j++)<br />
+    {<br />
+      result.append("_").append(tokens[j]);<br />
+    }<br />
+    return result.toString();<br />
+  }</p>
+<p>  private static String abbreviate(String token)<br />
+  {<br />
+    final String VOWELS = "AEIOUaeiou";<br />
+    boolean vowelFound = false;<br />
+    for (int i = token.length() - 1; i >= 0; i--)<br />
+    {<br />
+      if (!vowelFound)<br />
+        vowelFound = VOWELS.contains(<br />
+            String.valueOf(token.charAt(i)));<br />
+      else if (!VOWELS.contains(<br />
+            String.valueOf(token.charAt(i))))<br />
+        return token.substring(0, i + 1);<br />
+    }<br />
+    return "";<br />
+  }</p>
+<p>  private static int getIndexOfLongest(String[] tokens)<br />
+  {<br />
+    int maxLength = 0;<br />
+    int index = -1;<br />
+    for (int i = 0; i < tokens.length; i++)<br />
+    {<br />
+      String string = tokens[i];<br />
+      if (maxLength < string.length())<br />
+      {<br />
+        maxLength = string.length();<br />
+        index = i;<br />
+      }<br />
+    }<br />
+    return index;<br />
+  }</p>
+<p>  @Override<br />
+  public String classToTableName(String aClassName)<br />
+  {</p>
+<p>    return abbreviateName(super.classToTableName(addUnderscores(aClassName)));<br />
+  }<br />
+}<&#47;pre></p>

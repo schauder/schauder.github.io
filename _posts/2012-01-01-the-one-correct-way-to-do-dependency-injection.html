@@ -1,0 +1,678 @@
+---
+layout: post
+status: publish
+published: true
+title: The One Correct Way to do Dependency Injection
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 996
+wordpress_url: http://blog.schauderhaft.de/?p=996
+date: '2012-01-01 07:17:02 +0100'
+date_gmt: '2012-01-01 05:17:02 +0100'
+categories:
+- Softwaredevelopment
+tags:
+- clean code
+- dependency injection
+comments:
+- id: 4705
+  author: Ralf Westphal
+  author_email: info@ralfw.de
+  author_url: http://ralfw.blogspot.com
+  date: '2012-01-01 13:05:12 +0100'
+  date_gmt: '2012-01-01 11:05:12 +0100'
+  content: "I don&Acirc;&acute;t agree with you on the first problem: lots of ctor
+    arguments need not be a sign of multiple responsibilities. In fact it can be a
+    sign of exactly 1 responsibility. And I&Acirc;&acute;d even argue this should
+    be the only reason for a ctor dependency argument:\r\n\r\nAn object depending
+    on others should have as its responsibility only \"integration\", i.e. wiring
+    together its dependencies to form a whole.\r\n\r\nIf that&Acirc;&acute;s really
+    the only responsibility of an object then it&Acirc;&acute;s only dependent on
+    the syntax&#47;form of the injected objects. It does not have a clue as to what
+    they are doing. Therefore it&Acirc;&acute;s no problem to be dependent on many
+    objects. Like a DI container is dependent on many objects.\r\n\r\n(This is a more
+    roundabout statement than what I really mean. But I leave it at that to make it
+    a bit more thought provoking ;-)"
+- id: 4706
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-01-01 13:22:34 +0100'
+  date_gmt: '2012-01-01 11:22:34 +0100'
+  content: "@Ralf If the task of the object is to provide other objects with dependencies,
+    shouldn't it instantiate those objects?\r\n\r\nAnyway: You are correct that there
+    are a few (possibly one) good reason for lots of constructor arguments. But I
+    still think most of the time it will be the reason layed out in the article."
+- id: 4708
+  author: Florian Maul
+  author_email: fmaul@gmx.de
+  author_url: http://www.techbits.de
+  date: '2012-01-01 15:11:27 +0100'
+  date_gmt: '2012-01-01 13:11:27 +0100'
+  content: "I agree with using constructor injection wherever possible and was mostly
+    influenced to use it by the teachings of Misko Hevery: http:&#47;&#47;misko.hevery.com&#47;2008&#47;11&#47;11&#47;clean-code-talks-dependency-injection&#47;\r\n\r\nWhat
+    usually bugs me is, that when using the Spring XML configuration you can only
+    express the constructor arguments as ordered list instead of expressing them as
+    named properties. Constructor dependencies become much nicer to use when using
+    annotations (Spring or Guice) to express the binding, but that is a whole other
+    discussion in itself.\r\n\r\nIn a perfect world you should not have any object
+    instantiation in your business logic and have the DI layer create and inject those
+    dependencies. The only exception are pure data objects (Holders, DTOs,..) which
+    you still have to instantiate in your code."
+- id: 4711
+  author: Steven
+  author_email: steven@stevenschwenke.de
+  author_url: http://www.stevenschwenke.de
+  date: '2012-01-01 22:21:36 +0100'
+  date_gmt: '2012-01-01 20:21:36 +0100'
+  content: Thanks for this great let`s-think-this-through-article! One of the most
+    pressing design problems in my current project actually is another verbalization
+    of solution 1. Interesting how two seemingly unrelated problems are just the very
+    same thing.
+- id: 4720
+  author: Kristof Jozsa
+  author_email: kristof.jozsa@gmail.com
+  author_url: ''
+  date: '2012-01-03 15:19:24 +0100'
+  date_gmt: '2012-01-03 13:19:24 +0100'
+  content: "If you were there in mid 2003, this was called type-3 IoC by PicoContainer.
+    Hardly any news though. \r\n\r\nThe more I think about it, the less the whole
+    IoC&#47;DI feels like a valid object oriented approach to me.. This leads back
+    to good old structured programming of the 80's on a straight wide road."
+- id: 4721
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-01-03 15:37:16 +0100'
+  date_gmt: '2012-01-03 13:37:16 +0100'
+  content: "I certainly don't claim that Constructor Dependency Injection is anything
+    new. Also the insight&#47;opinion that one really should use only constructors
+    for dependency injection isn't new. I think <a href=\"http:&#47;&#47;codemonkeyism.com&#47;\"
+    title=\"Codemonkeyism\" rel=\"nofollow\">Codemonkeyism<&#47;a> tweeted just that
+    a couple of weeks ago.\r\n\r\nI do think DI is a good idea. I don't understand
+    why I need a framework for it though (well  I do understand but I don't like the
+    reasons).\r\n\r\nFor the question if OO is a good idea at all ... I leave that
+    to people way smarter then me."
+- id: 4722
+  author: Kristof Jozsa
+  author_email: kristof.jozsa@gmail.com
+  author_url: ''
+  date: '2012-01-03 15:46:15 +0100'
+  date_gmt: '2012-01-03 13:46:15 +0100'
+  content: "What I dislike in DI is exactly the \"background magic\" you start the
+    post with, and the massive horde of singletons which usually come with it. The
+    cake pattern (Scala) was a very surprising approach on the first look but now
+    I think it's actually a better idea than a DI framework (or manual DI, though
+    it's a kind of manual DI at the end).\r\n\r\nNow that you mention whether OO is
+    a good idea at all.. excellent question. The more I learn the very basics of Haskell,
+    the more I actually question that too.. :)\r\n\r\nThis path of learning reflects
+    a kind of personal evolution though, so I consider this \"time wasted well\".
+    I really wonder where it ends."
+- id: 4745
+  author: ftr
+  author_email: sithlord@freenet.de
+  author_url: ''
+  date: '2012-01-10 08:59:01 +0100'
+  date_gmt: '2012-01-10 06:59:01 +0100'
+  content: If only EJB 3.0 allowed constructor injection...
+- id: 4746
+  author: Rob
+  author_email: rob@ontometrics.com
+  author_url: http://jroller.com/robwilliams
+  date: '2012-01-10 16:59:04 +0100'
+  date_gmt: '2012-01-10 14:59:04 +0100'
+  content: "Have you never seen the Static Builder Pattern from the Second Edition
+    of Josh Bloch's Effective Java? Better solution than your two listed here.\r\n\r\nI
+    agree with your conclusions though."
+- id: 4747
+  author: Rob
+  author_email: rob@ontometrics.com
+  author_url: http://jroller.com/robwilliams
+  date: '2012-01-10 17:03:05 +0100'
+  date_gmt: '2012-01-10 15:03:05 +0100'
+  content: To conclude that shortcomings of a DI framework proves that object oriented
+    programming is wrong and we should back the car up and do structured programming
+    would be like finding out that fake food coloring was carcinogenic and therefore,
+    people should stop eating ice cream. Structured Programming collapsed because
+    it didn't work in larger projects. If you are making toys, by all means, just
+    use SP.
+- id: 4748
+  author: Ralf Westphal
+  author_email: info@ralfw.de
+  author_url: http://ralfw.blogspot.com
+  date: '2012-01-10 18:08:42 +0100'
+  date_gmt: '2012-01-10 16:08:42 +0100'
+  content: "@Rob: So, does OOP work? And then which kind of OOP? The 1988 kind of
+    OOP or the 1995 kind of OOP or the 2003 kind of OOP?\r\n\r\nObviously OOP has
+    not been able to deliver on reuse as expected. And also obviously OOP has not
+    saved us from heaps of technical debt and brownfield code.\r\n\r\nSo what exactly
+    is good and worth to keep in OOP, what needs improvement, what needs to be shed?"
+- id: 4750
+  author: Rob
+  author_email: rob@ontometrics.com
+  author_url: http://jroller.com/robwilliams
+  date: '2012-01-11 06:42:44 +0100'
+  date_gmt: '2012-01-11 04:42:44 +0100'
+  content: "@Raf - Your statements make me want to respond with my own socratic riddles,
+    or sophistic. \r\n\r\nSo reuse was the promise which, when not delivered, determines
+    OOP's terminal state? I would argue that objects have delivered on reuse. But
+    reuse is still too much work. Properly done libraries are so much easier to drop
+    into a project and start using than would be comparable code from a procedural
+    project. Did you ever do Windows programming? A treatise in the disintegration
+    of SP: all functions take 5-10 params, a couple are structs with a ton of members.
+    Especially intelligent use of chaining builders makes it incredibly easy to drop
+    components in and start using them (via DSL).\r\n\r\nAs to the various versions,
+    I think that objects are far from perfect, and I personally believe the future
+    will eventually be more agent-based, which is basically object-oriented, but has
+    different more interesting answers to plasticity, collaboration, etc. We'll have
+    to see. I welcome those who are doing small things going back to SP. Problem is,
+    any project that has an ounce of interest will soon make those environs seem like
+    quite a small cage."
+- id: 4755
+  author: Ralf Westphal
+  author_email: info@ralfw.de
+  author_url: http://ralfw.blogspot.com
+  date: '2012-01-11 17:36:06 +0100'
+  date_gmt: '2012-01-11 15:36:06 +0100'
+  content: "@Rob: Objects have not done much above ordinary libraries in terms of
+    reuse, I&Acirc;&acute;d say. We were able to encapsulate code in DLLs and linker
+    modules before OOP. In fact the much acclaimed VBX libraries which did so much
+    for UI components back in the 1990s were just DLLs with a non-OOP interface (if
+    I remember correctly).\r\n\r\nAnd DSLs... I doubt we&Acirc;&acute;ll see much
+    use of them above SQL and RegEx. People have a hard time to come up with decend
+    libraries&#47;frameworks. How should they be able to sling their own DSL?\r\n\r\nIt
+    would need a very generic DSL to find widespread use. A DSL to help with very
+    fundamental stuff - which then probably would replace some of what OOP tried to
+    deliver on so far.\r\n\r\nA DSL for integrating functionality maybe. I&Acirc;&acute;d
+    be all for it :-) Confine OOP 3GL code to small units which then are connected
+    using a DSL."
+- id: 4756
+  author: Rob
+  author_email: rob@ontometrics.com
+  author_url: http://jroller.com/robwilliams
+  date: '2012-01-11 17:57:24 +0100'
+  date_gmt: '2012-01-11 15:57:24 +0100'
+  content: "We clearly live in different worlds. The DLL components of the 90s?? You
+    mean the age of Alan Cooper and VB Uber Alles? Please. Pathetic march of the tinker
+    toys that went down to a bitter defeat (not the conquest they and their very rich
+    backer predicted).\r\n\r\nMost people who argue against objects use anecdotal
+    evidence that generally translates to 'I am happier when I don't have to deal
+    with the complicated world of OO.' I like to make decisions based on more data,
+    e.g. metrics. Metrics have shown that SP runs out of gas at around 100K lines
+    of code. Maybe you are a super user who is going to go and do what no one else
+    has done because you are so great at designing your procedures. I have more interesting
+    things to do than imagine such silly high wire acts. Again, SP runs out of gas
+    for a simple reason: the context, as it gets more complex, having to be passed
+    around all the time, becomes toxic and then quickly terminal.\r\n\r\nAs to DSLs,
+    that was why I said we are clearly traveling in different worlds. Every single
+    thing I am seeing in the Java world now has one. The new versions of Hibernate
+    Core and Search, Joda, Guava, etc. A DSL is not some scary thing that makes it
+    harder for the user to figure out. It's the opposite. The user constructs an object,
+    chains some calls, and gets their product. (Interestingly, objective c has pretty
+    much the same thing with its named arguments, or labeled arguments in the function
+    signatures.)\r\n\r\nDSLs don't replace oop. They solve the stupid part of OOP,
+    which is that you have to construct the object, then set a bunch of things on
+    it, then hope you set all the things it wanted, and try and finally use it. If
+    you use the Static Builder, you chain the calls and then build the object. The
+    builder can validate whether you have provided what is required.\r\n\r\nLearn
+    something about the state of the art of a language&#47;programming paradigm before
+    you personally proclaim its death."
+- id: 4758
+  author: Ralf Westphal
+  author_email: info@ralfw.de
+  author_url: http://ralfw.blogspot.com
+  date: '2012-01-11 18:37:50 +0100'
+  date_gmt: '2012-01-11 16:37:50 +0100'
+  content: "@Rob: It&Acirc;&acute;s sad you need to become personal and ask me to
+    first learn something.\r\n\r\nThat&Acirc;&acute;s especially sad since you yourself
+    claim to know the truth. All&Acirc;&acute;s well. DSL are about to solve our problems.
+    We&Acirc;&acute;re almost there. And on top: whatever happened in the 90s was
+    bullshit.\r\n\r\nOn top: I just said that OOP did not deliver on reuse as much
+    as it promised. Reuse through libraries is decades older. We never needed OOP
+    for that. Modula delivered on reuse possibility as much as C++ did.\r\n\r\nAnd
+    I really doubt that OOP&Acirc;&acute;s promise to make reuse easy through inheritance
+    did a lot of good. How else do you explain the GoF statement in their 1995 (!)
+    book: favor composition over inheritance?\r\n\r\nAs for anecdotal evidence: I&Acirc;&acute;m
+    doing team assessments on a regular basis, meaning around once a month. This means
+    every month I see a different (!) team and ask them to solve a simple problem
+    using their choice of tools and paradigms - which today means they use Java&#47;C#
+    and Eclipse&#47;IntelliJ&#47;VS.\r\n\r\nAnd guess what: Those teams fail to deliver
+    90% of the times. They fail to deliver on time (which means within a timeframe
+    of 2h). They fail to deliver on quality (which means their code looks like s***).\r\n\r\nHow
+    come if all&Acirc;&acute;s well in OOP land? Are those guys just dumb programmers?
+    Well, let me tell you, they are - as you might expect - average.\r\n\r\nYes, this
+    is not really an empiric study I&Acirc;&acute;m talking about. But certainly it&Acirc;&acute;s
+    more than just anecdotal evidence given by people about themselves. I&Acirc;&acute;m
+    outside those teams, I don&Acirc;&acute;t have stakes in their performance. So
+    my point of view is pretty neutral. It&Acirc;&acute;s diverse teams from all all
+    kinds of business domains. It&Acirc;&acute;s self taught programmers as well as
+    guys with bachelor and masters degrees. They&Acirc;&acute;re trying to make sense
+    of OOP, patterns, principles, practices. So what I&Acirc;&acute;m seeing is not
+    state of the art, but state of the practice.\r\n\r\nMy conclusion for such pretty
+    broad sampling: OOP does not deliver in a lot of ways. Things become better. DSLs
+    might help. Fluent interfaces might help. But the very basic paradigm is making
+    it hard for teams to deliver functionality and (!) evolovability. There&Acirc;&acute;s
+    work to do.\r\n\r\nSo maybe you want to sit down and do your homework and gather
+    some data yourself instead of just reading blogs and stuff from people who are
+    above average and highly motivated."
+- id: 4759
+  author: Rob
+  author_email: rob@ontometrics.com
+  author_url: http://jroller.com/robwilliams
+  date: '2012-01-11 19:01:09 +0100'
+  date_gmt: '2012-01-11 17:01:09 +0100'
+  content: "Oh, no, it's the victim defense. I asked you to learn something because
+    you did an original post that showed you have not even read Effective Java, the
+    accepted bible of Java programming. I was polite in that round, but when you kept
+    pressing your 'OOP is dead, and never delivered anything,' I noted that you are
+    declaring it dead from behind the bus. Show me some code you have written recently
+    in Java. I'll show you some of mine. I am not the one running around declaring
+    an Era of Computer Programming failed and over, you are.\r\n\r\nI have blogged
+    endlessly on the shortcomings of various programming approaches, so your characterization
+    of me as a glad-hander who is telling people we are almost there is laughably
+    wrong. I am saying that between the two choices (false ones) you have laid out,
+    it's not even close. Would be like saying 'cars pollute, therefore we should go
+    back to the horse.' I am saying, no, the horse is not the answer.\r\n\r\nWhat
+    does SP say about models? They are already handled by the db, right? Like, make
+    an ER diagram and then just push your strings around with your procedural goo?
+    Wow, sounds exciting! I want richer modeling semantics. Programming without serious
+    models is a complete joke. SP basically says 'pass me what I need, I'll give you
+    back what you want.' Which is not a way to model something large and complex.\r\n\r\nI
+    agree with some of what you say about average programmers not being able to do
+    objects. It's not because OO didn't deliver, like it's some kind of lying political
+    candidate. I have worked with a lot of average programmers, and I have trained
+    a lot of programmers. You know what I have found? Old dogs rarely learn new tricks.
+    But I have found that people can be taught objects and patterns. Let's not leave
+    out the fact that edu has been a completely miserable failure. I just hired a
+    guy a year ago who was literally a week out of a CS program at one of the richest
+    colleges in the US. I wanted to hire a lawyer and sue the teachers who took his
+    parents' money. I don't know what they thought they taught him, but it was a joke.
+    \r\n\r\nProcedural Programming is like the end of Nietzsche's Zarathustra: the
+    frustrated followers who've been told to find their own way instead return to
+    their prior idols. Sad."
+- id: 4760
+  author: Rob
+  author_email: rob@ontometrics.com
+  author_url: http://jroller.com/robwilliams
+  date: '2012-01-11 19:14:05 +0100'
+  date_gmt: '2012-01-11 17:14:05 +0100'
+  content: "@Ralf, wow, your conclusions are all wrong. I said whatever happened in
+    the 90s was bullshit? No, I said VB and its DLL components failed to deliver (do
+    those words sound familiar?). Lot of great stuff happened in the 90s. Half the
+    90s was the rise of Java. So try and control your very obvious inclination to
+    paint every thing in only black and white.\r\n\r\nAs to the Gang of Four, what
+    on earth is your point there. Notice the word choice there: FAVOR!! Something
+    you cannot understand because you only like yes or no. Favor means use this when
+    possible, otherwise use the other. Again, I just find this constant 'I did inheritance
+    once and it made a mess,' baby talk. There are a lot of places where inheritance
+    makes a lot of sense. \r\n\r\nDid you happen to notice that tons of the DPs in
+    Gang of Four use inheritance? Like builder with its Abstract and Concerte builders
+    and Bridge with it's 2 hierarchies (bound by a delegate)? Composite, Factory Method..
+    on and on...."
+- id: 4761
+  author: Ralf Westphal
+  author_email: info@ralfw.de
+  author_url: http://ralfw.blogspot.com
+  date: '2012-01-11 21:31:12 +0100'
+  date_gmt: '2012-01-11 19:31:12 +0100'
+  content: "Rob, please choose one of the following final replies from me:\r\n\r\na.
+    You are right. I apologize for speaking up without knowing the basics. I&Acirc;&acute;ll
+    go back to school and learn. The resources you&Acirc;&acute;re putting online
+    sure will help me with that. Thank you for showing me the light.\r\n\r\nb. This
+    discussion has become too meta and too personal for my taste. Sorry for having
+    enraged you.\r\n\r\nc. I&Acirc;&acute;m out of here. You don&Acirc;&acute;t get
+    what I mean. You are not interested in questioning what you deem the holy grail.
+    This becomes tedious and boring for me. Good luck with your students and suing
+    some university.\r\n\r\nd. We&Acirc;&acute;re having too many misunderstandings
+    to resolve here. We should invest our time differently. Thank you for yours."
+- id: 4762
+  author: Rob
+  author_email: rob@ontometrics.com
+  author_url: http://jroller.com/robwilliams
+  date: '2012-01-11 21:39:47 +0100'
+  date_gmt: '2012-01-11 19:39:47 +0100'
+  content: "Clearly your therapist has not helped much on your control issues.\r\n\r\nHere's
+    my answer: e. it's amusing. So you mock me for being outraged that a student who
+    paid $150K doesn't know basic things while you issue a decree that objects ought
+    be abandoned because they are a tissue of lies. Ok, that makes sense. Kind of
+    like 'no one trained him on how to speak english then we dropped him into coursework
+    where it was required and he did poorly. Time to abandon english.'\r\n\r\nMaybe
+    you would prefer to continue with a puppet where you can provide both voices.\r\n\r\nI
+    did notice that you didn't address any of the issues I brought up with your theses,
+    e.g. that the Go4 patterns are soaked in the bogie man inheritance. It's ok, there
+    are no good responses to contradictory facts.\r\n\r\nI didn't say you were clueless.
+    You seem very educated, though, in a glowing dream of yesteryear. I just said
+    go try some of the newer approaches before you conclude that there is no way to
+    save objects.\r\n\r\nYou forgot all of the above. Clearly that is your response.
+    I am not enraged. You are. You just think the veneer of politesse you are trying
+    to coat your material with masks that. It doesn't. (P&#47;A)"
+- id: 4765
+  author: Oliver Gierke
+  author_email: ogierke@vmware.com
+  author_url: ''
+  date: '2012-01-12 14:56:47 +0100'
+  date_gmt: '2012-01-12 12:56:47 +0100'
+  content: "To bring back the discussion to Jens' original topic: the post pretty
+    much summarizes most of my arguments for constructor and against field injection.
+    However, there's a few things I'd like to add:\r\n\r\n1) Dependencies need to
+    be communicated publically\r\n\r\nField injection completely bypasses that. Take
+    a look at the JavaDoc of the class or type new MyComponent( + CTRL+SPACE. Nothing
+    happens. You're actually forced to look into the implementation code to see what
+    fields you have to inject. But \"inject\" by what means? Reflection? Awesome&acirc;&euro;&brvbar;\r\n\r\nExactly
+    the opposite for constructor arguments: constructors are listed in JavaDocs, can
+    be documented and are immediately available to code completion. Beyond that you
+    can actually have assertions in the constructor that prevent someone from handing
+    in nulls for mandatory dependencies making sure *the object is always in a valid
+    state once constructed*. Especially this part is what makes constructor injection
+    so valuable to me. No ugly null checks sprinkled around the code or even potential
+    NullPointerExceptions someone accidentally forgot to setup the instance correctly\r\n\r\n2)
+    Setter injection for optional dependencies\r\n\r\nI think there's one exception
+    to the guideline to use constructor injection: optional dependencies. In case
+    a class in either reasonably work without a given dependency or might gracefully
+    default it to something one might provide a setter to allow customization of the
+    instance. Following this approach you discoverably and cleanly communicate bot
+    mandatory and optional dependencies of  a class.\r\n\r\n@Ralph - IMO a factory
+    is a completely different scenario as it's responsible for creating the object
+    instances. So you're arguing a class could have the responsibility to simply collect
+    various instances of various types and do what? If it purely delegates, why have
+    the class in the first place? Usually those classes add some value add over the
+    plain dependency instances (e.g. having some kind of ordered access to multiple
+    implementations of a lookup interface). This might be an exception to the general
+    rule but I'd argue that in 80% of the cases developers tend to equip their classes
+    with too many dependencies and then argue against constructor injection as it
+    makes this flaw obvious.\r\n\r\n@Florian - Spring's XML  element does not have
+    to be listed in order. If you have distinctly typed constructor arguments the
+    order actually doesn't matter at all as Spring will assign the referenced beans
+    by type. Beyond that you can use the \"name\" attribute to make the parameter
+    binding explicit (similarly to ) but will have to compile with debug flag then."
+- id: 4766
+  author: Ralf Westphal
+  author_email: info@ralfw.de
+  author_url: http://ralfw.blogspot.com
+  date: '2012-01-12 16:02:01 +0100'
+  date_gmt: '2012-01-12 14:02:01 +0100'
+  content: "@Oliver: I&Acirc;&acute;m not talking about a factory. If a DI container
+    functions like a factory then that&Acirc;&acute;s fine with me. And I&Acirc;&acute;m
+    all for ctor injection.\r\n\r\nHowever, I&Acirc;&acute;m asking: What&Acirc;&acute;s
+    going on if a dependency tree looks like this:\r\n\r\n<pre>\r\nDomainlogicRootClass\r\n
+    \ DomainlogicClassA\r\n    DomainlogicClassF\r\n  DomainlogicClassB\r\n    DomainlogicClassK\r\n
+    \   DomainlogicClassL\r\n<&#47;pre>\r\n\r\nOn every level of this hierarchy domain
+    logic resides. That&Acirc;&acute;s how it&Acirc;&acute;s usually done. That&Acirc;&acute;s
+    why IoC is used and a DI container is supposed to inject an instance of DomainlogicClassF
+    into an instance of DomainlogicClassA etc. That&Acirc;&acute;s what Jens ment,
+    right?\r\n\r\nNow, what I find highly problematic is that domain logic is spread
+    vertically (!) over the hierarchy. That not only makes all non-leaf classes hard
+    to test. It also violates the Single Responsibility Principle (SRP).\r\n\r\nThe
+    purpose of all non-leaf classes is twofold: they are responsible for executing
+    domain logic plus (!) they integrate lower level functionality.\r\n\r\nThis sure
+    sounds normal, even inevitable. But at least inevitable it is not.\r\n\r\nSo what
+    I&Acirc;&acute;m saying is: If you&Acirc;&acute;re serious about SOLID, then take
+    SRP seriously, which means become eXtreme in comparison to its usual interpretation,
+    do xSRP :-)\r\n\r\nKeep all non-leaf classes free of domain logic (or whatever
+    concern we&Acirc;&acute;re talking about). Do not let them add value in terms
+    of fulfilling functional&#47;non-functional requirements. No expressions, no control
+    statements.\r\n\r\nThis will degenerate those classes. They&Acirc;&acute;ll become
+    pure integrators. But that&Acirc;&acute;s ok. No, that&Acirc;&acute;s even highly
+    beneficial, I&Acirc;&acute;d say.\r\n\r\nFirstly, this makes all classes much
+    easier to test. The need for mock objects is drastically reduced. I haven&Acirc;&acute;t
+    used a mock framework in months for my development.\r\n\r\nSecondly, this makes
+    it very easy to spot where functionality you need to change is located. It can
+    only sit in one of the leaf classes.\r\n\r\nThirdly, all non-leaf classes become
+    dispensable :-) Since they don&Acirc;&acute;t fulfill any function above integrating
+    lower level objects into a whole, this can be done in a different and easier way.
+    Think DSL if you like :-)\r\n\r\nI&Acirc;&acute;ve been working along these lines
+    for the past 2 years. And is has greatly simplyfied my coding. And it has much
+    improved the readability of my programs.\r\n\r\nPS: Just to anticipate a usual
+    objection: I&Acirc;&acute;m not talking about your grandfather&Acirc;&acute;s
+    procedural or structured programming (SP) here :-) This is different at least
+    in that SP never was that rigorous in terms of SP. Also this approach does not
+    require you to give up on ADTs or encapsulation. Technical OOP is just fine -
+    but it&Acirc;&acute;s curbed."
+- id: 4768
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-01-12 17:29:16 +0100'
+  date_gmt: '2012-01-12 15:29:16 +0100'
+  content: |-
+    This sounds interesting, yet I don't see how it works. Lets considere a trivial example:
+
+    Class A chooses on some condition to delegate to b of type B or c of type C
+
+    How would you move the responsibility of A (deciding which delegate to use) into a leave class?
+- id: 4769
+  author: Ralf Westphal
+  author_email: info@ralfw.de
+  author_url: http://ralfw.blogspot.com
+  date: '2012-01-12 17:43:59 +0100'
+  date_gmt: '2012-01-12 15:43:59 +0100'
+  content: "@Jens: You see, that&Acirc;&acute;s the point: A should not decide. A
+    decision is part of the domain to which A belongs.\r\n\r\nIf you want to follow
+    the SRP you have to choose:\r\n-either A integrates B and C functionality\r\n-or
+    A contains business logic.\r\n\r\nOr at least this decision has to be made for
+    each method:\r\n\r\n-either a method a of A integrates b and c\r\n-or a implements
+    domain logic - and the decision has to be made somewhere else."
+- id: 4770
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-01-12 17:54:12 +0100'
+  date_gmt: '2012-01-12 15:54:12 +0100'
+  content: "@Ralf I do see your point (which of course doesn't mean I agree)\r\n\r\nBut
+    I don't understand how I can write code where only the leave nodes contain logic.
+    Hence the example with three pieces of logic\r\n\r\nA: decide between doing b
+    or c\r\nB: doing b\r\nC: doing c\r\n\r\nI'd implement it more or less like this:\r\n<pre>\r\nclass
+    A(b:B, c:D){\r\n    doSomething(){\r\n        if (some condition)\r\n           b.doSomething()\r\n
+    \       else\r\n           c.doSomething()\r\n    }\r\n}\r\n<&#47;pre>\r\n\r\nHow
+    would this look after transformation into a form where only leave classes contain
+    logic?"
+- id: 4771
+  author: Ralf Westphal
+  author_email: info@ralfw.de
+  author_url: http://ralfw.blogspot.com
+  date: '2012-01-12 18:12:47 +0100'
+  date_gmt: '2012-01-12 16:12:47 +0100'
+  content: "@Jens: Pushing the logic into the leaves requires you to use continuations,
+    e.g.\r\n\r\n<pre>\r\nclass A {\r\n  B b;\r\n  C c;\r\n  ...\r\n  doSomething()
+    {\r\n    decide(\r\n      b.doSomething, \r\n      c.doSomething);\r\n  }\r\n\r\n
+    \ decide(Action onTrue, Action onFalse) {\r\n    if (some condition)\r\n      onTrue();\r\n
+    \  else\r\n     onFalse();\r\n  }\r\n}\r\n<&#47;pre>\r\n\r\nThis works fine in
+    C# where Action is defined as\r\n\r\n<code>\r\ndelegate void Action();\r\n<&#47;code>\r\n\r\nIt&Acirc;&acute;s
+    a type safe function pointer.\r\n\r\nSee how doSomething() now only does the \"wiring\"?
+    It is independent of the condition and also independent of how the decision is
+    made, whether an if is used of some other means. As long as the basic structure
+    of the decision (no input, two alternate paths to follow) stays the same, decide()
+    does not need to change.\r\n\r\nSLA just would push \"some condition\" into a
+    function of its own. But this goes a step further. If even pushes down the decision
+    itself. decide() is just a method with two out-flows. maybe they alternatively
+    carry data. maybe under some circumstances processing continues down both paths.
+    decide() does not care."
+- id: 4772
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-01-12 18:23:02 +0100'
+  date_gmt: '2012-01-12 16:23:02 +0100'
+  content: I see where you are heading ... not convinced, but at least, where you
+    are heading.
+- id: 4775
+  author: Ralf Westphal
+  author_email: info@ralfw.de
+  author_url: http://ralfw.blogspot.com
+  date: '2012-01-12 20:11:49 +0100'
+  date_gmt: '2012-01-12 18:11:49 +0100'
+  content: "What would it take to convince you? ;-)\r\nI guess: You need to see this
+    applied to a larger code base.\r\nAnd you need to experience the development process
+    using this approach. Because that&Acirc;&acute;s changing the way you approach
+    solutions."
+- id: 4777
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-01-13 00:19:28 +0100'
+  date_gmt: '2012-01-12 22:19:28 +0100'
+  content: exactly
+- id: 8779
+  author: Dan
+  author_email: sebastian@are-you-ready.de
+  author_url: ''
+  date: '2012-12-04 15:54:55 +0100'
+  date_gmt: '2012-12-04 13:54:55 +0100'
+  content: What do you do when you want to communicate between a View and it's Controller&#47;Producer?
+    In that case you need the view injected in the presenter and otherwise.
+- id: 8782
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-12-04 18:12:29 +0100'
+  date_gmt: '2012-12-04 16:12:29 +0100'
+  content: "@Dan In case of a circular dependency you are right, one has to get injected
+    with a setter. BUT this isn't a real dependency in the sense that it should work
+    perfectly well without that dependency. Or to put it differently: it is just a
+    listener&#47;oberserver. \r\n\r\nA distinction I failed to make in the article"
+- id: 8787
+  author: Sebastian
+  author_email: sebastian@are-you-ready.de
+  author_url: ''
+  date: '2012-12-05 09:23:14 +0100'
+  date_gmt: '2012-12-05 07:23:14 +0100'
+  content: With CDI&#47;Weld you can inject the View in the Controller and otherwise
+    without getting a cyclic dependency when you "lazy inject" at one side (http:&#47;&#47;stackoverflow.com&#47;questions&#47;8749073&#47;better-way-to-pass-class-reference-to-an-injected-instance?answertab=active#tab-top)
+- id: 8789
+  author: Oliver Gierke
+  author_email: info@olivergierke.de
+  author_url: http://www.olivergierke.de
+  date: '2012-12-05 11:24:37 +0100'
+  date_gmt: '2012-12-05 09:24:37 +0100'
+  content: "If you do field injection you can wire almost anything to anything. That
+    doesn't mean it's a good idea. Just because the container doesn't bark at you,
+    it doesn't mean nothing is wrong. \r\n\r\nField injection actually subverts a
+    crucial part of the whole DI story: exposing dependencies. With FI you still cannot
+    reason about the dependencies of a class just by looking at it's public interface
+    (aka. JavaDoc, not a Java interface). With constructor&#47;sett injection you
+    actually do. So while the latter two impose a slight overhead in initial coding
+    they actually serve an important purpose from an architectural or design perspective.
+    \r\n\r\nEspecially constructor injection actually prevents you from introducing
+    cyclic dependencies. If you do introduce them you essentially make the two parties
+    one because you cannot really change the one without risking to break the other,
+    which in every case is a design smell. It still can be reasonable to do this (as
+    your example introduces an interface to decrease the coupling) but you're still
+    left with quite a few issues. How do you reasonably test the instances in isolation?
+    How do you set the dependencies in a unit test at all? Reflection? So you're writing
+    the first client for your code and already work around drawbacks of your design?\r\n\r\nActually
+    I've already discussed this in length in this comment: http:&#47;&#47;blog.schauderhaft.de&#47;2012&#47;01&#47;01&#47;the-one-correct-way-to-do-dependency-injection&#47;comment-page-1&#47;#comment-4765\r\n\r\nCheers,\r\nOllie"
+- id: 8790
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-12-05 11:34:06 +0100'
+  date_gmt: '2012-12-05 09:34:06 +0100'
+  content: "Hi Sebastian,\n<ol>\n\t<li> at runtime you do have a cyclic dependency,
+    which is actually Ok\t<li>\n<&#47;li>\n<li>\n at compile time you don't have a
+    cyclic dependency if you use interfaces (see this article for more details: http:&#47;&#47;blog.schauderhaft.de&#47;2011&#47;07&#47;17&#47;breaking-dependency-cylces&#47;)\n\t<&#47;li><li>\n
+    You can do that with CDI, Spring or simple Java code without a problem. You just
+    can't do it with constructor injection.\n\t<&#47;li>\n<ul>"
+- id: 8926
+  author: Tim Schneider
+  author_email: tim@mails.are-you-ready.de
+  author_url: ''
+  date: '2012-12-21 11:19:51 +0100'
+  date_gmt: '2012-12-21 09:19:51 +0100'
+  content: What about doing field injection and making the fields package private?
+    In that case you have to place your tests in the same package but can than access
+    its fields from there and put your mocks in it without the use of any other tools
+    or franeworks?!
+- id: 8929
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-12-21 13:58:51 +0100'
+  date_gmt: '2012-12-21 11:58:51 +0100'
+  content: "No it is not ok.\r\n\r\n1. The field has package access, but there is
+    nothing in the package that should need to access it.\r\n2. The field is not final,
+    suggesting it is ok to change it to some new value during the lifetime of the
+    object, which it probably isn't\r\n3. There you gave no reason why you don't want
+    to use constructor injection in the first place. Try to formulate the reason why
+    you don't want to do that, then look me in the face and tell me it is not a design
+    smell in itself.\r\n\r\nSeason's Greetings and a Happy End of the World."
+- id: 9023
+  author: Tim Schneider
+  author_email: tim@mails.are-you-ready.de
+  author_url: ''
+  date: '2012-12-30 17:22:29 +0100'
+  date_gmt: '2012-12-30 15:22:29 +0100'
+  content: "After surviving the armageddon I want to reply to that again.\r\n\r\nThe
+    whole idea came from Adam Bien because of the pragmatism of field injection http:&#47;&#47;www.adam-bien.com&#47;roller&#47;abien&#47;entry&#47;inject_with_package_private_fields
+    . But as you can see I'm not sure about it and because of that I found your blog.
+    \ Thing is that it is obviously less code to write but not at last I'm loosing
+    some comfort when I write unit-tests as I can see all my dependencies at instantiation
+    time when they are in the constructor and the test turns red immediately when
+    I add a dependency in the class under test which is not necessarily the case with
+    field injection."
+- id: 9024
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-12-30 18:25:23 +0100'
+  date_gmt: '2012-12-30 16:25:23 +0100'
+  content: "Hi Tim, \ncongrats for being one of the survivors of the apocalypse.\n\nI
+    think you wrapped it quite nicely. With package scope fields, you get a little
+    less code and less hassle during testing. \n\nWith constructor injection you get
+    expressive 'correct' semantics.\n\nIn the end it is your decision."
+- id: 9079
+  author: Tim Schneider
+  author_email: tim@mails.are-you-ready.de
+  author_url: ''
+  date: '2013-01-02 10:21:46 +0100'
+  date_gmt: '2013-01-02 08:21:46 +0100'
+  content: "For me the testing hassle is a benefit as I can see instantly which tests
+    I have to look after.\r\n\r\nThanks for your opinion on that. Appreciate it much"
+- id: 10860
+  author: 'Mockito: Why You Should Not Use InjectMocks Annotation to Autowire Fields
+    | Ted Vinke&#039;s Blog'
+  author_email: ''
+  author_url: http://tedvinke.wordpress.com/2014/02/13/mockito-why-you-should-not-use-injectmocks-annotation-to-autowire-fields/
+  date: '2014-02-13 22:02:18 +0100'
+  date_gmt: '2014-02-13 20:02:18 +0100'
+  content: "[&#8230;] when there are more dependencies needed, they&#8217;re clearly
+    in sight because the constructor says so. So don&#8217;t go creating a bunch of
+    setters now &#8211; they still don&#8217;t force you to pass [&#8230;]"
+- id: 90260
+  author: Binh Thanh Nguyen
+  author_email: binhnt84vn@gmail.com
+  author_url: ''
+  date: '2014-06-10 11:40:10 +0200'
+  date_gmt: '2014-06-10 09:40:10 +0200'
+  content: Thanks, nice tips
+- id: 397900
+  author: olivia
+  author_email: oliviaflora89@gmail.com
+  author_url: http://www.besanttechnologies.com/training-courses/salesforce-training-institute-in-chennai
+  date: '2015-06-22 12:09:25 +0200'
+  date_gmt: '2015-06-22 10:09:25 +0200'
+  content: I definitely don&acirc;&euro;&trade;t claim that creator Dependency Injection
+    is something new. conjointly the insight&#47;opinion that one very ought to use
+    solely constructors for dependency injection isn&acirc;&euro;&trade;t new.
+---
+<p>A couple of weeks ago a coworker told me that they have a little utility in their projects in order to set private fields for tests. He kind of claimed they needed that since they are using Spring, which in production sets the dependency. I was a little confused. But after looking into it I realized that there is an (anti)pattern going on that needs some fighting against. Lets have a look at the pattern.</p>
+<p>Spring (and other DI frameworks) can inject dependencies into private fields. It looks like people like to use this because it combines some compelling properties:</p>
+<ul>
+<li>Very little boilerplate code. All you need is a simple annotation on the field.<&#47;li>
+<li>Since the field is private nobody outside the class can change it.<&#47;li><br />
+<&#47;ul><br />
+But now when you want to test your class and want to assign e.g. a mock to the field you have to either setup a Spring context in your tests or use reflection in order to access the field (just as Spring does).</p>
+<p>Now something is really starting to smell bad here. One of the purposes of Dependency Injection is to decouple code, which in turn should make the code easier to test. Now that didn't work out to well.</p>
+<p>So how can we clean up this mess? We can write a setter for the field. That solves the testing problem. It adds a little boiler plate code, but hey we are talking Java here, so you should be used to that. But now we have a setter which anybody can call at any time. At the very best that doesn't make any sense at all in the production environment. In the worst case somebody actually uses it and creates some ugly bug.</p>
+<p>So what do you do when you don't want anybody to change a field? Correct you make it final. Great, now you have a compile time error in the setter.You can only set a final field in a constructor. This leads naturally to the solution of all our problems (and possibly to world peace): <strong>Make your dependency a constructor argument!<&#47;strong></p>
+<p>This is the only place where dependencies really belong. If you try to stick to that rule I'd expect you'll encounter the following two problems.</p>
+<ol>
+<li>You'll find classes with lots and lots of constructor arguments. I'll bet that class does a lot of different things and really needs to get broken down into smaller pieces.<&#47;li>
+<li>You'll find cases where a class A needs an instance of B and B needs an instance of&Acirc;&nbsp; A. This is a typical case of a circular dependency and is obviously bad. In my experience the solution is either to make B a part of A when the two are so strongly dependent that they really should be one class. More often though there is at least one more class C hiding in there so that B doesn't need A but only C.<&#47;li><br />
+<&#47;ol><br />
+So really the problems you'll find when doing constructor based dependency injection are problems that are present in your current code already. So don't shoot the messenger, but fix the problems in your code and go for constructor arguments for dependency injection.</p>

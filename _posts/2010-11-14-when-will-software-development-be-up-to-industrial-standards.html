@@ -1,0 +1,92 @@
+---
+layout: post
+status: publish
+published: true
+title: When will Software Development be up to Industrial Standards?
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 492
+wordpress_url: http://blog.schauderhaft.de/?p=492
+date: '2010-11-14 16:15:01 +0100'
+date_gmt: '2010-11-14 14:15:01 +0100'
+categories:
+- Softwaredevelopment
+tags:
+- automation
+- reuse
+comments:
+- id: 1144
+  author: michael campbell
+  author_email: michael.campbell@gmail.com
+  author_url: ''
+  date: '2010-11-17 20:41:12 +0100'
+  date_gmt: '2010-11-17 18:41:12 +0100'
+  content: "This will happen, at least in specific industries, when there are laws
+    enacted that make it happen.  I suspect things like embedded systems programming
+    that control health&#47;hospital equipment, \"people movers\" (airplanes, cars,
+    elevators, etc.) will be the first industries to mandate this, perhaps via legislation.\r\n\r\nIMO,
+    of course."
+- id: 1145
+  author: Ivan S Kirkpatrick
+  author_email: ivank2139@gmail.com
+  author_url: ''
+  date: '2010-11-17 20:53:13 +0100'
+  date_gmt: '2010-11-17 18:53:13 +0100'
+  content: "I think more likely it will happen when it becomes economically more desirable
+    rather than waiting for laws to be passed and then enforced.\r\n\r\nFor example,
+    I recently ended a 14 month engagement with a large entertainment company's IT
+    Architecture group.  A key observation to this effect was that the VP that paid
+    for and delivered the software applications was not the same one that maintained
+    and operated it.  The first VP outsourced development and was interested in meeting
+    budget, schedule and feature requirements in order to generate revenue.  The second
+    VP was interested only in maintaining the software.\r\n\r\nNeither VP or anyone
+    else for that matter, was looking at long term usage, reuse, improvements or similar
+    benefits that an \"industrialized software development capacity\" would bring.
+    \ We identified thousands of points for software improvement and reduction in
+    bugs that were ignored. \r\n\r\nFrequently it is the organization of the various
+    teams involved that has the biggest impact on the software quality and the ability
+    to deliver components similar to an industrial concern.\r\n\r\nI submit that this
+    kind of long term capability is the product of several factors not least of which
+    is organizational."
+- id: 1152
+  author: Daniel
+  author_email: danielleighpark@hotmail.com
+  author_url: ''
+  date: '2010-11-19 00:47:21 +0100'
+  date_gmt: '2010-11-18 22:47:21 +0100'
+  content: "The fundamental reason the software development industry seems immature
+    is that the base you work on is constantly changing. As the technology changes
+    the approach to effective software also changes. \r\n\r\nReuse and automation
+    is talked about because it actually reduces bugs. If every body had to write their
+    own code to turn a string into an array there would be far more bugs than if they
+    used a library to help them.\r\n\r\nIts also complex because coding is esentially
+    design of a manufacturing line. If anybody thinks coding is like manufacturing
+    they are gravely mistaken.\r\n\r\nThe main reason for the bugs is that more risk
+    is taken because you can get away with it. In manufacturing a car the designing
+    engineers would spend months testing individual components to make sure they are
+    good then months testing the cars befor release. In software the changs often
+    come out quite quickly (This varies amongst industry) so hence bugs."
+- id: 2997
+  author: Kelsie Musselman
+  author_email: Hohner@freenet.com
+  author_url: http://www.fredelspritz.com
+  date: '2011-02-03 13:27:25 +0100'
+  date_gmt: '2011-02-03 11:27:25 +0100'
+  content: Hi there! I could have sworn I've been to this website before but after
+    checking through some of the post I realized it's new to me. Anyhow, I'm definitely
+    glad I found it and I'll be book-marking and checking back frequently!
+---
+<p>From time to time I hear people complain, that the Software Development industry is immature. Sometimes they even propose software development should be more like a factory, producing software on some kind of production chain, highly standardized, highly automated. They complain the level of reuse isn't high enough.</p>
+<p>I certainly agree, that we have a lot of room for improvement. But the complaints as they are put forward are just proof of total ignorance about how software development works.</p>
+<ol>
+<li>Reuse in software development is incredibly high. Even If I don't count the operating system and the web (application) server, any serious software development project I was on reused about two orders of magnitude more software then they wrote. For those not so familiar with 'orders of magnitude': 99% of the code base is reused, only about 1% is actually written from scratch (actually it is probably much less). If you doubt my words, remove your local maven repository and see how much maven loads down from the Internet and compare that to the stuff you check out from SVN. The problem is: Reuse happens so fast and so frictionless nobody actually notices it. This is as if workers in a factory would just use a different paint and maybe a different brush in order to change the resulting product form an ipod to a car.<&#47;li>
+<li>Automation is extremely high. In the project I am on right now we build about 100 to 200 artifacts every workday. Fully automated. All we do is check in a couple of code changes and of goes our software factory and builds about a dozen different jar files. If you compare this to highly automated industries like car building, this is as if a single designer sketches a new car on his computer and factory starts spitting out that car within 5 minutes. Coding is designing software, the compiler is doing the building part.<&#47;li><br />
+<&#47;ol><br />
+So instead of talking s**t about automation and reuse, let us tackle the real challenges of software development: When every pixel the designer (i.e. coder) changes results in completely different behavior of the product, and when this product is delivered to the customer within days, often hours, there is a high risk of shipping bugs.</p>
+<p>We don't need more automation. We don't need more reuse. We need better strategies for preventing and finding bugs. I take the automation and reuse any time, but the important stuff are the bugs.</p>

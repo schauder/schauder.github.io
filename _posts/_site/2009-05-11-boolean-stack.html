@@ -1,0 +1,18 @@
+<p>Many business people don't understand Boolean logic, at least not on the abstract level that developers are used to. And that is perfectly ok, since they don't have to instruct stupid things like computers to do their work. They either talk to other people, who are happy to base decision on a handful of examples and ask if they aren't sure, or they tell developers like me to instruct the computers. But here comes a common problem: When the computer is supposed to make a decision, I as a programmer have to tell it about all the parameters for the decision, including all the weird corner cases that a human would solve by asking the boss.</p>
+<p>So let's say there are 10 Boolean conditions involved in the decision, That's 2 to the power of 10 or 1024 different cases. Resulting in a very long question and answer session. Luckily in most case one can simplify the decision a lot by combining hole groups of cases. E.g. if the first three parameters are true, the other seven conditions might not matter anymore. While this shortens the Boolean expression,it also makes it really hard to understand what is going on. You are now stuck with a Boolean expression where one has to look very precisely in order to determine which case applies and what it results in.</p>
+<p>In my experience many Boolean problems in programming don't actually need the full complexity of Boolean expressions. An example: Enabling or disabling a button that represents an action on a domain object. Here are the conditions that apply for enabling the button: If authorization is activated he user needs the privileges for that action; the domain object needs to be of&Acirc;&nbsp; type A, B or C; if the action is state dependent the domain object has to be in the appropriate state. Although these are only a couple conditions, the resulting Boolean expression can become quite involved. And don't even think about adding rules later on. But if you bring it in the structure I call 'Boolean Stack' it becomes rather easy and transparent.</p>
+<p>A Boolean Stack consists of two sets of rules: allowing rules and denying rules. The result of the stack is <strong>true<&#47;strong>&Acirc;&nbsp; if at least one of the allowing rules is true, and none of the denying rules is true.</p>
+<p>So in the example above the allowing rules would be:</p>
+<ul>
+<li>The domain object is of type A<&#47;li>
+<li>The domain object is of type B<&#47;li>
+<li>The domain object is of type C<&#47;li><br />
+<&#47;ul><br />
+And the denying rules would be:</p>
+<ul>
+<li>The user has not the required privilege<&#47;li>
+<li>The object has not the correct state<&#47;li><br />
+<&#47;ul><br />
+Note that for typical changes in the conditions: new Types that support the action, Actions that are&Acirc;&nbsp; not state dependent rules get added or removed from the set, instead of manipulating the Boolean expression itself.</p>
+<p>Using this structure complex Boolean expressions become easy to understand and to maintain. I have used the structure for things like enabling &#47; showing controls in a GUI as in the example, but also for deciding if a train may leave a station, which is at least in Europe controlled by literally hundreds of rules and conditions, which differ depending on the state the train starts and to which state it travels.</p>
+<p>I am wondering if every Boolean condition can be transformed into this scheme. I actually think so, maybe I'll find time to proof (or disproof) it some day.</p>

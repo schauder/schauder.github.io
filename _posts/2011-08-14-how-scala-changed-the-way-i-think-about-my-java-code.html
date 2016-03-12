@@ -1,0 +1,106 @@
+---
+layout: post
+status: publish
+published: true
+title: How Scala changed the way I think about my Java Code
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 885
+wordpress_url: http://blog.schauderhaft.de/?p=885
+date: '2011-08-14 14:22:17 +0200'
+date_gmt: '2011-08-14 12:22:17 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- Java
+- scala
+comments:
+- id: 4048
+  author: Born
+  author_email: guate@web.de
+  author_url: ''
+  date: '2011-08-15 08:18:07 +0200'
+  date_gmt: '2011-08-15 06:18:07 +0200'
+  content: "+1 ... especially for the java-generics point! And.. yes learn more languages
+    - after I learned a bit of groovy - I learned using closures in java as well (...
+    okay they aren't real closures, but it solves the same use-cases in a nice way)."
+- id: 4049
+  author: KoW
+  author_email: kindofwhat@gmail.com
+  author_url: ''
+  date: '2011-08-15 10:28:50 +0200'
+  date_gmt: '2011-08-15 08:28:50 +0200'
+  content: "This is so 100% percent right on spot! Doing some stuff with Groovy made
+    me really think about testing, reading the Scala book makes me reflect heavily
+    about my java programming and about the major benefits of functional programming,
+    although Clojure is more consequent in that matter.\r\n\r\nLol, just have been
+    reading the comment of Born. Mutual agreement everywhere :)"
+- id: 4054
+  author: Markus Jais
+  author_email: markus.jais@yahoo.de
+  author_url: http://markusjais.com
+  date: '2011-08-15 21:25:08 +0200'
+  date_gmt: '2011-08-15 19:25:08 +0200'
+  content: "I fully agree. Learning a new language helps you write better code in
+    your current language.\r\nI've been using Java for over 10 years and the languages
+    I learned beside Java like Ruby, Python or Groovy (even C++) all influenced the
+    way I write Java code.\r\nScala probably has the biggest influence because it
+    is combines the full power of FP with OOP. I think EVERY Java developer should
+    look at Scala (and maybe also Clojure, Ruby and Haskell) even if he&#47;she doesn't
+    use Scala at work. It will definitely change your way of thinking.\r\nWith Scala
+    I started looking at projects like Functional Java. Although it is not as elegant
+    as Scala (or Clojure) it clearly is great stuff for every Java developer.\r\n\r\nMarkus\r\n\r\nP.S.
+    Lot's of cool stuff on your blog."
+- id: 4120
+  author: Ilias Tsagklis
+  author_email: ilias.tsagklis@javacodegeeks.com
+  author_url: http://www.javacodegeeks.com/
+  date: '2011-08-24 01:08:11 +0200'
+  date_gmt: '2011-08-23 23:08:11 +0200'
+  content: "Hi Jens,\r\n\r\nAwesome blog! Is there an email address I can contact
+    you in private?"
+- id: 4122
+  author: Niels
+  author_email: nbn@javaekspert.dk
+  author_url: ''
+  date: '2011-08-24 08:31:27 +0200'
+  date_gmt: '2011-08-24 06:31:27 +0200'
+  content: "Real artists needs inspiration. Yes, I compare good code to a work of
+    art. That is how much a craftsman care of his products.\r\n\r\nAnd anyway every
+    decade we should have evolved so much that we can progress the languages. We need
+    higher order programming anyway.\r\n\r\nThe pragmatic programmers said you should
+    learn a new language once in a while to seek inspiration and become better. Too
+    bad they stopped taking their own medicine when Ruby took of."
+- id: 4200
+  author: java
+  author_email: java@iava.com
+  author_url: http://www.java.com
+  date: '2011-09-05 14:12:27 +0200'
+  date_gmt: '2011-09-05 12:12:27 +0200'
+  content: dude, your idea about java with relation to scala is total crap. i'll suggest,
+    you read deeply before you post shit on the net.
+- id: 8092
+  author: livese
+  author_email: livese@yahoo.com
+  author_url: http://allfbo.com
+  date: '2012-09-03 04:11:18 +0200'
+  date_gmt: '2012-09-03 02:11:18 +0200'
+  content: shat dyosha&acirc;&euro;&brvbar;. original nkar@ arvesti gorc a, mets hajuyqov
+    tans mej kpakcneyi
+---
+<p>Some people advocate their preferred language as the only way to enlightenment and productivity boosts way in the two digit percentage range compared to another language in the same category. I don't believe it. (It's probably true when you compare things like Java and Assembler, but few do that)</p>
+<p>There are others that tell you the language doesn't matter at least not between languages like Scala and Java. I think they are wrong as well. The reason is: Although I don't actually use Scala during my day job it does affect my Java Coding. Here are some of the things I noticed.</p>
+<ul>
+<li>I appreciate immutability. I was aware for a long time of the benefits of immutability. But in Java using immutable data structures is so clumsy that I only used this approach in small areas, like rather simple value objects. But now I find my self more often tempted to use an immutable data structure even for relatively complex things.<&#47;li>
+<li>Lots of small classes. Classes in Scala are unbelievable small. It's easy to write a single page of code with half a dozen classes in it if you count the 'class', 'object' and 'trait' keywords and even more when you look at what the Scala compiler creates from closures and similar. Although creating a class is much more work in Java I find myself thinking much strict about the single responsibility principle, resulting in more smaller classes, which are easier to test.<&#47;li>
+<li>Thinking more in DSLs. Scala is great for creating internal DSLs. Lots of libraries use that approach for designing their APIs and I do it in my little projects as well. Java is pretty useless for DSLs. But there are things you can do. Even if it is simple stuff like method chaining. I use that a lot lately, especially when testing is concerned, because here readability of code is even more important then with normal code.<&#47;li>
+<li>I pretty much gave up on Java Generics. After seeing what is possible with a good type system, even when the compiled code runs on the same JVM as Java, made me also see the severe limitations of Java Generics. Before that I tended to think its just me who is to stupid. While this assumption is often true. Many things I tried to do in the past with Java Generics just can't work, because Java is lacking the necessary power (e.g. covariance and contravariance). So I drop generics from my code as soon as more then one type parameter gets involved.<&#47;li><br />
+<&#47;ul><br />
+So go ahead and learn a new language. Even if you can't use it in your normal job. You still will learn useful stuff. But be warned. I might as well make you hate parts of your day job:</p>
+<p>I really, really hate semicolons, primitives, arrays and collection APIs without higher order functions. And switching on Strings is a joke.</p>

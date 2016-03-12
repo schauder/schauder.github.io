@@ -1,0 +1,45 @@
+---
+layout: post
+status: publish
+published: true
+title: The Mikado Method
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1115
+wordpress_url: http://blog.schauderhaft.de/?p=1115
+date: '2012-06-03 15:23:58 +0200'
+date_gmt: '2012-06-03 13:23:58 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- process
+- mikado method; method
+- legacy code
+comments: []
+---
+<p>Have you ever considered a large scale change to a piece of software? Something that you can't possibly get done within a single day? Did you refrain from the change because of that? Or did you hack away on your code hiding in a corner for week. Having nightmares about merging it with all the other changes that happened in between?</p>
+<p>If you know this situation read on. You'll want to learn about the Mikado Method.</p>
+<p>The Mikado Metho has its name from the game <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Mikado_(game)">Mikado<&#47;a>. In the game you try to remove sticks without moving any other sticks of the game. In order to find a stick you often carefully move one that looks promising. If it moves without problem you remove it. If you find that it touches another stick you leave it for now and try a different one, often the one touched by the first. The Mikado Method works just the same:</p>
+<ul>
+<li>You want to change the software you are working on. Often some kind of refactoring, but maybe you want to add a feature which in turn needs some refactoring of the existing application.<&#47;li>
+<li>You start with the change in the most simple way you can think of.<&#47;li>
+<li>If this works: Great, commit it to version control. If not, you take note of the things you have to change in order to make the first change.<&#47;li>
+<li><strong>Then you rollback your work!!<&#47;strong><&#47;li>
+<li>You iterate with one of the necessary changes<&#47;li><br />
+<&#47;ul><br />
+There are a couple of key elements in this process:</p>
+<ol>
+<li>You pick a move without to much analysis. The compiler and your tests will tell you if it works. Note: If you don't have tests you are in deep trouble, but you knew that, right? Good news: you can use the Mikado Method while writing tests.<&#47;li>
+<li>If it does not work you try not to fix problems, but you rollback your changes.<&#47;li>
+<li>You use a simple notation to write down everything you need to change. This way you can see what is left to do and where you can try the next step.<&#47;li><br />
+<&#47;ol><br />
+The simple notation is just a simple directed graph. You can draw it with pen and paper or a white board. Since it can become pretty large I prefer a simple graph editor like <a href="http:&#47;&#47;www.yworks.com&#47;en&#47;products_yed_about.html">yed<&#47;a>.</p>
+<p>I tried the Mikado Method for two tasks lately and it works like charm. I was never far a way from compiling code. And I had a good overview of all the things that I needed to do and also the order in which I had to do those things. Even after switching to other tasks for almost a week I could pick up my work without much delay.</p>
+<p>There is just one problem I encountered with the Mikado Method: How to handle cycles in the graph you are building. From time to time I encountered such cycles like: do X; in order to do X I need to do Y; in order to do Y I need to do Z; I have to do X before I can do Z. I'm not sure if this was actually due to the fact that I was dealing with dependency problems in the first place, but I could solve the problem every time by <a href="&#47;2011&#47;07&#47;17&#47;breaking-dependency-cylces&#47;">removing some cyclic dependencies<&#47;a> in the classes involved.</p>
+<p>So that's my little introduction to the Mikado Method. Obviously I didn't come up with it and if you are completely confused by my rambling, or if you want to learn more about the Mikado Method you should go to <a href="http:&#47;&#47;mikadomethod.org&#47;">its website<&#47;a>. There is a <a href="http:&#47;&#47;www.agical.com&#47;mikmeth&#47;mikadomethod.pdf">free preview of a book<&#47;a>. Its where I learned everything I know about the method.</p>

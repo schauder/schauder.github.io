@@ -1,0 +1,97 @@
+<p>An important part of any kind of GUI is input validation. If you are living in the Java world, you probably know about Bean Validation and its reference implementation Hibernate Validation. Using Bean Validation you sprinkle your code with annotations in order to declare the maximum size attributes, if they may be Null and many more. It looks like this:</p>
+<pre lang="java">
+    @NotNull<br />
+    @Size(min = 2, max = 14)<br />
+    private String licensePlate;<br />
+<&#47;pre></p>
+<p>That's not bad. It's declarative and you can use the same annotation for your presentation model and your persistence model. If you use Hibernate for persistence it creates the right kind of constraint for the database as well. But there are a couple of shortcomings.</p>
+<ul>
+<li>If you want to do anything else with the information from the annotation you are forced to use ugly error prone reflection, which is especially bothersome, because a property consists of  field  getter and setter. So where exactly is the annotation? What if the annotation on the getter contradict the one on the field?<&#47;li>
+<li>You can't abstract over the annotations. If comments should always have a minimum length of 5 and a maximum length of 500 there is no way to put this information in a proper abstraction. The best you can do is to define two constants.<&#47;li>
+<li>It doesn't work with my <a href="&#47;2011&#47;05&#47;01&#47;binding-scala-objects-to-swing-components&#47;"><tt>Property<&#47;tt> class I introduced earlier.<&#47;a><&#47;li><br />
+<&#47;ul></p>
+<p>The last point is obviously my own problem, but it also provides a starting point for a solution for the other shortcomings. </p>
+<p>For those too lazy to read the referenced article, let me reintroduce the <tt>Property<&#47;tt> class. You define a <tt>Property<&#47;tt> like this:</p>
+<pre lang="scala">
+val age = new Property(20)<br />
+<&#47;pre></p>
+<p>This line of code is pretty much equivalent to this java code (with <tt>pcs<&#47;tt> being an instance of <tt>PropertyChangeSupport<&#47;tt>):</p>
+<pre lang="java">
+int age = 20;</p>
+<p>public void setAge(int theAge){<br />
+    int oldAge = age<br />
+    age = theAge;<br />
+    pcs.firePropertyChange("age", oldAge, age)<br />
+}</p>
+<p>public int getAge(){<br />
+    return age;<br />
+}<br />
+<&#47;pre></p>
+<p>You can set its value (with <tt>p<&#47;tt> being an instance of what ever class contains the code above):</p>
+<pre lang="scala">
+p := 63<br />
+<&#47;pre></p>
+<p>You can retrieve its value:</p>
+<pre lang="scala">
+val ageOfP = p()<br />
+<&#47;pre></p>
+<p>And you can register a listener on it</p>
+<pre lang="scala">
+p.age.registerListener(println(_))<br />
+<&#47;pre></p>
+<p>Back to validation. For <tt>age<&#47;tt> I only want to allow values between 9 and 99. How would you like to check if a given age is valid? Well, I would like to ask the property!</p>
+<pre lang="scala">
+if (p.age.valid()) doSomething()<br />
+else doSomethingElse()<br />
+<&#47;pre></p>
+<p>If I want to know what is wrong with the age value, I'd like to ask the property for a list of validation messages like this:</p>
+<pre lang="scala">
+val problems = p.age.validationMessages()<br />
+<&#47;pre></p>
+<p>All you have to do for this, is to add a trait to the age <tt>Property<&#47;tt></p>
+<pre lang="scala">
+val age = new Property(20) with Size { min = 9; max = 99 }<br />
+<&#47;pre></p>
+<p>You can properly abstract over constraints as well by defining you own Property classes:</p>
+<pre lang="scala">
+    class Name(value : String) extends Property(value) with Length { min = 3; max = 20 }<br />
+    val firstname = new Name("")<br />
+    val lastname = new Name("")<br />
+<&#47;pre></p>
+<p>And it is easy to define your own <tt>Validations<&#47;tt>. Have look at the implementation of <tt>Length<&#47;tt></p>
+<pre lang="scala">
+trait Length extends Validation[String] {<br />
+    self : Property[String] =><br />
+    var min : Int = -1<br />
+    var max : Int = Int.MaxValue<br />
+    override def validate : List[String] = minimumValidation ::: maximumValidation ::: super.validate<br />
+    def minimumValidation = if (value != null && value.length < min) List("Should have minimum length " + min) else List()<br />
+    def maximumValidation = if (value != null && value.length > max) List("Should have maximum length " + max) else List()<br />
+}<br />
+<&#47;pre></p>
+<p>There are a couple of simple rules for implementing a <tt>Validation<&#47;tt>:</p>
+<ul>
+<li>It has to have a selftype of <tt>Property<&#47;tt><&#47;li>
+<li>You must override the method <tt>validate<&#47;tt><&#47;li>
+<li>And when doing so you have to take care to append your validation messages to the results of <tt>super.validate<&#47;tt>. By doing this you make sure you can combine different validation traits.<&#47;li><br />
+<&#47;ul></p>
+<p><tt>validationMessages<&#47;tt> and <tt>valid<&#47;tt> aren't methods but are Properties themselves. Therefor you can register listeners with them and bind your swing GUI to it. For example the following code snippet binds the <tt>validationMessages<&#47;tt> and <tt>valid<&#47;tt> to the tooltip and the visibility of label, resulting in a validation marker for a <tt>Property<&#47;tt></p>
+<pre lang="scala">
+def bindValidation(validation : Validation[_], component : JComponent) {</p>
+<p>    component.setVisible(!validation.valid)<br />
+    validation.valid.registerListener(valid => component.setVisible(!valid))</p>
+<p>    def setToolTip(messages : List[String]) {<br />
+        component.setToolTipText(<br />
+            {<br />
+                messages match {<br />
+                    case x :: xs =><br />
+                        "<html>" + (x :: xs).mkString("<br&#47;>") + "<&#47;html>"<br />
+                    case _ => null<br />
+                }<br />
+            })<br />
+    }</p>
+<p>    setToolTip(validation.validationMessages())<br />
+    validation.validationMessages.registerListener(setToolTip)<br />
+}<br />
+<&#47;pre></p>
+<p>If you are interested in more source code: Everything is up at github under the working title <a href="https:&#47;&#47;github.com&#47;schauder&#47;More-Than-Properties">"moreThanProperties"<&#47;a>. You can also find other related articles by looking for the <a href="http:&#47;&#47;blog.schauderhaft.de&#47;tag&#47;morethanproperties&#47;">tag moreThanProperties<&#47;a>.</p>

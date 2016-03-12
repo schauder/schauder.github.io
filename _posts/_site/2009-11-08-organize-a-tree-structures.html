@@ -1,0 +1,13 @@
+<p>[caption id="attachment_314" align="alignleft" width="300" caption="Bonsai Tree"]<img class="size-medium wp-image-314" title="994671_96276875" src="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2009&#47;10&#47;994671_96276875-300x271.jpg" alt="Bonsai Tree" width="300" height="271" &#47;>[&#47;caption]</p>
+<p>Trees are everywhere in software! The file system is a tree structure, menus form a tree structure, the archive widget on the right side of this blog is a tree structure. We use trees all the time. And very often they get completely messed up. I'd say 9 out of 10 project folders are a complete mess. The only people finding anything in these structures are the ones who put it there in the first place. Why is it so difficult to find anything in most of these trees? And how can we make it more easy?</p>
+<p>Web2.0 and Google fanatics would probably say: forget about the tree structure. Just tag everything and use a search engine. I'd say this is a good approach for really solving the problem. But in many cases this is not an option. So let me present a really easy solution.</p>
+<p>But first lets clarify the problem. Just yesterday I found something like this inside a project folder:</p>
+<ul>
+<li>meeting minutes<&#47;li>
+<li>status report<&#47;li>
+<li>sales<&#47;li>
+<li>architecture<&#47;li><br />
+<&#47;ul><br />
+Question: Why doesn't this work? Answer: Where do the minutes of an architecture meeting go? We don't know. The underlying problem is that there are two criterias applied for identifying folders: document type (meeting minutes, status report) and job roles (sales, architecture).</p>
+<p>The simple trick for obtaining an easy to manage tree structure is: "Use exactly one criteria for distinguishing the branches on the next level." In a project folder, you might use criteria like 'document type', 'project phase', 'document owner', 'date', 'module' but in every branch use only one criteria for the subfolders. In reality it is actually pretty difficult to find good criteria, but it is worth the effort, because in such a structure, it is easy to find the correct spot for a document. It is easy to find a document. And it is easy to decide that a new folder is needed.</p>
+<p>Of course the challenge remains, to make everybody understand and maintain the structure. Feel to point them to this blog post.</p>

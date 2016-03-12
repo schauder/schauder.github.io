@@ -1,0 +1,42 @@
+---
+layout: post
+status: publish
+published: true
+title: New Project's Resolution
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 372
+wordpress_url: http://blog.schauderhaft.de/?p=372
+date: '2010-01-10 12:41:07 +0100'
+date_gmt: '2010-01-10 10:41:07 +0100'
+categories:
+- Softwaredevelopment
+tags:
+- testing
+- clean code
+- toxicity
+- dependency injection
+- resolution
+comments:
+- id: 341
+  author: DingensBummens | Das Ding was Bummst &raquo; My Google Reader Shared Items
+    &#8211; Tuesday, January 12, 2010
+  author_email: ''
+  author_url: http://www.dingensbummens.de/2010/01/12/my-google-reader-shared-items-tuesday-january-12-2010/
+  date: '2010-01-12 19:01:13 +0100'
+  date_gmt: '2010-01-12 17:01:13 +0100'
+  content: "[...] New Project&acirc;&euro;&trade;s Resolution [...]"
+---
+<p>[caption id="attachment_374" align="alignleft" width="300" caption="Fireworks"]<a href="http:&#47;&#47;www.sxc.hu&#47;photo&#47;1216962"><img class="size-medium wp-image-374" title="Fireworks" src="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2010&#47;01&#47;1216962_13713831-300x200.jpg" alt="" width="300" height="200" &#47;><&#47;a>[&#47;caption]</p>
+<p>In a couple of days I'll start working on a new project. Actually it is an project that I worked one or two years ago. I think I did decent job last time. But there is always lots of room for improvement. So today I want to list a couple of things I want to do bettern than the last time.</p>
+<p><strong>More Tests<&#47;strong> - When working on that project I was the only person with real experience in automated testing. I am proud that we had a test suite and that this test suite still exists and put to good use and actually grew during the last months. Yet I consider the coverage of the tests not sufficient by far. So for every code I write, I will add an extensive set of test. I'll also add tests for existing code, when refactoring.</p>
+<p><strong>Earlier Tests<&#47;strong> - One reason we didn't produce as many tests as I would wish today is that we didn't do TDD. It probably was a correct decission the last time, since it would have been just to much. But this time I will practice TDD as good as I can.</p>
+<p><strong>Cleaner Code<&#47;strong> - One of the first tests I wrote back then was a test to ensure that we don't have circular dependencies. We succeeded in this, but still parts of the system a pretty tangled. We gonna improve that. Appart from the knowledge I took from <a href="http:&#47;&#47;www.amazon.com&#47;gp&#47;product&#47;0132350882?ie=UTF8&amp;tag=schauderhaft-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0132350882">Clean Code<&#47;a> I'll plan to use the <a href="http:&#47;&#47;erik.doernenburg.com&#47;2008&#47;11&#47;how-toxic-is-your-code&#47;">toxicity metric<&#47;a> as an important tool for that.</p>
+<p><strong>Dependency Injection<&#47;strong> - We considered using Spring and decided against it, because we already had about 20 libraries we hardly knew in the project. Again at that time it was a reasonable decision. But in the meantime I learned what we could have gained by using Spring. I'll propose using it, but even when the team declines again, I'll be able to use the concept in order to improve the code base.</p>
+<p>So these are the things I want to improve on in the next project. What are the things you want to improve on in your next project?</p>

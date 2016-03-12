@@ -1,0 +1,454 @@
+---
+layout: post
+status: publish
+published: true
+title: Tips for Testing Database Code
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1013
+wordpress_url: http://blog.schauderhaft.de/?p=1013
+date: '2012-01-15 07:52:33 +0100'
+date_gmt: '2012-01-15 05:52:33 +0100'
+categories:
+- Softwaredevelopment
+tags:
+- database
+- testing
+- continuous integration
+comments:
+- id: 4801
+  author: Databases in developers environment &#8211; Versioning and migrations &laquo;
+    BibaBlog
+  author_email: ''
+  author_url: http://wap.ecw.de/archives/1665
+  date: '2012-01-16 11:29:10 +0100'
+  date_gmt: '2012-01-16 09:29:10 +0100'
+  content: "[...] Update: Jens Schauder published a post about  Tips for Testing Database
+    Code. [...]"
+- id: 4810
+  author: Tomek Kaczanowski
+  author_email: tkaczano@poczta.onet.pl
+  author_url: http://kaczanowscy.pl/tomek
+  date: '2012-01-17 08:34:43 +0100'
+  date_gmt: '2012-01-17 06:34:43 +0100'
+  content: "Hi Jens,\r\n\r\n\"Stay away from any tool that comes with its own repository\"
+    - even though you give some explanation, I am still not sure what kind of tools
+    (and what repository) you talk about. Do you mean things like liquibase.org? Could
+    you please elaborate on this?\r\n\r\n--\r\nCheers,\r\nTomek Kaczanowski"
+- id: 4811
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-01-17 09:01:30 +0100'
+  date_gmt: '2012-01-17 07:01:30 +0100'
+  content: "@Tomek No, Liquibase is fine AFAIK. From their home page:\r\n\r\n\"All
+    database changes are stored in a human readable yet trackable form and checked
+    into source control.\"\r\n\r\nThis is really important. There are modeling tools
+    that have their own repository&#47;database as part of the application. The effect
+    is that you can't use the myriads of tools we have for text based files, like
+    diff, version control, editors and so on.\r\n\r\nImagine a situation where your
+    for example java code is checked into subversion. Now there is no problem to obtain
+    a consistent revision of that code. If your database model is stored as sql, xml
+    or similar in the same subversion repository, you can get a consistent copy of
+    both parts.\r\n\r\nNow imagine data model is stored in a modeling tool instead.
+    You have no link to your svn model. you can't branch&#47;tag properly. Even if
+    you just take the complete repository of the modeling tool and put it in svn you
+    still have\r\na) a manual process, bound to fail in many instances\r\nb) no reasonable
+    way of doing a meaningful diff between two versions\r\nc) a big challange when
+    you want to create a real database for testing based on a specific revision of
+    the model.."
+- id: 4812
+  author: Alex
+  author_email: asotobu@gmail.com
+  author_url: http://alexsotob.blogspot.com
+  date: '2012-01-17 10:51:28 +0100'
+  date_gmt: '2012-01-17 08:51:28 +0100'
+  content: 'Flyway can help you too. I wrote some time ago in my blog: http:&#47;&#47;alexsotob.blogspot.com&#47;2011&#47;12&#47;far-away-long-ago-glowing-dim-as-ember.html'
+- id: 4824
+  author: Brent Tilley
+  author_email: brent.tilley@gmail.com
+  author_url: http://www.prisonofmirrors.com
+  date: '2012-01-18 08:32:44 +0100'
+  date_gmt: '2012-01-18 06:32:44 +0100'
+  content: Very interesting read. I, too, advocate the need for database testing.
+    I also like to challenge myself in writing more efficient SQL statements; I'm
+    constantly wondering if I can do something better.
+- id: 4830
+  author: Anonymous Coward
+  author_email: a_flj_@hotmail.com
+  author_url: ''
+  date: '2012-01-18 19:22:16 +0100'
+  date_gmt: '2012-01-18 17:22:16 +0100'
+  content: "&acirc;&euro;&oelig;Stay away from any tool that comes with its own repository&acirc;&euro;\x9D
+    - that's one thing I strongly disagree with.\r\n\r\nUML tools are useful, as long
+    as they are properly integrated into your IDE.\r\n\r\nDatabase management tools
+    are also useful, as long as you don't maintain your database in the database itself,
+    but just re-create the database each time from your SQL source, and keep the SQL
+    files in source control as any other source file. It's a lot harder to test and
+    develop your database code without a tool\r\n\r\nI also disagree about \"Favor
+    a proper Language (like Java, C, PHP &acirc;&euro;&brvbar;) over database specific
+    languages\" - it all depends on the job at hand. What you shouldn't do is spread
+    your business logic across different technologies. Putting all persistence-related
+    logic into SQL, and keeping the actual logic which manipulates data in Java, C#
+    or whatever your poison is sometimes not possible - operations which are simple
+    but need to be performed on huge amounts of data are impractical in a non-SQL
+    language. In which case you have two options: you delimit the long-running operations
+    very clearly, implement them in SQL and wrap them neatly into functions in your
+    Java&#47;C#&#47;whatever code, or, if most of your business logic lends itself
+    to such an implementation, you make your non-SQL application a thin wrapper around
+    the SQL application. Either way, you still don't need to give up maintaining your
+    application's source in a source control system, and can still apply mostly all
+    the techniques you described - including driving transactions from your non-SQL
+    application."
+- id: 4831
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-01-18 19:42:43 +0100'
+  date_gmt: '2012-01-18 17:42:43 +0100'
+  content: "@Anonymous Coward\r\n\r\nI don't think our opinions are so far apart.
+    Modeling tools are helpful. But everything that results in an artifact that eventually
+    becomes part of a deployment should if at all possible reside in you version control
+    system, be text based and the process to create the final artifact should be completely
+    scriptable. \r\n\r\nAs far as languages are concerned: I agree there are jobs
+    that should be done using PL&#47;SQL or T-SQL or whatever your RDBMSs equivalent
+    is. But for the majority of application logic the lack of proper tool support
+    is just to cumbersome."
+- id: 4832
+  author: bushfoot
+  author_email: kelley@prairiefyre.com
+  author_url: http://www.prairiefyre.com
+  date: '2012-01-18 20:57:46 +0100'
+  date_gmt: '2012-01-18 18:57:46 +0100'
+  content: "For our db stored procedure testing, we have insert scripts that insert
+    a known set of data into an empty database.  \r\n\r\nThe procs are run with a
+    known set of parameter (XML file keeps track of the proc name, parameters and
+    expected output) and the returned data is compared to benchmark data.\r\n\r\nMany
+    tests can exists to handle the different parameter options.\r\n\r\nIt has taken
+    us a long time to get to this point. This is just one small part of our database
+    testing but it works pretty good."
+- id: 4833
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-01-18 21:25:26 +0100'
+  date_gmt: '2012-01-18 19:25:26 +0100'
+  content: "@bushfoot\r\nhow do you deal with changes in your schema? I once worked
+    with a similar approach, but we finally ditched it  because it became just impossible
+    to maintain the scripts for inserting data."
+- id: 4835
+  author: Petri Kainulainen
+  author_email: petri.kainulainen@gmail.com
+  author_url: http://www.petrikainulainen.net
+  date: '2012-01-18 23:24:33 +0100'
+  date_gmt: '2012-01-18 21:24:33 +0100'
+  content: "Nice entry. It has several good points in it but I liked especially this
+    one:\r\n\r\n\"Stay away from any tool that comes with its own repository. If have
+    seen about a dozen of such tools and although some looked promising in the beginning,
+    they all completely failed to integrate with other tools on the development side
+    of things. \"\r\n\r\nI have used one such tool (it was a database design tool)
+    in one large project I worked on a year ago. The tool did indeed look promising
+    but in the end it was a real nightmare since all changes to the db schema would
+    have go into that tool as well. But since we also had separate SQL change scripts
+    for each version of the software, the we were simply adding the same stuff for
+    two places. The tool itself did support schema import but it was always a very
+    cumbersome process. And to make things worse, we had only one license for that
+    tool. So it became my unpleasant duty to merge changes back to the tool. It ended
+    up to a total nightmare. \r\n\r\nThe bad thing is that most of these tool Vendors
+    have very good sales departments. Also, since those tools feels pretty promising,
+    you might end up shooting yourself in the foot pretty easily. People should not
+    be afraid of doing things in the \"old school\" way. It does indeed have some
+    serious advantages."
+- id: 4843
+  author: Michael Francis
+  author_email: michael.francis@red-gate.com
+  author_url: http://www.red-gate.com
+  date: '2012-01-19 16:28:29 +0100'
+  date_gmt: '2012-01-19 14:28:29 +0100'
+  content: "Hi\r\n\r\nDid you know that you can this all aotomatically (without the
+    manual scripts) using SQL Source Control - http:&#47;&#47;www.red-gate.com&#47;products&#47;sql-development&#47;sql-source-control&#47;\r\n\r\nFree
+    28-day trial if anyone is interested in taking a look."
+- id: 4868
+  author: PAYcast 37 &raquo; PAYcast
+  author_email: ''
+  author_url: http://paycast.ru/paycast-37/
+  date: '2012-01-23 08:53:45 +0100'
+  date_gmt: '2012-01-23 06:53:45 +0100'
+  content: "[...] &ETH;&cent;&ETH;&micro;&ETH;&frac14;&ETH;&deg; &ETH;&sup2;&Ntilde;&lsaquo;&ETH;&iquest;&Ntilde;&fnof;&Ntilde;\x81&ETH;&ordm;&ETH;&deg;:
+    &ETH;&scaron;&ETH;&deg;&ETH;&ordm; &ETH;&cedil;&Ntilde;\x81&ETH;&iquest;&ETH;&frac34;&ETH;&raquo;&Ntilde;&OElig;&ETH;&middot;&ETH;&frac34;&ETH;&sup2;&ETH;&deg;&Ntilde;&sbquo;&Ntilde;&OElig;
+    &ETH;&cedil; &Ntilde;&sbquo;&ETH;&micro;&Ntilde;\x81&Ntilde;&sbquo;&ETH;&cedil;&Ntilde;&euro;&ETH;&frac34;&ETH;&sup2;&ETH;&deg;&Ntilde;&sbquo;&Ntilde;&OElig;
+    &ETH;&plusmn;&ETH;&deg;&ETH;&middot;&Ntilde;&lsaquo; &ETH;&acute;&ETH;&deg;&ETH;&frac12;&ETH;&frac12;&Ntilde;&lsaquo;&Ntilde;&hellip;
+    [...]"
+- id: 4871
+  author: Database Testing Tips
+  author_email: ''
+  author_url: http://www.softwaretestingmagazine.com/knowledge/database-testing-tips/
+  date: '2012-01-24 00:06:33 +0100'
+  date_gmt: '2012-01-23 22:06:33 +0100'
+  content: "[...] addthis_share = [];}In this blog post, Jens Schauder shares some
+    tips based on experience to improve the testing of database code. People seem
+    to understand the need to test their code, but apparently this is not yet the
+    case for [...]"
+- id: 4886
+  author: Lance
+  author_email: lance.java@gmail.com
+  author_url: ''
+  date: '2012-01-25 12:06:21 +0100'
+  date_gmt: '2012-01-25 10:06:21 +0100'
+  content: I have found <a href="http:&#47;&#47;www.liquibase.org&#47;" rel="nofollow">Liquibase<&#47;a>
+    to be an invaluable tool for managing database scripts. It maintains a table which
+    tracks which scripts have&#47;haven't been applied to avoid applying a script
+    twice. If a script has changed, liquibase can tell by checking a hashsum. If a
+    script has changed it will either fail if a rollback is not possible or rollback&#47;reapply
+    when a rollback script is provided.
+- id: 4930
+  author: Yuliya
+  author_email: y.zvolskaya@gmail.com
+  author_url: ''
+  date: '2012-01-30 11:27:13 +0100'
+  date_gmt: '2012-01-30 09:27:13 +0100'
+  content: "There are some points in this post I am disagree with. Please, keep in
+    mind that my opinion is based on my personal experience, mostly with huge Oracle
+    databases (banking and money transfers).\r\nHaving test-database for every developer
+    is a good idea in theory, but it creates huge amount of extra work. All of those
+    databases must be synchronized constantly and have to hold identical data. If
+    a production database holds terabytes of data, so should every test-database otherwise
+    testing is pointless. In performance critical applications solutions that work
+    well on small amount of data generally perform terribly in the real world. So
+    usually I saw the following installment - developers have their own copy of production
+    database, so does the QA team and so on. These approach proved to work well.\r\n\r\nSecond
+    point that I can't agree with is a choice of language. Personally, if I had a
+    choice of programming language I would certainly go with mentioned criterions
+    \"For which do you get the better IDE, Unit testing support, code analysis, code
+    coverage and so on\". But it's not my opinion that matters in the real world.
+    When I had to deal with hundreds of database requests per second, that could not
+    be cached in anyway and required direct communication with the data, the build-in
+    language wins hands down over proper languages (PL&#47;SQL in Oracle). Yes, it's
+    far from perfect, but it does its job better. Some modules of the application
+    are working better with the proper languages, but when it comes to the data, the
+    built-in language has no competitors."
+- id: 4933
+  author: Harald M.
+  author_email: h.mueller@pharmatechnik.de
+  author_url: ''
+  date: '2012-01-30 13:13:55 +0100'
+  date_gmt: '2012-01-30 11:13:55 +0100'
+  content: "Jens asked: \"@bushfoot\r\nhow do you deal with changes in your schema?
+    I once worked with a similar approach, but we finally ditched it because it became
+    just impossible to maintain the scripts for inserting data.\"\r\n\r\nWell, you
+    build your database in a CI (continuous integration) environment. If it does not
+    build, someone has to change the insert scripts.\r\n\r\nFor this to work, you
+    must go one step further than Jens's first item: \"Give every developer her own
+    database.\" This must be \"Give every developer <b>the means to create<&#47;b>
+    her own database.\"\r\n\r\nBy this, people changing the database schema and writing
+    tests can work in an agile way.\r\n\r\nOf course, there's more to all this: You
+    need to keep your schema trackable - so for each and every SQL statement, you
+    need a unit test that checks whether they still run. It helps if you have  DAO
+    layer (that contains all SQL statements); and it helps very much if you have a
+    schema comparison tool (we use Redgate) so taht you can check in a \"schema snapshot\"
+    and then check later what your developers changed.\r\n\r\nWe run a multi-million
+    LOC software with (currently) more than 250 installations - and yet we allow every
+    developer to change any part of the database schema in every (even minor) release
+    ... so yes, all this \"agility on the database\" does indeed work :-)\r\n\r\nHarald
+    M."
+- id: 4934
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-01-30 14:05:57 +0100'
+  date_gmt: '2012-01-30 12:05:57 +0100'
+  content: "@Harald I agree\r\n\r\n@Yulya I choose the word 'favor' for a reason.
+    There are reasons where PL&#47;SQL or similar languages are the correct choice.
+    Very large databases certainly might qualify.\r\n\r\nI don't agree with the approach
+    to production data. Yes you need a database with production data (or comparably
+    data) for testing performance and such. But that doesn't mean every developer
+    needs to use that kind of database all the time.\r\n\r\nAnyway there are lots
+    of great points in the comments and also from a discussion I had after doing a
+    talk about this topic at OOP 2012 so I guess I have to do a follow up on the topic.
+    Stay tuned"
+- id: 4965
+  author: Sunil
+  author_email: softwaretestingfullguide@gmail.com
+  author_url: http://www.softwaretestingfullguide.com
+  date: '2012-02-04 21:31:26 +0100'
+  date_gmt: '2012-02-04 19:31:26 +0100'
+  content: Very good topic, explained very clearly.thank you for good post.
+- id: 5169
+  author: QA Thought Leaders
+  author_email: qathoughtleaders@gmail.com
+  author_url: http://www.qainfotech.com/innovation.html
+  date: '2012-03-02 10:31:39 +0100'
+  date_gmt: '2012-03-02 08:31:39 +0100'
+  content: Wow. Very nice post. Thank you for sharing this post. I find it very informative.
+    I keep on reading normal posts on QA testing or importance of independent software
+    testing, however, this post of Testing Database Code is truely exceptional.
+- id: 5652
+  author: aakash
+  author_email: lucre.jobs@gmail.com
+  author_url: ''
+  date: '2012-04-03 14:46:57 +0200'
+  date_gmt: '2012-04-03 12:46:57 +0200'
+  content: thanks
+- id: 6313
+  author: 'Introducing onedb: Connect Small Data in the Cloud &laquo; Missing Link'
+  author_email: ''
+  author_url: http://maxrohde.com/2012/05/06/introducing-onedb/
+  date: '2012-05-06 00:56:45 +0200'
+  date_gmt: '2012-05-05 22:56:45 +0200'
+  content: "[...] logic which is tightly coupled to persisted data is notoriously
+    difficult to test using automated unit tests. There are many reasons for this
+    but one key factor is that it is often [...]"
+- id: 7863
+  author: 'Databases in developers environment &#8211; Versioning and migrations :
+    schakko.de'
+  author_email: ''
+  author_url: http://www.schakko.de/2011/12/23/databases-in-developers-environment-versioning-and-migrations/
+  date: '2012-08-14 14:37:12 +0200'
+  date_gmt: '2012-08-14 12:37:12 +0200'
+  content: "[...] Jens Schauder published a post about  Tips for Testing Database
+    Code.    Published: December 23, 2011 Filed Under: [...]"
+- id: 8419
+  author: "DB&eacute;&ndash;&lsaquo;&ccedil;&trade;&ordm;&atilde;&sbquo;&rsquo;&egrave;&iexcl;&OElig;&atilde;\x81&dagger;&atilde;\x81&uml;&atilde;\x81\x8D&atilde;\x81&reg;&atilde;&fnof;&trade;&atilde;&sbquo;&sup1;&atilde;&fnof;&circ;&atilde;&fnof;&mdash;&atilde;&fnof;&copy;&atilde;&sbquo;&macr;&atilde;&fnof;&dagger;&atilde;&sbquo;&pound;&atilde;&sbquo;&sup1;
+    &laquo; nanoblog"
+  author_email: ''
+  author_url: http://nanoappli.com/blog/archives/641
+  date: '2012-10-06 04:34:54 +0200'
+  date_gmt: '2012-10-06 02:34:54 +0200'
+  content: "[...] &atilde;&fnof;&Dagger;&atilde;&fnof;&frac14;&atilde;&sbquo;&iquest;&atilde;&fnof;&trade;&atilde;&fnof;&frac14;&atilde;&sbquo;&sup1;&atilde;\x81&reg;&atilde;&fnof;&dagger;&atilde;&sbquo;&sup1;&atilde;&fnof;&circ;&atilde;\x81&laquo;&atilde;\x81&curren;&atilde;\x81&bdquo;&atilde;\x81&brvbar;&atilde;\x81&reg;&egrave;&uml;&tilde;&auml;&ordm;&lsaquo;&atilde;&euro;\x81Tips
+    for Testing Database Code&atilde;&sbquo;&rsquo;&egrave;&ordf;&shy;&atilde;&sbquo;&ldquo;&atilde;\x81&sect;&atilde;\x81&reg;&atilde;&fnof;&iexcl;&atilde;&fnof;&cent;&atilde;\x81&sect;&atilde;\x81&trade;&atilde;&euro;&sbquo;
+    &aring;&hellip;&fnof;&egrave;&uml;&tilde;&auml;&ordm;&lsaquo;&atilde;&sbquo;&rsquo;&egrave;&uml;&sup3;&atilde;\x81&mdash;&atilde;\x81&Yuml;&atilde;&sbquo;&sbquo;&atilde;\x81&reg;&atilde;\x81&uml;&atilde;&euro;\x81&aelig;&bdquo;&Yuml;&aelig;&fnof;&sup3;&iuml;&frac12;&yen;&aelig;&bdquo;\x8F&egrave;&brvbar;&lsaquo;&atilde;\x81&OElig;&atilde;\x81&rdquo;&atilde;\x81&iexcl;&atilde;&sbquo;&fnof;&atilde;\x81&frac34;&atilde;\x81&oelig;&atilde;\x81&sect;&ccedil;&reg;&Dagger;&aelig;\x9D&iexcl;&aelig;&rsaquo;&cedil;&atilde;\x81\x8D&atilde;\x81&sect;&aelig;&rsaquo;&cedil;&atilde;\x81&bdquo;&atilde;\x81&brvbar;&atilde;\x81&sbquo;&atilde;&sbquo;&Scaron;&atilde;\x81&frac34;&atilde;\x81&trade;&atilde;&euro;&sbquo;
+    DB&atilde;\x81&reg;&egrave;&Dagger;&ordf;&aring;&lsaquo;&bull;&atilde;&fnof;&dagger;&atilde;&sbquo;&sup1;&atilde;&fnof;&circ;&atilde;\x81&macr;&eacute;\x81&hellip;&atilde;\x81\x8F&atilde;&euro;\x81&ccedil;&reg;&iexcl;&ccedil;\x90&dagger;&atilde;\x81&OElig;&eacute;&rsaquo;&pound;&atilde;\x81&mdash;&atilde;\x81&bdquo;
+    &nbsp; DB&atilde;\x81&reg;&aring;&curren;&permil;&aelig;&rsaquo;&acute;&atilde;\x81&macr;&aring;&hellip;&uml;&atilde;\x81&brvbar;&atilde;&euro;\x81&auml;&ordm;&ordm;&atilde;\x81&OElig;&egrave;&ordf;&shy;&atilde;&sbquo;\x81&atilde;&sbquo;&lsaquo;&aring;&frac12;&cent;&atilde;\x81&sect;&atilde;&fnof;\x90&atilde;&fnof;&frac14;&atilde;&sbquo;&cedil;&atilde;&fnof;&sect;&atilde;&fnof;&sup3;&ccedil;&reg;&iexcl;&ccedil;\x90&dagger;&atilde;&sbquo;&middot;&atilde;&sbquo;&sup1;&atilde;&fnof;&dagger;&atilde;&fnof;&nbsp;&atilde;\x81&sect;&ccedil;&reg;&iexcl;&ccedil;\x90&dagger;&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;&atilde;&euro;&sbquo;
+    &nbsp; DB&aring;&reg;&scaron;&ccedil;&frac34;&copy;&atilde;\x81&reg;&auml;&raquo;&bull;&aelig;&sect;&tilde;&aelig;&rsaquo;&cedil;&atilde;\x81&lsaquo;&atilde;&sbquo;&permil;&atilde;&euro;\x81&atilde;&fnof;&macr;&atilde;&fnof;&sup3;&atilde;&sbquo;&macr;&atilde;&fnof;&ordf;&atilde;&fnof;&fnof;&atilde;&sbquo;&macr;&atilde;\x81&sect;DB&aring;&reg;&scaron;&ccedil;&frac34;&copy;&atilde;\x81&reg;&atilde;&sbquo;&sup1;&atilde;&sbquo;&macr;&atilde;&fnof;&ordf;&atilde;&fnof;&mdash;&atilde;&fnof;&circ;&atilde;\x81&OElig;&ccedil;&rdquo;&Yuml;&aelig;&circ;\x90&atilde;\x81&sect;&atilde;\x81\x8D&atilde;&sbquo;&lsaquo;&atilde;\x81&ldquo;&atilde;\x81&uml;
+    DB&aring;&reg;&scaron;&ccedil;&frac34;&copy;&atilde;\x81&reg;&auml;&raquo;&bull;&aelig;&sect;&tilde;&aelig;&rsaquo;&cedil;&atilde;\x81&macr;&atilde;&euro;\x81Excel&atilde;\x81&ordf;&atilde;\x81&copy;&atilde;\x81&sect;&auml;&frac12;&oelig;&aelig;&circ;\x90&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;&atilde;\x81&ldquo;&atilde;\x81&uml;&atilde;&sbquo;&sbquo;&aring;&curren;&scaron;&atilde;\x81&bdquo;&atilde;\x81&OElig;&atilde;&euro;\x81&atilde;\x81&ldquo;&atilde;\x81&reg;&eacute;&scaron;&rsaquo;&atilde;&euro;\x81Excel&atilde;\x81&reg;&atilde;&fnof;ž&atilde;&sbquo;&macr;&atilde;&fnof;&shy;&atilde;\x81&sect;create
+    table&ccedil;&shy;&permil;&atilde;\x81&reg; DB&atilde;&sbquo;&ordf;&atilde;&fnof;&ndash;&atilde;&sbquo;&cedil;&atilde;&sbquo;&sect;&atilde;&sbquo;&macr;&atilde;&fnof;&circ;&ccedil;&rdquo;&Yuml;&aelig;&circ;\x90&atilde;&sbquo;&rsquo;&egrave;&iexcl;&OElig;&atilde;\x81&circ;&atilde;&sbquo;&lsaquo;&atilde;&sbquo;&circ;&atilde;\x81&dagger;&atilde;\x81&laquo;&atilde;\x81&mdash;&atilde;\x81&brvbar;&atilde;\x81&Scaron;&atilde;\x81\x8F&atilde;&euro;&sbquo;
+    &atilde;\x81&frac34;&atilde;\x81&Yuml;&atilde;&euro;\x81&atilde;\x81&ldquo;&atilde;\x81&reg;&eacute;&scaron;&rsaquo;&atilde;&euro;\x81&ccedil;&rsaquo;&acute;&aring;&permil;\x8D&atilde;\x81&reg;&ccedil;&rdquo;&Yuml;&aelig;&circ;\x90&aring;&dagger;&hellip;&aring;&reg;&sup1;&atilde;\x81&uml;&atilde;\x81&reg;&aring;&middot;&reg;&aring;&circ;&dagger;&atilde;&sbquo;&rsquo;&aring;\x8F&ndash;&atilde;&sbquo;&OElig;&atilde;&sbquo;&lsaquo;&auml;&raquo;&bull;&ccedil;&micro;&bdquo;&atilde;\x81&iquest;&atilde;&sbquo;&rsquo;&auml;&frac12;&oelig;&atilde;\x81&pound;&atilde;\x81&brvbar;&atilde;\x81&Scaron;&atilde;\x81\x8F&atilde;\x81&uml;ChangeLog&atilde;\x81&reg;&egrave;&Dagger;&ordf;&aring;&lsaquo;&bull;&ccedil;&rdquo;&Yuml;&aelig;&circ;\x90&atilde;&sbquo;&sbquo;&aring;\x8F&macr;&egrave;&fnof;&frac12;&atilde;\x81&uml;&atilde;\x81&ordf;&atilde;&sbquo;&lsaquo;&atilde;&euro;&sbquo;
+    &nbsp; &aring;\x90&bdquo;&eacute;&ndash;&lsaquo;&ccedil;&trade;&ordm;&egrave;&euro;&hellip;&atilde;\x81&laquo;&aring;&euro;&lsaquo;&aring;&circ;&yen;&atilde;\x81&reg;DB(&atilde;&sbquo;&sup1;&atilde;&sbquo;&shy;&atilde;&fnof;&frac14;&atilde;&fnof;ž)&atilde;&sbquo;&rsquo;&aelig;\x8F\x90&auml;&frac34;&rsaquo;&atilde;\x81&mdash;&atilde;&euro;\x81DB&atilde;\x81&reg;&atilde;&sbquo;&raquo;&atilde;&fnof;&fnof;&atilde;&fnof;&circ;&atilde;&sbquo;&cent;&atilde;&fnof;&fnof;&atilde;&fnof;&mdash;&atilde;&sbquo;&rsquo;&ccedil;&deg;&iexcl;&aring;\x8D&tilde;&atilde;\x81&laquo;&ccedil;&acute;&nbsp;&aelig;&mdash;&copy;&atilde;\x81\x8F&egrave;&iexcl;&OElig;&atilde;\x81&circ;&atilde;&sbquo;&lsaquo;&ccedil;&rsquo;&deg;&aring;&cent;&fnof;&atilde;&sbquo;&rsquo;&auml;&frac12;&oelig;&atilde;&sbquo;&lsaquo;&atilde;\x81&ldquo;&atilde;\x81&uml;
+    &egrave;&curren;&Dagger;&aelig;&bull;&deg;&auml;&ordm;&ordm;&atilde;\x81&sect;&eacute;&ndash;&lsaquo;&ccedil;&trade;&ordm;&atilde;&sbquo;&rsquo;&egrave;&iexcl;&OElig;&atilde;\x81&pound;&atilde;\x81&brvbar;&atilde;\x81&bdquo;&atilde;&sbquo;&lsaquo;&aring;&nbsp;&acute;&aring;\x90&circ;&atilde;&euro;\x81DB&atilde;\x81&OElig;1&atilde;\x81&curren;&atilde;\x81&mdash;&atilde;\x81&lsaquo;&atilde;\x81&ordf;&atilde;\x81&bdquo;&atilde;\x81&uml;
+    &atilde;\x81&frac34;&atilde;\x81&Yuml;&atilde;&euro;\x81&atilde;\x81&ldquo;&atilde;\x81&reg;&ccedil;&sbquo;&ordm;&atilde;\x81&laquo;&egrave;&uml;&shy;&aring;&reg;&scaron;&atilde;&fnof;&bull;&atilde;&sbquo;&iexcl;&atilde;&sbquo;&curren;&atilde;&fnof;&laquo;&atilde;\x81&nbsp;&atilde;\x81&lsquo;&atilde;\x81&sect;&atilde;&euro;\x81&aelig;Ž&yen;&ccedil;&para;&scaron;&aring;&hellip;&circ;DB&atilde;&sbquo;&rsquo;&aring;&circ;&Dagger;&atilde;&sbquo;&Scaron;&aelig;&rsaquo;&iquest;&atilde;\x81&circ;&atilde;&sbquo;&permil;&atilde;&sbquo;&OElig;&atilde;&sbquo;&lsaquo;&atilde;&sbquo;&circ;&atilde;\x81&dagger;&atilde;\x81&ordf;&aelig;&sect;&lsaquo;&aelig;&circ;\x90&atilde;&sbquo;&rsquo;&atilde;\x81&uml;&atilde;&sbquo;&lsaquo;&aring;&iquest;&hellip;&egrave;&brvbar;\x81&atilde;\x81&OElig;&atilde;\x81&sbquo;&atilde;&sbquo;&lsaquo;&atilde;&euro;&sbquo;
+    &nbsp; &atilde;&fnof;&macr;&atilde;&fnof;&sup3;&atilde;&sbquo;&macr;&atilde;&fnof;&ordf;&atilde;&fnof;&fnof;&atilde;&sbquo;&macr;&atilde;\x81&sect;&atilde;&euro;\x81DB&atilde;\x81&reg;&atilde;&sbquo;&uml;&atilde;&sbquo;&macr;&atilde;&sbquo;&sup1;&atilde;&fnof;\x9D&atilde;&fnof;&frac14;&atilde;&fnof;&circ;&atilde;&fnof;&raquo;&atilde;&sbquo;&curren;&atilde;&fnof;&sup3;&atilde;&fnof;\x9D&atilde;&fnof;&frac14;&atilde;&fnof;&circ;&atilde;&sbquo;&rsquo;&aring;\x8F&macr;&egrave;&fnof;&frac12;&atilde;\x81&laquo;&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;&atilde;\x81&ldquo;&atilde;\x81&uml;&atilde;&euro;&sbquo;
+    &atilde;&sbquo;&uml;&atilde;&sbquo;&macr;&atilde;&sbquo;&sup1;&atilde;&fnof;\x9D&atilde;&fnof;&frac14;&atilde;&fnof;&circ;&atilde;\x81&mdash;&atilde;\x81&Yuml;&atilde;&fnof;&bull;&atilde;&sbquo;&iexcl;&atilde;&sbquo;&curren;&atilde;&fnof;&laquo;&atilde;\x81&macr;&atilde;&euro;\x81&atilde;&sbquo;&iquest;&atilde;&sbquo;&curren;&atilde;&fnof;&nbsp;&atilde;&sbquo;&sup1;&atilde;&sbquo;&iquest;&atilde;&fnof;&sup3;&atilde;&fnof;&mdash;&auml;&raquo;&tilde;&atilde;\x81\x8D&atilde;\x81&reg;&atilde;&fnof;&bull;&atilde;&sbquo;&iexcl;&atilde;&sbquo;&curren;&atilde;&fnof;&laquo;&aring;\x90\x8D&atilde;\x81&laquo;&atilde;\x81&mdash;&atilde;&euro;\x81&egrave;&curren;&Dagger;&aelig;&bull;&deg;&auml;&cedil;&ndash;&auml;&raquo;&pound;&ccedil;&reg;&iexcl;&ccedil;\x90&dagger;&aring;\x8F&macr;&egrave;&fnof;&frac12;&atilde;\x81&uml;&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;&atilde;\x81&ldquo;&atilde;\x81&uml;
+    &nbsp; UI&atilde;\x81&reg;&aring;&Dagger;&brvbar;&ccedil;\x90&dagger;&atilde;\x81&uml;&atilde;&euro;\x81DB&aring;&Dagger;&brvbar;&ccedil;\x90&dagger;(&atilde;&fnof;&circ;&atilde;&fnof;&copy;&atilde;&fnof;&sup3;&atilde;&sbquo;&para;&atilde;&sbquo;&macr;&atilde;&sbquo;&middot;&atilde;&fnof;&sect;&atilde;&fnof;&sup3;&aring;&Dagger;&brvbar;&ccedil;\x90&dagger;)&atilde;&sbquo;&rsquo;&aring;&circ;&dagger;&eacute;&rsaquo;&cent;&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;&atilde;\x81&ldquo;&atilde;\x81&uml;&atilde;&euro;&sbquo;
+    &nbsp; &atilde;&fnof;&circ;&atilde;&fnof;&copy;&atilde;&fnof;&sup3;&atilde;&sbquo;&para;&atilde;&sbquo;&macr;&atilde;&sbquo;&middot;&atilde;&fnof;&sect;&atilde;&fnof;&sup3;&aring;&Dagger;&brvbar;&ccedil;\x90&dagger;&atilde;\x81&macr;&atilde;&euro;\x81&ccedil;&micro;&plusmn;&auml;&cedil;&euro;&atilde;\x81&bull;&atilde;&sbquo;&OElig;&atilde;\x81&Yuml;&atilde;&sbquo;&curren;&atilde;&fnof;&sup3;&atilde;&sbquo;&iquest;&atilde;&fnof;&frac14;&atilde;&fnof;&bull;&atilde;&sbquo;&sect;&atilde;&fnof;&frac14;&atilde;&sbquo;&sup1;&atilde;\x81&uml;&atilde;\x81&ordf;&atilde;\x81&pound;&atilde;\x81&brvbar;&atilde;\x81&bdquo;&atilde;&sbquo;&lsaquo;&atilde;\x81&ldquo;&atilde;\x81&uml;&atilde;&euro;&sbquo;
+    &auml;&frac34;&lsaquo;&atilde;\x81&circ;&atilde;\x81&deg;&atilde;&euro;\x81GUI&atilde;&sbquo;&cent;&atilde;&fnof;&mdash;&atilde;&fnof;&ordf;&atilde;\x81&sect;&atilde;&fnof;&oelig;&atilde;&sbquo;&iquest;&atilde;&fnof;&sup3;&atilde;\x81&reg;&atilde;&sbquo;&macr;&atilde;&fnof;&ordf;&atilde;&fnof;&fnof;&atilde;&sbquo;&macr;&atilde;&sbquo;&curren;&atilde;&fnof;&trade;&atilde;&fnof;&sup3;&atilde;&fnof;&circ;&atilde;&fnof;\x8F&atilde;&fnof;&sup3;&atilde;&fnof;&permil;&atilde;&fnof;&copy;&aring;&dagger;&hellip;&atilde;\x81&laquo;&ccedil;&rsaquo;&acute;&aelig;Ž&yen;SQL&atilde;&sbquo;&rsquo;&egrave;&uml;&tilde;&egrave;&iquest;&deg;&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;&atilde;\x81&ldquo;&atilde;\x81&uml;&atilde;&sbquo;&sbquo;&aring;\x8F&macr;&egrave;&fnof;&frac12;&atilde;\x81&nbsp;&atilde;\x81&OElig;&atilde;&euro;\x81
+    &atilde;\x81&ldquo;&atilde;\x81&reg;&aelig;&sect;&lsaquo;&aelig;&circ;\x90&atilde;\x81&laquo;&atilde;\x81&mdash;&atilde;\x81&brvbar;&atilde;\x81&mdash;&atilde;\x81&frac34;&atilde;\x81&dagger;&atilde;\x81&uml;DB&atilde;\x81&reg;&atilde;&fnof;&circ;&atilde;&fnof;&copy;&atilde;&fnof;&sup3;&atilde;&sbquo;&para;&atilde;&sbquo;&macr;&atilde;&sbquo;&middot;&atilde;&fnof;&sect;&atilde;&fnof;&sup3;&aring;&Dagger;&brvbar;&ccedil;\x90&dagger;&atilde;&sbquo;&rsquo;&atilde;&fnof;&dagger;&atilde;&sbquo;&sup1;&atilde;&fnof;&circ;&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;&atilde;\x81&nbsp;&atilde;\x81&lsquo;&atilde;\x81&reg;&atilde;\x81&Yuml;&atilde;&sbquo;\x81&atilde;\x81&laquo;&ccedil;&rdquo;&raquo;&eacute;\x9D&cent;&aelig;&ldquo;\x8D&auml;&frac12;&oelig;&atilde;\x81&OElig;&aring;&iquest;&hellip;&egrave;&brvbar;\x81&atilde;\x81&laquo;&atilde;\x81&ordf;&atilde;&sbquo;&lsaquo;&atilde;&euro;&sbquo;
+    &atilde;\x81&frac34;&atilde;\x81&Yuml;&atilde;&euro;\x81UI&aring;&Dagger;&brvbar;&ccedil;\x90&dagger;&atilde;\x81&uml;&atilde;&fnof;&ldquo;&atilde;&sbquo;&cedil;&atilde;&fnof;\x8D&atilde;&sbquo;&sup1;&atilde;&fnof;&shy;&atilde;&sbquo;&cedil;&atilde;&fnof;&fnof;&atilde;&sbquo;&macr;&atilde;&sbquo;&rsquo;&aring;&circ;&dagger;&eacute;&rsaquo;&cent;&atilde;\x81&mdash;&atilde;\x81&Yuml;&aelig;&ndash;&sup1;&atilde;\x81&OElig;&atilde;&fnof;&mdash;&atilde;&fnof;&shy;&atilde;&sbquo;&deg;&atilde;&fnof;&copy;&atilde;&fnof;&nbsp;&atilde;\x81&reg;&egrave;&brvbar;&lsaquo;&eacute;&euro;&scaron;&atilde;\x81&mdash;&atilde;&sbquo;&sbquo;&egrave;&permil;&macr;&atilde;\x81\x8F&atilde;\x81&ordf;&atilde;&sbquo;&lsaquo;&atilde;&euro;&sbquo;
+    &aring;&frac14;&bull;&aelig;&bull;&deg;&atilde;&euro;\x81&aelig;&circ;&raquo;&atilde;&sbquo;&Scaron;&aring;&euro;&curren;&atilde;\x81&reg;&aelig;&bull;&deg;&atilde;\x81&OElig;&aring;\x8F&macr;&aring;&curren;&permil;&aring;&euro;&lsaquo;&atilde;\x81&laquo;&atilde;\x81&ordf;&atilde;&sbquo;&lsaquo;&ccedil;&sbquo;&ordm;&atilde;&euro;\x81&atilde;\x81&ldquo;&atilde;\x81&reg;&ccedil;&sbquo;&sup1;&atilde;&sbquo;&rsquo;&egrave;&euro;&fnof;&aelig;&hellip;&reg;&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;&aring;&iquest;&hellip;&egrave;&brvbar;\x81&atilde;\x81&OElig;&atilde;\x81&sbquo;&atilde;&sbquo;&lsaquo;&atilde;&euro;&sbquo;
+    &auml;&frac34;&lsaquo;&atilde;\x81&circ;&atilde;\x81&deg;C#&atilde;\x81&reg;backgroundWorker&atilde;&sbquo;&macr;&atilde;&fnof;&copy;&atilde;&sbquo;&sup1;&atilde;\x81&macr;&atilde;&euro;\x81&atilde;\x81&ldquo;&atilde;\x81&reg;&atilde;\x81&sbquo;&atilde;\x81&Yuml;&atilde;&sbquo;&Scaron;&atilde;\x81&reg;&aring;&Dagger;&brvbar;&ccedil;\x90&dagger;&atilde;&sbquo;&rsquo;&atilde;\x81&dagger;&atilde;\x81&frac34;&atilde;\x81\x8F&egrave;&iexcl;&OElig;&atilde;\x81&pound;&atilde;\x81&brvbar;&atilde;\x81&bdquo;&atilde;&sbquo;&lsaquo;&atilde;&euro;&sbquo;
+    &nbsp; &atilde;&fnof;&dagger;&atilde;&sbquo;&sup1;&atilde;&fnof;&circ;&ccedil;&rdquo;&uml;&atilde;&euro;\x81&atilde;&fnof;&Dagger;&atilde;&fnof;&cent;&ccedil;&rdquo;&uml;&atilde;&euro;\x81&egrave;&Dagger;&ordf;&aring;&lsaquo;&bull;&aring;\x8D&tilde;&auml;&frac12;&ldquo;&atilde;&fnof;&dagger;&atilde;&sbquo;&sup1;&atilde;&fnof;&circ;&ccedil;&rdquo;&uml;&atilde;\x81&ordf;&atilde;\x81&copy;&atilde;\x81&reg;DB&atilde;\x81&macr;&atilde;&euro;\x81&eacute;&ndash;&lsaquo;&ccedil;&trade;&ordm;&ccedil;&rdquo;&uml;&atilde;\x81&reg;DB&atilde;\x81&uml;&atilde;\x81&macr;&aring;&circ;&yen;&atilde;\x81&laquo;&egrave;&uml;&shy;&atilde;\x81&lsquo;&atilde;&sbquo;&lsaquo;&atilde;\x81&ldquo;&atilde;\x81&uml;
+    &nbsp; DB&aelig;&ldquo;\x8D&auml;&frac12;&oelig;&atilde;&sbquo;&rsquo;&aring;\x8F&mdash;&atilde;\x81&lsquo;&aelig;&OElig;\x81&atilde;\x81&curren;&atilde;\x81&Yuml;&atilde;&sbquo;\x81&atilde;\x81&reg;&atilde;&fnof;&Dagger;&atilde;&fnof;&frac14;&atilde;&sbquo;&iquest;&atilde;&sbquo;&cent;&atilde;&sbquo;&macr;&atilde;&sbquo;&raquo;&atilde;&sbquo;&sup1;&aring;&plusmn;&curren;&atilde;\x81&reg;&ccedil;&rdquo;&uml;&atilde;&sbquo;&macr;&atilde;&fnof;&copy;&atilde;&sbquo;&sup1;&atilde;&sbquo;&rsquo;&egrave;&uml;&shy;&atilde;\x81&lsquo;&atilde;&sbquo;&lsaquo;&atilde;\x81&ldquo;&atilde;\x81&uml;&atilde;&euro;&sbquo;
+    dbi,jdbc,ODBC&atilde;&sbquo;&bdquo;OADO&atilde;\x81&ordf;&atilde;\x81&copy;&atilde;\x81&reg;DB&atilde;&sbquo;&cent;&atilde;&sbquo;&macr;&atilde;&sbquo;&raquo;&atilde;&sbquo;&sup1;&atilde;&sbquo;&macr;&atilde;&fnof;&copy;&atilde;&sbquo;&sup1;&atilde;&sbquo;&rsquo;&atilde;&sbquo;&cent;&atilde;&fnof;&mdash;&atilde;&fnof;&ordf;&atilde;&sbquo;&plusmn;&atilde;&fnof;&frac14;&atilde;&sbquo;&middot;&atilde;&fnof;&sect;&atilde;&fnof;&sup3;&atilde;\x81&lsaquo;&atilde;&sbquo;&permil;&ccedil;&rsaquo;&acute;&aelig;Ž&yen;&atilde;&sbquo;&sup3;&atilde;&fnof;&frac14;&atilde;&fnof;&laquo;&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;&atilde;\x81&ldquo;&atilde;\x81&uml;&atilde;\x81&macr;&eacute;\x81&iquest;&atilde;\x81&lsquo;&atilde;&sbquo;&lsaquo;&atilde;&euro;&sbquo;
+    &nbsp; DB&atilde;\x81&reg;&egrave;&uml;&shy;&aring;&reg;&scaron;&atilde;\x81&sect;&atilde;&euro;\x81&atilde;&fnof;&Dagger;&atilde;&fnof;&frac14;&atilde;&sbquo;&iquest;&atilde;&sbquo;&rsquo;&atilde;&sbquo;&curren;&atilde;&fnof;&sup3;&atilde;&fnof;&iexcl;&atilde;&fnof;&cent;&atilde;&fnof;&ordf;&atilde;\x81&sect;&ccedil;&reg;&iexcl;&ccedil;\x90&dagger;&atilde;\x81&sect;&atilde;\x81\x8D&atilde;&sbquo;&lsaquo;&atilde;&sbquo;&circ;&atilde;\x81&dagger;&atilde;\x81&sect;&atilde;\x81&sbquo;&atilde;&sbquo;&OElig;&atilde;\x81&deg;&atilde;\x81&ldquo;&atilde;\x81&reg;&egrave;&uml;&shy;&aring;&reg;&scaron;&atilde;&sbquo;&rsquo;&auml;&frac12;&iquest;&atilde;\x81&dagger;&atilde;&euro;&sbquo;
+    &atilde;\x81\x9D&atilde;&sbquo;&OElig;&atilde;\x81&OElig;&ccedil;&bdquo;&iexcl;&ccedil;\x90&dagger;&atilde;\x81&ordf;&atilde;&sbquo;&permil;&atilde;&euro;\x81RAM&atilde;&fnof;&Dagger;&atilde;&sbquo;&pound;&atilde;&sbquo;&sup1;&atilde;&sbquo;&macr;&atilde;&sbquo;&bdquo;SSD&atilde;\x81&laquo;DB&atilde;&sbquo;&rsquo;&ccedil;&frac12;&reg;&atilde;\x81&lsquo;&atilde;\x81&ordf;&atilde;\x81&bdquo;&atilde;\x81&lsaquo;&aelig;&curren;&oelig;&egrave;&uml;Ž&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;
+    &eacute;&ndash;&lsaquo;&ccedil;&trade;&ordm;&atilde;&fnof;&raquo;&aring;\x8D&tilde;&auml;&frac12;&ldquo;&atilde;&fnof;&dagger;&atilde;&sbquo;&sup1;&atilde;&fnof;&circ;&aelig;&trade;&sbquo;&atilde;\x81&macr;&atilde;&euro;\x81&aring;&iquest;&hellip;&atilde;\x81&scaron;&atilde;\x81&mdash;&atilde;&sbquo;&sbquo;&aring;&curren;&sect;&eacute;&Dagger;\x8F&atilde;&fnof;&Dagger;&atilde;&fnof;&frac14;&atilde;&sbquo;&iquest;&atilde;\x81&sect;&atilde;&fnof;&dagger;&atilde;&sbquo;&sup1;&atilde;&fnof;&circ;&atilde;&sbquo;&rsquo;&egrave;&iexcl;&OElig;&atilde;\x81&dagger;&aring;&iquest;&hellip;&egrave;&brvbar;\x81&atilde;\x81&macr;&atilde;\x81&ordf;&atilde;\x81&bdquo;&atilde;&euro;&sbquo;
+    &nbsp; DB&atilde;\x81&reg;&aelig;&bull;&acute;&aring;\x90&circ;&aelig;&euro;&sect;&atilde;&fnof;\x81&atilde;&sbquo;&sect;&atilde;&fnof;&fnof;&atilde;&sbquo;&macr;&ccedil;&rdquo;&uml;&atilde;\x81&reg;&atilde;&sbquo;&sup1;&atilde;&sbquo;&macr;&atilde;&fnof;&ordf;&atilde;&fnof;&mdash;&atilde;&fnof;&circ;&atilde;&sbquo;&rsquo;&auml;&frac12;&oelig;&aelig;&circ;\x90&atilde;\x81&mdash;&atilde;&euro;\x81&aring;\x90&bdquo;&aring;\x8D&tilde;&auml;&frac12;&ldquo;&atilde;&fnof;&dagger;&atilde;&sbquo;&sup1;&atilde;&fnof;&circ;&aring;&frac34;&OElig;&atilde;\x81&laquo;&atilde;&sbquo;&sup1;&atilde;&sbquo;&macr;&atilde;&fnof;&ordf;&atilde;&fnof;&mdash;&atilde;&fnof;&circ;&atilde;&sbquo;&rsquo;&aring;&reg;&Yuml;&egrave;&iexcl;&OElig;&atilde;\x81&mdash;&atilde;\x81&brvbar;&ccedil;&cent;&ordm;&egrave;&ordf;\x8D&atilde;\x81&OElig;&egrave;&iexcl;&OElig;&atilde;\x81&circ;&atilde;&sbquo;&lsaquo;&atilde;&sbquo;&circ;&atilde;\x81&dagger;&atilde;\x81&laquo;&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;&atilde;&euro;&sbquo;
+    &nbsp; &egrave;&Dagger;&ordf;&aring;&lsaquo;&bull;&atilde;\x81&sect;&aring;&circ;\x9D&aelig;&oelig;&Yuml;&atilde;&fnof;ž&atilde;&sbquo;&sup1;&atilde;&sbquo;&iquest;&atilde;&fnof;&Dagger;&atilde;&fnof;&frac14;&atilde;&sbquo;&iquest;&atilde;&fnof;&raquo;&atilde;&fnof;&dagger;&atilde;&sbquo;&sup1;&atilde;&fnof;&circ;&atilde;&fnof;&Dagger;&atilde;&fnof;&frac14;&atilde;&sbquo;&iquest;&atilde;&sbquo;&rsquo;&atilde;&fnof;&shy;&atilde;&fnof;&frac14;&atilde;&fnof;&permil;&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;&atilde;&sbquo;&sup1;&atilde;&sbquo;&macr;&atilde;&fnof;&ordf;&atilde;&fnof;&mdash;&atilde;&fnof;&circ;&atilde;&sbquo;&rsquo;&egrave;&uml;&shy;&atilde;\x81&lsquo;&atilde;&sbquo;&lsaquo;
+    &nbsp; &atilde;&fnof;&dagger;&atilde;&sbquo;&sup1;&atilde;&fnof;&circ;&atilde;&fnof;&Dagger;&atilde;&fnof;&frac14;&atilde;&sbquo;&iquest;&atilde;&sbquo;&rsquo;&ccedil;&rdquo;&uml;&aelig;&bdquo;\x8F&atilde;\x81&laquo;&ccedil;&rdquo;&Yuml;&aelig;&circ;\x90&atilde;\x81&sect;&atilde;\x81\x8D&atilde;&sbquo;&lsaquo;&atilde;\x81&Yuml;&atilde;&sbquo;\x81&atilde;\x81&reg;&auml;&raquo;&bull;&ccedil;&micro;&bdquo;&atilde;\x81&iquest;&atilde;&sbquo;&rsquo;&egrave;&uml;&shy;&atilde;\x81&lsquo;&atilde;&sbquo;&lsaquo;&atilde;&euro;&sbquo;
+    &atilde;&sbquo;&uml;&atilde;&sbquo;&macr;&atilde;&sbquo;&raquo;&atilde;&fnof;&laquo;&atilde;\x81&reg;&atilde;&fnof;ž&atilde;&sbquo;&macr;&atilde;&fnof;&shy;&atilde;\x81&sect;&atilde;&sbquo;&sbquo;&egrave;&permil;&macr;&atilde;\x81&bdquo;&atilde;&euro;&sbquo;
+    &nbsp; &aring;\x8D&tilde;&auml;&frac12;&ldquo;&atilde;&fnof;&dagger;&atilde;&sbquo;&sup1;&atilde;&fnof;&circ;&atilde;&sbquo;&rsquo;&egrave;&Dagger;&ordf;&aring;&lsaquo;&bull;&aring;&OElig;&ndash;&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;&aring;&nbsp;&acute;&aring;\x90&circ;&atilde;\x81&macr;&atilde;&euro;\x81&atilde;&sbquo;&sup1;&atilde;&sbquo;&shy;&atilde;&fnof;&frac14;&atilde;&fnof;ž&aring;&reg;&scaron;&ccedil;&frac34;&copy;&atilde;\x81&reg;&aring;&Dagger;&brvbar;&ccedil;\x90&dagger;&atilde;\x81&lsaquo;&atilde;&sbquo;&permil;&aring;&dagger;\x8D&aring;&reg;&Yuml;&egrave;&iexcl;&OElig;&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;&atilde;&euro;&sbquo;
+    &atilde;\x81&bdquo;&atilde;&sbquo;\x8F&atilde;&sbquo;&dagger;&atilde;&sbquo;&lsaquo;create
+    user&atilde;&sbquo;&bdquo;create table&atilde;&sbquo;&rsquo;&egrave;&iexcl;&OElig;&atilde;\x81&dagger;&aring;&Dagger;&brvbar;&ccedil;\x90&dagger;&atilde;&sbquo;&rsquo;&aelig;&oelig;&euro;&aring;&circ;\x9D&atilde;\x81&laquo;&aring;&reg;&Yuml;&egrave;&iexcl;&OElig;&atilde;\x81&bull;&atilde;\x81&rsaquo;&atilde;&sbquo;&lsaquo;&atilde;&euro;&sbquo;
+    &atilde;\x81&ldquo;&atilde;\x81&reg;&aelig;&permil;&lsaquo;&aelig;&reg;&micro;&atilde;&sbquo;&rsquo;&atilde;\x81&uml;&atilde;&sbquo;&lsaquo;&atilde;\x81&uml;&atilde;&euro;\x81&aring;&frac12;&ldquo;&ccedil;&bdquo;&para;&atilde;&fnof;&dagger;&atilde;&sbquo;&sup1;&atilde;&fnof;&circ;&atilde;\x81&laquo;&aelig;&trade;&sbquo;&eacute;&ndash;&ldquo;&atilde;\x81&OElig;&aelig;Ž&rsaquo;&atilde;\x81&lsaquo;&atilde;&sbquo;&lsaquo;&atilde;&sbquo;&circ;&atilde;\x81&dagger;&atilde;\x81&laquo;&atilde;\x81&ordf;&atilde;&sbquo;&lsaquo;&atilde;\x81&OElig;&atilde;&euro;\x81&atilde;&sbquo;&curren;&atilde;&fnof;&sup3;&atilde;&fnof;&bull;&atilde;&fnof;&copy;&eacute;&fnof;&uml;&atilde;\x81&reg;&aring;&curren;&permil;&aelig;&rsaquo;&acute;&atilde;\x81&laquo;&auml;&frac14;&acute;&atilde;\x81&dagger;&auml;&cedil;\x8D&aring;&hellip;&middot;&aring;\x90&circ;&atilde;&sbquo;&rsquo;
+    &aelig;&mdash;&copy;&aelig;&oelig;&Yuml;&atilde;\x81&laquo;&aelig;&curren;&oelig;&aring;&Dagger;&ordm;&aring;\x8F&macr;&egrave;&fnof;&frac12;&atilde;\x81&uml;&atilde;\x81&ordf;&atilde;&sbquo;&Scaron;&atilde;&euro;\x81&atilde;&fnof;&iexcl;&atilde;&fnof;&ordf;&atilde;&fnof;&fnof;&atilde;&fnof;&circ;&atilde;\x81&macr;&aring;&curren;&sect;&atilde;\x81\x8D&atilde;\x81&bdquo;&atilde;&euro;&sbquo;
+    &nbsp; &nbsp; &aring;\x90&bdquo;&atilde;&fnof;&dagger;&atilde;&sbquo;&sup1;&atilde;&fnof;&circ;&atilde;&sbquo;&rsquo;&aring;&reg;&Yuml;&egrave;&iexcl;&OElig;&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;&atilde;\x81&Yuml;&atilde;\x81&sup3;&atilde;\x81&laquo;&atilde;&euro;\x81&atilde;&fnof;&shy;&atilde;&fnof;&frac14;&atilde;&fnof;&laquo;&atilde;&fnof;\x90&atilde;&fnof;&fnof;&atilde;&sbquo;&macr;&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;&atilde;&euro;&sbquo;&atilde;&fnof;&circ;&atilde;&fnof;&copy;&atilde;&fnof;&sup3;&atilde;&sbquo;&para;&atilde;&sbquo;&macr;&atilde;&sbquo;&middot;&atilde;&fnof;&sect;&atilde;&fnof;&sup3;&aring;&dagger;&hellip;&atilde;\x81&sect;&aring;&lsaquo;\x9D&aelig;&permil;&lsaquo;&atilde;\x81&laquo;&atilde;&sbquo;&sup3;&atilde;&fnof;&Yuml;&atilde;&fnof;&fnof;&atilde;&fnof;&circ;&atilde;\x81&mdash;&atilde;\x81&brvbar;&atilde;\x81&bdquo;&atilde;\x81&ordf;&atilde;\x81&bdquo;&atilde;\x81&lsaquo;&atilde;&sbquo;&rsquo;&ccedil;&cent;&ordm;&egrave;&ordf;\x8D&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;&atilde;&euro;&sbquo;
+    &nbsp; &nbsp; &atilde;&sbquo;&sup1;&atilde;&sbquo;&shy;&atilde;&fnof;&frac14;&atilde;&fnof;ž&aring;&reg;&scaron;&ccedil;&frac34;&copy;&atilde;\x81&reg;&atilde;\x81&Yuml;&atilde;&sbquo;\x81&atilde;\x81&reg;&atilde;&sbquo;&sup1;&atilde;&sbquo;&macr;&atilde;&fnof;&ordf;&atilde;&fnof;&mdash;&atilde;&fnof;&circ;&atilde;&sbquo;&rsquo;&egrave;&uml;&shy;&atilde;\x81&lsquo;&atilde;&euro;\x81&atilde;&fnof;\x90&atilde;&fnof;&frac14;&atilde;&sbquo;&cedil;&atilde;&fnof;&sect;&atilde;&fnof;&sup3;&ccedil;&reg;&iexcl;&ccedil;\x90&dagger;&atilde;\x81&laquo;&aring;&hellip;&yen;&atilde;&sbquo;&OElig;&atilde;&sbquo;&lsaquo;
+    &atilde;&fnof;&dagger;&atilde;&sbquo;&sup1;&atilde;&fnof;&circ;&atilde;&sbquo;&rsquo;&egrave;&iexcl;&OElig;&atilde;\x81&dagger;&atilde;\x81&reg;&atilde;\x81&OElig;&ccedil;&deg;&iexcl;&aring;\x8D&tilde;&atilde;\x81&laquo;&atilde;\x81&ordf;&atilde;&sbquo;&lsaquo;
+    &nbsp; &auml;&frac12;&dagger;&atilde;\x81&mdash;&atilde;&euro;\x81&aring;&curren;&sect;&eacute;&Dagger;\x8F&atilde;&fnof;&Dagger;&atilde;&fnof;&frac14;&atilde;&sbquo;&iquest;&atilde;\x81&reg;&atilde;&fnof;&dagger;&atilde;&sbquo;&sup1;&atilde;&fnof;&circ;&atilde;&sbquo;&bdquo;&atilde;&euro;\x81&atilde;&fnof;ž&atilde;&fnof;&fnof;&atilde;&sbquo;&macr;&atilde;&sbquo;&sup1;&aring;&euro;&curren;&atilde;\x81&reg;&atilde;&fnof;&Dagger;&atilde;&fnof;&frac14;&atilde;&sbquo;&iquest;&atilde;\x81&sect;&atilde;&fnof;&dagger;&atilde;&sbquo;&sup1;&atilde;&fnof;&circ;&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;&atilde;\x81&ldquo;&atilde;\x81&uml;&atilde;&sbquo;&sbquo;&aring;&iquest;&tilde;&atilde;&sbquo;&OElig;&atilde;\x81&brvbar;&atilde;\x81&macr;&atilde;\x81&bdquo;&atilde;\x81&lsquo;&atilde;\x81&ordf;&atilde;\x81&bdquo;
+    \    &eacute;&ndash;&cent;&eacute;&euro;&pound;&egrave;&uml;&tilde;&auml;&ordm;&lsaquo;&atilde;\x81&macr;&atilde;\x81&ldquo;&atilde;\x81&iexcl;&atilde;&sbquo;&permil;
+    &acirc;&dagger;&rsquo;&nbsp;&nbsp;&nbsp; &atilde;&sbquo;&laquo;&atilde;&fnof;&dagger;&atilde;&sbquo;&acute;&atilde;&fnof;&ordf;:
+    &aelig;&oelig;&ordf;&aring;&circ;&dagger;&eacute;&iexcl;ž                   [PIC16F88]HI-TECH
+    C&atilde;\x81&sect;Timer1&aring;&permil;&sup2;&atilde;&sbquo;&Scaron;&egrave;&frac34;&frac14;&atilde;\x81&iquest;&atilde;&sbquo;&rsquo;&auml;&frac12;&iquest;&ccedil;&rdquo;&uml;&atilde;\x81&trade;&atilde;&sbquo;&lsaquo;
+    \              rakuten_design=\"slide\";rakuten_affiliateId=\"06876b3e.caf43034.06876b3f.5c6dee3a\";rakuten_items=\"ctsmatch\";rakuten_genreId=0;rakuten_size=\"600x200\";rakuten_target=\"_blank\";rakuten_theme=\"gray\";rakuten_border=\"off\";rakuten_auto_mode=\"on\";rakuten_genre_title=\"off\";rakuten_recommend=\"on\";rakuten_ver=\"20100708\";
+    \         &atilde;&sbquo;&laquo;&atilde;&fnof;&dagger;&atilde;&sbquo;&acute;&atilde;&fnof;&ordf;&aring;&circ;&yen;RSS&eacute;&hellip;\x8D&auml;&iquest;&iexcl;&auml;&cedil;&shy;!!
+    [...]"
+- id: 9241
+  author: all day long
+  author_email: barb-myles@live.de
+  author_url: http://www.okventuring.org
+  date: '2013-01-24 02:43:28 +0100'
+  date_gmt: '2013-01-24 00:43:28 +0100'
+  content: "This is a topic that is near to my heart.\r\n.. Take care! Where are your
+    contact details though?"
+- id: 9295
+  author: Shani
+  author_email: shaniconley@web.de
+  author_url: http://NZWPW
+  date: '2013-02-02 15:16:59 +0100'
+  date_gmt: '2013-02-02 13:16:59 +0100'
+  content: "Awesome website you have here but I was curious about if you knew of any
+    message boards that cover the same topics \r\ntalked about in this article? I'd
+    really like to be a part of group where I can get comments from other knowledgeable
+    people that share the same interest. If you have any recommendations, please let
+    me know. Many thanks!"
+- id: 9296
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2013-02-02 15:41:02 +0100'
+  date_gmt: '2013-02-02 13:41:02 +0100'
+  content: Have a look at http:&#47;&#47;tech.dir.groups.yahoo.com&#47;group&#47;agileDatabases&#47;
+- id: 10953
+  author: applicius
+  author_email: website@applicius.fr
+  author_url: http://www.applicius.fr
+  date: '2014-03-10 11:19:46 +0100'
+  date_gmt: '2014-03-10 09:19:46 +0100'
+  content: As for testing we suggest to have a look to Java (and Scala) frameworks
+    at http:&#47;&#47;acolyte.eu.org&#47; . Allow to write isolated unit test for
+    persistence code.
+- id: 338514
+  author: Alex
+  author_email: alexpodlesny@gmail.com
+  author_url: http://www.dbtestdriven.com
+  date: '2014-11-07 23:49:03 +0100'
+  date_gmt: '2014-11-07 21:49:03 +0100'
+  content: "Try DBTestDriven framework, it is lightweight, free, open source (GitHub).
+    We have thousands of tests written in SQL that are testing very complex back end
+    code. Integrated with build servers as major part of CI process.\r\n-Alex"
+---
+<p>Almost everybody understands that source code belongs into version control. Many people understand we need to test our code. Quite a few do that automatically.</p>
+<p>But everything seems to change when it comes to databases. A lot of stuff in and around databases goes untested. Heck some of the scripts don't even live in version control. If you can't believe that, because you haven't seen it, you are a damn lucky bastard.</p>
+<p>At least one reason for this state of affairs is obviously: It hurts. Database tests tend to be slow, interdependent and hard to maintain. Granted. But you know what: If it hurts, you should do it more often. It will teach you what exactly the things are that cause pain when testing and eventually you'll find approaches to make it less painful. Here are some ideas I found helpful when testing database related code:</p>
+<ul>
+<li>Give every developer her own database. This forces you to find a way to set up the database fast, easy and reliable. If your application lives in a single user&#47;schema&#47;namespace it is sufficient for each developer to have his own user&#47;schema&#47;namespace in a single database. For this to work though ...<&#47;li>
+<li>... the application should be user&#47;schema&#47;namespace agnostic. It makes it much easier to create multiple instances one a single server.<&#47;li>
+<li>Let the application live in a single user&#47;schema&#47;namespace. If you have multiple interdependent namespaces (e.g. for modules) you'll have a hard time making them agnostic of the names.<&#47;li>
+<li>&Acirc;&nbsp;Have separate instances for CI, Demos, QA and so on. Actually ideally it should be trivial to create a fresh instance.<&#47;li>
+<li>Stay away from any tool that comes with its own repository. If have seen about a dozen of such tools and although some looked promising in the beginning, they all completely failed to integrate with other tools on the development side of things. Examples of such tools are tools for code generation from <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Unified_Modeling_Language">UML<&#47;a> or <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Entity-relationship_model">ER<&#47;a> models and <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Extract,_transform,_load">ETL<&#47;a> tools.<&#47;li><br />
+<&#47;ul><br />
+The previous points where about the setup of your database and infrastructure. Lets have a look at the code:</p>
+<ul>
+<li>&Acirc;&nbsp;Favor a proper Language (like Java, C, PHP ...) over database specific languages like T-SQL or PL&#47;SQL. If you are wondering why, make a comparison between your favorite DB language and your all purpose language. For which do you get the better IDE, Unit testing support, code analysis, code coverage and so on. Reconsider your main language if it doesn't win in that comparison.<&#47;li>
+<li>&Acirc;&nbsp;Have a small layer that does all interaction with the database. Make sure no SQL or other database dependent code leaks out. Inject that layer as a dependency into anybody in need of it. This will allow you to test almost everything without worrying about the database. Only the tests for that integration layer actually needs a database for testing.<&#47;li>
+<li>Favor database independent SQL or a library abstracting away the differences of various databases. Back in the time people claimed they needed that in case they have to switch database vendors, which never happened. Now it does. See below.<&#47;li><br />
+<&#47;ul><br />
+The next points will deal with the actual tests:</p>
+<ul>
+<li>Consider an in-memory-database for testing. Many databases can run in an in-memory-mode. They are great for testing, because you can throw them away after the test, and they are way faster then any database writing to disk. This of course is only possible when you work with a database system that can run as a in-memory-database or if your code is database independent. Hence the previous point.<&#47;li>
+<li>If you can't use your database as in memory database, consider putting it on a RAM disk. We got a huge performance gain for our tests with this approach. A solid state disk might be the next best thing although I'm not sure how it would react to the heavy load of continuous database tests.<&#47;li>
+<li>Make test failure messages so explicit that you don't have to look into the database for analyzing test failures.<&#47;li>
+<li>Use code for setting up your test data. Make it nice and concise. If you need a row in a table without special requirements for its values you should be able to create that with a single trivial line of code, no matter how many foreign keys the table contains. I.e. you should have a little <a href="&#47;2011&#47;03&#47;20&#47;testing-databases-with-junit-and-hibernate-part-2-the-mother-of-all-things&#47;">DSL for your test data<&#47;a>. Doing it with plain code will enable all the refactoring power of your IDE for your tests. For load and performance tests other approaches like loading production data or large amounts of generated data might be suitable.<&#47;li>
+<li>Make sure your tests clean up after them selves. There are two approaches I found usable in most cases:<&#47;li><br />
+<&#47;ul></p>
+<blockquote>
+<ol>
+<li>Recreate the schema for every test. This is slow but really safe.<&#47;li>
+<li>Do a rollback after each test. This only works when there is no commit inside the test. The mean thing is: If a test tries to rollback, but fails because there was a commit inside the test some completely different test will fail. It can be a really frustrating task to find the bad test in such a case.<&#47;li><br />
+<&#47;ol><br />
+<&#47;blockquote><br />
+We covered the testing of&Acirc;&nbsp; database related code inside your application. But there is another kind of code we need to deal with: Scripts for deploying your application (or upgrading it)</p>
+<ul>
+<li>The scripts that change your database schema from one version to the next are source code just like everything else. Therefore they belong under version control and should get tested continuously.<&#47;li>
+<li>The testing process is really simple: Create a database as it looks now. Apply your change scripts and verify it looks as desired.<&#47;li>
+<li>For verifying the resulting schema it is useful to have a script that creates your target database (or at least the schema) from scratch, so you compare it with the result of the test.<&#47;li>
+<li>For performance reasons you might want to test this with an empty database first.<&#47;li>
+<li>But don't forget to run it on an instance with realistic data as well. Hint: adding a column to huge tables can take loooooong.<&#47;li><br />
+<&#47;ul><br />
+Happy testing everybody.</p>
+<blockquote><p>&nbsp;<&#47;blockquote></p>

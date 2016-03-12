@@ -1,0 +1,49 @@
+<p>Some weeks ago I wrote about getting <a href="&#47;2010&#47;12&#47;26&#47;testing-with-scala&#47;">started with testing with scala<&#47;a>. Now its time to explore a little more what's in that <a href="http:&#47;&#47;www.scalatest.org&#47;">ScalaTest<&#47;a> library.</p>
+<p>I described one way of testing with scalatest using FeatureSpec. But there are many ways in which you can write tests. So just for the fun of it I'm using the FunSuite today:</p>
+<pre language="scala">
+import org.scalatest.FunSuite<br />
+import org.scalatest.matchers.ShouldMatchers</p>
+<p>class SomeTest extends FunSuite with ShouldMatchers{<br />
+	test("Some Test"){<br />
+		"test" should have length (4)<br />
+	}<br />
+	test("Some other Test"){<br />
+		"test".reverse should be ("tset")<br />
+	}<br />
+}<br />
+<&#47;pre></p>
+<p>This looks similar easy enough for every Java developer to to understand what is going to be tested. It might not be so obvious, what actually is going on in this class. Lets ignore the actual assertions for today. Note that we don't define anything but the test class itself. So the the individual tests aren't method definitions as in JUnit (and TestNG AFAIK), but calls to a function called <tt>test<&#47;tt>. It takes two arguments: the name of the test (which has to be unique in the test class) and the actual test which is just a code block. (Actually you can have additional tags after the test name, but again thats for a different article. The method test registers the test for execution. This happens at instantiation of the test class, since the calls to the <tt>test<&#47;tt> method are placed directly in the body of the test class. Once all the test classes are instantiated (and therefore all tests registered) scalatest starts executing all the tests, i.e. it executes all the code blocks passed as parameters to <tt>test<&#47;tt>.</p>
+<p>As you might have noted, there was no 'reflection' or 'byte code magic' involved in all this. It's all straight scala code. I guess Bill Venners liked that when he was writing the code. But why should we as a user care? Because we can do all the things we can do with normal code!</p>
+<p>Lets assume you wrote a method to check if a string is a <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Palindrome">palindrome<&#47;a> obviously you want to have some tests for that:</p>
+<pre language="scala">
+class Palindrome extends FunSuite with ShouldMatchers{<br />
+	def palindrome(s: String) = s == s.reverse</p>
+<p>	test("empty String is a palindrome"){<br />
+		assert (palindrome(""))<br />
+	}</p>
+<p>	test("single character is a palindrome"){<br />
+		assert(palindrome("a"))<br />
+	}</p>
+<p>	test("sator square is a palindrome"){<br />
+		assert(palindrome("sator arepo tenet opera rotas"))<br />
+	}</p>
+<p>	test("xyz is not a palindrome"){<br />
+		assert(!palindrome("xyz"))<br />
+	}<br />
+}<br />
+<&#47;pre></p>
+<p>While the tests in this example are really simple we still see the code duplication. And once the tests get just a little more involved, it gets really annoying. But since tests are just method calls we can rewrite like this:</p>
+<pre language="scala">
+class Palindrom2 extends FunSuite with ShouldMatchers {<br />
+    def palindrome(s: String) = s == s.reverse</p>
+<p>    val testvalues = Map(true -> List("", "a", "sator arepo tenet opera rotas"),<br />
+        false -> List("xyz"))</p>
+<p>    for ((r, probes) &acirc;&dagger; testvalues; probe &acirc;&dagger; probes) {<br />
+        test(probe + " is " + (if (!r) "not ") + " a palindrome") {<br />
+            assert(palindrome(probe) === r)<br />
+        }<br />
+    }<br />
+}<br />
+<&#47;pre></p>
+<p>I start by creating a <tt>Map<&#47;tt> from the expected result of the method <tt>palindrome<&#47;tt> to a list of test values which should yield that result. I then loop through that Map and the contained list and for each entry I call <&#47;tt>test<&#47;tt>, with a dynamic name and a fixed code block.</p>
+<p>To do the same thing in JUnit or TestNG you have to use special features of the test frameworks. With scalatest its just a basic application of language features. I like that.</p>

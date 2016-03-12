@@ -1,0 +1,122 @@
+---
+layout: post
+status: publish
+published: true
+title: Building a Turing Engine in Oracle SQL using the Model Clause
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 157
+wordpress_url: http://blog.schauderhaft.de/?p=157
+date: '2009-06-18 14:33:36 +0200'
+date_gmt: '2009-06-18 12:33:36 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- database
+- turing
+- sql
+- Oracle
+- model clause
+comments: []
+---
+<p>Everybody who understands the working of a <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Turing_machine">Turing machine<&#47;a> and that of SQL understands, that SQL probably isn't Turing complete, i.e. you can't use it to build a Turing machine. Yet I'm going to show that you actually can implement a Turing Engine using Oracle SQL.</p>
+<p>So for those among you who haven't studied informatics: "What is a Turing machine?"</p>
+<p>A Turing machine is a theoretical, extremly simple computer. It consists of an endless array (often called tape), that can store a symbol on every position, and the 'head' that is positioned at a specific position of the tape. The Turing machine works as follows: The head reads the symbol in the array at its current position. Depending on the current state of the head, and the symbol read, it writes a new symbol in the array at the current position, and moves one step to the right or left. It continues to do so, until it reaches a final state.</p>
+<p>Turing machines are interesting, because everything a computer can calculate, can be calculated using a Turing machine and vice versa. The fact that the memory of a real computer is limited can be ignored, as long as it is 'big enough'.</p>
+<p>Since there is no way to iterate in SQL, neither directly nor by means of recursion, it is hard to imagine, how such a machine could be implemented using SQL.</p>
+<p>Enter the model clause. The model clause is a Oracle specific extension to SQL. It is supposed to allow Excel like manipulation on resultsets of a SQL statement. Basically you do a normal Select statement, add a model clause, and in the model clause you can adress any cell of your resultset, and you can even add rows or columns. This is done using a very limited iterative language. This feature exists since Oracle 10g (2004?), but I haven't seen it used in a production system (thank godness), actually I haven't found a person in real live that actualy knows this feature. One reason is probably that Oracle managed to create the worst language I have seen so far, and I have worked with XSLT, Visual Basic 5, Fortran 66 and 6502 Assembler.</p>
+<p>So let's implement the Turing machine. We need the tape and the definition of how the Turing machine should behave, it's program. Since we are in a database this will get stored in tables:</p>
+<pre lang="sql">
+drop table tape;drop table machine; -- holds the program of the machinecreate table tape (position number, symbol varchar2(1) not null);alter table tape add constraint tape_pk primary key (position);create table machine (state number, input varchar2(1), output varchar2(1), head_move number(1) not null, next_state number);alter table machine add constraint machine_pk primary key (state, input);<&#47;pre><br />
+In order to test our Turing machine we need an initial state and a program. Since I'm no expert on Turing machine programming I copied that from the <a href="http:&#47;&#47;de.wikipedia.org&#47;wiki&#47;Turingmaschine">german Wikipedia page<&#47;a>. The initial state are just two 1s, and the program is supposed to copy all the continuous 1s it finds, with a separating 0 in between:</p>
+<pre lang="sql">
+-- create programinsert into machine (state, input, output, next_state, head_move) values (1,1,0,2,1);insert into machine (state, input, output, next_state, head_move) values (1,0,0,6,0);insert into machine (state, input, output, next_state, head_move) values (2,1,1,2,1);insert into machine (state, input, output, next_state, head_move) values (2,0,0,3,1);</p>
+<p>insert into machine (state, input, output, next_state, head_move) values (3,0,1,4,-1);</p>
+<p>insert into machine (state, input, output, next_state, head_move) values (3,1,1,3,1);</p>
+<p>insert into machine (state, input, output, next_state, head_move) values (4,1,1,4,-1);</p>
+<p>insert into machine (state, input, output, next_state, head_move) values (4,0,0,5,-1);</p>
+<p>insert into machine (state, input, output, next_state, head_move) values (5,1,1,5,-1);</p>
+<p>insert into machine (state, input, output, next_state, head_move) values (5,0,1,1,1);-- create initial state:</p>
+<p>insert into tape (position, symbol) values (0,1);</p>
+<p>insert into tape (position, symbol) values (1,1);<&#47;pre><br />
+Now comes the actual work. If you are only interested in the final solution, scroll all the way to the end of the article. But if you follow along you can see how I developed the program. This should teach you a little about the model clause, and why you shouldn't use it for anything real.</p>
+<p>First step, get any model clause at all to work:</p>
+<pre lang="sql">
+select * from tapemodeldimension by (position)measures (symbol)rules iterate(3) (</p>
+<p>symbol[any] = symbol[cv()]*2</p>
+<p>)</p>
+<p>order by position;<&#47;pre><br />
+The first line selects the intial state from the tape. The second line starts the model clause. <tt>dimension by (position)<&#47;tt> allows us to access a row by its position value. Think of it as an array index or primary key. <tt>Measures<&#47;tt> defines the cells we are going to work with. A cell can be accessed with an array like syntax like <tt>symbol[23]<&#47;tt>, where 23 it the <tt>position<&#47;tt>-value we use to specify the cell. The <tt>rules<&#47;tt> part is the actual program, it doesn't do anything useful. It only multiplies every symbol with 2 and repeats this 3 times. <tt>any<&#47;tt> references all rows (that's why it is called any), while <tt>cv()<&#47;tt> references the current value, i.e. the any&#47;cv combination defines an implicit loop over all rows of the model.</p>
+<p>Second Step: make the program or the machine accessible. In order to do that we make it a 'model' as well. Note that these reference models are read only.</p>
+<pre lang="sql">
+select * from tapemodelreference machine_model on (select * from machine) dimension by (state, input)</p>
+<p>measures (output, head_move, next_state)</p>
+<p>ignore nav -- this affects the handling of NULL</p>
+<p>main main_model</p>
+<p>dimension by (position)</p>
+<p>measures (symbol, 1 current_state, 0 current_position)</p>
+<p>rules iterate(3) (</p>
+<p>symbol[any] = symbol[cv()]*2</p>
+<p>)</p>
+<p>order by position;<&#47;pre><br />
+Using the <tt>measures<&#47;tt> I also added two column to store the current state of the Turing machine, and the current position of the head. These cells are available for every row of my model, i.e. the tape, but I'm going to use only the one in position 0. Maybe just didn't look hard enough but I couldn't find a proper way to define variables.</p>
+<p>Now we have all the data structures that we need, we can actually implement the workings of the Turing machine.</p>
+<pre lang="sql">
+select * from tapemodelreference machine_model on (select * from machine) dimension by (state, input)</p>
+<p>measures (output, head_move, next_state)</p>
+<p>main main_model</p>
+<p>dimension by (position)</p>
+<p>measures (symbol, 1 current_state,0 current_position, 0 current_symbol) ignore nav</p>
+<p>rules iterate(15) (</p>
+<p>current_symbol[0] = nvl(symbol[current_position[0]],0),</p>
+<p>symbol[current_position[0]] = machine_model.output[current_state[0], current_symbol[0]],</p>
+<p>current_position[0] =  current_position[0] + machine_model.head_move[current_state[0], current_symbol[0]],</p>
+<p>current_state[0] = machine_model.next_state[current_state[0], current_symbol[0]]</p>
+<p>)</p>
+<p>order by position;<&#47;pre><br />
+The real program part are the four lines after <tt>rules<&#47;tt>. The first line reads the current symbol, the second writes the new symbol, depending on the current symbol and the current state. The third line moves the head, and the fourth line sets the new current state. We are almost done.</p>
+<p>What's left is the implementation of stop states. Right now we just iterate 15 times (<tt>rules iterate(15)<&#47;tt>) the little challenge is: The model clause does not offer the equivalent of a while loop. It only knows for loops. Luckily you can exit from a loop with another condition, so when you need a while loop you define a number as being equal to inifinity, and put your exit condition in a <tt>until<&#47;tt> clause, like so:</p>
+<pre lang="sql">
+select * from tapemodelreference machine_model on (select * from machine) dimension by (state, input)</p>
+<p>measures (output, head_move, next_state)</p>
+<p>main main_model</p>
+<p>dimension by (position)</p>
+<p>measures (symbol, 1 current_state,0 current_position, 0 current_symbol) ignore nav</p>
+<p>rules iterate(10000) until (machine_model.next_state[current_state[0], 0] is null ) ( -- if the machine reaches an undefined state it considers it a stop state.</p>
+<p>current_symbol[0] = nvl(symbol[current_position[0]],0),</p>
+<p>symbol[current_position[0]] = machine_model.output[current_state[0], current_symbol[0]],</p>
+<p>current_position[0] =  current_position[0] + machine_model.head_move[current_state[0], current_symbol[0]],</p>
+<p>current_state[0] = machine_model.next_state[current_state[0], current_symbol[0]]</p>
+<p>)</p>
+<p>order by position;<&#47;pre><br />
+The Turing machine is done and produces the intended output:</p>
+<pre>
+position	symbol	c.state	c.position	c.symbol</p>
+<p>0		1	6	2		0</p>
+<p>1		1	1	0		0</p>
+<p>2		0</p>
+<p>3		1</p>
+<p>4		1<&#47;pre><br />
+So, what do we learn from this?</p>
+<ul>
+<li>Oracle SQL is indeed Turing complete<&#47;li>
+<li>Oracle jumped the DSL band waggon already in 2004 and fell of the other side<&#47;li>
+<li>You definetly should learn and use the model clause if
+<ul>
+<li>You want to make your code unreadable<&#47;li>
+<li>You are a masochist<&#47;li>
+<li>You earn your money by betting: "I bet you can't do this in SQL"<&#47;li><br />
+<&#47;ul><br />
+<&#47;li></p>
+<li>Other then that the Oracle Clause is just another sign that Oracle doesn't get anything right if it isn't inside the database core engine<&#47;li><br />
+<&#47;ul><br />
+If you still want to explore the model clause further, I can recommend these links:</p>
+<p><a href="http:&#47;&#47;www.oreillynet.com&#47;pub&#47;a&#47;network&#47;2004&#47;08&#47;10&#47;MODELclause.html">http:&#47;&#47;www.oreillynet.com&#47;pub&#47;a&#47;network&#47;2004&#47;08&#47;10&#47;MODELclause.html<&#47;a></p>
+<p><a href="http:&#47;&#47;rwijk.blogspot.com&#47;2007&#47;10&#47;sql-model-clause-tutorial-part-one.html ">http:&#47;&#47;rwijk.blogspot.com&#47;2007&#47;10&#47;sql-model-clause-tutorial-part-one.html <&#47;a></p>
+<p><a href="http:&#47;&#47;otn.oracle.com&#47;pls&#47;db10g&#47;search?remark=quick_search&amp;word=model+clause">http:&#47;&#47;otn.oracle.com&#47;pls&#47;db10g&#47;search?remark=quick_search&amp;word=model+clause<&#47;a></p>

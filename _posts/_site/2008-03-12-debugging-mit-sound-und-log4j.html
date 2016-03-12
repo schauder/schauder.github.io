@@ -1,0 +1,29 @@
+<p>Ein Freund von mir erz&Atilde;&curren;hlte von einiger Zeit von einem interessanten kleinen Feature, das er in einer Entwicklungsumgebung (ich denke auf einem Mac) gefunden hatte. Eine Art Breakpoint, der aber nicht die Ausf&Atilde;&frac14;hrung unterbrach, sondern ein einfach einen kurzen Ton produzierte. Konsequenz: Es war sehr einfach zu kontrollieren, ob und wie h&Atilde;&curren;ufig die entsprechende Codezeile ausgef&Atilde;&frac14;hrt wurde.</p>
+<p>Das ganze erinnerte mich sehr an die LED Matrizen an Supercomputern, die in SciFi Filmen so gerne gezeigt werden. Die hielt ich lange Zeit f&Atilde;&frac14;r eine Erfindung von Hollywood, bis ich selbst einmal an einem solchen System arbeiten durfte. Es war im Jahr 1997 und der Rechner stand ein paar 100km entfernt von mir. LEDs sah ich also nicht. Es gab aber eine kleine Webanwendung mit &Atilde;&curren;quivalenter Funktion: F&Atilde;&frac14;r jeden Prozessor wurde angezeigt, ob er aktiv war, oder vor sich hin idlete. Die LEDs waren also ein wichtiges debugging und tuning Werkzeug.</p>
+<p>Vor ein paar Wochen habe ich die Idee mit dem Sound tats&Atilde;&curren;chlich sinnvoll einsetzen k&Atilde;&para;nnen: In meinem aktuellen Projekt bauen wir eine auf Basis von Swing und Hibernate eine Rich Client Anwendung. Kritisch dabei ist, das jeder Dialog, die f&Atilde;&frac14;r sich vorgesehen Session verwendet und nur diese. Genau in diesem Bereich gab es ein Problem. Es war aber &Atilde;&frac14;berhaupt nicht klar, bei welchem Fensterwechsel etwas schief ging. Also in unseren SessionManager ein <tt>Toolkit.getDefaultToolkit().beep()<&#47;tt> eingebaut, wann immer er eine neue Session erzeugt oder vernichtet. Und wenig sp&Atilde;&curren;ter war die Stelle eingekreist, an der das Problem lag.</p>
+<p>Nun ist ein hart verdrahtetes <tt>Toolkit.getDefaultToolkit().beep()<&#47;tt> aber nicht die feine englische Art, also habe ich das ganze einfach mal als Log4J Appender implementiert:</p>
+<pre>
+public class PingAppender extends AppenderSkeleton {</p>
+<p>    protected void append(LoggingEvent arg0) {<br />
+        Toolkit.getDefaultToolkit().beep();<br />
+    }</p>
+<p>    public void close() {}</p>
+<p>    public boolean requiresLayout() {<br />
+        return false;<br />
+    }<br />
+}<&#47;pre><br />
+Das ganze in der Log4J Konfiguration verwenden:</p>
+<pre>
+<appender name="ping" class="de.schauderhaft.log4j.PingAppender"><br />
+    <filter class="org.apache.log4j.varia.LevelRangeFilter"></p>
+<param name="LevelMin" value="ERROR"><&#47;param></p>
+<param name="AcceptOnMatch" value="true"><&#47;param><br />
+    <&#47;filter><br />
+<&#47;appender><br />
+[..]<br />
+<root><br />
+    [..]<br />
+    <appender-ref ref="ping"><&#47;appender-ref><br />
+<&#47;root><&#47;pre><br />
+Und schon piepst es, wenn ein Error geloggt wird. Nat&Atilde;&frac14;rlich kann man das ganze noch Bedarf verfeinern: <a href="http:&#47;&#47;pod6.com&#47;blog_wp&#47;2006&#47;04&#47;05&#47;debugging-with-sound&#47;">Je nach Thread, Loglevel oder Logger eine anderen Ton<&#47;a>, oder eine andere Tonh&Atilde;&para;he.</p>
+<p>Und wer Langeweile hat, kann zu einer existierenden Anwendung einen Appender bauen, der ein Musikst&Atilde;&frac14;ck spielt, wenn die richtigen Aktionen in der Anwendung ausgef&Atilde;&frac14;hrt werden.</p>

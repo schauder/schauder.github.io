@@ -1,0 +1,27 @@
+<p>Debugging is said to take about just as much time as coding, possibly even longer. Yet I don't see a discussion about how to debug. So lets propose my personal process on this:</p>
+<ol>
+<li><strong>Gather information<&#47;strong>. Make sure you have reliable information about
+<ul>
+<li>Which application has a problem<&#47;li>
+<li>What are the steps to reproduce the problem<&#47;li>
+<li>The version of the application<&#47;li>
+<li>Does it happen only to specific users, specific machines or to everyone everywhere<&#47;li>
+<li>When did the problem start to happen<&#47;li><br />
+<&#47;ul><br />
+The important part is the <strong>reliable<&#47;strong> part. Users are known to have a completely different perspective on applications. I had users swearing there was only one message box although there where two (they didn't understand the content of the second, but it was the information needed by the developer). The last point is a difficult one. In many cases you will hear things like "Oh it just started today. Everything was fine the last two months" Just to find out, nobody had used that feature before. Probably the best source of information is a clean logging trail.<&#47;li></p>
+<li><strong>Give a first estimate<&#47;strong>. Yes, that early. Most of the reasonable users are pretty happy with something like: I give you an update in half an hour. They might not be just as happy with: "I think I can look into this next month"  but if this is the case it is at least fair to let them know. If the problem is urgent and the resolution time is long a workaround might be needed. Check your estimate every now and then. If you realize that you can't deliver on your estimate for whatever reason, let the user know.<&#47;li>
+<li> <strong>Make sure the bug is a bug<&#47;strong> and not a butterfly. Although users sometimes have a different oppinion: Software can't do what they wish. It can only do what they say. So many times the behavior now classified as a bug was considered a feature when it was specified. If this is the case let the user know, give him a reason why it is specified this way, and inform him about the chances to change it.<&#47;li>
+<li><strong>Reproduce the problem<&#47;strong>. If possible reproduce it on your machine.<&#47;li>
+<li><strong>Simplify<&#47;strong> and <strong>automate<&#47;strong>. Often the procedure to reproduce a problem is long, but often some steps aren't necessary. By finding these step you'll gather information about what influences the problem and what not. If possible you should automate the reproduction of the problem using a test case. With a serious bug you will execute the steps for reproducing the problem a lot. If this takes 2 minutes, spending 2 hours reproducing the problem with a testcase might easily payoff before the bug is fixed. But even if it doesn't pay off immediatly you will have another test case in your Test Suite.<&#47;li>
+<li>Now we finally start working on the buggy code. <strong>Find the place where the state of the application is not the way it is intended to be<&#47;strong>. Often this will be just before a NullPointerException is thrown, but it might be a line, where an event should get fired but doesn't, or where the variable <tt>Pi<&#47;tt> is supposed to be equal to 4 but actually holds the value 2. Add debugging output to show the problem.<&#47;li>
+<li><strong>Find a place<&#47;strong> shortly before the point found in step 6 <strong>where everything is ok<&#47;strong>. Add debugging output to show the absence of the problem.<&#47;li>
+<li><strong>Find a place between<&#47;strong> the spots identified in step 6 and 7. Check if the problem is present at that spot. Document it with a debugging statement.<&#47;li>
+<li><strong>Repeat<&#47;strong> from beginning from step 6 until you find the actual faulty line in the application.<&#47;li>
+<li><strong>Fix it<&#47;strong>.<&#47;li>
+<li><strong>Test it<&#47;strong> (should be easy with the automated test from step 5).<&#47;li>
+<li><strong>Let the user know<&#47;strong> when she will receive the new version.<&#47;li><br />
+<&#47;ol><br />
+Every process should have a tayloring advice to accompany it. So here it comes: You may not short cut the fixing, testing and communication part with the customer. You may use some short cuts in steps 6 through 9. But be prepared to return to the clean process when the shortcut turns out to be a cul de sac.</p>
+<p>You may use your debugger instead of debugging output, but in the complex cases debugging output is easier and faster to use, especially if you have an automated test.</p>
+<p>There are special cases that need some consideration, but those have to wait for a future post: Finding suitable starting points in step&Acirc;&nbsp; 6 and 7; Debugging in a distributed environment; Debugging with 3rd party software; reading stack traces.</p>
+<p>What process do you use when debugging? What is missing? Let me know.</p>

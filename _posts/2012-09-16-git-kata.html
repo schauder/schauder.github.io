@@ -1,0 +1,87 @@
+---
+layout: post
+status: publish
+published: true
+title: Git Kata
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1176
+wordpress_url: http://blog.schauderhaft.de/?p=1176
+date: '2012-09-16 18:37:50 +0200'
+date_gmt: '2012-09-16 16:37:50 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- git
+- kata
+- Git Kata
+- Github
+comments:
+- id: 8266
+  author: Geek Reading September 17, 2012 | Regular Geek
+  author_email: ''
+  author_url: http://regulargeek.com/2012/09/17/geek-reading-september-17-2012/
+  date: '2012-09-17 17:47:08 +0200'
+  date_gmt: '2012-09-17 15:47:08 +0200'
+  content: "[...] Git Kata (Schauderhaft) [...]"
+- id: 8269
+  author: zonkflut
+  author_email: zonkflut@hotmail.com
+  author_url: ''
+  date: '2012-09-18 00:59:49 +0200'
+  date_gmt: '2012-09-17 22:59:49 +0200'
+  content: "Hey Jens, \r\n\r\nThanks for this cool resource. Just one question though,
+    since I am a newbie to git how do I validate that I have solved each problem successfully.\r\n\r\nMany
+    thanks,\r\n\r\nErik"
+- id: 8272
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-09-18 07:18:41 +0200'
+  date_gmt: '2012-09-18 05:18:41 +0200'
+  content: "Hi zonkflut,\r\nyou are very welcome.\r\n\r\nRight now you have to check
+    it manually yourself. I recommend gitk as an important tool for that.\r\n\r\nI'm
+    thinking about how to provide automatic checking, but everything I came up with
+    so far seems to be rather brittle."
+- id: 8310
+  author: Justin Forder
+  author_email: justin.forder@gmail.com
+  author_url: ''
+  date: '2012-09-23 11:33:47 +0200'
+  date_gmt: '2012-09-23 09:33:47 +0200'
+  content: "Thanks, Jens, this is a great idea. I shall give the katas a try.\r\n\r\nJustin"
+---
+<p>I use <a href="http:&#47;&#47;git-scm.com&#47;">Git<&#47;a> for quite some time now. But all the time I used it only in private projects where you don't have to deal with merges and stuff. But since I'm using it in a real project with multiple developers, I'm realy at awe with the power of Git. It is extremely flexible and I can do all kinds of stuff with it I couldn't even think about with SVN.</p>
+<p>As you learn very quickly when starting with Git, Git is very different from most Version Control Systems you might know. This means in order to use Git you have to learn a lot. And learning is best done, by <strong>doing<&#47;strong> whatever you want to learn. This brought up the idea of <a href="http:&#47;&#47;schauder.github.com&#47;gitkata&#47;">Git Katas<&#47;a>.</p>
+<p>Kata is a form of practice with its origins in the <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Kata">martial arts<&#47;a>, but the term is also popular in the <a href="http:&#47;&#47;codekata.pragprog.com&#47;">software development community<&#47;a>. The idea is that you practice a task, throw away the result and do it again. Over and over again. </p>
+<p>The great thing is: Git (and the public repository infrastructure of GitHub) are great for actually setting up such Katas for learning Git. </p>
+<p>And  so when we were on a train to N&Atilde;&frac14;rnberg for the <a href="http:&#47;&#47;herbstcampus.de&#47;">great little conference Herbstcampus<&#47;a> <a href="https:&#47;&#47;twitter.com&#47;Kroneker_Delta">KronekerDelta<&#47;a> and I created a first Git Kata and by now we already have a second. It works like this:</p>
+<ul>
+<li>
+The Katas assume you work with the console. Note that the Windows Git installation includes the Git Bash which allows you to run Unix Scripts which are part of the Katas on Windows as well.<br />
+<&#47;li></p>
+<li>You clone the <a href="https:&#47;&#47;github.com&#47;schauder&#47;gitkata">Git Kata repository<&#47;a> to a local repository on your machine.<br />
+<&#47;li></p>
+<li>
+You clone the repository <strong>again<&#47;strong> in a second directory. This is where you will work for the kata. Cloning twice has two important consequences: If you screw up your Kata you can simply remove the second directory and recreate it as a fresh clone. Secondly some Katas require you to push work results to the remote repository, which will be your first clone.<br />
+<&#47;li></p>
+<li>
+Change directory into the second repository and checkout the Kata you want to do. Each Kata is a Git branch starting with <tt>kata_<&#47;tt>. So you can type <tt>git checkout kata_<tab><tab><&#47;tt> in order to get a list of valid katas available.<br />
+<&#47;li></p>
+<li>
+In the second repository you'll find a startKata.sh script. Run it. It will do changes to your repository and print the task for this Kata on the console. The task is also included in a readme.txt file in the Kata branch.<br />
+<&#47;li></p>
+<li>
+Happy Gitting.<br />
+<&#47;li><br />
+<&#47;ul></p>
+<p><a href="https:&#47;&#47;twitter.com&#47;Kroneker_Delta">KronekerDelta<&#47;a> and I learned a lot about Git when creating the first Katas and I hope you will enjoy and learn when doing them. </p>
+<p>If you know a little Git you are likely to know more then we do and the Katas aren't really a challange for you. If this is the case, how about providing your own Kata? Just create an orphan branch. Setup a startKata.sh and a readme.txt and let me know about it by <a href="https:&#47;&#47;github.com&#47;schauder&#47;gitkata&#47;issues">opening an issue<&#47;a> or a comment below or an e-mail at jens at schauderhaft de. I'll pull it and add it to the existing katas. Note that a pull request on github doesn't <a href="http:&#47;&#47;stackoverflow.com&#47;questions&#47;12413745&#47;pull-requests-for-orphan-branch">seem to work with orphan branches<&#47;a>.</p>
+<p>Also any feedback is extremely welcome in the comments below, in your own blog posts with a trackback to this article, or in the GitHub issue system. </p>
+<p>Just in case you mist the links above. Here is the <a href="https:&#47;&#47;github.com&#47;schauder&#47;gitkata">Git Kata repository<&#47;a>, and here is the <a href="http:&#47;&#47;schauder.github.com&#47;gitkata&#47;">Git Kata home page<&#47;a>.</p>

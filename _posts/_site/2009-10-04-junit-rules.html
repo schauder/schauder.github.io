@@ -1,0 +1,77 @@
+<p>[caption id="attachment_258" align="alignleft" width="300" caption="card board box"]<img class="size-medium wp-image-258" title="1117482_76414816" src="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2009&#47;10&#47;1117482_76414816-300x200.jpg" alt="card board box" width="300" height="200" &#47;>[&#47;caption]</p>
+<p>I am always surprised how many unknown feature hide in a supposedly simple library. Todays example is <a href="http:&#47;&#47;junit.org&#47;">JUnit<&#47;a>. When inspecting the newest version (4.7) I noted an annotation I hadn't noticed before: <tt>@Rule<&#47;tt>. WTF? I am looking at a testing framework and not at a rules engine, am I? So naturally I tried to find out what it is good for, and since not to much documentation is available my little research resulted in this blog post. Enjoy.</p>
+<p>The purpose of the <tt>@Rule<&#47;tt> annotation is to mark public fields of a test class. These fields&Acirc;&nbsp; must be of type <tt>MethodRule<&#47;tt>, or an implementing class. Such <tt>MethodRule<&#47;tt>s behave similar to a AOP aspects, of course without use of any AOP library and specialized for Tests. They can execute code before, after or instead of a test method.&Acirc;&nbsp; Example use cases listed in the <a href="http:&#47;&#47;github.com&#47;KentBeck&#47;junit&#47;raw&#47;23ffc6baf5768057e366e183e53f4dfa86fbb005&#47;doc&#47;ReleaseNotes4.7.txt">release notes<&#47;a> include:</p>
+<ul>
+<li>Notification on tests<&#47;li>
+<li>Setting up or tearing down resources, especially when they are used in multiple test classes<&#47;li>
+<li>Special checks performed after every test, possibly causing a test to fail.<&#47;li>
+<li>Making information about the test available inside the test<&#47;li><br />
+<&#47;ul><br />
+But ready made examples are boring, so I decided to try to implement something I was looking for all the time.</p>
+<p>When writing acceptance tests with <a href="http:&#47;&#47;fit.c2.com&#47;">Fit<&#47;a> or a similiar framework, you might end up with tons of failing tests, simply because the features aren't implemented yet. But I don't want this red lights hide a real red light, i.e. a test that worked before, but fails now. Therefore I'd like tests to get ignored just as if they where accordingly annotated, until they succeed for the first time. After that they should run (and possibly fail) just as a normal.</p>
+<p>Let's get started. First we need a little test case that can fail or succeed as we want. And this test case of course needs our annotated field:</p>
+<pre lang="java">public class DummyTest {</p>
+<p>    @Rule<br />
+    public IgnoreLeadingFailure ilf = new IgnoreLeadingFailure();</p>
+<p>    @Test<br />
+    public void testTest() {<br />
+        assertTrue(false);<br />
+    }<br />
+}<&#47;pre><br />
+Please note that I stripped all package and import statements for brevity. As you can see I already named my <tt>MethodRule<&#47;tt> implementation <tt>IgnoreLeadingFailure<&#47;tt>. It needs some way to track which tests ran successfully at least once. Since I am lazy, I stored this information in a property file.</p>
+<pre lang="java">public class IgnoreLeadingFailure implements MethodRule {</p>
+<p>    private final static String PROPERTY_FILE_NAME = "activatedTests.properties";</p>
+<p>    private final static Properties activatedTests = new Properties();</p>
+<p>    static {<br />
+        try {<br />
+            activatedTests.load(new FileInputStream(PROPERTY_FILE_NAME));<br />
+        } catch (IOException e) {<br />
+            &#47;&#47; actually this is to be expected on the first run<br />
+            System.out.println("Couldn't load Properties from file" + e);<br />
+        }<br />
+    }</p>
+<p>    public Statement apply(final Statement base, final FrameworkMethod method,<br />
+            final Object target) {</p>
+<p>        if (activatedTests.containsKey(getFullTestMethodName(method, target))) {<br />
+            return base;<br />
+        } else {</p>
+<p>            return new Statement() {</p>
+<p>                @Override<br />
+                public void evaluate() throws Throwable {<br />
+                    try {<br />
+                        base.evaluate();<br />
+                        activateTest(getFullTestMethodName(method, target));<br />
+                    } catch (Throwable t) {<br />
+                        throw new AssumptionViolatedException(<br />
+                                "This test never succeeded before, and failed again with: "<br />
+                                        + t.toString());<br />
+                    }<br />
+                }</p>
+<p>                private void activateTest(String fullTestMethodName) {<br />
+                    activatedTests.put(fullTestMethodName,<br />
+                            new SimpleDateFormat().format(new Date()));<br />
+                    try {<br />
+                        activatedTests.store(new FileOutputStream(<br />
+                                PROPERTY_FILE_NAME),<br />
+                                "tests that ran successfully at least once");<br />
+                    } catch (IOException io) {<br />
+                        System.out.println("failed to store properties" + io);<br />
+                    }</p>
+<p>                }<br />
+            };<br />
+        }<br />
+    }</p>
+<p>    private String getFullTestMethodName(final FrameworkMethod method,<br />
+            Object target) {<br />
+        return target.getClass().getName() + " " + method.getName();<br />
+    }<br />
+}<&#47;pre><br />
+The interesting part is the single method contained in the <tt>MethodRule<&#47;tt> interface:</p>
+<pre lang="java">public Statement apply(final Statement base, final FrameworkMethod method, final Object target)<&#47;pre><br />
+<strong>base<&#47;strong> is the object that encapsulates the execution of the test method. The purpose of <tt>apply(..)<&#47;tt> is to provide a Statement. This Statement will get executed (or in the lingo of the interface 'evaluated'). Typically you'll return a <tt>Statement<&#47;tt> implementation, that wraps the <tt>Statement<&#47;tt> instance passed as a parameter.<&#47;tt></p>
+<p><strong>method<&#47;strong> is the test method that will eventually get called and</p>
+<p><strong>target<&#47;strong> is the object containing that method. Note that you normally do not execute the method, but use it mainly to get more information about the test case the <tt>MethodRule<&#47;tt> is applied to.</p>
+<p>With this information it should be easy to understand what my little class does: It checks if the test at hand was already executed successfully before. If this is the case, the same <tt>Statement<&#47;tt> is returned, that was passed as a parameter. Otherwise an anonymous implementation is returned which replaces any failure by a <tt>AssumptionViolatedException<&#47;tt>, and saves a successful test run in the property file. Note that the <tt>AssumptionViolatedException<&#47;tt> actually does not result in a ignored test, but gets displayed as a successful test, at least with the default runner, which doesn't really fit my needs, but one could easily fix that by a minor change in the runner but not without that change.</p>
+<p>So here is my opinion about this new JUnit feature: It certainly can come in handy for (integration) tests, where one tends to need a lot of resources that need quite some setup and&#47;or tear down. Implementation of a <tt>MethodRule<&#47;tt> is fairly easy, although not exactly straight forward. The biggest problem is that it is next to impossible for an average java developer who doesn't know this feature to understand what is going on. The annotated field is easily missed, since in many cases it isn't used at all in the test class. Once more all this could be straight forward when java would support natively things like aspect oriented programming or open classes.</p>
+<p>If you want more information I suggest you drop by <a href="http:&#47;&#47;www.threeriversinstitute.org&#47;blog&#47;?p=155">this blog post about 'Interceptors' which was the name for rules<&#47;a> at the time of writing of that post.</p>
+<p>So, what do you think of this feature? Any ideas for features that could be implemented using rules?</p>

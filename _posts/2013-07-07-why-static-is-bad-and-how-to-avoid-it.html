@@ -1,0 +1,144 @@
+---
+layout: post
+status: publish
+published: true
+title: Why <tt>static<&#47;tt> is Bad and How to Avoid It
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1396
+wordpress_url: http://blog.schauderhaft.de/?p=1396
+date: '2013-07-07 10:43:21 +0200'
+date_gmt: '2013-07-07 08:43:21 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- clean code
+- design
+- static
+comments:
+- id: 10049
+  author: oop_conference
+  author_email: twitter.97459028@example.com
+  author_url: https://twitter.com/oop_conference
+  date: '2013-07-07 10:51:38 +0200'
+  date_gmt: '2013-07-07 08:51:38 +0200'
+  content: 'Blog: Why static is Bad and How to Avoid It: Everybody who worked with
+    a project which included ... http:&#47;&#47;t.co&#47;yNHdGln3KQ @jensschauder'
+- id: 10050
+  author: fabian
+  author_email: fake@mailaddress.com
+  author_url: ''
+  date: '2013-07-07 12:31:06 +0200'
+  date_gmt: '2013-07-07 10:31:06 +0200'
+  content: "i'm not quite about the usefulness of this blogpost?\r\n\r\nso, you are
+    basically saying static methods are only bad, because they are hard to overcome
+    when you try to test your (client) classes?\r\n\r\ndoesn't this just mean, that
+    one should avoid overly complex, long-running and highly depended static methods
+    (since they are hard to overcome in your tests) ... but - who does that stuff?
+    and also, who is actually able to pull out that stuff. I mean, putting all your
+    business logic into static methods is really really hard ... (i think)\r\n\r\nor
+    do you want to say, that one should try to have his unit tests clean of all the
+    dependencies thus avoiding any subsequent errors... and therefor avoid static
+    methods overall .. ?"
+- id: 10051
+  author: yves
+  author_email: marcel.pokrandt@csmp.de
+  author_url: ''
+  date: '2013-07-07 12:57:32 +0200'
+  date_gmt: '2013-07-07 10:57:32 +0200'
+  content: "I *don&Acirc;&acute;t* think that static functions(!) are bad....\r\nIf
+    the method shouldn&Acirc;&acute;t need dependencies to other fields&#47;objects
+    than that that are part of the parameters I&Acirc;&acute;m quite sure using static
+    functions is better than instanciating an object on every function call. It also
+    helps you to keep your dependencies clean because you can only use static ones.
+    So despite of testing purposes of the client classes I don&Acirc;&acute;t see
+    the benefit."
+- id: 10052
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2013-07-07 13:02:37 +0200'
+  date_gmt: '2013-07-07 11:02:37 +0200'
+  content: "@fabian\r\n\r\n1. causing problems in tests is an important symptom of
+    static methods being bad.\r\n\r\n2. yes, static method are more problematic when
+    they become complex and dependent on other stuff. But most methods start small
+    before they become ugly. And yes I have seen lots of to complicated stuff in static
+    methods. System.getCurrentMillies being one example right there in the standard
+    API.\r\n\r\n3. Yes I do recommend avoiding static methods all together. I won't
+    shout at you if you do something simple in a static method on my project, but
+    I will refactor it at the tiniest sign that it might cause problems."
+- id: 10056
+  author: OC_WIRE
+  author_email: twitter.408387683@example.com
+  author_url: https://twitter.com/OC_WIRE
+  date: '2013-07-08 13:21:00 +0200'
+  date_gmt: '2013-07-08 11:21:00 +0200'
+  content: 'RT @oop_conference: Why static is Bad and How to Avoid It: http:&#47;&#47;t.co&#47;nm5DIq5o17
+    @jensschauder'
+- id: 10064
+  author: carloschacin
+  author_email: twitter.48364078@example.com
+  author_url: https://twitter.com/carloschacin
+  date: '2013-07-10 23:14:27 +0200'
+  date_gmt: '2013-07-10 21:14:27 +0200'
+  content: Why static is Bad and How to Avoid It http:&#47;&#47;t.co&#47;Xbw962mDGF
+---
+<p>Everybody who worked with a project which included a <tt>StringUtil(s)<&#47;tt> class with only static methods, raise her hand! Thought so. Are those methods bad? Probably not so much, although I had a word to say about the name, after all if a class is not a utility it isn't useful (<a href="http:&#47;&#47;en.wiktionary.org&#47;wiki&#47;utility">by the definition of Wiktionary<&#47;a>) and we hopefully haven't much of that kind in our projects.</p>
+<p>But static methods turn bad, when they become more complex than the typical content of a <tt>StringUtil<&#47;tt> class. The problem is your code becomes hard wired to that static method. There is no easy way to replace the reference to the static method with something else, and if you are testing your code using automated tests, this is exactly what you want to do.</p>
+<p><a href="&#47;2011&#47;07&#47;31&#47;getting-started-with-testing&#47;">If you don't test your code using automated tests, do something about it NOW!<&#47;a></p>
+<p>Converting a static method to something easily mocked is straight forward once you've done it once or twice. Lets start with an example:</p>
+<pre lang="java">
+public class Utility{<br />
+    public static int doSomething(){<br />
+        &#47;&#47;...<br />
+    }<br />
+}</p>
+<p>public class Client{<br />
+    public void foo(){<br />
+        &#47;&#47;...<br />
+        Utility.doSomething();<br />
+        &#47;&#47;...<br />
+    }<br />
+}<br />
+<&#47;pre></p>
+<p>The <tt>Client<&#47;tt> uses a static method in <tt>Utility<&#47;tt> and we want to get rid of that. The first step is to make the <tt>doSomething<&#47;tt> method non-static. It is really as easy as removing the static modifier. Of course now the <tt>Client<&#47;tt> needs and instance of <tt>Utility<&#47;tt>, so we just create one for now:</p>
+<pre lang="java">
+public class Utility{<br />
+    public int doSomething(){<br />
+        &#47;&#47;...<br />
+    }<br />
+}</p>
+<p>public class Client{<br />
+    public void foo(){<br />
+        &#47;&#47;...<br />
+        new Utility().doSomething();<br />
+        &#47;&#47;...<br />
+    }<br />
+}<br />
+<&#47;pre> </p>
+<p>Of course this doesn't improve the situation much. We still have a static reference to the <tt>Utility<&#47;tt> class, since the constructor is  just another static method. But now we can simply inject the dependency from the outside:</p>
+<pre lang="java">
+public class Utility{<br />
+    public int doSomething(){<br />
+        &#47;&#47;...<br />
+    }<br />
+}</p>
+<p>public class Client{<br />
+    private final Utility utility;</p>
+<p>    public Client(Utility aUtility){<br />
+        utility = aUtility;<br />
+    }</p>
+<p>    public void foo(){<br />
+        &#47;&#47;...<br />
+        utility.doSomething();<br />
+        &#47;&#47;...<br />
+    }<br />
+}<br />
+<&#47;pre> </p>
+<p>Now you can replace <tt>Utility<&#47;tt> by a mocked instance for tests, you can use a wrapped instance for logging or make it implement an interface and so one. Basically you are back in OO world. Of course you can use your favorite DI-Framework to inject the dependency (<a href="&#47;2012&#47;01&#47;01&#47;the-one-correct-way-to-do-dependency-injection&#47;">just make sure you do it properly<&#47;a>), or if you don't mind the compile time dependency you can create an alternative constructor in the <tt>Client<&#47;tt> which uses the default implementation.</p>

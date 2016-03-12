@@ -1,0 +1,32 @@
+---
+layout: post
+status: publish
+published: true
+title: Usage Patterns of Scala Traits
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 901
+wordpress_url: http://blog.schauderhaft.de/?p=901
+date: '2011-08-21 13:28:10 +0200'
+date_gmt: '2011-08-21 11:28:10 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- trait
+- scala
+- pattern
+comments: []
+---
+<p>One of the many cool features in Scala are traits. traits are like a mixture of abstract classes and interfaces: You can 'implement' as many of them as you want just as with interfaces, but they can also contain implementation, which makes them similar to abstract classes. You also can't instantiate a trait on its own, so there is another similarity to abstract classes.</p>
+<p>While digging my way through various libraries I found a couple of different usage patterns, how traits are getting used. Here is what I found so far:</p>
+<div><strong>The Introvert Trait<&#47;strong>: These are traits that aren't intended for changing the behavior of a class for outside clients of the class, but for the code inside the class itself. They often make an internal DSL available. An example are the <a href="http:&#47;&#47;www.scalatest.org&#47;scaladoc-1.6.1&#47;#org.scalatest.matchers.ShouldMatchers">ShouldMatchers<&#47;a> in <a href="http:&#47;&#47;www.scalatest.org&#47;">ScalaTest<&#47;a>. You mix in this trait into your test class in order to use syntax like <tt>someValueToTest should be (23)<&#47;tt> The problem with this kind of usage is that you can't really control the scope in which your trait&#47;DSL applies. So if you want to use two such traits which happen do define the same method or operator with different meaning you are in trouble. Often you can replace the trait with an object which you import. Since scoping rules apply for imports as well you can control much better which part of your class have access to that object. I see two reasons why this kind of trait makes sense: It makes the presence of the trait&#47;DSL very obvious since it is right next in the beginning of the class declaration, while an import statement might get overlooked. The other reason is, if you want to fool around with <a href="http:&#47;&#47;www.scala-lang.org&#47;node&#47;124">self types<&#47;a>, i.e. you want to limit the kind of classes the trait can get mixed in to or if you want to reference that class.<&#47;div></p>
+<div><strong>Classes with dissociative identity disorder:<&#47;strong> Sometimes things are two things at once. A wooden chair might be furniture as well as fuel for an oven. A square is a rectangle and a rhombus. This works perfectly with traits. While in java you would often have two interface, but one class implementing both, you can easily split the implementation between two traits in scala. Nice. But you should carefully check if these two behaviors&Acirc;&nbsp; actually belong in a single class, or if you are violating the <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Single_responsibility_principle">Single Responsibility Principle<&#47;a>.<br />
+<strong><&#47;strong><&#47;div></p>
+<div><strong>The Jigsaw Puzzle Trait:<&#47;strong> In this pattern traits are used to separate different aspects of a responsibility in a very fine grained manner. The results are traits that are really hard to understand on their own. Actually they are easy to understand since the often only consist of half a dozen lines of code. What is difficult is to understand how this can be useful in any way. Yet if done right it allows do reduce code duplication to an absolute minimum. The best example for this usage is the <a href="&#47;2010&#47;12&#47;19&#47;the-scala-collection-api-sucks-or-is-it-a-work-of-beauty&#47;">Scala collection API<&#47;a>. It consists of a huge number of traits, that get assembled in different ways in order to form the different classes.<br />
+<strong>The Steam Roller Trait<&#47;strong>: What happens when you drive a steam roller over something small, let's say an interface? It gets very wide. This is another technique used in the Scala Collection API. The trait defines a self type, either using another trait or a structural type and defines lots of other stuff based on that interface. This completely solves one of the basic challenges in Java interface design: If you define wide interfaces, i.e. interfaces with lots of methods, it increases the chances for users to find the method they need. On the other hand those poor bastards who have to implement such an interface have a lot of work to do. If you have any doubts how powerful this pattern is, check out <a href="http:&#47;&#47;www.scala-lang.org&#47;docu&#47;files&#47;collections-api&#47;collections-impl.html">how little code you have to write<&#47;a> in order to create a new collection implementation which nicely integrates with all the others and has hundreds of methods just like all the other Scala collections as well.<&#47;div></p>

@@ -1,0 +1,87 @@
+---
+layout: post
+status: publish
+published: true
+title: How to Tune a SQL Statement
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 531
+wordpress_url: http://blog.schauderhaft.de/?p=531
+date: '2010-06-27 06:07:03 +0200'
+date_gmt: '2010-06-27 04:07:03 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- database
+- sql
+- Oracle
+- tuning
+- performance
+comments:
+- id: 577
+  author: stunaz
+  author_email: stunaz@gmail.com
+  author_url: ''
+  date: '2010-06-29 05:16:06 +0200'
+  date_gmt: '2010-06-29 03:16:06 +0200'
+  content: "Thank you for that,but its not helpful. What we need is examples, or how
+    to really tune. i mean examples with cases\r\nthanks"
+- id: 578
+  author: ivan
+  author_email: matavulj@yahoo.com
+  author_url: ''
+  date: '2010-06-29 10:34:58 +0200'
+  date_gmt: '2010-06-29 08:34:58 +0200'
+  content: what about query &amp; query result caching ?
+- id: 586
+  author: Dimityr
+  author_email: unhumannature@gmail.com
+  author_url: http://dotnetintheshell.blogspot.com/
+  date: '2010-06-30 09:38:43 +0200'
+  date_gmt: '2010-06-30 07:38:43 +0200'
+  content: Nice milestones, but it will be better if examples were shown.
+- id: 667
+  author: Johannes
+  author_email: mail@hehejo.de
+  author_url: http://blog.hehejo.de
+  date: '2010-08-06 13:31:35 +0200'
+  date_gmt: '2010-08-06 11:31:35 +0200'
+  content: "But you can't show examples for such kinds of \"tuning questions\".\r\nEither
+    it must be dead simple, which would not help at all. Or it must be a fully fleged
+    specific example, which you couldn't take to solve any other tunig problems &acirc;&euro;&brvbar;"
+---
+<p>One of my standard questions I ask when interviewing a candidate with some database or SQL know how is:</p>
+<blockquote><p>Assume you have a fairly complex select statement operating on some serious tables (tens of millions of rows). The customer complains the SQL statement is to slow. What options would you consider for tuning such a select statement? If it matters assume it is an Oracle database.<&#47;blockquote><br />
+Just in case you want to apply for a job at a <a href="http:&#47;&#47;www.lineas.de">LINEAS<&#47;a> here is, what I would consider a damn good answer:</p>
+<p>First I check if the SQL statement is really slow, for that I'll execute the SQL statement with a low level tool (SQL Plus, SQL Developer ...) on the database. I fetch the same amount of rows, as the customer (or his application) does. I do that on the DB machine or one a machine with very good connectivity to the database, in order to take network issues out of the loop. I measure the execution time. If this is as slow as described by the customer, the SQL statement plus DB seem to be the problem. If not probably something else is the problem (network, application logic ...)</p>
+<p>I establish a target performance, we need to meet the customer requirements.</p>
+<p>I check the execution plan of the statement comparing it with the structure of the schema (tables, indexes, number of rows in tables compared to number of rows actually selected). Are there any obvious problems? For example;</p>
+<ul>
+<li> Full Table Scans that result only in a small percentage of the rows of that table<&#47;li>
+<li>Index accesses on a large percentage of rows<&#47;li>
+<li>Indexes that don't get used, although one would expect them to<&#47;li>
+<li>Identical expensive pieces of the execution plan, on different places&Acirc;&nbsp; of the execution plan<&#47;li>
+<li>Estimated number of rows in the execution plan that differ significantly from the actual number of rows returned<&#47;li><br />
+<&#47;ul><br />
+Depending on what I find I would try some of the following actions, to improve performance</p>
+<ul>
+<li>gather statistics<&#47;li>
+<li>create an additional index supporting the where clauses used in the statement<&#47;li>
+<li>add columns to an index, in order to remove the need for additional table accesses<&#47;li>
+<li>use hints to force certain execution plans<&#47;li>
+<li>exchange (not) in with (not) exists and vice versa<&#47;li>
+<li>rearrange the select statement (e.g. turn a union of&Acirc;&nbsp; joins into a join of union)<&#47;li>
+<li>partitioning of tables and indexes<&#47;li>
+<li>use materialized views<&#47;li>
+<li>in very special cases use bitmap indexes or dimensions<&#47;li><br />
+<&#47;ul><br />
+With these options the performance of most of the 'slow' statements I encountered so far could get brought to acceptable levels. Often improving performance by multiple orders of magnitude. When I am able to identify the problem, but not the solution <a href="http:&#47;&#47;asktom.oracle.com&#47;pls&#47;apex&#47;f?p=100:1:0">Ask Tom<&#47;a> is what I would do next.</p>
+<p>There is one answer I get very often, which I consider pretty bad, if it comes without further comment:</p>
+<blockquote><p>Replace outer joins with inner joins<&#47;blockquote><br />
+Outer joins have a different meaning than inner joins. Normally you can't replace one for the other. If you actually can, I'd consider using an outer join a bug, so replacing it with an inner join is bug fixing, not tuning.</p>

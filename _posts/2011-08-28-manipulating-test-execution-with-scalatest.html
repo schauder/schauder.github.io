@@ -1,0 +1,194 @@
+---
+layout: post
+status: publish
+published: true
+title: Manipulating Test Execution with ScalaTest
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 906
+wordpress_url: http://blog.schauderhaft.de/?p=906
+date: '2011-08-28 21:01:54 +0200'
+date_gmt: '2011-08-28 19:01:54 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- testing
+- junit
+- scala
+- scalatest
+- rules
+comments:
+- id: 4142
+  author: Karl
+  author_email: ksr@mach.de
+  author_url: ''
+  date: '2011-08-30 11:31:29 +0200'
+  date_gmt: '2011-08-30 09:31:29 +0200'
+  content: "Hi Jens,\r\n\r\nhttp:&#47;&#47;blog.schauderhaft.de doesn't link to your
+    current article, but on \"Input Validation with Scala and Swing\"\r\n\r\nI wondered,
+    if you were on vacation for the last 2 month ... :)"
+- id: 4143
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2011-08-30 11:37:26 +0200'
+  date_gmt: '2011-08-30 09:37:26 +0200'
+  content: "Hi Karl, thats bad. \r\nEspecially since I can't reproduce it. Something
+    seems to be caching the site but I don't know what, nor how to fix it. :-("
+- id: 4155
+  author: Born
+  author_email: guate@web.de
+  author_url: ''
+  date: '2011-08-31 12:19:46 +0200'
+  date_gmt: '2011-08-31 10:19:46 +0200'
+  content: "I've had the same issues some weeks ago also wondering if the post-on-sunday
+    behavior was given up or something else happened ;) ... you may consider a\r\n\r\n\r\n\r\nbut
+    the http header sent has a expiration in the past - so I thought that everything
+    should be fine. So don't know why I or anyone else did not see the latest post..."
+- id: 4156
+  author: Born
+  author_email: guate@web.de
+  author_url: ''
+  date: '2011-08-31 12:21:10 +0200'
+  date_gmt: '2011-08-31 10:21:10 +0200'
+  content: narf... i considered using a pragma no cache meta tag - which was of course
+    successfully erased from the comment ;)
+- id: 4159
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2011-08-31 20:08:23 +0200'
+  date_gmt: '2011-08-31 18:08:23 +0200'
+  content: "@Karl can you email me th complete html of start page that you get?\r\n\r\nThe
+    old version that some people see comes from before a switch of servers I had to
+    do at that time. If that gives anybody an idea what is going on, It would be awesome"
+- id: 4194
+  author: Karl
+  author_email: ksr@mach.de
+  author_url: ''
+  date: '2011-09-05 00:21:35 +0200'
+  date_gmt: '2011-09-04 22:21:35 +0200'
+  content: I'll try it tomorrow at work.
+- id: 4198
+  author: Karl
+  author_email: ksr@mach.de
+  author_url: ''
+  date: '2011-09-05 10:09:09 +0200'
+  date_gmt: '2011-09-05 08:09:09 +0200'
+  content: Our proxy now returns the correct page, seems that loading one of the newer
+    pages invalidated the old one :&#47;
+- id: 4199
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2011-09-05 13:00:45 +0200'
+  date_gmt: '2011-09-05 11:00:45 +0200'
+  content: "@Karl I killed a couple of plugins and now it seems to work. \r\n\r\n\r\nThx
+    to everybody helping with the caching problem."
+- id: 322517
+  author: Quo Vadis JUnit | Schauderhaft
+  author_email: ''
+  author_url: http://blog.schauderhaft.de/2014/10/26/quo-vadis-junit/
+  date: '2014-10-26 10:07:14 +0100'
+  date_gmt: '2014-10-26 08:07:14 +0100'
+  content: "[&#8230;] you aren&#8217;t sure, what I&#8217;m talking about, check out
+    this article about ScalaTest. Something like this should be the standard for [&#8230;]"
+---
+<p>My favorite feature in the <a href="&#47;2011&#47;07&#47;24&#47;rules-in-junit-4-9-beta-3&#47;">JUnit are Rules<&#47;a>. With Rules you can manipulate the execution of your test, by wrapping your own code around the test execution. I have used this for setting up <a href="&#47;2011&#47;03&#47;13&#47;testing-databases-with-junit-and-hibernate-part-1-one-to-rule-them&#47;">databases for test<&#47;a>, making sure they <a href="&#47;2010&#47;08&#47;15&#47;use-cases-for-junit-rules&#47;">execute in the EDT<&#47;a>, limiting legal test execution time and for set up and tear down of various other resources.</p>
+<p>So naturally when working with <a href="&#47;2010&#47;12&#47;26&#47;testing-with-scala&#47;">ScalaTest<&#47;a> I pretty soon wanted to have something equivalent to Rules. While you find not much when searching for 'Rules ScalaTest', it is actually quite easy to implement.</p>
+<p>No matter what kind of tests you write with ScalaTest, at the end of the day the method <tt>def withFixture(aTest : NoArgTest)<&#47;tt> will get called with your test to execute. 'Your test' means in case of a FunSuite test the stuff between the curly braces that you pass to the <tt>test<&#47;tt> method.</p>
+<p>The implementation of <tt>withFixture<&#47;tt> will finally execute your test. So all you have to do in order to get the equivalent of a JUnit Rule is to override <tt>withFixture<&#47;tt>. Lets give it a try:</p>
+<pre lang="scala">
+class ExampleTest extends FunSuite {</p>
+<p>    override def withFixture(test : NoArgTest){<br />
+        println<br />
+        println("before")<br />
+        super.withFixture(test)<br />
+        println("after")<br />
+    }</p>
+<p>    test("example test"){<br />
+        println("succeding test")<br />
+    }</p>
+<p>    test("example failing test"){<br />
+        println("failing test")<br />
+        fail("embrace failure")<br />
+    }<br />
+}<br />
+<&#47;pre></p>
+<p>This produces the following output on the console:</p>
+<pre>
+<p>before<br />
+succeding test<br />
+after</p>
+<p>before<br />
+failing test<br />
+<&#47;pre></p>
+<p>As you can see, if you want to do stuff after the test, you better put it in a <tt>finally<&#47;tt> block, so it gets executed no matter if the test fails or not.</p>
+<p>While this works, we don't want to explicitly override <tt>withFixture<&#47;tt> every time we need our 'rule'. The solution to this is to extract it into a trait:</p>
+<pre lang="scala">
+trait ExampleRule extends AbstractSuite {<br />
+    self : Suite =><br />
+    override abstract def withFixture(test : NoArgTest) {<br />
+        println<br />
+        println("before")<br />
+        try {<br />
+            ExampleRule.super.withFixture(test)<br />
+        } finally {<br />
+            println("after")<br />
+        }<br />
+    }<br />
+}</p>
+<p>class Example2Test extends FunSuite with ExampleRule {<br />
+    test("example test") {<br />
+        println("succeding test")<br />
+    }</p>
+<p>    test("example failing test") {<br />
+        println("failing test")<br />
+        fail("embrace failure")<br />
+    }<br />
+}<br />
+<&#47;pre></p>
+<p>The trait extends AbstractSuite, which makes <tt>withFixture<&#47;tt> available. It has a selftype of Suite, in order to ensure it gets only mixed into test suites.</p>
+<p>So how does this solution compare to the implementation of a JUnit Rule? With a Junit Rule we have to create the actual Rule plus a Statement instance. With ScalaTest we only extend a single trait. Also since all this is standard Scala inheritance an no reflection involved, so it is pretty strait forward to find out how this works. While how and why a Rule gets executed is kind of tricky from the source alone. Finally you can explicitly control the order in which your traits apply, by controlling the order in which you put them in the extends clause:</p>
+<pre lang="scala">
+trait Example3Rule extends AbstractSuite {<br />
+    self : Suite =><br />
+    override abstract def withFixture(test : NoArgTest) {<br />
+        println("3 before")<br />
+        try {<br />
+            Example3Rule.super.withFixture(test)<br />
+        } finally {<br />
+            println("3 after")<br />
+        }<br />
+    }<br />
+}</p>
+<p>@RunWith(classOf[JUnitRunner])<br />
+class Example3Test extends FunSuite  with Example3Rule with ExampleRule{<br />
+    test("example test") {<br />
+        println("succeding test")<br />
+    }</p>
+<p>    test("example failing test") {<br />
+        println("failing test")<br />
+        fail("embrace failure")<br />
+    }<br />
+}<br />
+<&#47;pre></p>
+<pre>
+before<br />
+3 before<br />
+succeding test<br />
+3 after<br />
+after</p>
+<p>before<br />
+3 before<br />
+failing test<br />
+3 after<br />
+after<br />
+<&#47;pre></p>
+<p>With Junit Rules there is currently no ready to use way to do this, but a feature to achieve this <a href="https:&#47;&#47;github.com&#47;stefanbirkner&#47;junit&#47;commit&#47;3584c44bedd8705f30dda4f4213fa45655b998c7">is in development<&#47;a>.</p>

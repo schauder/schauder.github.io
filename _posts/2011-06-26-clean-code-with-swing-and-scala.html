@@ -1,0 +1,351 @@
+---
+layout: post
+status: publish
+published: true
+title: Clean Code with Swing and Scala
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 821
+wordpress_url: http://blog.schauderhaft.de/?p=821
+date: '2011-06-26 15:23:23 +0200'
+date_gmt: '2011-06-26 13:23:23 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- clean code
+- scala
+- swing
+- moreThanProperties
+comments:
+- id: 3816
+  author: Jan Kotek
+  author_email: kjan80@gmail.com
+  author_url: ''
+  date: '2011-06-28 15:25:37 +0200'
+  date_gmt: '2011-06-28 13:25:37 +0200'
+  content: "Hi,\r\nI think basic problem is GridBagLayout which is very verbose. Here
+    is similar form with MigLayout. Text fields are growing when window is resized,
+    labels are alligned to right\r\n\r\nval firstName = new JTextField\r\nval lastName
+    = new JTextField\r\n\r\nval panel = new JPanel{\r\n  setLayout(new MigLayout(\"fill\"))\r\n
+    \ add(new JLabel(\"First name:\",\"align right\")\r\n  add(firstName, \"growx,wrap\")\r\n
+    \ add(new JLabel(\"Last name:\",\" align right)\r\n  add(lastName, \"growx,wrap\")\r\n
+    \ add(new JButton(\"Submit\"),\"spanx, align right\");\r\n}"
+- id: 3817
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2011-06-28 18:45:12 +0200'
+  date_gmt: '2011-06-28 16:45:12 +0200'
+  content: "I agree that GridBagLayout is verbose and I do recommend and use something
+    different (JGoodies form layout) in most cases.\r\n\r\nBUT I don't think it is
+    at the root of the problem. The code you provide does two things: creating components
+    and arranging them. Which makes the code hard to test and maintain. You have code
+    duplication (2x new JTextField, 2x align right, 2x growx ...) and you don't even
+    have a way to extract the values from the textfields and stuff them into a proper
+    object."
+- id: 3818
+  author: Jan Kotek
+  author_email: kjan80@gmail.com
+  author_url: ''
+  date: '2011-06-28 19:42:40 +0200'
+  date_gmt: '2011-06-28 17:42:40 +0200'
+  content: "LOL. There is also code triplication in 'val' :-)\r\n\r\nAnyway, had you
+    consider joining Scala-swing project? I think you have very similar mind set as
+    it's creators."
+- id: 3819
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2011-06-28 20:23:58 +0200'
+  date_gmt: '2011-06-28 18:23:58 +0200'
+  content: "I'm quite serious about the code duplication. Of course it's not much
+    of an issue when you are dealing with two controls and a button, but that changes
+    rapidly once you have ten controls on each panel and hundred of panels in the
+    application. Even more which controls which need more work to set up than Textboxes.\r\n\r\nI'm
+    actually not so much impressed with what I have seen of the swing project. The
+    wrappers they provide are nice and less verbose than normal Java&#47;Swing but
+    other then verbosity they don't solve much of a problem. \r\n\r\nOr did I miss
+    something? or they might start working on stuff like Binding or a SCalable Rich
+    Application Platform ..."
+- id: 3820
+  author: Jan Kotek
+  author_email: kjan80@gmail.com
+  author_url: ''
+  date: '2011-06-28 21:23:20 +0200'
+  date_gmt: '2011-06-28 19:23:20 +0200'
+  content: "Well this style is working for me pretty well. I prefer forms (commit,
+    reset) and events rather than binding. And my app actually _has_ GUI tests. \r\n\r\nI
+    have something like 'Scala RCP'. But it is just bunch of utility classes for forms,
+    model manipulations, resource injections etc... \r\n\r\nScala-Swing did think
+    about creating binding, but it never took of"
+- id: 3823
+  author: Spencer K
+  author_email: spencer@kormos.net
+  author_url: http://twitter.com/skormos
+  date: '2011-06-29 04:57:47 +0200'
+  date_gmt: '2011-06-29 02:57:47 +0200'
+  content: "This is really well done, and certain can apply for any JVM language (including
+    Java itself).\r\n\r\nI'm currently doing a Swing based project, and am looking
+    to develop a DSL for end-users as part of the implementation. This will be definitely
+    be an inspiration. Thanks!"
+- id: 3824
+  author: Erwin M.
+  author_email: devent@deventm.org
+  author_url: ''
+  date: '2011-06-30 00:32:09 +0200'
+  date_gmt: '2011-06-29 22:32:09 +0200'
+  content: "\"What is so bad about this piece of crap &acirc;&euro;&brvbar; &Atilde;&curren;hm
+    &acirc;&euro;&brvbar; code?\"\r\n\r\nFirst, you are using GridBagLayout. There
+    are a lot of useful layouts out there which can be used much easier, like TableLayout.
+    (Btw, why is everyone now using MigLayout?)\r\n\r\nSeconds, you are writing a
+    GUI yourself? Didn't you heard of GUI-Builders like Jigloo or WindowBuilder? Try
+    to build a complex GUI without a GUI-Builder, let's see how much time you are
+    wasting to get the layout right by hand.\r\n\r\nThird, if you really have to do
+    it by hand, why not using a DSL like SwingBuilder in Groovy? Then your code would
+    look something like that:\r\n\r\nnew SwingBuilder().edt {\r\n  frame(title: \"Java
+    Frame\", size: [100, 100], locationRelativeTo: null, show: true) {\r\n    gridLayout(cols:
+    1, rows: 2)\r\n    label(text: bind(source: model, sourceProperty: \"count\",
+    converter: { v ->  v? \"Clicked $v times\": ''}))\r\n    button(\"Click me!\",
+    actionPerformed: { model.count++ })\r\n  }\r\n}"
+- id: 3825
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2011-06-30 09:37:52 +0200'
+  date_gmt: '2011-06-30 07:37:52 +0200'
+  content: "@Erwin Different Layouts or DSLs for building GUIs fix the problem of
+    verbosity. But they don't do anything about the underlying problem: Mixing of
+    different responsibilities.\r\n\r\nGUI Builders are nice if you want to build
+    1 Panel. They are ok if you have 5 similar panel. But they are a maintenance nightmare
+    if you have 200 frames where every frame needs to behave in the same way. \r\n\r\nThe
+    latter is the kind of application I tend to build. Of course your mileage might
+    vary."
+- id: 3839
+  author: Java desktop links of the week, July 4 | Jonathan Giles
+  author_email: ''
+  author_url: http://JonathanGiles.net/blog/?p=1074
+  date: '2011-07-04 01:16:31 +0200'
+  date_gmt: '2011-07-03 23:16:31 +0200'
+  content: "[...] Jens Schauder blogged about creating Swing-based user interfaces
+    with Scala. [...]"
+- id: 3840
+  author: James
+  author_email: james@dzone.com
+  author_url: http://java.dzone.com
+  date: '2011-07-04 07:54:26 +0200'
+  date_gmt: '2011-07-04 05:54:26 +0200'
+  content: "Hi Jens\r\nWould you be interested in joining DZone's MVB Program (see
+    dzone.com&#47;aboutmvb for details)? \r\nI think you'd be a great addition to
+    the program. If you're interested, send me an email and we can discuss further.
+    \r\nRegards\r\nJames"
+- id: 3842
+  author: Alexander
+  author_email: alex@apleben.com
+  author_url: ''
+  date: '2011-07-04 08:31:59 +0200'
+  date_gmt: '2011-07-04 06:31:59 +0200'
+  content: "Hello Jens,\r\n\r\nI also urge you to analyze your code again and take
+    a look at the GridBagConstraints wrapper. Thus, you'll make a simple method call
+    chain and , of course, will sprinkle your code with a new freshness and purity.
+    Here's how you can make it on Java -> https:&#47;&#47;gist.github.com&#47;1062950\r\nI'm
+    still studying Scala, therefore, cannot implement this on Scala, yet."
+- id: 3844
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2011-07-04 12:16:43 +0200'
+  date_gmt: '2011-07-04 10:16:43 +0200'
+  content: "Hi Alexander,\r\nI had a quick look at the wrapper. To be honest I wouldn't
+    try to fix GridBagLayout or try to make it nicer. I think it is broken beyond
+    repair.\r\n\r\nThis of course means in turn that this article is not about hiding
+    the problems of GridBagLayout. It is about hiding the technical details of the
+    layout, by wrapping any manipulation of the Layout in classes and methods that
+    operate on an abstraction level you might discuss with your user.\r\n\r\nActually
+    I replaced the GridBagLayout with JGoodies FormLayout just two days ago. If you
+    are interested, you can take a look here: https:&#47;&#47;github.com&#47;schauder&#47;More-Than-Properties&#47;blob&#47;master&#47;src&#47;main&#47;scala&#47;de&#47;schauderhaft&#47;mtp&#47;PersonClient.scala"
+- id: 3845
+  author: Alexander
+  author_email: alex@apleben.com
+  author_url: ''
+  date: '2011-07-04 14:23:00 +0200'
+  date_gmt: '2011-07-04 12:23:00 +0200'
+  content: "Thanks for noting Jens.\r\n\r\nTotally agree. It's broken and some of
+    the bugs still doesn't fixed (like a resizing bug). I have no idea why people
+    still using GridBagLayout.\r\nScala Swing is very interesting part and could be
+    a total fix for many of the Java Swing current problems, one of them is abstraction.
+    Studying..."
+---
+<p>I guess everybody who knows Java and Swing also knows the <a href="http:&#47;&#47;download.oracle.com&#47;javase&#47;tutorial&#47;uiswing&#47;">Swing Tutorial<&#47;a>. It is a great source of information if you want to learn Swing. It is also a major catastrophy when it comes to structuring code. The problem is: Lots of people miss critical information contained in the tutorial like 'Everything concerned with Swing must happen in the EDT' but they seem to suck up the messy way to structure code like a sponge.</p>
+<p>This might result in code like the one below. It is actually Scala code, but that shouldn't matter much. The only piece that is a little special are the calls to <tt>Binder<&#47;tt>, which is a little <a href="&#47;2011&#47;05&#47;01&#47;binding-scala-objects-to-swing-components&#47;">Swing Binding Framework<&#47;a> which I introduced a couple of weeks ago.</p>
+<pre lang="scala">    private def createPersonPanel(p : PersonEditor) = {<br />
+        val panel = new JPanel()<br />
+        val layout = new GridBagLayout()<br />
+        val c = new GridBagConstraints()<br />
+        c.gridx = 0<br />
+        c.gridy = 0</p>
+<p>        panel.setLayout(layout)</p>
+<p>        c.fill = 0<br />
+        panel.add(new JLabel("firstname"), c)</p>
+<p>        c.fill = 1<br />
+        c.gridx += 1<br />
+        c.weightx = 1<br />
+        val firstnameTF = new JTextField()<br />
+        panel.add(firstnameTF, c)<br />
+        Binder.bind(p.firstname, firstnameTF)</p>
+<p>        c.fill = 0<br />
+        c.weightx = 0<br />
+        c.gridx = 0<br />
+        c.gridy += 1</p>
+<p>        panel.add(new JLabel("lastname"), c)<br />
+        c.fill = 1</p>
+<p>        c.gridx += 1<br />
+        val lastnameTF = new JTextField()<br />
+        Binder.bind(p.lastname, lastnameTF)<br />
+        panel.add(lastnameTF, c)<br />
+        c.fill = 0<br />
+        c.weightx = 1<br />
+        c.gridy += 1<br />
+        c.anchor = GridBagConstraints.SOUTHEAST<br />
+        val button = new JButton("save")<br />
+        Binder.bind(p.save, button)<br />
+        panel.add(button, c)<br />
+        panel<br />
+    }<&#47;pre><br />
+What is so bad about this piece of crap ... &Atilde;&curren;hm ... code?</p>
+<p>The method is long. 38 lines is about 10 times longer than healthy for a method.</p>
+<p>There is tons of code duplication.</p>
+<p>The method does lots of different things: creating components, adding them to a panel, configuring the layout.</p>
+<p>There is a strong dependency on the order of commands. We can't just move stuff up or down in the method and still hope the result will be something reasonable, even if we stick to rearrangements allowed by the compiler.</p>
+<p>All this together makes the method extremely hard to understand. How long does it take to understand what kind of GUI results? Don't bother to much, I help. It looks like this:</p>
+<p><a href="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2011&#47;06&#47;small.png"><img class="alignnone size-full wp-image-824" title="Image of the Frame in packed state." src="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2011&#47;06&#47;small.png" alt="" width="132" height="104" &#47;><&#47;a></p>
+<p>and if you resize it, it looks like this</p>
+<p><a href="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2011&#47;06&#47;large.png"><img class="alignnone size-full wp-image-825" title="Resized Frame" src="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2011&#47;06&#47;large.png" alt="" width="315" height="214" &#47;><&#47;a></p>
+<p>Arguably the result looks just as ugly as the code, but once the code is clean we might be able to improve on the visual design as well.</p>
+<p>If you don't see it in the code, you might see it in the images: There are three different ways JComponents are handled by the method: <tt>JLabels<&#47;tt> are in the left column and don't resize. The <tt>JTextField<&#47;tt>s are in the right column and do resize and the JButton doesn't resize and is in the buttom right. In the code this is completely hidden in the manipulation of the <tt>GridBagConstraint<&#47;tt>. So lets make it explicit in the code:</p>
+<pre lang="scala">    private def addToLabelColumn(<br />
+        panel : JPanel,<br />
+        component : JComponent,<br />
+        row : Int) {<br />
+        val c = new GridBagConstraints()<br />
+        c.gridx = 0<br />
+        c.gridy = row<br />
+        c.weightx = 0<br />
+        c.fill = 0<br />
+        panel.add(component, c)<br />
+    }</p>
+<p>    private def addToComponentColumn(<br />
+        panel : JPanel,<br />
+        component : JComponent,<br />
+        row : Int) {<br />
+        val c = new GridBagConstraints()<br />
+        c.gridx = 1<br />
+        c.gridy = row<br />
+        c.weightx = 1<br />
+        c.fill = 1<br />
+        panel.add(component, c)<br />
+    }</p>
+<p>    private def addButton(<br />
+        panel : JPanel,<br />
+        component : JButton,<br />
+        row : Int) {<br />
+        val c = new GridBagConstraints()</p>
+<p>        c.weightx = 1<br />
+        c.gridx = 1<br />
+        c.gridy = row<br />
+        c.fill = 0<br />
+        c.anchor = GridBagConstraints.SOUTHEAST<br />
+        panel.add(component, c)<br />
+    }</p>
+<p>    private def createPersonPanel(p : PersonEditor) = {<br />
+        val panel = new JPanel()<br />
+        val layout = new GridBagLayout()<br />
+        panel.setLayout(layout)</p>
+<p>        addToLabelColumn(panel, new JLabel("firstname"), 0)</p>
+<p>        val firstnameTF = new JTextField()<br />
+        Binder.bind(p.firstname, firstnameTF)<br />
+        addToComponentColumn(panel, firstnameTF, 0)</p>
+<p>        addToLabelColumn(panel, new JLabel("lastname"), 1)</p>
+<p>        val lastnameTF = new JTextField()<br />
+        Binder.bind(p.lastname, lastnameTF)<br />
+        addToComponentColumn(panel, lastnameTF, 1)</p>
+<p>        val button = new JButton("save")<br />
+        Binder.bind(p.save, button)<br />
+        addButton(panel, button, 2)<br />
+        panel<br />
+    }<&#47;pre><br />
+I introduced three methods. One for adding a JLabel, one for adding a JComponent and one for adding JButtons. These handle the arrangement of components on a JPanel. The total length of the code increased because we create the GridBagConstraints insided the methods and have to set all properties and don't rely anymore on the previous step to leave the constraint in a specific state.</p>
+<p>If we now look at the <tt>createPersonPanel<&#47;tt> we'll get a strong fealing of repetition in various places:</p>
+<ul>
+<li>each call to add* methods takes the same JPanel as an argument. We can improve on this by creating a Builder wich crates the panel, contains the add* methods and can return the fully configured panel at the end.<&#47;li>
+<li>for each property we create a <tt>JLabel<&#47;tt>, a <tt>JTextField<&#47;tt>, bind the property to the later and add both to the <tt>JPanel<&#47;tt>. We can fix this by encapsulating it in a seperate method.<&#47;li><br />
+<&#47;ul><br />
+The result might look like this:</p>
+<pre lang="scala">
+    case class PanelBuilder() {<br />
+        val panel = new JPanel()<br />
+        val layout = new GridBagLayout()<br />
+        panel.setLayout(layout)</p>
+<p>        def add(components : (JLabel, JComponent), row : Int) {<br />
+            addToLabelColumn(components._1, row)<br />
+            addToComponentColumn(components._2, row)<br />
+        }</p>
+<p>        def add(<br />
+            component : JButton,<br />
+            row : Int) {<br />
+            val c = new GridBagConstraints()</p>
+<p>            c.weightx = 1<br />
+            c.gridx = 1<br />
+            c.gridy = row<br />
+            c.fill = 0<br />
+            c.anchor = GridBagConstraints.SOUTHEAST<br />
+            panel.add(component, c)<br />
+        }</p>
+<p>        private def addToLabelColumn(<br />
+            component : JComponent,<br />
+            row : Int) {<br />
+            val c = new GridBagConstraints()<br />
+            c.gridx = 0<br />
+            c.gridy = row<br />
+            c.weightx = 0<br />
+            c.fill = 0<br />
+            panel.add(component, c)<br />
+        }</p>
+<p>        private def addToComponentColumn(<br />
+            component : JComponent,<br />
+            row : Int) {<br />
+            val c = new GridBagConstraints()<br />
+            c.gridx = 1<br />
+            c.gridy = row<br />
+            c.weightx = 1<br />
+            c.fill = 1<br />
+            panel.add(component, c)<br />
+        }</p>
+<p>    }</p>
+<p>    private def create(name : String, property : Property[String]) : (JLabel, JComponent) = {<br />
+        val textField = new JTextField()<br />
+        Binder.bind(property, textField)<br />
+        (new JLabel(name), textField)<br />
+    }</p>
+<p>    private def create(name : String, action : => Unit) = {<br />
+        val button = new JButton("save")<br />
+        Binder.bind(action, button)<br />
+        button<br />
+    }</p>
+<p>    private def createPersonPanel(p : PersonEditor) = {<br />
+        val builder = PanelBuilder()</p>
+<p>        builder.add(create("firstname", p.firstname), 0)<br />
+        builder.add(create("lastname", p.lastname), 1)<br />
+        builder.add(create("save", p.save), 2)</p>
+<p>        builder.panel<br />
+    }<br />
+<&#47;pre></p>
+<p>The <tt>PanelBuilder<&#47;tt> has now two simple public <tt>add<&#47;tt> methods. In order to imitate the method signitures in Java we would have to create a couple of helper classes and interfaces. It would make the code less compact but this shouldn't be a serious problem. Creation of the various components is just as the binding extracted in two create Methods. The <tt>createPersonPanel<&#47;tt> has now only 5 lines of code. Adding another property to the form should be trivial. Changing the extremely simplistic layout should be trivial and is at least limited to a single small class. I think this is pretty much OK for a first step toward clean swing code. So I leave it like it is right now. Although I do have further plans for this.</p>
+<p>I hope most of you agree that the code is much easier to understand and maintain in the form it is right now. But is it really worth the effort? Some might say no. If the whole application would consist of only this little panel. I would agree. But a Swing application typically does not have a single panel with two textfields and a button. But tens or even hundreds of panels. Many consisting of large collections of components. If you have to maintain such a monster, would you prefer createPersonPanel methods like the last one, or would you prefer the first version? What if the customer if finally fed up with your crappy layout and insists on proper spacing between the labels and the <tt>JTextFields<&#47;tt> or other components?</p>
+<p>All this is pretty nice when you start a new Swing application. But what if you have an existing Swing application? One with convoluted code just as the Swing Tutorial taught you? Well ... start changing it now. Don't sit down for two months and rewrite all your code, but find pieces of code duplication and extract them. It will be a long way, but you wont reach the end if you don't start walking.</p>
+<p>But what if you are not using Swing, but writing a web application? Well it really shouldn't matter much. Your PanelBuilder might be written in JavaScript, or create HTML, but the principle is the same: Seperate creation of components, layout of components and binding of components to properties and actions.</p>

@@ -1,0 +1,32 @@
+<p>I hope we all agree that methods an classes should be small and have only few dependencies. This point of view is widely accepted, while the interpretation of "small" varies. There is lots of literature out there about this. But what about packages?</p>
+<p>Some people consider packages just as namespaces. So packages are just things that allow you to reuse names for classes!?</p>
+<p>I thought so about methods a couple of years ago: Just containers for reusable code.</p>
+<p>Today I disagree with both statements. Methods are a very important tool to name a thing, to separate it from the rest, even when it is called only once.</p>
+<p>Likewise packages have an important role even when we ignore the issue of names. Packages bundle together some functionality. They name that functionality and they should encapsulate it so we might reuse it. And just as with methods a package should have single purpose. It is probably a 'bigger' purpose than that of a method but still it should do only stuff directly related to that purpose.</p>
+<p>Unfortunately in many projects this doesn't work out well.</p>
+<p>Here is a challenge. Pick a random package out of your current project. For this package answer the following questions</p>
+<ul>
+<li>What is the purpose of that package? Please use a single simple sentence. Does this sentence match the name of the package?<&#47;li>
+<li>Go through the classes of that package do they all work together to achieve the purpose of the class? Or are there classes in there that just ended up there by accident?<&#47;li>
+<li>Go through all the other classes of your system. Is none of them concerned with the single purpose of your package? Or are there classes that float around somewhere else that really should be in the package you are looking at?<&#47;li>
+<li>If your coworker in the next project needs basically the same package, how difficult would it be to extract the package from your code base and build it as a standalone jar?<&#47;li><br />
+<&#47;ul><br />
+In my experience it is very likely that the answers to the questions above are rather depressing. They certainly are in most projects I worked with.</p>
+<p>Even when the classes and methods in that project are reasonable clean.</p>
+<p>Why is that?</p>
+<p>I think the reason is that problems with packages are not as obvious as with methods or classes. If a methods spans across the complete monitor you see that every time all the time you are working with the method. And since the method is long there is probably much work to be done in it. Same for classes. But with packages is different. I spend whole days coding without looking what is inside a package . I open my classes with shortcuts and name based search, no need to look inside packages.</p>
+<p>So you won't notice that classes concerned with completely different issues are together in one package. You won't notice that the number of classes in a package exceeds any reasonable threshold.</p>
+<p>And if it comes to the last question, the question about dependencies it becomes really ugly. What other packages does a package depend on? Which class contains that dependency? There is very limited tool support for this kind of question. And the question only gets asked late in a project, maybe when a sister project gets spawned that should reuse some of the code base so it should move in a common base project.</p>
+<p>Since I have been there a couple of times I recommend to implement a couple of tests right in the beginning of a project using either JDepend or Dependency Finder:</p>
+<ul>
+<li>No cyclic dependencies between packages<&#47;li>
+<li>A maximum number of classes per package<&#47;li>
+<li>A fixed naming schema like &Acirc;&nbsp;<domain>.
+<project>.<module>.<layer>.<rest-of-package-name><&#47;li></p>
+<li>A fixed direction of dependencies between modules (modules are vertical slices, often based on some domain concept)<&#47;li>
+<li>A fixed direction of dependencies between layers ( gui, presentation, domain, persistence are typical examples)<&#47;li><br />
+<&#47;ul><br />
+But be warned: these tests tend to be hard to keep satisfied. But if you put in the extra effort to keep your packages clean it has a significant positive impact on your application structure.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

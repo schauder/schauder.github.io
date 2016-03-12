@@ -1,0 +1,107 @@
+---
+layout: post
+status: publish
+published: true
+title: Your Code ain't your To-Do List
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1430
+wordpress_url: http://blog.schauderhaft.de/?p=1430
+date: '2014-02-16 14:42:38 +0100'
+date_gmt: '2014-02-16 12:42:38 +0100'
+categories:
+- Softwaredevelopment
+tags:
+- code
+- comments
+- todos
+comments:
+- id: 10863
+  author: Lukas Eder
+  author_email: lukas.eder@gmail.com
+  author_url: http://www.jooq.org
+  date: '2014-02-17 10:58:17 +0100'
+  date_gmt: '2014-02-17 08:58:17 +0100'
+  content: Yet, a TODO accompanied with an issue tracker ID makes a lot of sense
+- id: 10864
+  author: Steven
+  author_email: steven@stevenschwenke.de
+  author_url: http://stevenschwenke.de
+  date: '2014-02-17 11:32:23 +0100'
+  date_gmt: '2014-02-17 09:32:23 +0100'
+  content: I have a task "no todo added to code" in my definition of done (dod). After
+    implementing a feature, I review this dod and make sure that all "TODO SSC" are
+    gone in the new code. "SSC" is the abbreviation for my name. This way, I can make
+    a search over the entire codebase and get only my todos.
+- id: 10891
+  author: fabian
+  author_email: spam@fabian.mm.st
+  author_url: ''
+  date: '2014-02-22 13:36:49 +0100'
+  date_gmt: '2014-02-22 11:36:49 +0100'
+  content: "another solution: use CI &#47; continuous deployment and scan your code
+    base for those annotations (maybe also include fixmes?)\r\n\r\ndaily reports inform
+    you about the quality of your code and you can verify the code before it goes
+    into production"
+- id: 10892
+  author: Steven
+  author_email: steven@stevenschwenke.de
+  author_url: http://stevenschwenke.de
+  date: '2014-02-22 13:59:58 +0100'
+  date_gmt: '2014-02-22 11:59:58 +0100'
+  content: Thanks, fabian, for this idea. It never came to me to use CI that way.
+    Monday, I will add the task scanner plugin to our Hudson scan for my tasks.
+- id: 10903
+  author: Anonymous Coward
+  author_email: a_flj_@hotmail.com
+  author_url: ''
+  date: '2014-02-26 22:09:38 +0100'
+  date_gmt: '2014-02-26 20:09:38 +0100'
+  content: Of course my code isn't my todo list. But I use Todos to mark tech debt
+    explicitly, rather than just relying on static code analysis tools - they usually
+    miss the most important problems, deriving from design or architecture, they mostly
+    catch only simple problems.
+- id: 169680
+  author: devtribe
+  author_email: twitter.121459344@example.com
+  author_url: https://twitter.com/devtribe
+  date: '2014-02-19 11:42:56 +0100'
+  date_gmt: '2014-02-19 09:42:56 +0100'
+  content: 'RT @jensschauder: I blogged: Your Code ain''t your To-Do List http:&#47;&#47;t.co&#47;KTVzEMpCDt'
+- id: 169682
+  author: shfrnv
+  author_email: twitter.430959520@example.com
+  author_url: https://twitter.com/shfrnv
+  date: '2014-02-16 17:31:53 +0100'
+  date_gmt: '2014-02-16 15:31:53 +0100'
+  content: 'RT @jensschauder: I blogged: Your Code ain''t your To-Do List http:&#47;&#47;t.co&#47;KTVzEMpCDt'
+- id: 169683
+  author: olivergierke
+  author_email: twitter.16736130@example.com
+  author_url: https://twitter.com/olivergierke
+  date: '2014-02-16 16:41:12 +0100'
+  date_gmt: '2014-02-16 14:41:12 +0100'
+  content: 'RT @jensschauder: I blogged: Your Code ain''t your To-Do List http:&#47;&#47;t.co&#47;KTVzEMpCDt'
+- id: 169684
+  author: ithempel
+  author_email: twitter.102978608@example.com
+  author_url: https://twitter.com/ithempel
+  date: '2014-02-16 15:12:30 +0100'
+  date_gmt: '2014-02-16 13:12:30 +0100'
+  content: 'RT @jensschauder: I blogged: Your Code ain''t your To-Do List http:&#47;&#47;t.co&#47;KTVzEMpCDt'
+---
+<p>What do you do if you find a problem in your code base but can't fix it right now? If you are like many developers you probably put something like a todo comment next to it, so you don't forget it. Something like:</p>
+<pre>&#47;&#47; TODO: We really need to move all this stuff into a seperate class it really has no bussiness here.<&#47;pre><br />
+The great thing about this kind of comments is: The IDE can pick them up and display them in some kind of list.</p>
+<p>But the problem is (at least in my experience): It doesn't work. Lots of those comments hang around for months and even years, often until the code around the comments changed so much nobody knows what the comment is supposed to mean. I have even seen TODO comments copied around with the code they are embedded in (which of course is a symptom of another problem).</p>
+<p>You might know the book <a href="http:&#47;&#47;www.amazon.de&#47;gp&#47;product&#47;B005KKQ4XC?ie=UTF8&amp;camp=3206&amp;creative=21426&amp;creativeASIN=B005KKQ4XC&amp;linkCode=shr&amp;tag=schauderhafte-21&amp;qid=1392554284">"Getting Things Done" (GTD)<&#47;a>. If not, read it. It's good stuff. One of the key points of the book is: Your inbox isn't your to-do list. Meaning you don't use your inbox (where stuff you have to do arives) as the list of things you actually have to do.</p>
+<p>In your inbox you have no way to properly control, what is important and what is urgent. Nor do you know if the task is something that takes two minutes or two weeks, or if it has a specific due date on which it has to be finished. Therefor the recommendation of GTD is: Get you inbox to zero by reviewing everything in it and either doing it right now if it is quick or transforming it in a proper task and filing it to one of various lists where you can pull it from when you have time to do stuff that takes longer than two minutes. Those lists cary with them all the information to decide quickly what task you should tackle next.</p>
+<p>The same thing applies to TODO comments in your code. Code is great for many things. Managing tasks isn't one of it. But you probably already have some kind of issue tracker in your project. If you find something that needs fixing in your code: put it there. There you can discuss it, compare it to alle the other tasks at hand in order to decide what is most important.</p>
+<p>As every rule it comes with some exceptions: Short lived TODOs are fine in your code. Like when you implement a new feature and suddenly realize two more tests that you need to implement. Go ahead put a TODO in your code. Just make sure you'll remove it and replace it with actual code before your next push to the central branch.</p>
+<p>For everything else: don't misuse your code as a to do list.</p>

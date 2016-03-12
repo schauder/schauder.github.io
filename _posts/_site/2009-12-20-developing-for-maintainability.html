@@ -1,0 +1,89 @@
+<p>Just as <a href="&#47;2009&#47;12&#47;13&#47;developing-for-supportability&#47;">Supportability<&#47;a>, Maintainability is one of these Non Functional Requirements, that is or should be required from every software development project. So what does that mean? Wikipedia defines it as</p>
+<blockquote><p>the ease with which a software product can be modified in order to:</p>
+<ul>
+<li>correct defects<&#47;li>
+<li>meet new requirements<&#47;li>
+<li>make future maintenance easier, or<&#47;li>
+<li>cope with a changed environment;<&#47;li><br />
+<&#47;ul><br />
+<&#47;blockquote><br />
+Wow, that's great. Because it lends itself for an 'easy' test for maintainability. Take the completed product, make up some new requirements and measure how long it takes to implement those. If you do this with different products for same task, you can compare the time needed, thus comparing maintainability. Unfortunately most of the time, the requirement is stated before any software is written. And only one piece of software gets written, so there is nothing to compare to. So what to do?</p>
+<p>Since one can't realistically measure maintainability we once more should concentrate on characteristics making software easier to maintain, i.e. easier to change. There are plenty of measures around that are thought to be linked to maintainability. Cyclomatic Complexity being possibly the best known. I personally prefer <a href="http:&#47;&#47;erik.doernenburg.com&#47;2008&#47;11&#47;how-toxic-is-your-code&#47;">toxicity<&#47;a>, which is based on Cyclomatic Complexity and a couple of other measures, which contribute to the toxicity with the amount they are above a certain threshold:</p>
+<blockquote>
+<table border="0" cellpadding="2">
+<tbody>
+<tr>
+<th>Metric<&#47;th></p>
+<th>Level<&#47;th></p>
+<th>Threshold<&#47;th><br />
+<&#47;tr></p>
+<tr>
+<td>File Length<&#47;td></p>
+<td>file<&#47;td></p>
+<td>500<&#47;td><br />
+<&#47;tr></p>
+<tr>
+<td>Class Fan-Out Complexity<&#47;td></p>
+<td>class<&#47;td></p>
+<td>30<&#47;td><br />
+<&#47;tr></p>
+<tr>
+<td>Class Data Abstraction Coupling<&#47;td></p>
+<td>class<&#47;td></p>
+<td>10<&#47;td><br />
+<&#47;tr></p>
+<tr>
+<td>Anon Inner Length<&#47;td></p>
+<td>inner class<&#47;td></p>
+<td>35<&#47;td><br />
+<&#47;tr></p>
+<tr>
+<td>Method Length<&#47;td></p>
+<td>method<&#47;td></p>
+<td>30<&#47;td><br />
+<&#47;tr></p>
+<tr>
+<td>Parameter Number<&#47;td></p>
+<td>method<&#47;td></p>
+<td>6<&#47;td><br />
+<&#47;tr></p>
+<tr>
+<td>Cyclomatic Complexity<&#47;td></p>
+<td>method<&#47;td></p>
+<td>10<&#47;td><br />
+<&#47;tr></p>
+<tr>
+<td>Nested If Depth<&#47;td></p>
+<td>statement<&#47;td></p>
+<td>3<&#47;td><br />
+<&#47;tr></p>
+<tr>
+<td>Nested Try Depth<&#47;td></p>
+<td>statement<&#47;td></p>
+<td>2<&#47;td><br />
+<&#47;tr></p>
+<tr>
+<td>Boolean Expression Complexity<&#47;td></p>
+<td>statement<&#47;td></p>
+<td>3<&#47;td><br />
+<&#47;tr></p>
+<tr>
+<td>Missing Switch Default<&#47;td></p>
+<td>statement<&#47;td></p>
+<td>1<&#47;td><br />
+<&#47;tr><br />
+<&#47;tbody><&#47;table><br />
+<&#47;blockquote><br />
+Compared to a single simple measure, this has the benefit of being less prone to optimization for the measurement, although of course this is still possible.</p>
+<p>So does a low, even zero toxicity guarantee maintainable code? Hell no. For starters there are a couple of different things to consider:</p>
+<ul>
+<li>Is the code well covered with tests?<&#47;li>
+<li>Are the current requirements specified in a suitable manner (e.g. using tests)?<&#47;li>
+<li>Is the code written in a consistent style<&#47;li>
+<li>Is all the code including the documentation under control of a version control system?<&#47;li>
+<li>Is the structure of the application, its architecture defined and documented?<&#47;li>
+<li>Is there an automatic process for building new versions of the software (i.e. ant, maven, make scripts or similar)?<&#47;li>
+<li>Is the code written in a language that is well known and understood and which has a large user community?<&#47;li><br />
+<&#47;ul><br />
+Everything but the last bullet point is pretty much identical with what I consider <a href="&#47;2009&#47;11&#47;01&#47;are-you-a-software-developer-or-a-dabbler&#47;">base practices for any serious software developer<&#47;a>.</p>
+<p>So I propose: The next time you encounter the vague requirement of maintainability, replace itybe useful and well testable requirements, based on specific practices and metrics. It still won't guarantee maintainability. But it will increase the chance for it.</p>

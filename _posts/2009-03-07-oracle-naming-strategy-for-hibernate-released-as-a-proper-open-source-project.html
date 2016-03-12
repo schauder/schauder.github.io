@@ -1,0 +1,63 @@
+---
+layout: post
+status: publish
+published: true
+title: Oracle Naming Strategy for Hibernate Released as a proper Open Source Project
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 141
+wordpress_url: http://blog.schauderhaft.de/2009/03/07/oracle-naming-strategy-for-hibernate-released-as-a-proper-open-source-project/
+date: '2009-03-07 21:21:13 +0100'
+date_gmt: '2009-03-07 20:21:13 +0100'
+categories:
+- Uncategorized
+- Softwareentwicklung
+- Oracle
+- Datenbank
+tags: []
+comments:
+- id: 149
+  author: Sarel Botha
+  author_email: sarel@botha.us
+  author_url: http://blog.botha.us/sarel/
+  date: '2009-03-17 14:30:18 +0100'
+  date_gmt: '2009-03-17 13:30:18 +0100'
+  content: "Could you post a few examples of how it changes the names when it is run
+    through this class?\r\n\r\nThanks,\r\nSarel"
+- id: 151
+  author: Jens Schauder
+  author_email: jens.schauder@lineas.de
+  author_url: http://blog.schauderhaft.de
+  date: '2009-03-26 21:38:38 +0100'
+  date_gmt: '2009-03-26 20:38:38 +0100'
+  content: "One example would be the name\r\n\r\nSomeLongNamedEntityForDemonstrationPurposes\r\nbecomes
+    \r\nsome_long_nam_ent_for_dem_purp\r\n\r\nIt also supports embeddables, so you
+    can have multiple embeddables attributes of the same type in one class without
+    a problem"
+- id: 237
+  author: Daniel Alexiuc
+  author_email: daniel@alexiuc.com
+  author_url: http://justsomejavaguy.blogspot.com
+  date: '2009-06-11 07:05:17 +0200'
+  date_gmt: '2009-06-11 06:05:17 +0200'
+  content: "Great work! \r\n\r\nThis is exactly what I was looking for when I typed
+    \"namingstrategy oracle\" into google.\r\n\r\nIt seems to work well so far - I'll
+    be more than happy to report any suggestions or bugs as I continue to use it."
+- id: 238
+  author: Jens Schauder
+  author_email: jens.schauder@lineas.de
+  author_url: http://blog.schauderhaft.de
+  date: '2009-06-13 14:11:54 +0200'
+  date_gmt: '2009-06-13 13:11:54 +0200'
+  content: "Hi Daniel,\r\nthanks for the nice comment, I am looking forward to the
+    bug reports and suggestions"
+---
+<p>I am a big <a href="&#47;2008&#47;11&#47;27&#47;why-hibernate-is-so-much-more-powerful-than-jdbc&#47;">fan of creating at least the basic structure of your database from the domain model using hibernate<&#47;a>. But if you work with <a href="http:&#47;&#47;www.oracle.com">Oracle<&#47;a> you know on problem with this approach: the length of names is seriously limited for tables and columns. So if you have a&Acirc;&nbsp; inner class with embeddables you pretty soon bump against that limit of 30 characters.</p>
+<p>I published before an <a href="&#47;2008&#47;02&#47;22&#47;hibernate-namingstrategy-fur-oracle&#47;">OracleNamingStrategy<&#47;a> that fixes this problem by creating abbreviations on this blog. But writing a <a href="&#47;2008&#47;03&#47;29&#47;hibernate-naming-strategie-fur-oracle-die-zweite&#47;">new blog entry<&#47;a> with all the code every time I find a little glitch in the code felt just wrong. So I published it as an official Open Source Project over at <a href="http:&#47;&#47;code.google.com&#47;">google code<&#47;a>: <a href="http:&#47;&#47;code.google.com&#47;p&#47;hibernate-naming-strategy-for-oracle&#47;">The Hibernate Naming Strategy for Oracle!<&#47;a> And I just released the first version. and since it is so extremely simple, it isn't even a jar but a <a href="http:&#47;&#47;code.google.com&#47;p&#47;hibernate-naming-strategy-for-oracle&#47;downloads&#47;list">single java file<&#47;a>.</p>
+<p>I'd be glad if this is of some use for other developers. If you like it, drop me a line in the comments. If you find a bug or have an idea for improvement use the <a href="http:&#47;&#47;code.google.com&#47;p&#47;hibernate-naming-strategy-for-oracle&#47;issues&#47;list">issue tracker<&#47;a>.</p>

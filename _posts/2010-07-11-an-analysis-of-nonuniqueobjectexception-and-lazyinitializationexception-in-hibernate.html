@@ -1,0 +1,66 @@
+---
+layout: post
+status: publish
+published: true
+title: An Analysis of NonUniqueObjectException and LazyInitializationException in
+  Hibernate
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 529
+wordpress_url: http://blog.schauderhaft.de/?p=529
+date: '2010-07-11 21:25:19 +0200'
+date_gmt: '2010-07-11 19:25:19 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- domain driven design
+- hibernate
+comments: []
+---
+<p>I consider Hibernate a great and useful tool. But it has some mean Exceptions lurking in the darker corners. Today I'd like to explore the ones from the title in a little more detail, including different approaches on how to avoid them.</p>
+<p>Let's start with the well known <tt>LazyInitializationException<&#47;tt>. When you search for this one in the Internet you end up with scenarios like this one:</p>
+<p>You load <tt>A<&#47;tt>, close the session you&Acirc;&nbsp; used and try to access a property of <tt>A<&#47;tt> which gets loaded lazily resulting in a <tt>LazyInitializationException<&#47;tt>. That one is well described, including strategies to avoid it, which basically consist of not closing the session to early.</p>
+<p>But there are more hideous scenarios. Assume the classes Mom, Dad and Kid are mapped as one would expect, with references from Mom and Dad to Kid. Now consider the following piece of code:</p>
+<pre lang="java">
+Session session = openSession();<br />
+session.beginTransaction();</p>
+<p>Mom mom = (Mom) session.load(Mom.class, momId);<br />
+Kid momsKid = mom.getKid();</p>
+<p>&#47;&#47; dad comes by<br />
+Dad dad = (Dad) session.load(Dad.class, dadId);<br />
+Kid dadsKid = dad.getKid();</p>
+<p>&#47;&#47; and leaves<br />
+session.evict(dad);</p>
+<p>&#47;&#47; alas he has taken kido with him<br />
+momsKid.getName();<br />
+<&#47;pre><br />
+Depending on your exact Mapping you might get a <tt>LazyInitializationException<&#47;tt> in the last line, although the session is still open. The problem here is that when dad got evicted the kid got evicted as well. And since Mom has a reference to the exact same object, that object isn't attached to any session anymore. In order to see this effect you'll have to use mappings like this:</p>
+<pre lang="java">    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)<br />
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)<br />
+    private Kid kid;<br />
+<&#47;pre><br />
+The <tt>NonUniqueObjectException<&#47;tt> gets caused by what could be considered the reverse process. Examine the following piece of code:</p>
+<pre lang="java">
+        &#47;&#47; Dad left for another woman, I mean Session<br />
+        Dad dad = loadDad();</p>
+<p>        Session session = openSession();<br />
+        session.beginTransaction();</p>
+<p>        Mom mom = (Mom) session.load(Mom.class, momId);<br />
+        System.out.println(mom.getKid().getName());</p>
+<p>        &#47;&#47; Now dad wants to move back in<br />
+        session.saveOrUpdate(dad);<br />
+<&#47;pre><br />
+The first method call loads a <tt>Dad<&#47;tt> object including <tt>Kid<&#47;tt> from a different session. Then from the 'main' session <tt>Mom<&#47;tt> gets loaded including kid. When we attach the <tt>Dad<&#47;tt> object to the session it tries to attach its version of the <tt>Kid<&#47;tt> as well, which collides with the <tt>Kid<&#47;tt> already present in the session.</p>
+<p>So how can we avoid these kind of problem? I see several options:</p>
+<ul>
+<li>Don't use Cascade. Of course this means much more effort on your side in many cases, since you have to carefully track what you need to attach or evict from a session.<&#47;li>
+<li>Don't use <tt>evict<&#47;tt> and don't reattach existing instances to sessions. I guess this should work in many cases. But I have seen cases where this approach would have caused a large overhead, because reloading complex object graphs.<&#47;li>
+<li>Carefully design your cascading boundaries. A look at the Aggregate Root from <a href="http:&#47;&#47;www.amazon.de&#47;gp&#47;product&#47;0321125215?ie=UTF8&tag=schauderhafte-21&linkCode=as2&camp=1638&creative=19454&creativeASIN=0321125215">DDD<&#47;a> might help here. An Aggregate Root is a single class which works as a gate keeper (did anybody say facade) to a cluster of classes related to the Aggregate Root. When all the Hibernate related actions go against that Aggregate Root, and cascade from there to the content and only the content of the Aggregate Root you should be safe. All entities outside an Aggregate Root have to use the Aggregate Root or Repositories to gain access. This needs some bookkeeping. But when you do it properly it might actually improve the over all design of your code. Please note that all this is a thought experiment on my side, and I can't promise that it actually works as intended, but I think it should.<&#47;li><br />
+<&#47;ul><br />
+If you want the complete source code for the example, you can download this <a href="&#47;wp-content&#47;uploads&#47;2010&#47;07&#47;sources.zip">source.zip<&#47;a> file.</p>

@@ -1,0 +1,177 @@
+---
+layout: post
+status: publish
+published: true
+title: Named Parameters in Java
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1144
+wordpress_url: http://blog.schauderhaft.de/?p=1144
+date: '2012-07-29 23:03:09 +0200'
+date_gmt: '2012-07-29 21:03:09 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- dsl
+- Java
+- Named Parameters
+comments:
+- id: 7757
+  author: Julien Nicoulaud
+  author_email: julien.nicoulaud@gmail.com
+  author_url: http://www.twitter.com/nicoulaj
+  date: '2012-07-30 12:55:56 +0200'
+  date_gmt: '2012-07-30 10:55:56 +0200'
+  content: "What about performance ? In your example, you end up with:\r\n - 5 extra
+    object instances\r\n - 5 extra method calls for wrapping parameters\r\n - at least
+    5 extra method calls for unwrapping them\r\n\r\nYou better solve by using a good
+    IDE that displays the parameter name as you type it..."
+- id: 7758
+  author: Olexandr Demura
+  author_email: oleksander.demura@gmail.com
+  author_url: http://arumad.livejournal.com
+  date: '2012-07-30 15:30:57 +0200'
+  date_gmt: '2012-07-30 13:30:57 +0200'
+  content: "Reasonably popular approach.\r\nhttp:&#47;&#47;blog.joda.org&#47;2008&#47;11&#47;java-language-change-unique-identifier_1824.html\r\nOnly
+    drawback - too much objects;\r\nusually unnoticeable in enterprise environment.\r\n\r\nI
+    hope JEP-104 (JSR-305 + JSR-308) \"annotations everywhere\" is out;\r\nit will
+    teach us to solve it cheaper,\r\nin common way with (JSR-330 + JSR-299) \"CDI\":\r\n\r\nvoid
+    Obj#doSomething1(\r\n        @Name String,\r\n        @Url String,\r\n        int
+    x,\r\n        @Path String,\r\n        int);\r\n\r\no.doSomething1(\r\n        @Name
+    \"Alfred E. Neumann\", &#47;&#47;compile-time check\r\n        @Url \"http:&#47;&#47;blog.schauderhaft.de\",\r\n
+    \       42,\r\n        @Path \"c:\\\\temp\\\\x.txt\",\r\n        23);"
+- id: 7759
+  author: Geek Reading July 30, 2012 | Regular Geek
+  author_email: ''
+  author_url: http://regulargeek.com/2012/07/30/geek-reading-july-30-2012/
+  date: '2012-07-30 17:58:03 +0200'
+  date_gmt: '2012-07-30 15:58:03 +0200'
+  content: "[...] Named Parameters in Java (Schauderhaft) [...]"
+- id: 7760
+  author: Jens Th
+  author_email: jens.thielscher@gmail.com
+  author_url: ''
+  date: '2012-07-30 18:36:56 +0200'
+  date_gmt: '2012-07-30 16:36:56 +0200'
+  content: "interesting! i like this little dsl ;-)\r\n\r\n@julien: it's always the
+    same... how much performance impact has this design? it depends on the project.
+    performance can be problem, but maintenance is more important."
+- id: 7762
+  author: Angelo
+  author_email: angelo.veltens@online.de
+  author_url: http://datenwissen.de
+  date: '2012-07-30 21:34:16 +0200'
+  date_gmt: '2012-07-30 19:34:16 +0200'
+  content: I agree that named parameters are nice to have. But in your example and
+    i guess most methods like that, I think the real problem is not the absence of
+    named parameters. The problem is, that there are _too many_ parameters, e.g. because
+    the method does too many things. Clearly named methods, that follow the single
+    responsibility principle taking 0 to 2 parameters, usually are fine without named
+    parameters.
+- id: 7763
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-07-30 21:56:07 +0200'
+  date_gmt: '2012-07-30 19:56:07 +0200'
+  content: "Yes and no.\r\n\r\nI agree: there is probably a concept hiding behind
+    all these strings, that needs to get out.\r\n\r\nBut: It is often not at all clear
+    what that concept might be. Or introducing the concept might trigger a huge refactoring
+    not possible and that point in time. Such 'named parameter' are one more option
+    to move in a good direction. \r\n\r\nIf their usage 'leaks' further they might
+    actually evolve into such concepts."
+- id: 7772
+  author: Frisian
+  author_email: no.no@no.no
+  author_url: ''
+  date: '2012-07-31 09:26:15 +0200'
+  date_gmt: '2012-07-31 07:26:15 +0200'
+  content: "A method with five arguments. Yikes! Put the arguments into a class of
+    its own and use a fluent interface, like so:\r\n\r\no.doSomething(MyArguments.start().name(\"Alfred
+    E. Neumann\").\r\n    link(\"http:&#47;&#47;blog.schauderhaft.de\").\r\n    ultimateAnswer(42).\r\n
+    \   tempFile(\"c:\\\\temp\\\\x.txt\").\r\n    zip(23).end());\r\n\r\n\r\nUsing
+    a value class for concepts like name or link is of course still recommended. The
+    code in the builder class for MyArguments could look like this:\r\n\r\npublic
+    MyArguments.Builder name(String name) {\r\n  this.name = new Name(name);\r\n  return
+    this;\r\n}"
+- id: 7773
+  author: han
+  author_email: han@sidlr.com
+  author_url: ''
+  date: '2012-07-31 10:51:52 +0200'
+  date_gmt: '2012-07-31 08:51:52 +0200'
+  content: "usually named parameters usually means you need not preserve the order\r\n\r\nyou
+    can't doSomething2 ( link(\"www.yahoo.com\", name(\"ass\") )\r\ne.g."
+- id: 7853
+  author: JP
+  author_email: javin.paul@yahoo.com
+  author_url: ''
+  date: '2012-08-10 17:23:47 +0200'
+  date_gmt: '2012-08-10 15:23:47 +0200'
+  content: "<a href=\"http:&#47;&#47;goo.gl&#47;NkAhE\" rel=\"nofollow\">Builder pattern
+    in java<&#47;a> is preferred way of solving it like object.\r\n\r\nsetName(\"Alfred
+    E. Neumann\") .setLink(\"http:&#47;&#47;blog.schauderhaft.de) .setUltimateAnswer(42)
+    .setTempFile(\"c:\\\\temp\\\\x.txt\") .setZip(23);"
+---
+<p>I lately came across some code that looked like this:</p>
+<pre lang="java">
+o.doSomething1(<br />
+    "Alfred E. Neumann",<br />
+    "http:&#47;&#47;blog.schauderhaft.de",<br />
+    42,<br />
+    "c:\\temp\\x.txt",<br />
+    23);<br />
+<&#47;pre></p>
+<p>Things were actually worse since there where about 20 or 30 such calls and there was no hint what so ever to the difference in meaning of the various literals. </p>
+<p>Why is so bad? The problem here is that a user of the method <tt>doSomething1<&#47;tt> might accidently call it with</p>
+<pre lang="java">
+o.doSomething1(<br />
+    "Alfred E. Neumann",<br />
+    "c:\\temp\\x.txt",<br />
+    42,<br />
+    "http:&#47;&#47;blog.schauderhaft.de",<br />
+    23);<br />
+<&#47;pre></p>
+<p>There is no hint that something went wrong. It will compile. And if you are lucky it will blow up once the call executes. But maybe the application will just behave really strange. </p>
+<p>Some languages have a feature called <em>named parameters<&#47;em> that allows a syntax like this:</p>
+<pre lang="java">
+o.doSomething(<br />
+    name = "Alfred E. Neumann",<br />
+    link = "http:&#47;&#47;blog.schauderhaft.de",<br />
+    ultimateAnswer = 42,<br />
+    tempFile = "c:\\temp\\x.txt",<br />
+    zip = 23);<br />
+<&#47;pre></p>
+<p>Unfortunately Java is not among these languages. But as so often we can trick Java into actually helping us if we are willing to invest in some extra typing. </p>
+<p>How about this?</p>
+<pre lang="java">
+o.doSomething2(<br />
+    name("Alfred E. Neumann"),<br />
+    link("http:&#47;&#47;blog.schauderhaft.de"),<br />
+    ultimateAnswer(42),<br />
+    tempFile("c:\\temp\\x.txt"),<br />
+    zip(23));<br />
+<&#47;pre></p>
+<p>It works like this: For every parameter there is a little class:</p>
+<pre lang="java">
+public class Name {<br />
+    public final String name;<br />
+    public Name(String n) {<br />
+        name = n;<br />
+    }<br />
+}<br />
+<&#47;pre></p>
+<p>And a static method:</p>
+<pre lang="java">
+static Name name(String n) {<br />
+    return new Name(n);<br />
+}<br />
+<&#47;pre></p>
+<p>While this is a lot of typing, it gives you some type safety and the equivalence of named parameters. It might also be the first step toward value objects in your code, after all, when you have these values wrapped, why would you unwrap them before you have to? In that case you should implement <tt>hashcode<&#47;tt> and <tt>equals<&#47;tt>. </p>
+<p>There are alternative ways to get similar effects. We'll look at tehm in another blog post.</p>

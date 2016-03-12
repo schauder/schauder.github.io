@@ -1,0 +1,6 @@
+ruby -rubygems -e 'require "jekyll-import"; JekyllImport:: Importers::WordPress.run({
+"dname"      => "usr_web929_1",
+"user"       => "web929",
+"host"       => "server105.greatnet.de",
+"password" => "cymry807"
+})'

@@ -1,0 +1,43 @@
+---
+layout: post
+status: publish
+published: true
+title: Quo Vadis JUnit
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1472
+wordpress_url: http://blog.schauderhaft.de/?p=1472
+date: '2014-10-26 10:06:53 +0100'
+date_gmt: '2014-10-26 08:06:53 +0100'
+categories:
+- Softwaredevelopment
+tags:
+- junit
+- java5
+comments: []
+---
+<p>For me <a href="http:&#47;&#47;junit.org&#47;">JUnit<&#47;a> is the most important library of the Java universe. But I think a new version of it is overdue. With it's approach of having a method definition as a test definition JUnit is mighty inflexible and needs various hacks ... sorry features, to do what you really should be able to do with basic (Java 8) language features.</p>
+<p>If you aren't sure, what I'm talking about, check out this <a href="http:&#47;&#47;blog.schauderhaft.de&#47;2011&#47;08&#47;28&#47;manipulating-test-execution-with-scalatest&#47;">article about ScalaTest<&#47;a>. Something like this should be the standard for JUnit.</p>
+<p>Of course you can implement your own TestRunner to get something like this going. But there are already many important TestRunners (<a href="http:&#47;&#47;docs.spring.io&#47;spring&#47;docs&#47;current&#47;javadoc-api&#47;org&#47;springframework&#47;test&#47;context&#47;junit4&#47;SpringJUnit4ClassRunner.html">SpringJUnit4ClassRunner<&#47;a> anyone?) and they have the huge drawback that you can have only one of them.</p>
+<p>Another alternative would be to just say good-bye to JUnit and use a different Testframework. But all these other Testframeworks don't have the support from third-party tools that JUnit has, so I'd really prefer JUnit to evolve, instead of it being replaced by something else.</p>
+<p>I was thinking about these issues for quite some time and actually brought them up on the <a href="https:&#47;&#47;groups.yahoo.com&#47;neo&#47;groups&#47;junit&#47;conversations&#47;messages&#47;24156">JUnit mailing list<&#47;a>, with lots of interesting feedback, but nothing happened. So when I met <a href="https:&#47;&#47;github.com&#47;marcphilipp">Marc<&#47;a>, one of the JUnit committers at the <a href="http:&#47;&#47;www.xpdays.de&#47;2014&#47;">XP-Days<&#47;a> we started to discuss the situation, joined by <a href="https:&#47;&#47;github.com&#47;stefanbirkner">Stefan<&#47;a>, another JUnit committer and various XP-Days participants.</p>
+<p>And as so often nothing is as easy as it seems. JUnit is a very successful library, but it also doesn't offer all the features people want or need. This has the effect that people use JUnit in all kinds of weird ways, which makes it really hard to evolve. E.g. Marc and Stefan told a story about the latest version of JUnit where they learned that a certain IDE uses reflection on private fields of JUnit, resulting in a "Bug" when the name of that field was changed.</p>
+<p>Therefore it seems, before one can make a change as big as a different default TestRunner, one has to revamp JUnit.</p>
+<p>I envision something like the following:</p>
+<ul>
+<li>gather the various features that others bolted onto JUnit, that probably should be part of JUnit itself.<br />
+<&#47;li>
+<li>provide a clean, supported API for those<br />
+<&#47;li>
+<li>apply gentle pressure and time for third parties to switch to the new APIs<br />
+<&#47;li>
+<li>behind that API provide a new more flexible way to create tests<br />
+<&#47;li>
+<li>profit<&#47;li><&#47;ul></p>
+<p>And since JUnit is an open source project and all developers seem to work only in their private time on it, we started right there at the XP-Days gathering stuff that needs consideration. I put the results in a <a href="https:&#47;&#47;github.com&#47;junit-team&#47;junit&#47;wiki&#47;Quo-Vadis-JUnit">wiki page in the JUnit github repository<&#47;a>. Get over there and see if you can add something.</p>

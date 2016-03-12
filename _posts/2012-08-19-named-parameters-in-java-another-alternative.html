@@ -1,0 +1,67 @@
+---
+layout: post
+status: publish
+published: true
+title: Named Parameters in Java another Alternative
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1152
+wordpress_url: http://blog.schauderhaft.de/?p=1152
+date: '2012-08-19 08:15:36 +0200'
+date_gmt: '2012-08-19 06:15:36 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- dsl
+- Java
+comments:
+- id: 8082
+  author: David Tanzer
+  author_email: business@davidtanzer.net
+  author_url: http://davidtanzer.net
+  date: '2012-09-02 08:29:31 +0200'
+  date_gmt: '2012-09-02 06:29:31 +0200'
+  content: "Also note that anonymous subclasses with static initializers can break
+    \"equals\" in some cases (although this is quite unlikely in the ParameterObject
+    scenario): Some implementation of \"equals\" check for class equality (not instanceof),
+    like\r\n\r\nif(this.getClass() == other.getClass())\r\n\r\nAnd maybe yet another
+    drawback: You can just leave out initializing parameters to pass \"null\" values.
+    This might be confusing because the method call looks different every time. OTOH,
+    developers should be used to different parameter lists."
+---
+<p>I wrote before about how you can emulate named parameters in a Java, either <a href="&#47;2012&#47;07&#47;29&#47;named-parameters-in-java&#47;">using methods<&#47;a> or a <a href="&#47;2012&#47;08&#47;05&#47;named-parameters-in-java-an-alternative&#47;">builder<&#47;a>. There is another approach, which already got <a href="&#47;2012&#47;08&#47;05&#47;named-parameters-in-java-an-alternative&#47;comment-page-1&#47;#comment-7869">mentioned in the comments<&#47;a>.</p>
+<p>On the usage side it looks like this:</p>
+<pre lang="java">
+    doSomething4(new ParameterObject() {{<br />
+        name = "Alfred E. Neumann";<br />
+        link = "http:&#47;&#47;blog.schauderhaft.de";<br />
+        ultimateAnswer = 42;<br />
+        tempFile = "c:\\temp\\x.txt";<br />
+        zip = 23;<br />
+    }});<br />
+<&#47;pre></p>
+<p>I find this solution interesting, because it looks seriously weird. At least it did to me when I saw it for the first time, and also to many others who I observed when they encountered it for the first time. So what the heck are we exactly looking at?</p>
+<pre lang="java">
+    doSomething4(new ParameterObject() {<br />
+	&#47;&#47;...<br />
+	});<br />
+<&#47;pre></p>
+<p>Is an anonymous subclass of <tt>ParameterObject<&#47;tt>, which is defined like this</p>
+<pre lang="java">
+    class ParameterObject {<br />
+        protected String name;<br />
+        protected String link;<br />
+        protected int ultimateAnswer;<br />
+        protected String tempFile;<br />
+        protected int zip;<br />
+    }<br />
+<&#47;pre></p>
+<p>so it is just a bunch of fields. The part that throws many people of is the nested set of {...} it is a java feature that doesn't get much usage: an <a href="http:&#47;&#47;docs.oracle.com&#47;javase&#47;specs&#47;jls&#47;se7&#47;html&#47;jls-8.html#jls-8.6">initializer<&#47;a>. It is similar to a constructor, but can't take any arguments. It gets executed before any constructor and in this case just sets the fields of the <tt>ParameterObject<&#47;tt> to the desired values.</p>
+<p>Appart from the "WTF is this?" effect I don't find much good things about this approach, especially because it is so confusing for many people. It saves a little typing on the implementor side of the interface I guess, but then you have this <tt>new WhatEverStuff()<&#47;tt> on the client side, which doesn't help readability much.</p>
+<p>Initializers and their siblings <a href="http:&#47;&#47;docs.oracle.com&#47;javase&#47;specs&#47;jls&#47;se7&#47;html&#47;jls-8.html#jls-8.7">static intializers<&#47;a> do belong in the toolbox of every java developer though.</p>

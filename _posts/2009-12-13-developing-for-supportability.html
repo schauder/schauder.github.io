@@ -1,0 +1,59 @@
+---
+layout: post
+status: publish
+published: true
+title: Developing for Supportability
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 347
+wordpress_url: http://blog.schauderhaft.de/?p=347
+date: '2009-12-13 10:42:17 +0100'
+date_gmt: '2009-12-13 08:42:17 +0100'
+categories:
+- Softwaredevelopment
+tags:
+- software development
+- supportability
+comments:
+- id: 329
+  author: Tweets die Schauderhaft &Acirc;&raquo; Developing for Supportability erw&Atilde;&curren;hnt
+    -- Topsy.com
+  author_email: ''
+  author_url: http://topsy.com/tb/blog.schauderhaft.de/2009/12/13/developing-for-supportability/
+  date: '2009-12-13 13:21:16 +0100'
+  date_gmt: '2009-12-13 11:21:16 +0100'
+  content: "[...] Dieser Eintrag wurde auf Twitter von Jens Schauder, Benjamin Winterberg
+    erw&Atilde;&curren;hnt. Benjamin Winterberg sagte: RT @jensschauder: New blog
+    post: Developing for Supportability http:&#47;&#47;blog.schauderhaft.de&#47;2009&#47;12&#47;13&#47;developing-for-supportability&#47;
+    [...]"
+- id: 330
+  author: DingensBummens | Das Ding was Bummst &raquo; My Google Reader Shared Items
+    &#8211; Sunday, December 13, 2009
+  author_email: ''
+  author_url: http://www.dingensbummens.de/2009/12/13/my-google-reader-shared-items-sunday-december-13-2009/
+  date: '2009-12-13 19:00:43 +0100'
+  date_gmt: '2009-12-13 17:00:43 +0100'
+  content: "[...] Developing for Supportability [...]"
+---
+<p>[caption id="attachment_349" align="alignleft" width="225" caption="Support beams and wires of  a bridge"]<a href="http:&#47;&#47;www.sxc.hu&#47;photo&#47;830816"><img class="size-medium wp-image-349" title="830816_70304776" src="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2009&#47;12&#47;830816_70304776-225x300.jpg" alt="Support beams and wires of  a bridge" width="225" height="300" &#47;><&#47;a>[&#47;caption]</p>
+<p>When reading the specification of a piece of software to be written, you are bound to find some non functional requirements. Among these there will be, or at least should be <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Serviceability_%28computer%29">Supportability<&#47;a>. But what the heck does that mean? How do you install supportability? Let me present some ideas, what you can do to improve supportability.</p>
+<p>Let your application <strong><a href="&#47;2009&#47;09&#47;16&#47;good-logging-practices&#47;">log in a well defined reliable way<&#47;a><&#47;strong>, to a location that is easily accessible. Flatfiles on a server qualify. If you must log on a client, consider implementing a way to automatically transfer the log file to a support person. If you log into a database, make sure the support person can access it easily.</p>
+<p><strong>Make your application easy to shut down and start<&#47;strong>. This sounds trivial, but it is easy to break this ability. Considere the following check list:</p>
+<ul>
+<li>What happens when you start two different versions of your application against the same database? A nicely supportable application should notice this and react accordingly.<&#47;li>
+<li>What happens when you stop your application while it is processing a request?<&#47;li>
+<li>If you have batches or batchlike processes, what will happen with those when you try to stop your application while the batch runs? Do you have the 5hours, until the batch finishes? Or will the batch stop and rollback, so you have to wait an hour for the rollback to happen? Or will it stop nicely within a minute, and pick up its work automatically after restart?<&#47;li>
+<li>Are you stuffing stuff into a database or a queue? What happens when the queue or the database gets started after the application?<&#47;li>
+<li>Do you receive messages from a queue? What happens when the first message arrives, before your application is available? What does happen when you receive a message that you already processed? What does happen when you receive a message for which you already processed a later message?<&#47;li>
+<li>How long does it take to shutdown and restart an instance of your application when it is under full load? If this takes more then a few minutes, is it possible to stop and restart only parts of your application?<&#47;li><br />
+<&#47;ul><br />
+<strong>Make the <&#47;strong><strong>state of your application <&#47;strong>visible for support personnel. Most applications just report arbitrary errors when a component of the system is down. It's up to the supporters to guess if it is the database, a queue, a webservice or the application itself which is causing the problem. Identify the resources your application depend on. Write a check which tests all these resources, and make this check available, for example as a special health check webpage.</p>
+<p><strong>Put components that are likely to fail behind some kind of buffer.<&#47;strong> Your database might be so important for the application that this doesn't work for it. But if you are posting stuff to a queue (or webservice or ...), consider using a local queue as a buffer, so your application can work as usual even when the target queue isn't available.</p>
+<p>Last but not least: <strong>Document your application<&#47;strong>. The agile manifest says that working software is more important then documentation. It doesn't say you don't need documentation. And I'd say the documentation for servicing your application might be the most important one. The normal user who uses your application everyday will figure out a way to get along. If not he will call you or your boss. But the poor support person has to support dozens of the applications and since your application just works he'll encounter it only a few times a year. He will know nothing about it except the stuff documented in the manual. So make sure there are instructions on how to interpret the logs, how to shutdown and restart the application, how to analyze the internal state of the application and what happens when some connected component fails.</p>
+<p>Have you noticed something? The vague non functional requirement 'supportability' turned into a nice set of very functional requirements. You can attach a price to that, decide what pieces of it you'll really need and measure if it really works. And I claim this works with all the much hated non functional requirements.</p>

@@ -1,0 +1,139 @@
+---
+layout: post
+status: publish
+published: true
+title: The second D in TDD
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 990
+wordpress_url: http://blog.schauderhaft.de/?p=990
+date: '2011-12-25 14:14:51 +0100'
+date_gmt: '2011-12-25 12:14:51 +0100'
+categories:
+- Softwaredevelopment
+tags:
+- agile
+- testing
+- design
+- TDD
+- development
+comments:
+- id: 4666
+  author: Ralf Westphal
+  author_email: info@ralfw.de
+  author_url: http://ralfw.blogspot.com
+  date: '2011-12-26 17:04:08 +0100'
+  date_gmt: '2011-12-26 15:04:08 +0100'
+  content: "+1 TDD hinges on a T and (!) a D.\r\n\r\nIt&Acirc;&acute;s about Tests.
+    So you need to come up with good tests in a nicely prioritized way. Unfortunately
+    this requires you to understand the problem first. Otherwise you don&Acirc;&acute;t
+    know what \"good\" tests are, i.e. as many as necessary, but as few as possible.
+    What are the equivalence classes?\r\n\r\nAnd it&Acirc;&acute;s about Design. But
+    design comes not from tests. And good design is not just testability. Especially
+    since TDD does not lead to unit tests, but just to integration tests. So you need
+    to have an idea of what the design should look like. Refactoring needs a goal.
+    This is the hardest part - and TDD says nothing about it. The D of TDD, the design,
+    is happening during refactoring - which is opaque to TDD.\r\n\r\nNothing much
+    is won by TDD except for small steps towards a solution and high test coverage.
+    Design does not come from TDD. It comes from an understanding of the problem and
+    a design idea. And the design idea comes from a paradigm and principles - which
+    are not part of TDD."
+- id: 4751
+  author: Tristan
+  author_email: twem2@eridu.org.uk
+  author_url: ''
+  date: '2012-01-11 10:16:02 +0100'
+  date_gmt: '2012-01-11 08:16:02 +0100'
+  content: "<i>Can your domain model represent all the cases needed by the business?<&#47;i>\r\n\r\nTDD
+    can tell you this (or at least that your software represents all the cases you&#47;your
+    customer has thought of). You just have to have the higher level specification
+    tests as well as the unit tests.\r\n\r\n Aside from that you are correct, but
+    I don't know of anyone who really claims otherwise and it does not detract from
+    TDD in any way. TDD should actually help in these situations by ensuring when
+    you inevitably backtrack and go down a different route things still work...\r\n\r\nPersonally
+    I think the T should be an S - the tests are really part of the specification
+    (the rest being the rest of the source code)."
+- id: 4826
+  author: hastur
+  author_email: haihastur@yahoo.fr
+  author_url: ''
+  date: '2012-01-18 11:20:40 +0100'
+  date_gmt: '2012-01-18 09:20:40 +0100'
+  content: "well, I think the whole TDD concept include refactoring, and while TDD
+    won't do your design by itself, building tests should make refactoring (more)
+    painless.\r\n\r\nrefactoring your code implies changing your design, to cope with
+    new specifications, or because you just thought of something better.\r\n\r\nTDD
+    isn't about getting your design right the first time, every time. it's about lowering
+    the cost of changing your design.\r\n\r\nmaybe there are people who work in good
+    written (sensible) code bases, and have enough experience to choose a good design
+    95% of the time, for the next ten years of the product life - well for these people
+    TDD must seem trivial.\r\n\r\nas for me, I work in dirty, messy, uselessly intricated
+    code every single day, so the \"simple\" benefits of a good API and SOLID principles
+    are a huge step forward in design. And since I never seem to get the right design
+    to handle the new specification my boss will throw on me in 2 years time, the
+    ability to change internal design with confidence is priceless.\r\n\r\nI could
+    rephrase Test Driven Design as \"Test Driven Programing Common Sense\" + \"Test
+    Assisted ReDesign After I Mess The Initial Design Or My Boss Change The Goals
+    Of The Product\". TDD is much shorter (but somewhat lacking in clarity).\r\n\r\nIf
+    you have any solution to learn to design good code from the start, aside from
+    reading a lot of code and learning from your own experience, now that could be
+    interesting."
+- id: 6742
+  author: Arialdo Martini
+  author_email: arialdomartini@gmail.com
+  author_url: http://arialdomartini.wordpress.com
+  date: '2012-06-10 12:48:10 +0200'
+  date_gmt: '2012-06-10 10:48:10 +0200'
+  content: "I believe the secret of TDD is in the most neglected of its three phases
+    (red, green, refactor) refactor\r\n\r\nActually, you are right: TDD tells ou nothing
+    about how to best represent your domain model, or how to simplify a complete but
+    awfully complex solution. You are right: TDD won&acirc;&euro;&trade;t tell you.\r\n\r\nTDD
+    just forces you to use SOLID principle. Hence, it leads you to an architecture
+    which probably is not the best one, but surely is very cheap to change. That is:
+    to refactor.\r\n\r\nOnce you have setup your *working* solution with TDD you can
+    safely and easily change it in order to obtain the things you listed above.\r\n\r\nTDD
+    gives you the ability of building a very safe and solid scaffold, and the safety
+    net that allow you to change it.\r\n\r\nI appreciate your point of view. It's
+    inspiring. But I'm not sure it's sharable. TDD is not just a matter of \"let's
+    the tests get green\". It is indeed a tool to allow a safe and continuous refactoring."
+- id: 6744
+  author: Ralf Westphal
+  author_email: info@ralfw.de
+  author_url: http://ralfw.blogspot.com
+  date: '2012-06-10 13:53:37 +0200'
+  date_gmt: '2012-06-10 11:53:37 +0200'
+  content: "@Arialdo: I beg to disagree. TDD does not force you to use any principle.
+    TDD is defined by a) writing test first, and b) doing the in the way red-green-refactor.
+    That&Acirc;&acute;s it. red and green are pretty easy. But refactor is not. Refactor
+    just means: tidy up your code structure. TDD only \"forces\" you to pause in your
+    development effort. But how you actually put this pause to use, is not part of
+    TDD. Maybe you apply one of the SOLID principles. Maybe not. Maybe you don&Acirc;&acute;t
+    even know them.\r\n\r\nTDD is no magical method. It&Acirc;&acute;s an approach
+    to produce code with high test coverage - if that&Acirc;&acute;s what you&Acirc;&acute;re
+    striving for. But test coverage has no value in and of itself. It&Acirc;&acute;s
+    just a means to an end. This end is \"peace of mind\" :-) What you want is peace
+    of mind in the face of changing your code base. You don&Acirc;&acute;t want to
+    be in constant fear if one of your changes will cause anything to break.\r\n\r\nSo
+    if I can reach \"peace of mind\" by some other method&#47;tool&#47;technique,
+    I won&Acirc;&acute;t need TDD. This is to put TDD in perspective. It&Acirc;&acute;s
+    no silver bullet. It should not be treated as a dogma. It&Acirc;&acute;s just
+    one of many tools."
+---
+<p>Some proponents of TDD say, that TDD forces you to find a good design. Some even translate TDD to Test Driven Design. I don't agree. Mostly.</p>
+<p>Lets start with the small part where I do agree.</p>
+<p>Since TDD forces you to write test first, it forces you to think about how you want to use an API, because that is the very first thing you write down. This is a good thing and in my case led to more usable APIs (often in the form of Builders or little internal DSLs).</p>
+<p>Since it is almost insane to test anything if it isn't properly decoupled from stuff it uses, TDD also forces you to factor out dependencies in order to be able to mock them. Thats the other point where TDD encourages good design.</p>
+<p>But there are bad news: There is more to software design than just nice to use APIs and SOLID principles: Your design actually has to solve a problem! And TDD does almost nothing for you in order to find a good solution for your problem. Yet this is really the hard part in software design.</p>
+<p>Can your domain model represent all the cases needed by the business? TDD won't tell you.</p>
+<p>Should represent some edge cases of the domain in a 'dirty' way and thereby making the domain model simpler and therefor 99% of the use cases way easier? Or should you go for the complete but awfully complex solution? TDD won't tell you.</p>
+<p>Which of all the design patterns would help you? Or is there some well known algorithm you could use to solve your problem? TDD won't tell you.</p>
+<p>Does the problem become trivial once you approach it in a functional way? TDD won't tell you.</p>
+<p>Is recursion a solution or a dead end? TDD won't tell you.</p>
+<p>You have to understand the problem and know lots of possible approaches to a problem in order to design software well. There is just no way around it.</p>
+<p>Once you have the solution in your mind, once you know the basic data structures and algorithm you going to use, TDD will help you to implement it in a clean, well factored way. It will also help you to stay focused on the task at hand (which is making the next test green).</p>

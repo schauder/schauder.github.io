@@ -1,0 +1,31 @@
+<p>The Purpose of Documentation</p>
+<p>When it comes to documentation the Agile Manifesto says:</p>
+<blockquote><p>We have come to value working software over comprehensive documentation<&#47;blockquote><br />
+And I agree. If you can choose between working software and documentation I choose the software any time. But as many noticed before me people seem to read the quote above as</p>
+<blockquote><p>We don't value comprehensive documentation<&#47;blockquote><br />
+In other cases there is documentation that doesn't seem to add much value:</p>
+<p>Oliver Gierke mentions in his talk <a href="http:&#47;&#47;youtu.be&#47;tEm0USdF-70">"Whoops! Where did my architecture go?"<&#47;a> architecture documentation that makes you think: How did the documentation of THAT system end up in the documentation of THIS system?</p>
+<p>Markus G&Atilde;&curren;rtner talks about process documentation that doesn't fit the process that actually exists. He even comes to the realization that it can't fit reality, because reality is to complex. Markus also has a great quote relating to documentation that doesn't match reality from the Swiss Army :</p>
+<blockquote><p>When the map and the territory don&acirc;&euro;&trade;t agree, always believe the territory.<&#47;blockquote><br />
+But the Swiss Army still uses maps, I guess? Why?</p>
+<p>So here is my list of why you might want to have (or create) a map, although it will disagree with the territory.</p>
+<p><strong>Guide for the New<&#47;strong></p>
+<p>You probably don't need a map for the area you live in. You know all the streets and paths you need. You even know about the little shortcuts that no map knows about. But if you stay in a hotel in an area unknown to you a map is extremely helpful to find your way around. The same applies to your system. The developers working with the system probably know the important parts by heart, but a new developer will be thankful if there is some kind of map leading him around. Of course a human guide is often better, but a guide is costly and not always available. So a map is of great value in this scenario, even though he map will disagree with the territory, because it will always be a little outdated and it will simplify things.</p>
+<p><strong>10 000 feet perspective<&#47;strong></p>
+<p>Even when you know the territory pretty well it is sometimes not easy to identify the shortest, fastest or savest path between 2 points. A map can help with that.</p>
+<p><strong>A plan for what the territory should look like<&#47;strong></p>
+<p>When a map and the territory disagree, this is might be because the map is outdated or plain wrong, but maybe it describes the territory how it should look like in the future? In landscaping and in software development we actively change the environment. When many people work have to work together for this it certainly helps to have some kind of plan.</p>
+<p><strong>An explanation why the territory looks like it does<&#47;strong></p>
+<p>Sometimes you come across features of the landscape and it is not at all clear <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Cairn">why this feature exists<&#47;a>. An annotated map can clarify if this is just garbage waiting for to be removed, is it there just because it was fun to create it? Or is it actually important?</p>
+<p>So maps (and documentation in software development projects) do serve some purpose. But why do they get such a bad press? And how can you change that?</p>
+<p><strong>Clarify the intended purpose<&#47;strong></p>
+<p>If you try to navigate using a map that describes how the territory should look like in a year from now you are asking for trouble. The same applies if you use an overview map in order to understand the purpose of some tiny detail. When creating documentation, ask yourself what problem you want to solve with it. Make it clear in the document what problem the document should solve, and finally solve that problem in the document.</p>
+<p><strong>Keep documents current<&#47;strong></p>
+<p>Outdated documents are only interesting for archaeologists and historians. Both are rare in software development projects. &Acirc;&nbsp;When creating documentation always consider how you will ensure that it is kept updated. Maybe you add it as a point to your Definition of Done, maybe you schedule some time in regular intervals. Prefer ways of documentation that are easy to update. A wiki is great, code as documentation is even better. If you have a lengthy process to approve changes to the documentation you can rest assured that nobody will update it if he isn't forced to.</p>
+<p><strong>Use your documentation<&#47;strong></p>
+<p>If not used documentation is obvious useless. If you don't use your documentation yourself. Why do you think anybody else will? Using your documentation will make you realize problems with it so you can fix them.</p>
+<p><strong>Make it easily accessible<&#47;strong></p>
+<p>Some documentation is stored like <a href="http:&#47;&#47;www.clivebanks.co.uk&#47;THHGTTG&#47;THHGTTGradio1.htm">the plans to demolish Athur Dents house<&#47;a>: They are on display in the planning office, where nobody goes anyway, in the cellar without light nor stairs, locked in a file cabinet in a disused lavatory.</p>
+<p>If there is documentation (or significant updates to documentation) tell everybody about it. Then print it out and stick it to the office walls. Put a link to it on a place where everybody involved will see it (like on the main page of your CI server). Make sure there is an easy way to get updated about changes (like notification mails or RSS feeds).</p>
+<p><strong>Don't confuse the tool and the purpose<&#47;strong></p>
+<p>Documentation is a tool for creating a mutual understanding and should only be created when it actually helps doing that. Documentation is not an aim in itself. </p>

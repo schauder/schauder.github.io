@@ -1,0 +1,19 @@
+<p>I can't help repeating myself: <a href="&#47;2011&#47;07&#47;24&#47;rules-in-junit-4-9-beta-3&#47;">JUnit Rules<&#47;a> are among the best, maybe the best, feature of JUnit. I even gave a talk at <a href="http:&#47;&#47;www.devoxx.com&#47;display&#47;DV12&#47;JUnit+Rules">Devoxx about Junit Rules<&#47;a>. </p>
+<p>The great thing about Rules compared to other options to solve similar problems like TestRunners or common super classes is that you can combine multiple Rules. One favorite example why you want to do this are <a href="https:&#47;&#47;github.com&#47;KentBeck&#47;junit&#47;wiki&#47;Parameterized-tests">Parameterized Tests<&#47;a> they are nice, but what if you want to parameterize Tests build on the base of the <a href="http:&#47;&#47;static.springsource.org&#47;spring&#47;docs&#47;3.0.x&#47;javadoc-api&#47;org&#47;springframework&#47;test&#47;context&#47;junit4&#47;SpringJUnit4ClassRunner.html">Spring JUnit Test Runner<&#47;a>. It doesn't work, because you can have only one Test Runner.</p>
+<p>The problem with this example is: There aren't replacements (as far as I know) for the two runners with Rules. The Spring Runner should be replaceable in principle, but it seems to be <a href="https:&#47;&#47;jira.springsource.org&#47;browse&#47;SPR-7731">not as easy as one might think<&#47;a>.</p>
+<p>But when I was preparing my Devoxx talk it occurred to me that you can actually do Parameterized Tests using Rules! And I think the usage is actually more intuitive then Parameterized tests with its custom annotations and stuff. </p>
+<p>It looks like this:</p>
+<pre lang="java">
+public class SimpleExampleTest {</p>
+<p>    @Rule<br />
+    public Generator<String> params =<br />
+        new ListGenerator(asList("alpha", "beta", "gamma"));</p>
+<p>    @Test<br />
+    public void testSomething() throws Exception {<br />
+        assertTrue(params.value().length() >= 4);<br />
+    }<br />
+}<br />
+<&#47;pre></p>
+<p>You just specify a <tt>ListGenerator<&#47;tt> rule, with all the values you want to run your tests with. Each test in the class gets executed once for each parameter value provided, and it can access the parameter value using the <tt>value()<&#47;tt> method of the rule. I think with the current feature set available for Java and JUnit it doesn't get much easier to read and write.</p>
+<p>The rule itself uses an <a href="http:&#47;&#47;kentbeck.github.com&#47;junit&#47;javadoc&#47;4.10&#47;org&#47;junit&#47;rules&#47;ErrorCollector.html">ErrorCollector<&#47;a> to gather test failures so if tests fail you'll see all the failures not just the last one or something.</p>
+<p>The code for <a href="https:&#47;&#47;github.com&#47;schauder&#47;parameterizedTestsWithRules">Parameterized JUnit Tests with Rules is available at GitHub<&#47;a>. Just keep in mind, it is an experiment and demonstration of concept I hacked together at Devoxx.</p>

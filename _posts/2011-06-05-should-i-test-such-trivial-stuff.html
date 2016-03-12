@@ -1,0 +1,72 @@
+---
+layout: post
+status: publish
+published: true
+title: Should I Test such Trivial Stuff?
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 813
+wordpress_url: http://blog.schauderhaft.de/?p=813
+date: '2011-06-05 21:22:05 +0200'
+date_gmt: '2011-06-05 19:22:05 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- testing
+- coverage
+comments:
+- id: 3713
+  author: Steffen F&Atilde;&para;rster
+  author_email: box.steffen.foerster@gmx.ch
+  author_url: ''
+  date: '2011-06-06 20:45:58 +0200'
+  date_gmt: '2011-06-06 18:45:58 +0200'
+  content: What kind of testing method do you use to test a Swing-GUI? Do you know
+    a good tool or framework to create black-box tests for Swing applications?
+- id: 3714
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2011-06-06 23:47:37 +0200'
+  date_gmt: '2011-06-06 21:47:37 +0200'
+  content: "I have used  <a href=\"http:&#47;&#47;abbot.sourceforge.net&#47;doc&#47;overview.shtml\"
+    rel=\"nofollow\"> Abbot<&#47;a> a long time ago. But I strongly recommend to build
+    your app in a way, that you can test right below the GUI.\r\n\r\nEverything else
+    is lots of work for not much gain."
+- id: 3716
+  author: Bryan
+  author_email: bryan.deter@gmail.com
+  author_url: ''
+  date: '2011-06-07 18:49:41 +0200'
+  date_gmt: '2011-06-07 16:49:41 +0200'
+  content: I would use <a href="http:&#47;&#47;code.google.com&#47;p&#47;fest&#47;"
+    rel="nofollow">Fest<&#47;a>.  It made the GUI testing I've done fairly easy.  I'm
+    in agreement on Jens though, with keeping the core of the code outside of the
+    GUI so you can test it separately.
+- id: 3717
+  author: Steffen F&Atilde;&para;rster
+  author_email: box.steffen.foerster@gmx.ch
+  author_url: ''
+  date: '2011-06-07 21:11:07 +0200'
+  date_gmt: '2011-06-07 19:11:07 +0200'
+  content: "Thank you for your answers. \r\n\r\nWe have an application from a provider
+    and extend the application with GUI plugins. I see no other way to test the integration
+    of the plugins but to create GUI-tests. The core of our code is inside the model
+    so we can test it with comparatively little effort."
+---
+<p>I try to write my code test first nowadays. But of course it happens that I have to work with code that doesn't have tests. Maybe I was undisciplined and skipped the tests, or somebody else wrote it, or what ever. When it is feasible I try to add test until I have 100% or close to 100% coverage. But sometimes I come across really trivial code. Like a simple two or three line method. Or a bunch of getters and setters. And then I ask my self. </p>
+<p>"<strong>Should I test such trivial stuff?<&#47;strong>"</p>
+<p>The answer IMHO is "<strong>YES!!<&#47;strong>"</p>
+<p>The arguments are really simple: </p>
+<ul>
+<li>if it is trivial to write and understand it should be trivial to test. So we are not talking about hours of work here.<&#47;li>
+<li>If somebody is adding stuff to this code she might not realize it is not properly tested.<&#47;li>
+<li>And last but not least: over and over again I have written tests for trivial stuff just to see them turn red on me immediately. Bugs like to hide in trivial code, because nobody really looks at trivial code, and trivial code tends to get created via cut'n'paste which offers lot of opportunities for bugs.<&#47;li><br />
+<&#47;ul></p>
+<p>So write a test for that little piece of code. If you have lots of pieces like it, consider to make a little test helper using reflection or a dynamic language. Make 100% your standard.</p>

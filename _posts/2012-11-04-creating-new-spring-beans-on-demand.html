@@ -1,0 +1,47 @@
+---
+layout: post
+status: publish
+published: true
+title: Creating new Spring Beans on Demand
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1210
+wordpress_url: http://blog.schauderhaft.de/?p=1210
+date: '2012-11-04 18:07:26 +0100'
+date_gmt: '2012-11-04 16:07:26 +0100'
+categories:
+- Softwaredevelopment
+tags:
+- spring
+comments:
+- id: 8706
+  author: Ivan Sopov
+  author_email: moradan228@gmail.com
+  author_url: http://moradanen.sopovs.com
+  date: '2012-11-13 14:32:47 +0100'
+  date_gmt: '2012-11-13 12:32:47 +0100'
+  content: You can just use javax.inject.Provider for this purpose with the latest
+    Spring.
+---
+<p>We lately had a little Spring related challenge in our application at work. We had a singleton bean (<tt>TheClient<&#47;tt>) that on every call of a method needed a group of other beans. These beans (<tt>TheService<&#47;tt>) unfortunately where stateful and couldn't be reused on the next call. So they had to be recreated every time.</p>
+<p>Not a big deal we thought at first, nothing forces us to use Spring, so we just created the bean using ... drum roll ... <strong>new<&#47;strong>.</p>
+<p>This works fine until you need something from your Spring context. Maybe another bean or something provided via AOP. Of course you can make your bean  <a href="http:&#47;&#47;static.springsource.org&#47;spring&#47;docs&#47;3.1.x&#47;javadoc-api&#47;org&#47;springframework&#47;context&#47;ApplicationContextAware.html">ApplicationContextAware<&#47;a> and look it up using the <a href="http:&#47;&#47;static.springsource.org&#47;spring&#47;docs&#47;3.1.x&#47;javadoc-api&#47;org&#47;springframework&#47;beans&#47;factory&#47;BeanFactory.html#getBean(java.lang.String)">getBean method on the ApplicationContext<&#47;a>.</p>
+<p>But this really negates the idea of dependency injection and typically is a sign something is messed up. But how to do it properly? I was a little surprised that my google searches didn't turn up anything useful. So I brought my question to the place where every IT question belongs these days: <a href="http:&#47;&#47;stackoverflow.com&#47;">Stackoverflow<&#47;a>. Sure enough <a href="https:&#47;&#47;plus.google.com&#47;111266412943874700770">Oliver Gierke<&#47;a>, whom I know from him talking at our <a href="http:&#47;&#47;www.jug-ostfalen.de">local java user group<&#47;a> <a href="http:&#47;&#47;stackoverflow.com&#47;a&#47;13026344&#47;66686">pointed me to the solution<&#47;a>.</p>
+<p><tt>TheClient<&#47;tt> provides an abstract method returning the required bean:</p>
+<pre lang="java" >
+    public abstract TheService createService()<br />
+<&#47;pre></p>
+<p>If configured correctly Spring will provide the implementation for the method.</p>
+<pre lang="xml" >
+    <bean id="theService" class="TheService" scope="prototype" &#47;></p>
+<p>    <bean class="TheClient"><br />
+        <lookup-method name="createService" bean="theService" &#47;><br />
+    <&#47;bean><br />
+<&#47;pre></p>
+<p>Now you can call <tt>createService<&#47;tt> any time you need a fresh Spring managed instance of <tt>TheService<&#47;tt></p>

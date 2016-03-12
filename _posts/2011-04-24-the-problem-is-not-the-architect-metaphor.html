@@ -1,0 +1,52 @@
+---
+layout: post
+status: publish
+published: true
+title: The Problem is not the Architect Metaphor
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 758
+wordpress_url: http://blog.schauderhaft.de/?p=758
+date: '2011-04-24 16:10:42 +0200'
+date_gmt: '2011-04-24 14:10:42 +0200'
+categories:
+- Softwaredevelopment
+tags: []
+comments:
+- id: 4166
+  author: Olaf Lewitz
+  author_email: olaf@lewitz.net
+  author_url: http://hhgttg.de/blog/
+  date: '2011-09-01 19:49:34 +0200'
+  date_gmt: '2011-09-01 17:49:34 +0200'
+  content: "Jens, no idea why I missed this great reply to my post.\r\nGood explanation&acirc;&euro;&rdquo;actually
+    the first one that makes sense to me.\r\nAnd: I still think it's the wrong metaphor,
+    as I have seldom heard of a team of architects creating a building on their own,
+    without additional workers. Counting tools like Maven as workers is a beautiful
+    idea, and still I think it misses an important point...\r\nI can't translate this
+    into English: Nicht alles was hinkt, ist ein Vergleich:-)\r\nBut: You made me
+    think again... Which might lead to another post. cool.\r\nThank you!\r\nOlaf"
+---
+<p>A couple days ago <a href="http:&#47;&#47;hhgttg.de&#47;blog&#47;?p=352">Olaf Lewitz compared the work of a real Architect<&#47;a> (the guy responsible for actual buildings) with the work of an so called Architect in a software development project. He concludes with</p>
+<blockquote><p>this role description, as sketchy as it is, fits even less into my view of software development than I had thought.<&#47;blockquote></p>
+<p>I strongly disagree. The tasks Olaf describes are exactly the tasks the architects do in a healthy software development project (at least in my opinion):</p>
+<ul>
+<li>They analyse what the needs of the clients are by entering an into an intense dialogue<br />
+<&#47;li>
+<li>They make very detailed prescriptions about how the software is to be build<br />
+<&#47;li>
+<li>They design carefully how the user will interact with the resulting program, paying huge attention to details (at least the good ones)<br />
+<&#47;li>
+<li>They plan when what piece of the software gets build and carefully control that it actually happens as planned<br />
+<&#47;li><&#47;ul></p>
+<p>I currently work on a team of 8. 8 architects. We make important decisions on a daily basis. We talk to the client (the product owner) to understand the requirements. We write programs and build scripts which are the equivalent of highly detailed plans of architects. We carefully tune all things which the customer will see. Most notably the GUI, but also performance, stability, maintainability. We plan when the software gets build (right after every change to the plans and again at 1o'clock in the morning) and control that it is build as intended. It's build by jenkins and his team: maven, javac, buckminster, junit and cmd.</p>
+<p>There is no human construction worker involved. That is the part of the metaphor that falls apart. All the building happens by software and each developer is an architect. Some of them might make the big decisions, while other have a smaller area for which they are responsible.</p>
+<p>By the way Olaf is write when he qutes architects </p>
+<blockquote><p>&acirc;&euro;&oelig;when the workers begin to think, things start going wrong&acirc;&euro;<&#47;blockquote></p>
+<p>Maven does that from time to time. Each and every time it causes problems.</p>

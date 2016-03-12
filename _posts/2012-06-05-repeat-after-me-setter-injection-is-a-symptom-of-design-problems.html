@@ -1,0 +1,182 @@
+---
+layout: post
+status: publish
+published: true
+title: 'Repeat After Me: Setter Injection is a Symptom of Design Problems'
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1129
+wordpress_url: http://blog.schauderhaft.de/?p=1129
+date: '2012-06-05 22:01:34 +0200'
+date_gmt: '2012-06-05 20:01:34 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- dependency injection
+comments:
+- id: 6672
+  author: Steve Schols
+  author_email: steve.schols@gmail.com
+  author_url: http://steveschols.wordpress.com
+  date: '2012-06-05 22:17:37 +0200'
+  date_gmt: '2012-06-05 20:17:37 +0200'
+  content: "Hi Jens.\r\n\r\nI would like to react on your post.\r\n\r\nI was accually
+    agreeing with and quoting the spring reference documentation, so the quotes are
+    not my own.\r\n\r\nBut what you say is true. You shouldn't change the state or
+    dependencies of your objects all the time during your application runtime. But
+    for unit or integration testing this might be usefull. The same applies if you
+    have different objects for different users in the same application. Or like SpringSource
+    states, when usjng JMX managed beans.\r\n\r\nWhat you say about circular dependencies
+    as a bad design is true as well. You should avoid it. But there might be a situation
+    where it is necessary or where you get a legacy component that needs to be configured.
+    So then using constructor injection with Spring is impossible.\r\n\r\nThere are
+    always several parties to a topic. Martin Fowler advocates construcor injection,
+    Spring says settter injection is the best. It depends on the circumstances anx
+    ehat works best for you and your situation."
+- id: 6690
+  author: Patrick
+  author_email: info@xkill.de
+  author_url: ''
+  date: '2012-06-06 21:00:37 +0200'
+  date_gmt: '2012-06-06 19:00:37 +0200'
+  content: Great post! I totally agree!
+- id: 6716
+  author: Oliver Gierke
+  author_email: ogierke@vmware.com
+  author_url: ''
+  date: '2012-06-08 17:08:02 +0200'
+  date_gmt: '2012-06-08 15:08:02 +0200'
+  content: "Great post (,again)! I guess I'll have to comment a bit on the \"Spring
+    says\" theme here. First, \"X says\" is *never* a good argument. I would never
+    ever change my opinion on something because an arbitrary X says so. Think yourself
+    (I don't mean that in an offensive way), build an opinion based on reasonable
+    arguments and follow it. If it's completely opposite to mine - fine, there's no
+    right or wrong usually.\r\n\r\nI - employee of SpringSource and member of the
+    extended Spring team - do not read the side notes in the reference docs the way
+    you read them. But that's probably due to the context I read it in. I think the
+    docs argue about the way *Spring components* use DI. They usually do use SI for
+    two reasons: they're usually infrastructure components that might (theoretically)
+    be exposed through JMX and thus potentially reconfigured. Second (and I think
+    this is the more important reason) the usually use inheritance and constructors
+    become a PITA with inheritance. The third - and rather ancient - reason is that
+    back in the XML days configuration through properties was slightly more readable
+    than CI. So it's a trade off generally and all of these arguments usually don't
+    come into play when you discuss application components.\r\n\r\nI just triggered
+    a discussion on the internal mailing list to improve the situation because I think
+    you're probably not the only one looking at the Spring reference docs as some
+    kind of authority and we at least have to avoid the apparent strong position in
+    favor of SI. Through all my consulting years I've advocated CI over SI for the
+    reasons Jens outlined above with the only exception of optional dependencies.\r\n\r\nI
+    think Jens had a blog post quite a while ago discussing this topic in depth already,
+    maybe he can just link this from this blog post."
+- id: 6718
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-06-08 18:40:43 +0200'
+  date_gmt: '2012-06-08 16:40:43 +0200'
+  content: 'Now that you mention it. I wrote about it before: http:&#47;&#47;blog.schauderhaft.de&#47;2012&#47;01&#47;01&#47;the-one-correct-way-to-do-dependency-injection&#47;'
+- id: 6719
+  author: Maxim Zaks
+  author_email: maxim.zaks@gmail.com
+  author_url: ''
+  date: '2012-06-08 19:12:08 +0200'
+  date_gmt: '2012-06-08 17:12:08 +0200'
+  content: "I disagree. What's about default configuration. \r\nIt is pretty often
+    that field are initialized and exposed\r\nby setters for dependency injection.
+    \r\nDefault initialization + Setter injection =  Better experience"
+- id: 6721
+  author: Oliver Gierke
+  author_email: ogierke@vmware.com
+  author_url: ''
+  date: '2012-06-08 19:18:44 +0200'
+  date_gmt: '2012-06-08 17:18:44 +0200'
+  content: "@Maxim - definitely a valid point. But in that scenario using SI not only
+    makes sense but also is becoming a way of communicating which dependencies are
+    mandatory and which are optional. Jens' key point still stays valid: you can only
+    set up the object instance in valid state - the given dependencies plus default
+    ones. Once you have that you further tweak the instance by potentially re-configuring
+    it to the desired state.\r\n\r\nAll of this has the drawback that the creator
+    will have to make sure she sets up the object correctly before handing it out
+    as clients which might be okay but still has to be considered."
+- id: 6882
+  author: Harry
+  author_email: mpharrison@gmail.com
+  author_url: ''
+  date: '2012-06-15 09:14:17 +0200'
+  date_gmt: '2012-06-15 07:14:17 +0200'
+  content: "What about doubly-linked data structures like trees and lists. (parent-child,
+    or next-prev)\r\n\r\neach time you add an element, don't you have to change an
+    existing object?\r\n\r\nIs your point not that you should never change the state
+    of objects, but that if you're going to change the state, do it in an encapsulated
+    way, and not expose the details through set methods?"
+- id: 6883
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-06-15 09:22:24 +0200'
+  date_gmt: '2012-06-15 07:22:24 +0200'
+  content: "Hi Harry,\nactually these kind of things are possible to do without mutable
+    objects, by creating new instances with the changed references. Google 'Persistent
+    Datastructures' for more information.\n\nBut in the context of this post a double
+    linked list is just an implementation detail. If you want a list of things in
+    you DI context I very much recommend the equivalent of:\n\n<code>new List(a,b,c,d)<&#47;code>\n\ninstead
+    of \n\n<code>l = new List()\nl.add(a)\nl.add(b)\nl.add(c)\nl.add(d)<&#47;code>"
+- id: 6887
+  author: Harry
+  author_email: mpharrison@gmail.com
+  author_url: ''
+  date: '2012-06-15 11:17:22 +0200'
+  date_gmt: '2012-06-15 09:17:22 +0200'
+  content: "I would agree for initialising a list.\r\n\r\nI know that immutability
+    is a good thing (functional programming, concurrency and all that) I guess it's
+    just a question of where you push the management of your state changes."
+- id: 6888
+  author: Frisian
+  author_email: no.no@no.no
+  author_url: ''
+  date: '2012-06-15 12:55:04 +0200'
+  date_gmt: '2012-06-15 10:55:04 +0200'
+  content: "Write a factory or a builder, that uses SI, and inject the dependencies
+    into the object to be constructed via Constructor or private fields. Still handy
+    enough for testing purposes, yet immutable. Spring now supports fluent interfaces,
+    so one can even use Josh Bloch's variant of the Builder.\r\nThanks to Generics
+    (almost) no hassles with inheritance."
+- id: 7209
+  author: Frank
+  author_email: Frank.Gerberding@gmx.de
+  author_url: ''
+  date: '2012-06-21 18:42:48 +0200'
+  date_gmt: '2012-06-21 16:42:48 +0200'
+  content: "I agree with most parts of your post. I very much like immutable objects
+    and thus prefer constructor injection. A system, that uses dependency injection
+    and setters to change services or anything like that during runtime, is probably
+    a hint, that the design and the code is difficult to understand.\r\nBut there
+    is at least one case, where setter injection is the only practical way:  think
+    about a grails application, where all services, controllers and several other
+    components are configured using spring (this is the default, that is very easy
+    to use). Now you can change the code of a service in your favorite IDE, save the
+    code and just press \"reload\" in your browser window. Grails recompiles the service
+    and since everything is stateless, grails can inject the new service everywhere
+    using setter injection. This speeds up your turnaround time from minutes to a
+    few seconds! I very much like this grails-feature!"
+---
+<p>I just stumbled across <a href="http:&#47;&#47;steveschols.wordpress.com&#47;2012&#47;06&#47;05&#47;i-was-wrong-constructor-vs-setter-injection&#47;">an article by&Acirc;&nbsp;Steve Schols<&#47;a> in which he compares dependency injection via setter with constructor injection. And he prefers setter injection. </p>
+<p>I don't agree. I especially do not agree with his arguments. Lets take them one by one.</p>
+<blockquote><p>What are the problems with constructor injection?<br />
+No reconfiguration and re-injection<&#47;blockquote></p>
+<p>Why would you want to do that? One reason why many programs are so difficult to think about is that stuff changes around. Think about it. If the state of an object is defined by its constructor you just have to find the place where your object got created in order to understand how it looks like at run time. If the state can be changed through setters you have to find every place where the setter gets called AND if the program control actually came across these places AND in which order in order to understand what state your object is in. </p>
+<p>So don't change the state of your objects.</p>
+<blockquote><p>you could create a circular dependency using Spring. But not by using constructor-based injection<&#47;blockquote></p>
+<p>Excuse me? How is this possibly a drawback. I spent a lot of time to fix problems caused by circular dependencies. Using constructor injection prevents many circular dependencies. Absolutely a good thing.</p>
+<p>He also quotes the spring reference documentation: </p>
+<blockquote><p>The Spring team generally advocates setter injection, because large numbers of constructor arguments can get unwieldy<&#47;blockquote></p>
+<p>Again constructor injection shows you you have a problem. I have yet to see a class that has more then three dependencies which adheres to the Single Responsibility Principle.</p>
+<p>So if you run into problems with constructor injection congratulation! You just found a strong indication of a design problem in your application. Go ahead fix the design problem and proceed using constructor injection.</p>
+<p>Of course there are situations where you can't fix the design problem and in these cases setter injection is a valid workaround. But it is just that: A workaround.</p>

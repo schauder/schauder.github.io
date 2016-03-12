@@ -1,0 +1,9 @@
+<p><a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Heisenbug">Wikipedia defines a Heisenbug<&#47;a> as: </p>
+<blockquote><p>A software bug that seems to disappear when one attempts to study it.<&#47;blockquote></p>
+<p>Sometimes one has these nightmare debugging sessions where you can prove that the bug can't happen. But it still does. But I have rarely seen real Heisenbugs. Here is the story of one.</p>
+<p>A Coworker once called me to his machine and showed our application and how it failed with a <tt>NullPointerException<&#47;tt>. Then he ran the application in the debugger, stepping through the code and the application just worked.</p>
+<p>He could repeat this feat as often as he wanted. The perfect Heisenbug. So what was going on?</p>
+<p>Well after a lot of really hard <del datetime="2012-10-14T12:51:24+00:00">swearing<&#47;del>thinking we found the following: The bug was caused by accessing the field of a property in a Hibernate entity directly, and not through its getter. So the field was lazy loaded and uninitialized and contained <tt>NULL<&#47;tt>, causing the <tt>NPE<&#47;tt>. </p>
+<p>Why did it disappear in the debugger? There was an inspection showing the value returned by the getter. So on the first stop in the debugger the getter was called, Hibernate magic came to life, the field was populated and everything worked like a charm.</p>
+<p>The moral of the story?</p>
+<p>Don't know. Software development sucks? Hibernate sucks?</p>

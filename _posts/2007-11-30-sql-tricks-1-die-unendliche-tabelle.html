@@ -1,0 +1,50 @@
+---
+layout: post
+status: publish
+published: true
+title: 'SQL-Tricks #1: Die unendliche Tabelle'
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 8
+wordpress_url: http://blog.schauderhaft.de/2007/11/30/sql-tricks-1-die-unendliche-tabelle/
+date: '2007-11-30 18:40:05 +0100'
+date_gmt: '2007-11-30 17:40:05 +0100'
+categories:
+- Oracle
+tags: []
+comments:
+- id: 37
+  author: Wolfgang
+  author_email: wolli.erfurt@t-online.de
+  author_url: ''
+  date: '2008-08-21 10:46:34 +0200'
+  date_gmt: '2008-08-21 09:46:34 +0200'
+  content: "Genau der Tipp den ich gebraucht habe. Vielen Dank! \r\nErzeuge eine Tabelle
+    mit den 5-Minuten Intervallen des aktuellen Tages:\r\n\r\nselect intervalle from
+    (select trunc(sysdate) + ((level - 1) * 1&#47;288) intervalle from dual connect
+    by level "
+- id: 38
+  author: Jens Schauder
+  author_email: jens.schauder@lineas.de
+  author_url: http://blog.schauderhaft.de
+  date: '2008-08-21 10:59:14 +0200'
+  date_gmt: '2008-08-21 09:59:14 +0200'
+  content: Freut mich geholfen zu haben.
+---
+<p>Wie der erste Teil des Titels suggeriert, ist dies der Anfang einer Serie von SQL Tricks, die sich als praktisch erwiesen haben. Als Trick betrachte ich dabei alles was mit Oracle SQL Mitteln m&Atilde;&para;glich ist, aber sicherlich nicht das prim&Atilde;&curren;re Ziel derjenigen war, die die Sprache entworfen haben.</p>
+<p>Zur unendlichen Tabelle:</p>
+<p>Viele Reports, aber auch andere Anwendungen verlangen immer wieder nach einer Tabelle, deren einziger Sinn auf der Welt es ist, eine bestimmte Anzahl Zeilen zu haben. Das bekannteste Beispiel im Oracle Universum ist die Tabelle <tt>dual<&#47;tt> mit genau einer Zeile. Der Inhalt der Zeile dabei v&Atilde;&para;llig irrelevant.</p>
+<p>Aber wenn es mehr als nur ein Datensatz sein soll? Zum Beispiel 7 f&Atilde;&frac14;r die Tage einer Woche, oder 365&#47;366 f&Atilde;&frac14;r  die Tage im Jahr? Ein weit verbreiteter Ansatz ist es eine gro&Atilde;&Yuml;e Tabelle (z.B. <tt>ALL_OBJECTS<&#47;tt>) zu nehmen und davon die ersten n Zeilen:</p>
+<pre>select rownum from all_objects where rownum <= 23<&#47;pre><br />
+Aber was, wenn es mal richtig viele Zeilen werden sollen und <tt>ALL_OBJECTS<&#47;tt> nicht ausreicht, oder der aktuelle Benutzer keine Rechte auf <tt>ALL_OBJECTS<&#47;tt> hat? Oder wenn man die Irritation vermeiden m&Atilde;&para;chte, die ein select auf ALL_OBJECT bei vielen ausl&Atilde;&para;&Atilde;&Yuml;t?. Das folgende Statement sollte immer funktionieren und der Parameter (100) darf zumindestens seeehr gro&Atilde;&Yuml; werden:</p>
+<pre>select * from (select level x from dual connect by  level <=100)<&#47;pre><br />
+Das Statement verbindet per hierarchischer Abfrage jeden Eintrag aus dual (also einen) mit jedem Eintrag aus (dual) also noch einem, und dass immer so weiter, bis  100 Zeilen erreicht sind. Das ganze ist als inner select verpackt, da ansonsten bei einigen Kombinationen von Datenbank und Client Tool die Liste voreilig abbricht, vermutlich auf Grund von Optimierungen, die Oracle mit dual macht. Der &Atilde;&curren;u&Atilde;&Yuml;ere Select ist nicht explizit notwendig, wenn das ganze in einem Join oder dergleichen verwendet wird.</p>
+<p>Die anderen Teile dieser Serie findet ihr hier:</p>
+<p><a href="&#47;2007&#47;12&#47;26&#47;sql-tricks-2-verwendungen-eines-indexes-bei-like-abfragen">Verwendungen eines Indexes bei LIKE Abfragen<&#47;a></p>
+<p><a href="&#47;2008&#47;08&#47;20&#47;sql-tricks-3-intervall-join">Intervall Join<&#47;a></p>

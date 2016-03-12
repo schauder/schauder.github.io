@@ -1,0 +1,87 @@
+---
+layout: post
+status: publish
+published: true
+title: What Metrics to Use
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1060
+wordpress_url: http://blog.schauderhaft.de/?p=1060
+date: '2012-04-01 20:04:13 +0200'
+date_gmt: '2012-04-01 18:04:13 +0200'
+categories:
+- Quality Management
+tags:
+- code analysis
+- metrics
+- sonar
+- test coverage
+comments:
+- id: 5637
+  author: Martin
+  author_email: martinleanderfoersterling@gmail.com
+  author_url: ''
+  date: '2012-04-01 22:14:10 +0200'
+  date_gmt: '2012-04-01 20:14:10 +0200'
+  content: "About the last paragraph (motivation) : I've seen a video lately where
+    an engineer described a possible future, where permanent access to computers and
+    the internet (smart phones, hello) could change the way we tackle our daily tasks.
+    He suggested we use some of the most powerful motivational pioneers known: games.\r\n\r\nF.e.,
+    assign experience points to chores, and you can level up while you're doing day-to-day
+    tasks. Great for procrastinators such as myself. There's already a website (maybe
+    more) making good use of that model for fitness: https:&#47;&#47;www.fitocracy.com&#47;\r\n\r\nSame
+    could be done for a software project. Why not use motivation techniques from outside
+    professional work because they're not... hitherto professional? I, for my part,
+    would love being able to level up by fixing a production bug, and getting a nice
+    little achievement for my 50th refactoring (hopefully not at the same class, heh)."
+- id: 5672
+  author: Michal
+  author_email: michal.chmielarz@gmail.com
+  author_url: ''
+  date: '2012-04-05 09:31:02 +0200'
+  date_gmt: '2012-04-05 07:31:02 +0200'
+  content: I wonder  - how do you measure "The Number Of Commits During the last N
+    days" metric? Are you looking on history from source code repository? Or maybe
+    do you have some tool for that?
+- id: 5673
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-04-05 10:08:41 +0200'
+  date_gmt: '2012-04-05 08:08:41 +0200'
+  content: "Hi Michal,\r\nso far I have no tool for that. Its just something I'd probably
+    want for my next project. \r\n\r\nIt shouldn't be to difficult to get that information
+    out of your version control system."
+- id: 5674
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-04-05 10:14:36 +0200'
+  date_gmt: '2012-04-05 08:14:36 +0200'
+  content: "Hi again,\r\nI did a quick search and as so often there is a very good
+    answer on stackoverflow: http:&#47;&#47;stackoverflow.com&#47;questions&#47;141599&#47;how-do-you-get-a-list-of-changes-from-a-subversion-repository-by-date-range"
+---
+<p>When setting up a project with more code than fits one a piece of paper I like to have some code metrics around.</p>
+<p>The purpose of that metrics is two fold:</p>
+<ol>
+<li>Identify areas in the code base that need improvement.&Acirc;&acute;<&#47;li>
+<li>Motivate team members to improve those areas.<&#47;li><br />
+<&#47;ol><br />
+But what metrics should one use? I tried to use <a href="http:&#47;&#47;www.sonarsource.org&#47;">Sonar<&#47;a> but found it to be of very limited use. The problem is that it produces just to many metrics. You can spent hours browsing, slicing and dicing these metrics without really learning anything from it. Once again: Less is more.</p>
+<p>I also used <a href="http:&#47;&#47;erik.doernenburg.com&#47;2008&#47;11&#47;how-toxic-is-your-code&#47;">toxicity<&#47;a> and I still like it. But I also learned from the book <a href="http:&#47;&#47;www.amazon.de&#47;gp&#47;product&#47;B004D4YI6G&#47;ref=as_li_ss_tl?ie=UTF8&tag=schauderhafte-21&linkCode=as2&camp=1638&creative=19454&creativeASIN=B004D4YI6G">Making Software: What Really Works, and Why We Believe It<&#47;a><img src="http:&#47;&#47;www.assoc-amazon.de&#47;e&#47;ir?t=schauderhafte-21&l=as2&o=3&a=B004D4YI6G" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" &#47;> that all these fancy metrics are really pretty much equivalent to lines of code when it comes to predicting faults in your software.</p>
+<p>So here is my first code metric I recommend: <strong>Size<&#47;strong>. I don't think it matters to much what exact measure you use, but you should have a measure of size for the various artifacts in your project. For a typical java project you might end up with:</p>
+<ul>
+<li>Number of classes per package<&#47;li>
+<li>Lines of Code per class<&#47;li>
+<li>Lines of Code per method<&#47;li><br />
+<&#47;ul><br />
+The second metric I'd like to see in my projects is <strong>Test&Acirc;&nbsp;Coverage<&#47;strong>. I don't expect test coverage to be a useful predictor of faults in the software, but writing unit test teaches you a lot about modular design and if you know about modular design and have to write tests for your code I expect this combination to result in the application of modular design. That's why I have an eye on test coverage. Oh and good tests might actually help in&Acirc;&nbsp;maintenance. There are tons of different kinds of test coverage metrics. I'd choose the one that is most difficult to get to 100% and is provided by your tooling. I'd expect that to be either path or branch coverage.</p>
+<p>In the book <a href="http:&#47;&#47;www.amazon.de&#47;gp&#47;product&#47;B004D4YI6G&#47;ref=as_li_ss_tl?ie=UTF8&tag=schauderhafte-21&linkCode=as2&camp=1638&creative=19454&creativeASIN=B004D4YI6G">Making Software: What Really Works, and Why We Believe It<&#47;a><img src="http:&#47;&#47;www.assoc-amazon.de&#47;e&#47;ir?t=schauderhafte-21&l=as2&o=3&a=B004D4YI6G" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" &#47;> there is a chapter in which metrics are analysed for their ability to predict faults in software. One of the metrics that actually works is the amount of change: If you change a file a lot it is more likely to contain bugs. Therefore I'd like to have <strong>The Number Of Commits During the last N days<&#47;strong> as a code metric. Unfortunately I have no easy way to make that available to a project team, but I assume for now this is just because I haven't looked yet.</p>
+<p>I think with these three metrics you should be all set for the first purpose I mentioned above.</p>
+<p>But what about the motivational part. Is a test coverage of 85% motivating? I don't think so. What I found motivating in the past is the visualization of metrics over time. Measure the three metrics mentioned above for every day and make a graph out of it. Display it on the start page of your CI build. I find this part especially nice for systems that aren't in a very healthy state as far as code quality is concerned. It is very frustrating to look at the toxicity of your project and thinK: Oh man we have to get rid of 5739 points of toxicity. But when you can change that in: "Cool while adding this feature I refactored this class and now the toxicity is ten points lower then a week ago it becomes actually motivating. At least for number geeks like me.</p>

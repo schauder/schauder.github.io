@@ -1,0 +1,274 @@
+---
+layout: post
+status: publish
+published: true
+title: Hibernate Naming Strategie f&Atilde;&frac14;r Oracle die zweite
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 39
+wordpress_url: http://blog.schauderhaft.de/2008/03/29/hibernate-naming-strategie-fur-oracle-die-zweite/
+date: '2008-03-29 23:40:34 +0100'
+date_gmt: '2008-03-29 22:40:34 +0100'
+categories:
+- Java
+- Oracle
+tags: []
+comments:
+- id: 142
+  author: Ziombel
+  author_email: ziombel@op.pl
+  author_url: http://ziombel.fake.pl
+  date: '2009-03-03 11:17:44 +0100'
+  date_gmt: '2009-03-03 10:17:44 +0100'
+  content: English please :P
+- id: 148
+  author: Jens Schauder
+  author_email: jens.schauder@lineas.de
+  author_url: http://blog.schauderhaft.de
+  date: '2009-03-07 21:25:55 +0100'
+  date_gmt: '2009-03-07 20:25:55 +0100'
+  content: "You might be interested in the entry announcing the first release of the
+    Hibernate NamingStrategy for Oracle: \r\n\r\nhttp:&#47;&#47;blog.schauderhaft.de&#47;2009&#47;03&#47;07&#47;oracle-naming-strategy-for-hibernate-released-as-a-proper-open-source-project&#47;\r\n\r\nAnd
+    of course the Open Source Project\r\n\r\nhttp:&#47;&#47;code.google.com&#47;p&#47;hibernate-naming-strategy-for-oracle&#47;"
+- id: 4845
+  author: Dominik S.
+  author_email: dominik.schmid@ilu.ch
+  author_url: ''
+  date: '2012-01-19 16:41:21 +0100'
+  date_gmt: '2012-01-19 14:41:21 +0100'
+  content: "Nochmals Nachtrag (bezieht sich auf meinen Post im anderen Blogeintrag
+    zum Thema): F&Atilde;&frac14;r mich stimmt&acirc;&euro;&trade;s wenn ich die Methode
+    isMultipleUpperToLower in addUnderscores rausnehme. Ich habe das Ganze &Atilde;&frac14;brigens
+    auf NHibernate und C# &Atilde;&frac14;bertragen:\r\n\r\n\r\n<pre>\r\n\r\n    public
+    class OracleNamingStrategy : INamingStrategy\r\n    {\r\n        public string
+    ClassToTableName(string className)\r\n        {\r\n            return AbbreviateName(TableName(StringHelper.Unqualify(className)));\r\n
+    \       }\r\n\r\n\r\n\r\n        public string PropertyToColumnName(string propertyName)\r\n
+    \       {\r\n            return AbbreviateName(AddUnderscores(propertyName));\r\n
+    \       }\r\n\r\n\r\n\r\n        public string TableName(string tableName)\r\n
+    \       {\r\n            return AbbreviateName(AddUnderscores(tableName));\r\n
+    \       }\r\n\r\n\r\n\r\n        public string ColumnName(string columnName)\r\n
+    \       {\r\n            return AbbreviateName(AddUnderscores(columnName));\r\n
+    \       }\r\n\r\n\r\n\r\n        public string PropertyToTableName(string className,
+    string propertyName)\r\n        {\r\n            string tableName = \"Lt\";\r\n
+    \           tableName += className.Substring(className.LastIndexOf(\".\")).Remove(0,1);\r\n
+    \           tableName += propertyName.Substring(propertyName.LastIndexOf(\".\")).Remove(0,1);\r\n
+    \           return AbbreviateName(AddUnderscores(tableName));\r\n        }\r\n\r\n\r\n\r\n
+    \       public string LogicalColumnName(string columnName, string propertyName)\r\n
+    \       {\r\n            return ColumnName(columnName) + '_' + PropertyToColumnName(propertyName);\r\n
+    \       }\r\n\r\n        \r\n\r\n\r\n        private static string AddUnderscores(string
+    name)\r\n        {\r\n            if (name == null)\r\n                return
+    null;\r\n            StringBuilder buf = new StringBuilder(name.Replace('.', '_'));\r\n
+    \           for (int i = 1; i < buf.Length - 1; i++)\r\n            {\r\n                if
+    ((IsLowerToUpper(buf, i)))\r\n                {\r\n                    buf.Insert(i++,
+    '_');\r\n                }\r\n            }\r\n            return buf.ToString().ToLower();\r\n
+    \       }\r\n\r\n        \r\n\r\n        private static bool IsMultipleUpperToLower(StringBuilder
+    buf, int i)\r\n        {\r\n            return i > 1 &amp;&amp; char.IsUpper(buf[i
+    - 1])\r\n                    &amp;&amp; char.IsUpper(buf[i - 2])\r\n                    &amp;&amp;
+    char.IsLower(buf[i]);\r\n        }\r\n\r\n\r\n\r\n        private static bool
+    IsLowerToUpper(StringBuilder buf, int i)\r\n        {\r\n            return char.IsLower(buf[i
+    - 1])\r\n                    &amp;&amp; char.IsUpper(buf[i]);\r\n        }\r\n\r\n
+    \   \r\n\r\n        private static int MAX_LENGTH = 30;\r\n\r\n\r\n\r\n        public
+    static string AbbreviateName(string someName)\r\n        {\r\n            if (someName.Length
+    <= MAX_LENGTH)\r\n                return someName;\r\n\r\n\r\n\r\n            string[]
+    tokens = SplitName(someName);\r\n            ShortenName(someName, tokens);\r\n\r\n\r\n\r\n
+    \           return AssembleResults(tokens);\r\n        }\r\n\r\n\r\n\r\n        private
+    static string[] SplitName(string someName)\r\n        {\r\n            string[]
+    tokens = someName.Split(char.Parse(\"_\"));\r\n            return tokens;\r\n
+    \       }\r\n\r\n\r\n\r\n        private static void ShortenName(string someName,
+    string[] tokens)\r\n        {\r\n            int currentLength = someName.Length;\r\n
+    \           while (currentLength > MAX_LENGTH)\r\n            {\r\n                int
+    tokenIndex = GetIndexOfLongest(tokens);\r\n                string oldToken = tokens[tokenIndex];\r\n
+    \               tokens[tokenIndex] = Abbreviate(oldToken);\r\n                currentLength
+    -= oldToken.Length - tokens[tokenIndex].Length;\r\n            }\r\n        }\r\n\r\n\r\n\r\n
+    \       private static string AssembleResults(string[] tokens)\r\n        {\r\n
+    \           StringBuilder result = new StringBuilder(tokens[0]);\r\n            for
+    (int j = 1; j < tokens.Length; j++)\r\n            {\r\n                result.Append(\"_\").Append(tokens[j]);\r\n
+    \           }\r\n            return result.ToString();\r\n        }\r\n\r\n\r\n\r\n
+    \       private static string Abbreviate(string token)\r\n        {\r\n            string
+    VOWELS = \"AEIOUaeiou\";\r\n            bool vowelFound = false;\r\n            for
+    (int i = token.Length - 1; i >= 0; i--)\r\n            {\r\n                if
+    (!vowelFound)\r\n                    vowelFound = VOWELS.Contains(token[i].ToString());\r\n
+    \               else if (!VOWELS.Contains(token[i].ToString()))\r\n                    return
+    token.Substring(0, i + 1);\r\n            }\r\n            return \"\";\r\n        }\r\n\r\n\r\n\r\n
+    \       private static int GetIndexOfLongest(string[] tokens)\r\n        {\r\n
+    \           int maxLength = 0;\r\n            int index = -1;\r\n            for
+    (int i = 0; i < tokens.Length; i++)\r\n            {\r\n                string
+    tString = tokens[i];\r\n                if (maxLength < tString.Length)\r\n                {\r\n
+    \                   maxLength = tString.Length;\r\n                    index =
+    i;\r\n                }\r\n            }\r\n            return index;\r\n        }\r\n\r\n\r\n\r\n
+    \   }\r\n\r\n\r\n<&#47;pre>\r\n\r\nEs hat darin noch eine kleine Modifikation:
+    Collection tables werden bei uns mit einem vorangestellten &acirc;&euro;&oelig;lt_&acirc;&euro;\x9D
+    benannt.\r\n\r\nHoffe, das n&Atilde;&frac14;tzt jemandem.\r\n\r\n<b>-- English
+    summary:<&#47;b>\r\n\r\nI&acirc;&euro;&trade;ve translated the NamingStrategy
+    for Oracle to NHibernate and C#. Small additions:\r\n- I&acirc;&euro;&trade;m
+    not using the IsMultipleUpperToLower() method in AddUnderscores() because I&acirc;&euro;&trade;m
+    not happy with the result when there&acirc;&euro;&trade;s a bunch of consecutive
+    uppercase characters present.\r\n- We want our collection tables to be called
+    lt_* so the above code reflects that."
+---
+<p>Vor einiger Zeit habe ich eine einfache <a href="&#47;2008&#47;02&#47;22&#47;hibernate-namingstrategy-fur-oracle&#47;">Naming Strategie<&#47;a> vorgestellt, die sicherstellt, dass die generierten Namen sich an die etwas geizigen Beschr&Atilde;&curren;nkungen von Oracle h&Atilde;&curren;lt. Ich habe die Starategie noch einmal ein wenig &Atilde;&frac14;berarbeitet. Sie verteilt jetzt gro&Atilde;&Yuml;z&Atilde;&frac14;giger Underscores, so dass sie mehr Stellen hat, an denen sie einen Namen k&Atilde;&frac14;rzen kann.</p>
+<p>Nat&Atilde;&frac14;rlich gilt wieder: Benutzung auf eigene Gefahr.</p>
+<pre>
+public class OracleNamingStrategy<br />
+        extends DefaultComponentSafeNamingStrategy<br />
+{</p>
+<p>  protected static String addUnderscores(String name)<br />
+  {<br />
+    if (name == null) return null;<br />
+    StringBuffer buf = new StringBuffer(<br />
+            name.replace('.', '_')<br />
+    );<br />
+    for (int i = 1; i < buf.length() - 1; i++)<br />
+    {<br />
+      if (Character.isLowerCase(buf.charAt(i - 1)) &amp;&amp;<br />
+          Character.isUpperCase(buf.charAt(i))<br />
+      &#47;&#47; &amp;&amp; Character.isLowerCase(buf.charAt(i + 1))<br />
+      )<br />
+      {<br />
+        buf.insert(i++, '_');<br />
+      }<br />
+    }<br />
+    return buf.toString().toLowerCase();<br />
+  }</p>
+<p>  @Override<br />
+  public String collectionTableName(String ownerEntity,<br />
+      String ownerEntityTable, String associatedEntity,<br />
+      String associatedEntityTable, String propertyName)<br />
+  {<br />
+    return abbreviateName(super.collectionTableName(<br />
+        addUnderscores(ownerEntity),<br />
+        addUnderscores(ownerEntityTable),<br />
+        addUnderscores(associatedEntity),<br />
+        addUnderscores(associatedEntityTable),<br />
+        addUnderscores(propertyName)));<br />
+  }</p>
+<p>  @Override<br />
+  public String foreignKeyColumnName(String propertyName,<br />
+      String propertyEntityName, String propertyTableName,<br />
+      String referencedColumnName)<br />
+  {<br />
+    return abbreviateName(super.foreignKeyColumnName(<br />
+        addUnderscores(propertyName),<br />
+        addUnderscores(propertyEntityName),<br />
+        addUnderscores(propertyTableName),<br />
+        addUnderscores(referencedColumnName)));<br />
+  }</p>
+<p>  @Override<br />
+  public String logicalCollectionColumnName(<br />
+      String columnName,<br />
+      String propertyName, String referencedColumn)<br />
+  {<br />
+    return abbreviateName(super.logicalCollectionColumnName(<br />
+        addUnderscores(columnName),<br />
+        addUnderscores(propertyName),<br />
+        addUnderscores(referencedColumn)));<br />
+  }</p>
+<p>  @Override<br />
+  public String logicalCollectionTableName(String tableName,<br />
+      String ownerEntityTable,<br />
+      String associatedEntityTable, String propertyName)<br />
+  {<br />
+    return abbreviateName(super.logicalCollectionTableName(<br />
+        addUnderscores(tableName),<br />
+        addUnderscores(ownerEntityTable),<br />
+        addUnderscores(associatedEntityTable),<br />
+        addUnderscores(propertyName)));<br />
+  }</p>
+<p>  @Override<br />
+  public String logicalColumnName(String columnName,<br />
+        String propertyName)<br />
+  {<br />
+    return abbreviateName(super.logicalColumnName(<br />
+        addUnderscores(columnName),<br />
+        addUnderscores(propertyName)));<br />
+  }</p>
+<p>  @Override<br />
+  public String propertyToColumnName(String propertyName)<br />
+  {<br />
+    return abbreviateName(super.propertyToColumnName(<br />
+          addUnderscores(propertyName)));<br />
+  }</p>
+<p>  private static final int MAX_LENGTH = 30;</p>
+<p>  public static String abbreviateName(String someName)<br />
+  {<br />
+    if (someName.length() <= MAX_LENGTH) return someName;</p>
+<p>    String[] tokens = splitName(someName);<br />
+    shortenName(someName, tokens);</p>
+<p>    return assembleResults(tokens);<br />
+  }</p>
+<p>  private static String[] splitName(String someName)<br />
+  {<br />
+    StringTokenizer toki = new StringTokenizer(someName, "_");<br />
+    String[] tokens = new String[toki.countTokens()];<br />
+    int i = 0;<br />
+    while (toki.hasMoreTokens())<br />
+    {<br />
+      tokens[i] = toki.nextToken();<br />
+      i++;<br />
+    }<br />
+    return tokens;<br />
+  }</p>
+<p>  private static void shortenName(<br />
+       String someName, String[] tokens)<br />
+  {<br />
+    int currentLength = someName.length();<br />
+    while (currentLength > MAX_LENGTH)<br />
+    {<br />
+      int tokenIndex = getIndexOfLongest(tokens);<br />
+      String oldToken = tokens[tokenIndex];<br />
+      tokens[tokenIndex] = abbreviate(oldToken);<br />
+      currentLength -=<br />
+         oldToken.length() - tokens[tokenIndex].length();<br />
+    }<br />
+  }</p>
+<p>  private static String assembleResults(String[] tokens)<br />
+  {<br />
+    StringBuilder result = new StringBuilder(tokens[0]);<br />
+    for (int j = 1; j < tokens.length; j++)<br />
+    {<br />
+      result.append("_").append(tokens[j]);<br />
+    }<br />
+    return result.toString();<br />
+  }</p>
+<p>  private static String abbreviate(String token)<br />
+  {<br />
+    final String VOWELS = "AEIOUaeiou";<br />
+    boolean vowelFound = false;<br />
+    for (int i = token.length() - 1; i >= 0; i--)<br />
+    {<br />
+      if (!vowelFound)<br />
+        vowelFound = VOWELS.contains(<br />
+            String.valueOf(token.charAt(i)));<br />
+      else if (!VOWELS.contains(<br />
+            String.valueOf(token.charAt(i))))<br />
+        return token.substring(0, i + 1);<br />
+    }<br />
+    return "";<br />
+  }</p>
+<p>  private static int getIndexOfLongest(String[] tokens)<br />
+  {<br />
+    int maxLength = 0;<br />
+    int index = -1;<br />
+    for (int i = 0; i < tokens.length; i++)<br />
+    {<br />
+      String string = tokens[i];<br />
+      if (maxLength < string.length())<br />
+      {<br />
+        maxLength = string.length();<br />
+        index = i;<br />
+      }<br />
+    }<br />
+    return index;<br />
+  }</p>
+<p>  @Override<br />
+  public String classToTableName(String aClassName)<br />
+  {</p>
+<p>    return abbreviateName(super.classToTableName(addUnderscores(aClassName)));<br />
+  }<br />
+}<&#47;pre></p>

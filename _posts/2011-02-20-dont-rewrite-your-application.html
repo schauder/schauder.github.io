@@ -1,0 +1,281 @@
+---
+layout: post
+status: publish
+published: true
+title: Don't rewrite Your Application
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 462
+wordpress_url: http://blog.schauderhaft.de/?p=462
+date: '2011-02-20 21:33:00 +0100'
+date_gmt: '2011-02-20 19:33:00 +0100'
+categories:
+- Softwaredevelopment
+tags:
+- refactoring
+- legacy
+- rewrite
+- maintenance
+comments:
+- id: 3091
+  author: Maca134
+  author_email: maca134@googlemail.com
+  author_url: ''
+  date: '2011-02-21 23:27:12 +0100'
+  date_gmt: '2011-02-21 21:27:12 +0100'
+  content: "What happens if the developer was an idiot and wrote the app is a completely
+    backwards way? Then was maintained by someone who was skilled enough?\r\n\r\nI
+    am facing a similar situation at work, the code is shockingly out dated, there
+    is no sign of any structure and doesn't following a logical flow...\r\n\r\nIts
+    like its been a collapsing building being held up by duct tape.\r\n\r\nSo i kinda
+    disagree..."
+- id: 3102
+  author: Mark
+  author_email: mpaluch@paluch.biz
+  author_url: http://www.paluch.biz
+  date: '2011-02-22 13:43:07 +0100'
+  date_gmt: '2011-02-22 11:43:07 +0100'
+  content: Not at all. If you have some running code, it's better to give variables
+    and methods better names, reduce code dupes and see then, if you get the code's
+    sense. After that you decide what to do next (see http:&#47;&#47;www.sigs-datacom.de&#47;fachzeitschriften&#47;objektspektrum&#47;archiv&#47;artikelansicht.html?tx_mwjournals_pi1[pointer]=0&amp;tx_mwjournals_pi1[mode]=1&amp;tx_mwjournals_pi1[showUid]=6635)
+- id: 3107
+  author: dennis sellinger
+  author_email: sellingerd@vigis.com
+  author_url: ''
+  date: '2011-02-22 21:58:32 +0100'
+  date_gmt: '2011-02-22 19:58:32 +0100'
+  content: "I rather disagree with this.  If you have a significant software product
+    it has probably been reworked many times over a great many years before you come
+    to the point that you will consider to re-write it.  In such a case, technology
+    has always changed since the original implementation.\r\n\r\nRefactoring legacy
+    code has all the stumbling blocks that re-writing has - if you want to make sweeping
+    architectural changes, you have to really understand what it is suppose to be
+    doing (e.g the product specification + all the extension hacks).  If you don't
+    have a deep understanding of the legacy code it is pure folly to attempt deep
+    structural changes.\r\n\r\nI make the point that when we have considered re-writing
+    a software product they were typically more than 10 years old with as many years
+    devoted to heterogeneous development (i.e. some extensions are better than others).
+    \ It is rare that over this time your platform and development environment will
+    not have changed.\r\n\r\nAdditionally re-writing also means re-considering the
+    specification and lessons learned over the life of a product - which typically
+    can only be realized if we bring the entire application in question rather than
+    just trying to clean up the code so it doesn't fall apart for another year."
+- id: 3116
+  author: Lautaro
+  author_email: lbrasseur@yahoo.com
+  author_url: http://blog.oxenstudio.com.ar/
+  date: '2011-02-23 14:51:19 +0100'
+  date_gmt: '2011-02-23 12:51:19 +0100'
+  content: I don't agree with the article. If the application design sucks (because
+    of  stupid developers, which is a really common scenario), refactoring would be
+    a hell. In many cases I would prefer rewriting the application.
+- id: 3239
+  author: links for 2011-03-07 &laquo; pabloidz
+  author_email: ''
+  author_url: http://pabloidz.wordpress.com/2011/03/07/links-for-2011-03-07/
+  date: '2011-03-07 14:02:14 +0100'
+  date_gmt: '2011-03-07 12:02:14 +0100'
+  content: "[...] Don&acirc;&euro;&trade;t rewrite Your Application Schauderhaft (tags:
+    programming) [...]"
+- id: 3658
+  author: OliSchmitz
+  author_email: Oli99sc@gmail.com
+  author_url: ''
+  date: '2011-06-02 12:15:15 +0200'
+  date_gmt: '2011-06-02 10:15:15 +0200'
+  content: "I agree with the article. To offen rewriting is just the easiest way to
+    start something new and comfortable. But it is only easy at the start. Later you
+    have to learn the hard way, what your old application all did, but nobody knew.
+    If you do not know the old app&#47;functionallity you will have a hard time completing
+    your product. And all product owners I know do not easily decide to kick some
+    requirements out, but rather come up with some new additional stuff they always
+    wanted to have. And you will promies them, as I did :-), that all that can be
+    implemented much faster, if you just get permission to rewrite it all. I failed
+    to often with that. Why? There is to much work left, at the end of the time budget
+    you are allowed to spend. You will get a lot of pressure, or worse, your business
+    will not survive it.\r\nIf you really try hard, there are often ways to change
+    some things in the legacy stuff to improve it a lot.\r\nHere I like something
+    I read from Marty Abbot: If you can not find a way to refactor your app, fire
+    your architects."
+- id: 4275
+  author: lee
+  author_email: ljcave21@yahoo.com
+  author_url: ''
+  date: '2011-09-19 11:32:15 +0200'
+  date_gmt: '2011-09-19 09:32:15 +0200'
+  content: I agree with OliSchmitz, rewriting might seem an easy way out but it wont.
+    You need have a deep understanding of the legacy code. And your newly rewritten
+    code will only be as good as the time you've written and would look stupid 3-5
+    years from it. I would prefer cleaning up the house with refactoring and making
+    each of its modules more maintainable and more easier to support is more likable
+    than spending so much time building a new code base.
+- id: 4276
+  author: Dan
+  author_email: dan@d80.co.uk
+  author_url: http://www.d80.co.uk
+  date: '2011-09-19 13:39:28 +0200'
+  date_gmt: '2011-09-19 11:39:28 +0200'
+  content: "I wrote a post a while-ago entitled <a href=\"http:&#47;&#47;bitly.com&#47;e9oKFv\"
+    title=\"Re-writing is cheaper than refactoring legacy code\" rel=\"nofollow\">Re-writing
+    is cheaper than refactoring legacy code<&#47;a>, What I actually advocated some
+    would consider refactoring but I consider it re-writing, is to cut modules out
+    of the legacy code base and re-write them. Putting tests around where you perform
+    your removal in order to be able to test your new code transplant when it's hooked
+    up.\r\n\r\nThe problem I've found with legacy code is\r\n1) No tests\r\n2) No
+    surviving requirements docs\r\n3) No living person that understands what it's
+    supposed to do\r\n4) It's so hard and slow to add features it's just painful"
+- id: 4285
+  author: Alex
+  author_email: alex.kerner.24@googlemail.com
+  author_url: ''
+  date: '2011-09-20 10:50:33 +0200'
+  date_gmt: '2011-09-20 08:50:33 +0200'
+  content: "In general I really agree to that and also think this is the better way
+    to do it.\r\nBut what if you need&#47; want to refactor like to core library&#47;API
+    on which like all the other stuff depends on?\r\n\r\nHow can you do a clean refactoring
+    here without touching everything at the same time (complete rewrite)?"
+- id: 4286
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2011-09-20 11:15:41 +0200'
+  date_gmt: '2011-09-20 09:15:41 +0200'
+  content: "If you have a substantial library on which 'everything' depends and you
+    need to refactor that, you obviously have a problem. \r\n\r\nThe approach to use
+    normally looks like this:\r\n- if not already present, create a thin layer between
+    the existing library and its client code.\r\n- implement a little piece of the
+    new library. \r\n- switch in the separation layer to the new library for this
+    small set of functionality.\r\n- remove obsolete pieces of the old library.\r\n-
+    rinse and repeat. \r\n\r\nIs it easy or fast? Neither. Is it way more secure than
+    a rewrite? Certainly!"
+- id: 4287
+  author: Alex
+  author_email: alex.kerner.24@googlemail.com
+  author_url: ''
+  date: '2011-09-20 11:30:51 +0200'
+  date_gmt: '2011-09-20 09:30:51 +0200'
+  content: A substantial library on which &acirc;&euro;&tilde;everything&acirc;&euro;&trade;
+    depends is in this concrete case the JPA part if a JEE project. Database design
+    in the first place and also persistence entities are a nightmare. Unfortunately,
+    these persistence EJB are also DTOs which travel through the complete application.
+- id: 4293
+  author: Alastair Aitken
+  author_email: aaitken@morganhill.co.uk
+  author_url: http://www.morganhill.co.uk/
+  date: '2011-09-21 12:29:59 +0200'
+  date_gmt: '2011-09-21 10:29:59 +0200'
+  content: "If the system is consequential then a re-write may not be an option that
+    one can take, no matter how bad the codebase may seem.\r\n\r\nI can recommend
+    Michael Feathers' book \"Working Effectively with Legacy Code\" for offering useful
+    techniques for dealing with legacy code.\r\n\r\nImproving bad code, implementing
+    tests and creating documentation can be an intellectual challenge every bit as
+    stimulating as a greenfield project."
+- id: 4299
+  author: "&ETH;\x9D&ETH;&micro; &ETH;&iquest;&ETH;&micro;&Ntilde;&euro;&ETH;&micro;&ETH;&iquest;&ETH;&cedil;&Ntilde;\x81&Ntilde;&lsaquo;&ETH;&sup2;&ETH;&deg;&ETH;&sup1;&Ntilde;&sbquo;&ETH;&micro;
+    &Ntilde;\x81&ETH;&sup2;&ETH;&frac34;&ETH;&micro; &ETH;&iquest;&Ntilde;&euro;&ETH;&cedil;&ETH;&raquo;&ETH;&frac34;&ETH;&para;&ETH;&micro;&ETH;&frac12;&ETH;&cedil;&ETH;&micro;
+    [&ETH;&iquest;&ETH;&micro;&Ntilde;&euro;&ETH;&micro;&ETH;&sup2;&ETH;&frac34;&ETH;&acute;]
+    &mdash; &ETH;&lsquo;&ETH;&raquo;&ETH;&frac34;&ETH;&sup3; &Ntilde;\x81&ETH;&iquest;&ETH;&micro;&Ntilde;&dagger;&ETH;&cedil;&ETH;&deg;&ETH;&raquo;&ETH;&cedil;&Ntilde;\x81&Ntilde;&sbquo;&ETH;&frac34;&ETH;&sup2;
+    &ETH;&ldquo;&ETH;&scaron; &ETH;&scaron;&ETH;&frac34;&ETH;&frac14;&ETH;&iquest;&Ntilde;&OElig;&Ntilde;Ž&Ntilde;&sbquo;&ETH;&micro;&Ntilde;&euro;&ETH;&frac12;&Ntilde;&lsaquo;&ETH;&sup1;
+    &ETH;&deg;&Ntilde;&fnof;&ETH;&acute;&ETH;&cedil;&Ntilde;&sbquo;, &ETH;&sup3;.
+    &ETH;&iexcl;&ETH;&deg;&Ntilde;&euro;&ETH;&deg;&Ntilde;&sbquo;&ETH;&frac34;&ETH;&sup2;"
+  author_email: ''
+  author_url: http://compaud.ru/blog/2011/09/dont-rewrite-your-application/
+  date: '2011-09-24 00:27:25 +0200'
+  date_gmt: '2011-09-23 22:27:25 +0200'
+  content: "[...] &ETH;&middot;&ETH;&deg; &Ntilde;&Dagger;&Ntilde;&sbquo;&ETH;&frac34;
+    &ETH;&sup2; &ETH;&ordm;&ETH;&frac34;&ETH;&frac12;&Ntilde;&dagger;&ETH;&micro;
+    &Ntilde;&euro;&ETH;&deg;&ETH;&plusmn;&ETH;&frac34;&Ntilde;&Dagger;&ETH;&micro;&ETH;&sup3;&ETH;&frac34;
+    &ETH;&plusmn;&Ntilde;&lsaquo;&ETH;&raquo; &ETH;&frac12;&ETH;&deg;&ETH;&sup3;&Ntilde;&euro;&ETH;&deg;&ETH;&para;&ETH;&acute;&ETH;&micro;&ETH;&frac12;
+    &Ntilde;\x81&Ntilde;\x81&Ntilde;&lsaquo;&ETH;&raquo;&ETH;&ordm;&ETH;&frac34;&ETH;&sup1;
+    &ETH;&frac12;&ETH;&deg; &Ntilde;\x81&Ntilde;&sbquo;&ETH;&deg;&Ntilde;&sbquo;&Ntilde;&OElig;&Ntilde;Ž,
+    &ETH;&sup2; &ETH;&ordm;&ETH;&frac34;&Ntilde;&sbquo;&ETH;&frac34;&Ntilde;&euro;&ETH;&frac34;&ETH;&sup1;
+    &ETH;&iquest;&Ntilde;&euro;&ETH;&cedil;&ETH;&sup2;&ETH;&frac34;&ETH;&acute;&Ntilde;\x8F&Ntilde;&sbquo;&Ntilde;\x81&Ntilde;\x8F
+    &ETH;&sup2;&ETH;&micro;&Ntilde;\x81&ETH;&ordm;&ETH;&cedil;&ETH;&micro; &ETH;&cedil;
+    &Ntilde;&euro;&ETH;&deg;&ETH;&middot;&Ntilde;&fnof;&ETH;&frac14;&ETH;&frac12;&Ntilde;&lsaquo;&ETH;&micro;
+    &ETH;&deg;&Ntilde;&euro;&ETH;&sup3;&Ntilde;&fnof;&ETH;&frac14;&ETH;&micro;&ETH;&frac12;&Ntilde;&sbquo;&Ntilde;&lsaquo;
+    [...]"
+- id: 4302
+  author: notus
+  author_email: notus@list.ru
+  author_url: ''
+  date: '2011-09-25 16:46:05 +0200'
+  date_gmt: '2011-09-25 14:46:05 +0200'
+  content: "Evolution implies dying.\r\nNeverdying code becames living shit."
+- id: 4303
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2011-09-25 16:53:35 +0200'
+  date_gmt: '2011-09-25 14:53:35 +0200'
+  content: "@notus You are right, eventually every application will reach its end
+    of life and will die. It might even get replaced by a different application. But
+    hopefully it won't be a rewrite but something different, something new. \r\n\r\nOf
+    course the line is blurry."
+- id: 4304
+  author: notus
+  author_email: notus@list.ru
+  author_url: ''
+  date: '2011-09-25 18:21:17 +0200'
+  date_gmt: '2011-09-25 16:21:17 +0200'
+  content: "@Jens  I'd this sad experience. \r\nA very good system was born, caught
+    a wide market(still takes one) then was sold to ...,\r\n then stops self development
+    \r\n(just stupid refactoring, refactoring..).\r\nNow, indian supporters accompanies
+    \ \"her\" to dying.\r\nShe was not rewritten right time."
+- id: 4305
+  author: bart
+  author_email: bdeneuter@gmail.com
+  author_url: ''
+  date: '2011-09-25 23:01:35 +0200'
+  date_gmt: '2011-09-25 21:01:35 +0200'
+  content: Eric Evans has similar ideas (<a href="http:&#47;&#47;www.infoq.com&#47;presentations&#47;strategic-design-evans"
+    title="strategic designs" rel="nofollow">. His idea is to create a platform on
+    top of the lagecy application. On this platform you can write your new shiny,
+    tested code. You use an anticorruption layer to avoid that the legacy code will
+    leek in your new code. And if you follow Martin Fowler you can apply event interception
+    and asset capture to move the core functionalities away from the legacy code (<a
+    href="http:&#47;&#47;martinfowler.com&#47;bliki&#47;StranglerApplication.html"
+    rel="nofollow">. At the end it is all about risks.
+- id: 4340
+  author: 'Schauderhaft: Don&#8217;t Rewrite Your Application | Joachims Small World'
+  author_email: ''
+  author_url: http://joachimtuchel.wordpress.com/2011/10/03/schauderhaft-dont-rewrite-your-application/
+  date: '2011-10-03 10:21:57 +0200'
+  date_gmt: '2011-10-03 08:21:57 +0200'
+  content: "[...]    I&#8217;m probably the last to find this excellent piece on Jens
+    Schauder&#8217;s Blog called Don&#8217;t Rewrite Your Application. It&#8217;s
+    not only worth reading, but also thinking about it and memroizing it. There&#8217;s
+    [...]"
+- id: 304679
+  author: Make life easier&#8230; when working on large CRUD apps (generate it) |
+    Freeport Metrics
+  author_email: ''
+  author_url: https://www.freeportmetrics.com/blog/crud-generation-framework/
+  date: '2014-10-14 14:51:57 +0200'
+  date_gmt: '2014-10-14 12:51:57 +0200'
+  content: "[&#8230;] We hoped&#47;expected to avoid rewrite but the client was requesting
+    dramatic change to the data model with a thick pre-existing application stack
+    requiring a dozen artifact changes per data model change. Sounds like a perfect
+    recipe for one nasty, tedious rewrite. This time we are going to do it right&#8230;&Acirc;&nbsp;aren&acirc;&euro;&trade;t
+    we? [&#8230;]"
+---
+<p>When stuck with a legacy code base you'll hear the claim "We'll have to rewrite this from scratch in order to fix it!" It sounds promising. You start with a clean slate. You can do all the good stuff without all the mistakes. The only problem: It doesn't work. Here is why.</p>
+<ol>
+<li>What every you might think of the code base and the developers that created it: They weren't stupid nor evil. So chances are the results of your work will look just as ugly in two years from now.<&#47;li>
+<li>You don't know the requirements: Part of the reason legacy code bases are ugly is that requirements change. There is no reason for you to assume this won't stop.So chances are the results of your work will look just as ugly in two years from now.<&#47;li>
+<li>You don't have the time: As long as the rewrite isn't done, you'll need to maintain and probably evolve the current application. If it is of any importance, you can't ignore it for the months to come. If you can you should do so without wasting your time with a rewrite.<&#47;li><br />
+<&#47;ol><br />
+Instead of rewriting the application refactor it. Learn to properly estimate the effort needed for implementing new features in a clean way. Add some time to make the code immediately around that new feature a little cleaner as well. Use that as estimate. This way the application will become a little cleaner with every update. Nobody needs to spend a huge lump of money without a good chance on a reasonable ROI. Instead you spend a little money and get what you paid for. The interesting effect of this approach is: The part of the code changed often will become cleaner fast. And nobody should be concerned to much with code that doesn't change anyway.</p>
+<p>If you can't implement new features in a clean way I claim: You aren't really able to implement the whole application in a clean way from scratch either.</p>
+<p>There are only a few cases in which I'm willing to believe a rewrite is benefical:</p>
+<ol>
+<li>Change of basis technology: Is the legacy code written in Cobol and you will loose the last machine running that? Is it &Acirc;&nbsp;a rich client and it must become an internet application? You might not have a choice.<&#47;li>
+<li>Change of scope: Is 80% of code not needed anymore due to some changes in requirements? And you have to implement just as much for new features? You are doing a rewrite anyway.<&#47;li>
+<li>Tiny application: When the rewrite is done end of the week, I guess it is Ok to do it. But I still recommend doing it using refactorings. It will teach you the technique for the next larger legacy application.<&#47;li>
+<li>Somebody is willing to pay for the rewrite, but not for the effort needed to keep new code clean. It sounds extremely stupid to me, but I was told this happens ...<&#47;li><br />
+<&#47;ol></p>

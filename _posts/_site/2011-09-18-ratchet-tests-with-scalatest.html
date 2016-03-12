@@ -1,0 +1,49 @@
+<p>Ever found more broken things in a project than you possible could fix in one go? I'm exactly in that situation. We have a test which checks for certain dependencies in our project. The problem: We discovered that the test was broken and didn't report all disallowed dependencies. We do know how to fix it, but if we do it will fail. And since there are many violations it will take quite some time to fix all of them. But of course we want to prevent even more violations of our dependency rules. </p>
+<p>The solution could be a ratchet on the tests. A contraption which accepts broken tests, but which doesn't allow tests to fail once they succeeded.</p>
+<p>For ScalaTest you can create appropriate tests using this simple <tt>Ratchet<&#47;tt> trait</p>
+<pre lang="scala">
+package de.schauderhaft.ratchet<br />
+import org.scalatest.AbstractSuite<br />
+import org.scalatest.Suite<br />
+import org.scalatest.TestFailedException</p>
+<p>trait Ratchet extends AbstractSuite {<br />
+    self : Suite =></p>
+<p>    private var tests = Set[String]()</p>
+<p>    def ratchet(ratchetedTests : Set[String]) {<br />
+        tests = ratchetedTests<br />
+    }</p>
+<p>    override abstract def withFixture(theTest : NoArgTest) {<br />
+        if (tests.contains(theTest.name)) {<br />
+            var failedToFail = false<br />
+            try {<br />
+                super.withFixture(theTest)<br />
+                failedToFail = true<br />
+            } catch {<br />
+                case ex : TestFailedException =><br />
+            }<br />
+            if (failedToFail)<br />
+                fail("Remove '%s' from the ratchet it doesn't fail anymore".format(theTest.name))<br />
+        } else<br />
+            super.withFixture(theTest)<br />
+    }<br />
+}<br />
+<&#47;pre></p>
+<p>It adds a <tt>ratchet<&#47;tt> method to your suite. You pass it a <tt>Set<&#47;tt> of test names. These are the tests that you expect to fail. If they do fail, the <tt>Ratchet<&#47;tt> will convert that failure to a success. If a test which you expect to fail succeeds, the <tt>Ratchet<&#47;tt> will make sure it does fail with a message saying you should remove it from the tests expected to fail. Tests not registered with the <tt>ratchet<&#47;tt> method behave just as normal tests do. This is how the contraption looks in action with an example test suite: (Note tests which start witch 'expected:' do fail</p>
+<pre lang="scala">
+class RatchetTestDemo extends FunSuite with ShouldMatchers with Ratchet {<br />
+    ratchet(Set(<br />
+        "a failing test with ratchet does not fail",<br />
+        "expected: a succeeding test with ratchet fails"))</p>
+<p>    test("a failing test with ratchet does not fail") {<br />
+        fail<br />
+    }</p>
+<p>    test("expected: a failing test without ratchet fails") {<br />
+        fail<br />
+    }</p>
+<p>    test("a succeeding test without ratchet succeeds") {<br />
+    }</p>
+<p>    test("expected: a succeeding test with ratchet fails") {<br />
+        println("hallo")<br />
+    }<br />
+}<br />
+<&#47;pre></p>

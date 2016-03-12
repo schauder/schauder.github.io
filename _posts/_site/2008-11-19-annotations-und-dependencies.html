@@ -1,0 +1,20 @@
+<p>Seit mit JDK 1.5 (aka Java2 Version 5 (Kopfsch&Atilde;&frac14;ttel)) Annotations eingef&Atilde;&frac14;hrt wurden, wurden viele XML Dateien durch Annotations ersetzt. Prinzipiell sind Annotations auch eine feine Sache, aber bei der ganzen Begeisterung f&Atilde;&frac14;r die (nicht mehr so ganz) neue Technologie schiesst man leicht &Atilde;&frac14;ber das Ziel hinaus. Falls euch das noch nicht passiert ist, dann ist dieser Artikel f&Atilde;&frac14;r euch. Falls doch, k&Atilde;&para;nnt ihr zusammen mit mir in Erinnerungen schwelgen.</p>
+<p>Das Sch&Atilde;&para;ne an Annotations ist, das sie Teil der Java Sprache sind und mit &Atilde;&frac14;bersetzt werden, dementsprechend gibt es Compiler Fehler wenn man zu gro&Atilde;&Yuml;en Murcks macht. Nehmen wir zum Beispiel an, wir wollen per Konfiguration zu einer Property einer Klasse definieren, was f&Atilde;&frac14;r eine Art Filter f&Atilde;&frac14;r die Suche nach diesem Attribut verwendet werden kann.</p>
+<p>Mit XML k&Atilde;&para;nnte das so aussehen:</p>
+<pre language="xml">
+<entity class="de.schauderhaft.Person"><br />
+    <attrib name="name" filter="de.schauderhaft.LikeFilter"><&#47;attrib><br />
+<&#47;entity><&#47;pre><br />
+Vertippt man sich dabei bei einem der beiden enthaltenen Klassennamen hat man verloren und wird erst zur Laufzeit mit Fehlermeldungen bombardiert. Mit Annotations geht das viel besser:</p>
+<pre language="java">
+public class Person{<br />
+    @Filter(theClass= de.schauderhaft.LikeFilter)<br />
+    public String getName(){ ...<br />
+    }<br />
+}<&#47;pre><br />
+F&Atilde;&frac14;r die Person muss der Klassenname nicht noch einmal angegeben werden, da wir uns ja in eben dieser Klasse befinden. Auch die Zuordnung zu der Property ist allein dadurch klar, dass die Annotation eben am Getter steht. Und der Klassenname der Filterklasse? Wenn der falsch geschrieben ist, meckert der Compiler, und besser, man schreibt ihn garnicht erst falsch, da er per autocompletion entsteht. Aber ist das wirklich das gelbe vom Ei?</p>
+<p>Die Probleme werden offensichtlich, wenn man versucht die Person-Klasse au&Atilde;&Yuml;erhalb des urspr&Atilde;&frac14;nglich vorgesehenen Kontexts zu verwenden. Erstens: die Filter Annotation ist im Zweifelsfall nicht bekannt, da sie Teil eines speziellen Frameworks ist. Zweitens, die Klasse&Acirc;&nbsp; de.schauderhaft.LikeFilter ist ebenfalls nicht bekannt. Mit ein wenig Sorgfalt und wenigen einfachen Regeln lassen sich aber beide Probleme in den Griff bekommen.</p>
+<ol>
+<li>Wenn ihr ein Framework baut, welches eigene Annotations nutzt, macht die Annotations als kleines JAR separat verf&Atilde;&frac14;gbar. So k&Atilde;&para;nnen Klassen mit den Annotations versehen werden und vergr&Atilde;&para;&Atilde;&Yuml;ern den Classpath nur geringf&Atilde;&frac14;gig. Und wenn die Annotations gut entworfen sind, dann behalten sie einen gro&Atilde;&Yuml;en Teil ihrer Aussagekraft. Und k&Atilde;&para;nnen auch au&Atilde;&Yuml;erhalb ihres urspr&Atilde;&frac14;nglich geplanten Einsatzsgebietes verwendet werden.<&#47;li>
+<li>&Atilde;&oelig;berlegt euch gut, ob ihr wirklich Klassen als Parameter von Annotations verwendet. Die sind zwar charmant, aber sie machen die annotierte Klasse abh&Atilde;&curren;ngig von der Klasse, die als Parameter angegeben wurde. In vielen F&Atilde;&curren;llen geht dies Abh&Atilde;&curren;ngigkeit in die falsche Richtung, in dem obigen Beispiel von der Model Schicht in die GUI Schicht. Ein String, ein Enum, oder wenn es denn vom Typ Class sein soll, ein Interface sind oft die bessere Wahl. Sie transportieren auf abstakte Weise Informationen, ohne festzulegen, wie diese verwendet werden sollen. Im Beispiel: Nach dem Namensattribut soll Like Syntax gesucht werden, unabh&Atilde;&curren;ngig davon, ob daraus eine Eingabebox in einem Webdialog, einer Swingmaske, oder ein Argument eines Webservices wird.<&#47;li><br />
+<&#47;ol></p>

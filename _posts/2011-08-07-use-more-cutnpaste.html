@@ -1,0 +1,45 @@
+---
+layout: post
+status: publish
+published: true
+title: Use More Cut'n'Paste
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 879
+wordpress_url: http://blog.schauderhaft.de/?p=879
+date: '2011-08-07 21:38:25 +0200'
+date_gmt: '2011-08-07 19:38:25 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- clean code
+- code reuse
+comments:
+- id: 3985
+  author: Ralf Westphal
+  author_email: info@ralfw.de
+  author_url: http://ralfw.blogspot.com
+  date: '2011-08-07 22:54:13 +0200'
+  date_gmt: '2011-08-07 20:54:13 +0200'
+  content: "+1 Developing re-usable libraries easily can be a case of premature optimization."
+- id: 4007
+  author: Odedp
+  author_email: oded@oded.com
+  author_url: ''
+  date: '2011-08-10 14:49:33 +0200'
+  date_gmt: '2011-08-10 12:49:33 +0200'
+  content: "+1"
+---
+<p>Cut'n'Paste is frowned upon by most developers. And rightly so. If you copy code around you also copy bugs and missing features around. If you later need to make any change to that source code you have to copy the change to every single place where you copied the original snippet. Not a good thing.</p>
+<p>So the natural thing to do is to factor out common code into separate methods, classes and finally libraries. Great. But there is a downside to it.</p>
+<p>Often code doesn't get copied around as it is. It gets tweaked and adapted to the new environment in order to do its work. If you have factored out the code into some kind of library this library needs to support all the various ways of tweaking via some kind of API. This of course makes the library more complex.</p>
+<p>As long as we consider only a single project where everybody has access to all the code and at least some basic understanding of it this is all fine. And I vote for extracting almost all duplicated code in a project. The story changes a lot though when we are talking about code reuse between projects. Now you have to maintain a library that is used by multiple independent groups of people. People that you might not even know. This implies that you have to combine way more requirements in your library. At the same time it gets harder to change, because every breaking change will cause work for projects no matter if they needed that new feature that caused the change. Also for a given project which might have a problem with the library it gets way slower to fix the problem, since they&Acirc;&nbsp; can't do it on their own. They have to consult with the owner of the library which has to weigh the issue at hand against the complexity of the library and the requirements of other projects.</p>
+<p>These additional costs only pay of if the reduction of work by reusing the library is pretty big. Or if it is a real stable library without many requests for change.</p>
+<p>In typical enterprise settings very often these criteria aren't met. So my recommendation is: Just use cut and paste, i.e. make the actual source code available to projects. These projects can use the code as it is or modify to their tasting. If they have problems with their code, they have everything they need to fix it. But they also have to do it on their own. No mommy to run to.</p>
+<p>If you are really lucky you can get some kind of feedback from the users of the code. This would allow to improve it so the next project grabbing it gets an improved version. And if finally thing solidify you might turn it into a library which gets distributed in binary form and maintained by a central team.</p>

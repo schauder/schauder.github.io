@@ -1,0 +1,13 @@
+<p>Wait ... wasn't that 'Keep your tests green'? Of course I agree, if 50% of your tests are red all the time you have a problem. BUT if 100% of the tests are green all the time, then how do you know they can actually detect the errors they are supposed to cover? Simple answer you don't.</p>
+<p>It really sounds like a trivial thing, but it isn't. So far I have three times accountered scenarios where tests couldn't possibly become red. And in all cases this went undetected at least for some time:</p>
+<ul>
+<li>The first time I finally found the problem, when I by excident ran code coverage not only for the code under test but also for the Tests themself. I was quite surprised to find many classes with partial coverage as well with no coverage at all. The partial coverage turned out to be ok. This was due to tests checking for thrown exceptions. Those resulted in segments of the testcode that where never run. But the Tests that never ran at all, well they never ran at all. They were not included in any test suite.<&#47;li>
+<li>The next time we were using Teamcity to run our tests on each commit. We were kind of proud of ourself, because the tests where green for quite some time now. We clicked around in the statistic a little just to show to ourself how great we were. But what was that?The number of executed tests wen't down! Two days ago it went from 396 to 387! Who the heck deleted the tests? Well nobody did. But a change in the code caused an exception during setup of some tests. And this exception was silently ignored by Teamcity. But the associated tests of course didn't ran, thus reducing the test count. <a href="http:&#47;&#47;www.jetbrains.net&#47;jira&#47;browse&#47;TW-3809">JetBrains is aware of the problem<&#47;a>, but it doesn't seem to be high on the priority list.<&#47;li>
+<li>I detected the last on when I tried to gather some code statistics for a project and didn't get any results. In this case no tests where run at all! The team used the <a href="http:&#47;&#47;ant.apache.org&#47;manual&#47;OptionalTasks&#47;junit.html">ant junit target<&#47;a> with the batchtest nested element. But the pattern they used was wrong. So no tests where picked up. But since no tests failed the build was reported as a success.<&#47;li><br />
+<&#47;ul><br />
+All cases where pretty trivial to fix, but also in all cases the not excecuted tests surfaced some problem when they where finally executed. So do yourself a favor and make sure that</p>
+<ul>
+<li>your tests can fail (test first is one way to do that) .<&#47;li>
+<li>all your tests do run (using code cover and examination of statistics)<&#47;li><br />
+<&#47;ul><br />
+And only than make sure that your tests stay green.</p>

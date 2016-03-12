@@ -1,0 +1,67 @@
+---
+layout: post
+status: publish
+published: true
+title: Dependency Antipatterns - The Bypass
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1336
+wordpress_url: http://blog.schauderhaft.de/?p=1336
+date: '2013-03-24 17:21:45 +0100'
+date_gmt: '2013-03-24 15:21:45 +0100'
+categories:
+- Softwaredevelopment
+tags:
+- anti pattern
+- degraph
+- dependency
+comments:
+- id: 9669
+  author: oop_conference
+  author_email: twitter.97459028@example.com
+  author_url: http://twitter.com/oop_conference
+  date: '2013-03-24 17:58:10 +0100'
+  date_gmt: '2013-03-24 15:58:10 +0100'
+  content: 'Blog: Dependency Antipatterns &acirc;&euro;&ldquo; The Bypass: This is
+    the second part in my little series about de... http:&#47;&#47;t.co&#47;vYj7QDL9X1
+    @jensschauder'
+- id: 9688
+  author: robdiana
+  author_email: twitter.14442748@example.com
+  author_url: http://twitter.com/robdiana
+  date: '2013-03-25 17:15:45 +0100'
+  date_gmt: '2013-03-25 15:15:45 +0100'
+  content: http:&#47;&#47;t.co&#47;2RyjTucQNO Dependency Antipatterns &acirc;&euro;&ldquo;
+    The Bypass | Schauderhaft
+- id: 9813
+  author: Dependency Management is Risk Management | Form Follows Function
+  author_email: ''
+  author_url: http://genehughson.wordpress.com/2013/04/08/dependency-management-is-risk-management/
+  date: '2013-04-08 18:31:21 +0200'
+  date_gmt: '2013-04-08 16:31:21 +0200'
+  content: "[...] of framework classes are all dependency management issues. For these
+    types of dependencies, the anti-patterns tend to be well known, as are techniques
+    for managing [...]"
+- id: 63459
+  author: Dependency Management is Risk Management | Iasa Global
+  author_email: ''
+  author_url: http://blog.iasaglobal.org/2014/05/27/dependency-management-is-risk-management/
+  date: '2014-05-27 22:24:57 +0200'
+  date_gmt: '2014-05-27 20:24:57 +0200'
+  content: "[&#8230;] of framework classes are all dependency management issues. For
+    these types of dependencies, the anti-patterns tend to be well known, as are techniques
+    for managing [&#8230;]"
+---
+<p>This is the second part in my little series about dependency anti-patterns. The <a href="&#47;2013&#47;03&#47;17&#47;dependency-antipatterns-god-node&#47;">first part was about the God Node<&#47;a>. Images and <a href="https:&#47;&#47;github.com&#47;schauder&#47;degraph&#47;wiki&#47;Nomenclature">nomenclature<&#47;a> are based on <a href="https:&#47;&#47;github.com&#47;schauder&#47;degraph">Degraph<&#47;a>.</p>
+<p>As long as the affected nodes are collapsed the Bypass looks just like any circular dependency. </p>
+<p><a href="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2013&#47;03&#47;bypassCollapsed.png"><img src="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2013&#47;03&#47;bypassCollapsed.png" alt="bypassCollapsed" width="254" height="114" class="alignnone size-full wp-image-1360" &#47;><&#47;a></p>
+<p>But if you expand them something strange happens. In one node (A) (the main road so to say) one part of the subnodes gets pushed to the left (A1), while the rest gets pushed to the right (A2). The A1 nodes depend on B (the actual bypass) and B depends on A2. Since all arrows still go from left to right it can get hard to spot the problem, when more nodes are involved. </p>
+<p><a href="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2013&#47;03&#47;bypassExploded.png"><img src="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2013&#47;03&#47;bypassExploded.png" alt="bypassExploded" width="293" height="233" class="alignnone size-full wp-image-1359" &#47;><&#47;a></p>
+<p>I have seen this many times when someone attempted some kind of dependency injection, but didn't complete it. Maybe B is a plugin like class implementing a feature for an application A. For this it implements some kind of plugin interface A2, so that A doesn't actually need to know B. But something (A1) has to plug everything together, so it has to know A1 and B. That is ok, it just shouldn't be in the same node as A2.</p>
+<p>Which already gives a fix to this kind of problem: Move A1 (or A2) to its own node, basically splitting A in two pieces, voila you just got rid of a circular dependency. An alternative is to move A2 into B. The correct decision depends on the semantics of the nodes involved.</p>

@@ -1,0 +1,39 @@
+---
+layout: post
+status: publish
+published: true
+title: Layering Validations
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 119
+wordpress_url: http://blog.schauderhaft.de/2008/12/16/layering-validations/
+date: '2008-12-16 20:26:13 +0100'
+date_gmt: '2008-12-16 19:26:13 +0100'
+categories:
+- Softwareentwicklung
+- Design
+tags: []
+comments: []
+---
+<p>Almost every application needs validation, and validation frameworks do support developers for so long now that there finally is a <a href="http:&#47;&#47;jcp.org&#47;en&#47;jsr&#47;detail?id=303">JSR<&#47;a> for it. Yet one thing I haven't seen so far: a concept for layering validations. So here it comes</p>
+<p>If you try to automate validation you'll soon discover that there are different types of validation which I call 'layers'.</p>
+<p><strong>Character level:<&#47;strong> Many input fields can only use a certain subset of characters. If the field asks for a number this subset might be: {'-','1','2','3','4','5','6','7','8','9','0','.'}. If any character not in this set is present in the input, the input can not be valid. Note: of course the legal set of character might vary depending on your requirements. E.g. it might be allowed to use a '+' as a prefix, or scientific notation, thus you would need to allow 'E' or 'e' as well.<br />
+<strong><br />
+Local level:<&#47;strong> On this level a single field ist tested with some arbitrary code, as long as the code can be executed without any network communication. "Must be a number" is such an example, another one would be the requirement, that a number must be in a specific range. Many requirments can be implemented as a regular expression, but this is necessary. When this level of validation is passed, the input should be convertable into the target type (e.g. java.lang.Integer)</p>
+<p><strong>Form level:<&#47;strong> This level contains rules that check the consistency across more than a single field. For example to check a credit card number one needs to compute a checksum. But the algorithm to be used, depends on the type of card, so if the checksum doesn't match, the reason might be an error in the credit card number or a wrongly choosen card type.</p>
+<p><strong>Global level:<&#47;strong> On this level the input fields of the form alone aren't sufficient. Instead some kind of network ressource is required. The most typical case would be the check against a unique key but address validation via a webservice would be another candidate.</p>
+<p>Note that while some layers may be implemented in a webpage using javascript it is common knowledge (I hope) that you shouldn't rely on it and always validate on the server side as well.</p>
+<p>Ok so now that we have layers, what do we do with it? We should use them to decide when to validate and how to react on validation failure:</p>
+<ul>
+<li>On character level we should simply ignore any invalid input, possibly reporting this fact with a beep.<&#47;li>
+<li>On single field local level we can validate during typing. An indicator of invalid input should be placed near the input field (an icon, or a colored background for example). An error message describing what is wrong could also be placed next to the input field.<&#47;li>
+<li>On Form Level we can validate during typing, but I'd consider to validate only on focus lost, since computation involved with this type of validation might be a little more expensive. The involved fields should get an indicator what went wrong, but an error message should probably be in a common area, e.g. at the top of the form, in order to avoid duplicate validation messages.<&#47;li>
+<li>On Global level validation should only happen on submission or asynchronusly after focus lost. This is because this kind of validation can be very slow. Indication of validation failure should be indicated just as on Local or Form level, depending on if there is one field or more then one field that are relevant.<&#47;li><br />
+<&#47;ul><br />
+Also since the validation gets computational more expensive with every level, one should consider validating against one level only when all other levels succeed without a problem. This keeps the computational costs low, and allows to rely in one validation on the results of other validations.&Acirc;&nbsp; The drawback is that the user might see one validation message, fixes it just to see another one.</p>

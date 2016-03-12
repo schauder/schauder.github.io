@@ -1,0 +1,88 @@
+---
+layout: post
+status: publish
+published: true
+title: Even More Testing With Scalatest
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 695
+wordpress_url: http://blog.schauderhaft.de/?p=695
+date: '2011-04-03 21:03:44 +0200'
+date_gmt: '2011-04-03 19:03:44 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- scala
+- test
+- scalatest
+- before
+- after
+- setup
+- fixture
+comments: []
+---
+<p>One important feature of any test framework is setting up a test fixture and tearing it down afterwards.</p>
+<p>In JUnit 3 for you did that by overriding the methods <tt>setup()<&#47;tt> and <tt>teardown()<&#47;tt> of the class <tt>TestCase<&#47;tt>, which every test needed to extend. JUnit 4 was a little more flexible. The name of the methods was irrelevant, instead you used annotations to tag the methods you wanted to use for setup or teardown. The anotations where are <tt>@Before<&#47;tt>, <tt>@BeforeClass<&#47;tt>, <tt>@After<&#47;tt> and <tt>@AfterClass<&#47;tt>. This lead to the somewhat messy situation where the setup of a test was sometimes called setup, sometimes Before and sometime it was given a name that actually described what it was doing like <tt>createAnEmptyStack()<&#47;tt>. As a result the setup and teardown methods weren't easily identified any more.</p>
+<p>How does ScalaTest solve the issue? It goes back to the inheritance solution, but benefits from the possibility to inherit from multiple traits. So you can still have tests that extend some completely unrelated trait. As so often scalatest offers multiple option. For JUnit developers the following is probably the most intuitive:</p>
+<pre lang="scala">import org.scalatest._</p>
+<p>class FibonacciScalaTest extends FunSuite with BeforeAndAfterEach with BeforeAndAfterAll {</p>
+<p>    override def beforeEach() {<br />
+        println("beforeEach")<br />
+    }</p>
+<p>    override def afterEach() {<br />
+        println("afterEach")<br />
+    }</p>
+<p>    override def beforeAll() {<br />
+        println("beforeAll")<br />
+    }</p>
+<p>    override def afterAll() {<br />
+        println("afterAll")<br />
+    }</p>
+<p>    test("test something") {<br />
+        println("inside the test")<br />
+        assert(1 === (3 - 2))<br />
+    }</p>
+<p>    test("test something else") {<br />
+    	println("inside the test")<br />
+    	assert(2 > 1)<br />
+    }<br />
+}<&#47;pre><br />
+We mix two traits <tt>BeforeAndAfterEach<&#47;tt> and <tt>BeforeAndAfterAll<&#47;tt> into our test class, which allows as to override before&#47;afterEach and before&#47;afterAll which get executed as probably expected yielding the following output:</p>
+<pre>beforeEach<br />
+inside the test<br />
+afterEach<br />
+beforeEach<br />
+inside the test<br />
+afterEach<br />
+afterAll<&#47;pre><br />
+If you are using this technique to setup some variables that get used inside the test, note that there is only on instance of the test class no matter how many tests it contains. So make sure you clean everything up after your test. Since cleaning up is error prone there are other strategies you can use. You can use the <tt>OneInstancePerTest<&#47;tt> trait, which ensures that each test as its own test instance, as you are used to from JUnit.</p>
+<p>I consider different approach more idiomatic for Scala(Test): pass the stuff you need inside your test into the test as a parameter! In order to do this for every Suite trait (like e.g. FunSuite) there is a matching Fixture* trait. Let's examine an example using the <tt>FixtureFunSuite<&#47;tt>. In order to make it work we need to do three things:</p>
+<ol>
+<li>specify what kind of fixture our tests expect. We do this by defining the&Acirc;&nbsp;type <tt>FixtureParam<&#47;tt> inside the test class<&#47;li>
+<li>the tests actually have to accept a fixture of that type as a parameter<&#47;li>
+<li>we have have to create the FixtureParam objects and pass them into the tests when calling them for execution. This happens in the method <tt>withFixture<&#47;tt><&#47;li><br />
+<&#47;ol></p>
+<pre lang="scala">
+class FibonacciScalaTest extends FixtureFunSuite {<br />
+    type FixtureParam = scala.collection.mutable.Set[String]</p>
+<p>    def withFixture(testExpectingOneArgument : OneArgTest){<br />
+    	testExpectingOneArgument(scala.collection.mutable.Set("a","b","c"))<br />
+    }</p>
+<p>    test("length increases by adding elements") { set =><br />
+        set += "x"<br />
+        assert(4 === set.size)<br />
+    }</p>
+<p>    test("length decreases by adding elements") { set =><br />
+        set -= "a"<br />
+        assert(2 === set.size)<br />
+    }<br />
+}<br />
+<&#47;pre></p>
+<p>Note that both tests would fail if they would see the changes done by the other tests, but they don't. For just doing normal setup, this approach might be a little to verbose, but consider that you have full control over how you call the tests. You could use this in order to run each test 20 times in parallel threads in order to test for concurrency problems, or in the EDT of Swing for swing related tests. Faithful readers might remember such a list from a different article: It is exactly the kind of stuff you can do with <a href="&#47;2010&#47;08&#47;15&#47;use-cases-for-junit-rules&#47;">JUnit Rules<&#47;a>.</p>
+<p>If you read so far you might as well be interested in <a href="&#47;2010&#47;12&#47;26&#47;testing-with-scala&#47;">Testing with Scala<&#47;a> and <a href="&#47;2011&#47;01&#47;16&#47;more-on-testing-with-scalatest&#47;">More on Testing with Scalatest<&#47;a></p>

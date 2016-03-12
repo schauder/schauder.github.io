@@ -1,0 +1,22 @@
+<p><a href="http:&#47;&#47;schauder.github.io&#47;degraph&#47;">Degraph<&#47;a> is my personal open source project for visualizing and testing package dependencies in JVM byte code. I released the latest version 0.1.1, so go grab it while it is hot. </p>
+<h2>What's new<&#47;h2></p>
+<p>This release in mainly a bug fixing release. So the important changes are two bug fixes. Degraph 0.1.0 missed a few dependencies to static methods, and through class valued annotations. So you absolutely should upgrade. I hope you don't use many static methods, so the first bug won't bite you as bad. The second one is actually quite annoying with certain frameworks. Spring for example uses lot's of annotations, including those that contain references to classes.</p>
+<p>Fortunately upgrading your tests will be easy, because degraph-check is now available through <a href="http:&#47;&#47;mvnrepository.com&#47;artifact&#47;de.schauderhaft.degraph&#47;degraph-check&#47;0.1.1">Maven Central<&#47;a>, which makes using it really a no-brainer.</p>
+<p>Although this release is just a minor one, a tiny new feature slipped in almost by accident. And when I tried it at work it turned out to be extremely helpful: You can now instruct Degraph to create a graphml file for failed tests. Just provide a path using the <tt>printTo<&#47;tt> method. An example looks like this:</p>
+<pre lang="scala">
+  test("Check identifies cycles in junit") {<br />
+    classpath.printTo("junitDependencyFailure.graphml").including("**.junit.**") should  not be (violationFree)<br />
+  }<br />
+<&#47;pre></p>
+<p>This allows for a relative quick workflow:</p>
+<ul>
+<li>Write your test<&#47;li>
+<li>Run the test<&#47;li>
+<li>Open the resulting graphml file in <a href="http:&#47;&#47;www.yworks.com&#47;en&#47;products&#47;yfiles&#47;yed&#47;">yed<&#47;a><&#47;li>
+<li>Modify code or test<&#47;li>
+<li>Run the test<&#47;li>
+<li>Reopen in yed<&#47;li>
+<li>Repeat the previous three steps until done<&#47;li><br />
+<&#47;ul></p>
+<p>I found this tremendously helpful when fixing the problems that the bugfixes mentioned before surfaced.</p>
+<p>Give it a try and let me know about your experiences in the comments below, or in the <a href="https:&#47;&#47;github.com&#47;schauder&#47;degraph&#47;issues">issue tracker over at github<&#47;a>.</p>

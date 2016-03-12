@@ -1,0 +1,15 @@
+<p><span style="line-height: 1.5em;">When I do Clean Code Training or if I discuss the topic with coworkers one argument comes up over and over again:<&#47;span></p>
+<p>"But if I have split all my code in those tiny methods and classes, how will I find anything? I'll have to navigate through dozens of files!"</p>
+<p>The problem with this argument is: It is not that wrong. And I have certainly seen code where I had to navigate a dozen classes very carefully in order to understand what is going on.</p>
+<p>If you look at it from an abstract point of view it looks like it even has to be this way. If you want to completely understand a piece of code it's certainly best, to have it all in one piece on the monitor. You can go from top to bottom, line by line. If you have lots of little methods and classes, you in addition to that have to navigate through all that classes and methods, keeping track on from where you called this piece of code. Obviously these are additional tasks that just make your work harder!?</p>
+<p>I still insist this argument is wrong. The mistake is the premise that the task at hand is to understand all the code.</p>
+<p>It is very limited what you can keep in your brains working memory at any given time. So for any non trivial program the task to completely understand it is not feasible.</p>
+<p>The real task at hand is to</p>
+<ol>
+<li>limit the amount of code you have to understand<&#47;li>
+<li>make it as easy to understand as possible<&#47;li><br />
+<&#47;ol><br />
+The key to that is abstraction!</p>
+<p>Let me ask you a question: How often do you use a HashMap or what ever the equivalent in your preferred programming language is used? Probably many times a week, right? But how often do you actually look into the source code of a HashMap? Probably next to never! We just know what a Map does and that a HashMap is one very good general purpose implementation of it. That's all we need to know about it. We just use it. We just know how it behaves. We just understand what is going on when it get's called.</p>
+<p>If your abstractions, i.e. your methods and classes are just like that, you don't need to look at their source code most of the time. You just read the name and you know what it does. You probably don't know how it does it. At least not in detail. But you don't need to. If you know what it does, you know enough to decide, if you need to step into that class or not, for what ever you try to achieve right now.</p>
+<p>Of course if what your classes and methods do isn't as obvious as a get on a HashMap you still have room for improvement.</p>

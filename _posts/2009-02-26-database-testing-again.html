@@ -1,0 +1,42 @@
+---
+layout: post
+status: publish
+published: true
+title: Database Version Management ... Again
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 139
+wordpress_url: http://blog.schauderhaft.de/2009/02/26/database-testing-again/
+date: '2009-02-26 23:38:18 +0100'
+date_gmt: '2009-02-26 22:38:18 +0100'
+categories:
+- Softwaredevelopment
+tags:
+- agile
+- software development
+- database
+- testing
+comments:
+- id: 4890
+  author: Petr
+  author_email: hanys.petr@gmail.com
+  author_url: ''
+  date: '2012-01-25 17:19:12 +0100'
+  date_gmt: '2012-01-25 15:19:12 +0100'
+  content: The liquibase is quite good, but if you need something without "ridden
+    with horrible XML", try Flyway - http:&#47;&#47;code.google.com&#47;p&#47;flyway&#47;
+---
+<p>&Acirc;&nbsp;<a href="http:&#47;&#47;databaserefactoring.com&#47;PramodSadalage.html">Pramod Sadalage<&#47;a> author of <a href="http:&#47;&#47;www.amazon.de&#47;gp&#47;product&#47;0321293533?ie=UTF8&amp;tag=schauderhafte-21&amp;linkCode=as2&amp;camp=1638&amp;creative=19454&amp;creativeASIN=0321293533">Refactoring Databases: Evolutionary Database Design<&#47;a><img src="http:&#47;&#47;www.assoc-amazon.de&#47;e&#47;ir?t=schauderhafte-21&amp;l=as2&amp;o=3&amp;a=0321293533" style="border: medium none  ! important; margin: 0px ! important" width="1" border="0" height="1" &#47;> forwarded an email to the <a href="http:&#47;&#47;groups.yahoo.com&#47;group&#47;agileDatabases&#47;">agiledatabases <&#47;a>group announcing a new database migration tool (note: the tool is NOT writen by Pramod): <a href="http:&#47;&#47;www.dbmaintain.org">dbmaintain<&#47;a></p>
+<p>While I am glad that there are others worrying about the lack of basic software development tools in the database realm, I still think we are really missing to things.</p>
+<p>First: all these tools are using small migrations, and manage those. I think this is like directly writing patch files and then using some tools to assemble class files from those. Why not maintain one file for creating the schema or the changes from one release to the next. It is much easier to maintain and the version control system will split it into changes if you need it.</p>
+<p>Secondly: We now have <a href="http:&#47;&#47;code.google.com&#47;p&#47;dbmigrate&#47;">dbmigrate<&#47;a>, <a href="http:&#47;&#47;migratedb.sourceforge.net&#47;">migratedb<&#47;a>, <a href="http:&#47;&#47;www.liquibase.org&#47;">liquibase<&#47;a>, <a href="http:&#47;&#47;www.dbmaintain.org">dbmaintain<&#47;a>, <a href="http:&#47;&#47;dbdeploy.com&#47;">dbdeploy<&#47;a> but none seems to get real traction. Liquibase seems to be most active but even that doesn't cause enough search traffic to show up on google trends and it is so horribly ridden with XML that I don't even want to look at it.</p>
+<p>We need a JUnit equivalent for database release management. We need somebody with some traction in the community to pick one of those tools and push it forward real hard. Pramod? Martin? Anybody? Please!<a href="http:&#47;&#47;dbdeploy.com&#47;"><br />
+<&#47;a></p>
+<pre><a href="http:&#47;&#47;groups.yahoo.com&#47;group&#47;agileDatabases&#47;" class="moz-txt-link-freetext"></p>
+<p><&#47;a><&#47;pre></p>

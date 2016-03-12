@@ -1,0 +1,16 @@
+<p>A couple of weeks ago a coworker told me that they have a little utility in their projects in order to set private fields for tests. He kind of claimed they needed that since they are using Spring, which in production sets the dependency. I was a little confused. But after looking into it I realized that there is an (anti)pattern going on that needs some fighting against. Lets have a look at the pattern.</p>
+<p>Spring (and other DI frameworks) can inject dependencies into private fields. It looks like people like to use this because it combines some compelling properties:</p>
+<ul>
+<li>Very little boilerplate code. All you need is a simple annotation on the field.<&#47;li>
+<li>Since the field is private nobody outside the class can change it.<&#47;li><br />
+<&#47;ul><br />
+But now when you want to test your class and want to assign e.g. a mock to the field you have to either setup a Spring context in your tests or use reflection in order to access the field (just as Spring does).</p>
+<p>Now something is really starting to smell bad here. One of the purposes of Dependency Injection is to decouple code, which in turn should make the code easier to test. Now that didn't work out to well.</p>
+<p>So how can we clean up this mess? We can write a setter for the field. That solves the testing problem. It adds a little boiler plate code, but hey we are talking Java here, so you should be used to that. But now we have a setter which anybody can call at any time. At the very best that doesn't make any sense at all in the production environment. In the worst case somebody actually uses it and creates some ugly bug.</p>
+<p>So what do you do when you don't want anybody to change a field? Correct you make it final. Great, now you have a compile time error in the setter.You can only set a final field in a constructor. This leads naturally to the solution of all our problems (and possibly to world peace): <strong>Make your dependency a constructor argument!<&#47;strong></p>
+<p>This is the only place where dependencies really belong. If you try to stick to that rule I'd expect you'll encounter the following two problems.</p>
+<ol>
+<li>You'll find classes with lots and lots of constructor arguments. I'll bet that class does a lot of different things and really needs to get broken down into smaller pieces.<&#47;li>
+<li>You'll find cases where a class A needs an instance of B and B needs an instance of&Acirc;&nbsp; A. This is a typical case of a circular dependency and is obviously bad. In my experience the solution is either to make B a part of A when the two are so strongly dependent that they really should be one class. More often though there is at least one more class C hiding in there so that B doesn't need A but only C.<&#47;li><br />
+<&#47;ol><br />
+So really the problems you'll find when doing constructor based dependency injection are problems that are present in your current code already. So don't shoot the messenger, but fix the problems in your code and go for constructor arguments for dependency injection.</p>

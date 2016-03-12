@@ -1,0 +1,111 @@
+---
+layout: post
+status: publish
+published: true
+title: Why Aircraft Carriers are not Agile
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 192
+wordpress_url: http://blog.schauderhaft.de/?p=192
+date: '2009-08-23 20:02:09 +0200'
+date_gmt: '2009-08-23 19:02:09 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- agile
+- software development
+- waterfall
+comments:
+- id: 254
+  author: Steve Mitcham
+  author_email: smitcham@gmail.com
+  author_url: ''
+  date: '2009-08-26 04:17:06 +0200'
+  date_gmt: '2009-08-26 03:17:06 +0200'
+  content: "Very interesting post; however, blacksmiths have been make their own specialty
+    tools from simpler tools for thousands of years.\r\n\r\nI think the key element
+    that you're discussing, and that others have mentioned before, is that software
+    development more mirrors a craftmanship such as woodworking or cabinet making,
+    than engineering efforts."
+- id: 255
+  author: Jens Schauder
+  author_email: jens.schauder@lineas.de
+  author_url: http://blog.schauderhaft.de
+  date: '2009-08-26 05:21:36 +0200'
+  date_gmt: '2009-08-26 04:21:36 +0200'
+  content: "Hi Steve,\r\nyou are right about the blacksmiths they did make their own
+    tools. But these tools are needed for getting the job done, not for automating
+    it. The tools for automation, like steam driven hammers or modern automated systems
+    for creating and processing steel are done by a completely different group.\r\n\r\nThe
+    classification of software development as craftmanship might be a correct one,
+    but I would see that as a result of the immaturity of our craft. \r\n\r\nFor me
+    it becomes very obvious when one tries to estimate performance. This is next to
+    impossible even for skilled persons even for rather simple systems. Just us for
+    a long time it was impossible to calculate if a bridge or a damn will hold or
+    not.  So right now we do it like a craftman would do it. We look at our experience,
+    try to take our gut feeling into account and hope it works. I strongly hope this
+    will change some time, but I'd guess that will take quite some time."
+- id: 256
+  author: Oleg
+  author_email: oleg_ok@yahoo.com
+  author_url: ''
+  date: '2009-08-26 14:29:04 +0200'
+  date_gmt: '2009-08-26 13:29:04 +0200'
+  content: "I doubt that *designing* of aircraft carrier (that is \"writing code\")
+    is not done by using some agile techniqes. And customers do change requirements
+    at this stage. And they do receive new price tag and change of deliverables with
+    that.   \r\nThat's a stage we call \"writing code\" here.\r\n\r\nI am sure that
+    *building* of aircraft carrier is made by strict following to instructions&#47;blueprints.
+    \r\nThat's a stge we call \"compiling\" here."
+- id: 257
+  author: Giorgio Sironi
+  author_email: piccoloprincipeazzurro@gmail.com
+  author_url: http://giorgiosironi.blogspot.com
+  date: '2009-08-29 16:59:59 +0200'
+  date_gmt: '2009-08-29 15:59:59 +0200'
+  content: I like real world metaphors for software development. It can help a customer
+    understand why doing something is not simple as he thinks.
+---
+<p>[caption id="attachment_199" align="alignleft" width="300" caption="Aircraft Carrier"]<img class="size-medium wp-image-199" title="aircraft_carrier" src="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2009&#47;08&#47;472707_23563677-300x196.jpg" alt="Aircraft Carrier" width="300" height="196" &#47;>[&#47;caption]</p>
+<p>Itay Maman tries to answer the question posed in the title:</p>
+<blockquote>
+<div style="font-style: italic;"><a href="http:&#47;&#47;javadots.blogspot.com&#47;2009&#47;08&#47;why-aircraft-carriers-are-not-agile.html">Why aircraft carriers are not built using an agile methodology<&#47;a>?<&#47;div><br />
+And my answer is this:<br />
+<span style="font-style: italic;">Because the engineers can know up front that it will float<&#47;span></p>
+<p>That's it. That's the answer. That's the point I am making.<&#47;blockquote><br />
+I think the question is a good one, yet I do not agree on the answer. The mistake Itay makes is to reduce the task of building an aircraft carrier to the question: "Does it float?"</p>
+<p>I haven't been in any kind of military service. I have never been on an aircraft carrier (with the exception of a real cool flightsimulator with a real fighter cockpit). But I'd think the requirements for an aircraft carrier are rather complex. It should float. It should be difficult to hit with rockets or similiar, it should withstand hits with any kind of projectile, it should carry aircrafts and enable them to start and land. And of course it should allow the many women and man needed for the operation to live on the ship. You can't calculate this from the plans. And I am pretty sure that every single aircraft carrier is full of signs of improvisation where things didn't work as planned.</p>
+<p>On the other hand: proving algorithms in enterprise software is just as doable as calculating if an aircraft carrier floats. The referenced proof that one can't write a program that predicts for every program if it stops after finite time is next to irrelevant. Because for the typical applications this question is answered rather easily (ignoring bugs). For a desktop application it's simply: It does stop exactly iff anybody clicks on the close icon.</p>
+<p>One of the comments hints in the right direction:</p>
+<blockquote><p>Another reason that agile processes are not used in the construction of aircraft carriers is that people who sign the contract to purchase an aircraft carrier do not change the size and speed requirement after the ship has already been halfway completed. Nor do the bring back a ship that has already been delivered and say, "We need you to make the deck ten feet longer."<&#47;blockquote><br />
+But I'd expect these questions to be rather typical: "Oh we have this new fighter, it needs a longer deck. Can you make it?" And the people building aircraft carriers will try to do it or at least make a proposal on how to fix the problem. Actually this is the same problem Architects have (the real ones with a capital A). Customer request last minute changes all the time in all businesses of the world.</p>
+<p>So where is the difference between building Aircraft Carriers and Software?</p>
+<p>The first difference is the <strong>cost attached to a change<&#47;strong>! The cost of a change consists of the following parts:</p>
+<ol>
+<li> Cost of removing what is already there.<&#47;li>
+<li> Cost of adding what is supposed to be there in the new version.<&#47;li>
+<li> Cost of testing, taking care of side effects.<&#47;li>
+<li> Cost of not being able to use the subject of change during the change.<&#47;li><br />
+<&#47;ol><br />
+Number 2 and 3 is more or less the same for aircraft carriers and software. But number 1 and 4 differ a lot. If you replace a piece of an aircraft carrier, you have to remove the original piece, it attached to the ship really well I'd guess. With software it is just hitting the delete button a couple of times. Also during the replacement work, your software is fully available (assuming you are not doing changes directly to a production database). Only when everything is done you have to deploy the software which might cause an outage for limited time. This is very different for aircraft carriers. You can't start on a carrier, when engineers took that catapult out to replace it with a stronger one.</p>
+<p>So one real difference between software development and building an aircraft carrier or any other industry producing real physical artifacts is the cost of change.</p>
+<p>Once you realize that fact, the next revelation is: The grass is greener on our side! Aircraft Carrier Builder have to plan extremely detailed and carefully, because everybody involved knows: Changes are expensive. They just can't make mistakes.</p>
+<p>Very different for software developers: If we do something wrong the costs are only those attached for doing it the wrong way, which is rather cheap if you realize it immediately.</p>
+<p>Therefore agile methods try to detect errors fast, by getting feedback from the customer as often and early as possible.The waterfall approach tries to prevent changes.</p>
+<p>The second difference is in the <strong>process of automation:<&#47;strong> The software industry is the only industry that produces it's own tools. If a developer finds herself in a need of&Acirc;&nbsp; a certain kind of tool, she has everything available to write it herself. Especially if she finds herself doing things multiple times, it is very likely this job will get automated soon.</p>
+<p>A welder working on an aircraft carrier can't build a new version of welding equipment. She would need skills very different from the ones used in her day to day job.</p>
+<p>How does this affect the choice between agile and not so agile processes? Simply put: in software development everything which is done twice gets automated. So most things we do we, do for the first time. Which in turn makes it hard to predict how long it will take. In an aircraft carrier, you can calculate how many km of welding you have to do, compare that to the time needed for a meter of welding and get a pretty good estimate for the full time needed. The effect gets even more extreme when you build two aircraft carriers. The time needed for the second one should be extremely close to the time needed for the first one. Very different in software: Ctrl-C Ctrl-V done.</p>
+<p>So software projects are harder to predict, therefore an agile approach makes more sense, because you are doing a detailed planning only for a couple of days or weeks ahead.</p>
+<p>The third and final reason for going agile with software projects, but not with aircraft carriers is: <strong>We are immature<&#47;strong>.&Acirc;&nbsp; Well not the individuals, at least not each, but the industry as a whole. Depending on what exactly you consider a computer, the first one was build somewhere in the middle of the last century. Aircraft Carriers aren't that much older, but ships, rockets, flying devices and all the pieces (except the computers and software) making up an aircraft carrier are way older. Which again makes estimating much more difficult.</p>
+<p>So these im my point of view the differences between classical industries and the software industry. But what are the consequences? What should we do about it?</p>
+<ol>
+<li>Be happy that we are working in highly interesting, fast moving industry, that can fulfill customer wishes they couldn't even dream about 20 years ago.<&#47;li>
+<li>Realize that while change is cheap, it isn't free.<&#47;li>
+<li>While agile is the way to go for many projects it isn't for every one. If you are building software medical appliances, space ships, airbags or aircraft carriers you should think twice before going down the agile road.<&#47;li><br />
+<&#47;ol></p>

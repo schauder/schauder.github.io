@@ -1,0 +1,57 @@
+---
+layout: post
+status: publish
+published: true
+title: Wie setze ich ein Datenbankprojekt auf?
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 29
+wordpress_url: http://blog.schauderhaft.de/2008/02/04/wie-setze-ich-ein-datenbankprojekt-auf/
+date: '2008-02-04 14:50:49 +0100'
+date_gmt: '2008-02-04 13:50:49 +0100'
+categories:
+- Softwareentwicklung
+- Quality Management
+- Oracle
+tags: []
+comments: []
+---
+<p>Vier Fragen an alle, die an Unternehmensanwendungen arbeiten:</p>
+<ol>
+<li>W&Atilde;&frac14;rde irgend jemand auf die Idee kommen, ein zentrales Verzeichnis anzulegen, in der die aktuelle Version des Quellcodes f&Atilde;&frac14;r ein Projekt liegt, und das von allen Entwicklern gleichzeitig genutzt und bearbeitet wird? Nat&Atilde;&frac14;rlich nicht, denn es w&Atilde;&curren;re praktisch unm&Atilde;&para;glich etwas konsistent zu kompilieren, st&Atilde;&curren;ndig w&Atilde;&curren;re die eine oder andere Datei in Bearbeitung und daher unbenutzbar.<&#47;li>
+<li>W&Atilde;&frac14;rde irgend jemand auf die Idee kommen, ein Programm auszuliefern, dass nicht einmal vollst&Atilde;&curren;ndig compiliert? Nat&Atilde;&frac14;rlich nicht, denn es w&Atilde;&frac14;rde bedeuten, das etwas nicht funktioniert, und das w&Atilde;&frac14;rde zumindest aus der Auslieferung entfernt werden.<&#47;li>
+<li>W&Atilde;&frac14;rde irgend jemand es akzeptieren, wenn die ausgelieferten Jars&#47;Exe, oder was immer man ausliefert, nicht identisch sind bei Kunden, die die selbe Version erhalten haben (Wenn man mal von Konfigurationsdateien absieht)? Wohl kaum.<&#47;li>
+<li>W&Atilde;&frac14;rde irgend jemand ein Programm ausliefern, das nicht wenigstens einmal als ganzes getestet wurde? Wohl nur sehr wenige sehr 'wagemutige'.<&#47;li><br />
+<&#47;ol><br />
+Aber dennoch kann man dies in vielen Projekten beobachten, wenn eine Datenbank involviert ist. Mehr als einmal habe ich folgendes Vorgehen in Sachen Datenbank Entwicklung gesehen:Es gibt f&Atilde;&frac14;r das gesamte Team + N Kunden 2+N oder 2+2N Datenbanken: Entwicklung und Test vor Ort und f&Atilde;&frac14;r jeden Kunden entweder nur eine Produktionsdatenbank, oder eine Integrations- und eine Produktionsdatenbank. Das hei&Atilde;&Yuml;t alle entwickeln auf der selben Datenbank (vgl. 1.). Zu einem bestimmten Zeitpunkt wird der aktuelle Stand auf die Testdatenbank gebracht. Die daf&Atilde;&frac14;r verwendeten Skripte sind meist ungetestet und daher fehlerhaft. Wenn solche Fehler entdeckt werden, werden sie nach bestem Wissen und ohne Gewissen behoben, ohne sie erneut zu testen. Diese Skripte werden in einem sp&Atilde;&curren;teren Schritt verwendet um das System beim Kunden zu aktualisieren (vgl. 4.).  Da hierbei immer wieder Fehler entdeckt werden, werden die Skripte nachgebessert. So dass bei jedem Kunden eine geringf&Atilde;&frac14;gig andere Version installiert ist (vgl. 3.).</p>
+<p>Da es keinen konsistenten reproduzierbaren Stand gibt, laufen Schemata immer weiter auseinander und k&Atilde;&para;nnen nur durch den heroischen Aufwand einzelner halbwegs identisch gehalten werden. Nicht selten finden sich dabei Bestandteile im Schema, die nicht kompilieren, die in anderen Varianten des selben Schemas aber gar nicht vorhanden sind. Aber da man nie wei&Atilde;&Yuml;, ob das nicht noch jemand ben&Atilde;&para;tigt, werden die Leichen nicht oder nur bei unregelm&Atilde;&curren;&Atilde;&Yuml;igen Aufr&Atilde;&curren;umaktionen beseitigt.</p>
+<p>Es gibt zwei Gr&Atilde;&frac14;nde f&Atilde;&frac14;r diese Missst&Atilde;&curren;nde:</p>
+<ol>
+<li>Datenbanken sind doof. Bei einer Anwendung in Form einer EXE &#47; eines Jars wird bei einem Update die alte Version weggeschmissen, und eine neue installiert. Bei Datenbanken geht das so nicht. Die alten Daten m&Atilde;&frac14;ssen aufwendig migriert werden.<&#47;li>
+<li>80% der Datenbankentwickler haben von Softwareentwicklung keine Ahnung. Ich vermute dies liegt darin, dass die meisten Datenbankentwickler nur Datenbankentwicklung betreiben, und dies oft auch nur f&Atilde;&frac14;r eine Datenbank. Wogegen die meisten Softwareentwickler im Laufe ihrer Laufbahn eine ganze Reihe von Sprachen und Entwicklungsumgebungen kennen gelernt haben. Dieser Mangel an Ausweichm&Atilde;&para;glichkeiten erm&Atilde;&para;glicht es den Toolherstellern absolut essentielle Features  (Refactoring, Codecompletion, Anbindung an Versionskontrolle, Integration von Difftools ...) nicht, nur bruchst&Atilde;&frac14;ckhaft oder nur gegen Aufpreis zur Verf&Atilde;&frac14;gung zu stellen. Um Missverst&Atilde;&curren;ndnissen vorzubeugen: programmieren k&Atilde;&para;nnen die Datenbankentwickler, Analyse und Design mag auch zu ihrem Handwerkszeug geh&Atilde;&para;ren, es fehlen ihnen nur einige Kenntnisse in fundamentalem Softwareentwicklungsknowhow: Versionsverwaltung und Change- und Releasemanagement.<&#47;li><br />
+<&#47;ol><br />
+Aber genug des Lamentierens, wie geht es denn richtig?</p>
+<ol>
+<li>Eine Datenbank(schema) f&Atilde;&frac14;r jeden Entwickler (und Tester, Dokumentator oder wer sonst noch die Anwendung f&Atilde;&frac14;r seine Arbeit ben&Atilde;&para;tigt). Die gro&Atilde;&Yuml;en Datenbankhersteller bieten f&Atilde;&frac14;r Entwickler kostenlose Versionen an, die lokal installiert werden k&Atilde;&para;nnen. Alternativ kann auf einem zentralen Server eine Datenbank mit mehreren Schemata eingerichtet werden.<&#47;li>
+<li>Alles was zum Schema geh&Atilde;&para;rt, kommt unter Versionskontrolle. Alle DBA's und Datenbankentwickler bitte nachsprechen: ALLES. Tabellen, Indizes, Views, Trigger, Stored Procedures, Migrationsskripte.<&#47;li>
+<li>Es muss einen <strong>einfachen<&#47;strong> Weg geben, um den aktuellen Stand der Datenbank in dem pers&Atilde;&para;nlichem Schema eines Entwicklers herzustellen. F&Atilde;&frac14;r OLTP Anwendungen bevorzuge und empfehle ich die Schemagenerierung von Hibernate und &Atilde;&curren;hnlichen Tools. Dies hat den Vorteil, dass die Definition des Schemas automatisch auch immer in der Versionsverwaltung mitgef&Atilde;&frac14;hrt wird, und man sich darum nicht mehr explizit k&Atilde;&frac14;mmern muss.<&#47;li>
+<li>Es werden wenigstens zwei Arten von Skripten ben&Atilde;&para;tigt, die reproduzierbar Testdaten erzeugen: Einerseits Spieldaten, d.h. eine geringe Zahl von Datens&Atilde;&curren;tzen, die von den Entwicklern f&Atilde;&frac14;r Entwicklertests genutzt werden k&Atilde;&para;nnen. Andererseits Massendaten die in der Anzahl und der Komplexit&Atilde;&curren;t vergleichbar sind mit den real produktiv zu erwartenden Daten. Diese werden ben&Atilde;&para;tigt um die Performance der Anwendung unter ann&Atilde;&curren;hernd realistischen Bedingungen zu testen.<&#47;li>
+<li>Ein Schema f&Atilde;&frac14;r automatische Tests.<&#47;li><br />
+<&#47;ol><br />
+Mit diesen 5 Punkten ist sichergestellt, dass das Schema zu jeder beliebigen Version zeitnah wiederhergestellt werden kann. Bleibt noch ein Problem: Die oben angesprochene Migration. Sp&Atilde;&curren;testens ab der ersten Version, die beim Kunden ausgeliefert wird, kann man nicht mehr einfach das Schema neu erstellen, sondern es muss migriert werden. Die Skripte, die dies bewerkstelligen haben eine unangenehme Eigenschaft: Sie k&Atilde;&para;nnen bzw. d&Atilde;&frac14;rfen im allgemeinen nur einmal auf einem Schema laufen. Ein Skript, dass zum Beispiel eine Spalte in einer Tabelle erg&Atilde;&curren;nzt w&Atilde;&frac14;rde beim zweiten Lauf einen Fehler verursachen. Also kommen bei jedem Release ein paar Aufgaben auf den Releasemanager zu:</p>
+<ol>
+<li>Die bisherige Version die beim Kunden installiert ist, wird in ein leeres Datenbankschema installiert.<&#47;li>
+<li>Das Schema wird mit Testdaten gef&Atilde;&frac14;llt. Idealerweise mit einem Abzug der Produktionsdatenbank. Dies stellt sicher, dass wenigstens unakzeptables Performance Verhalten und harte Datenfehler, zum Beispiel auf Grund von nicht befriedigten Constraints sofort auffallen.<&#47;li>
+<li>Das ad&Atilde;&curren;quate Changeskript wird identifiziert und ausgef&Atilde;&frac14;hrt.<&#47;li>
+<li>Die neue Version des Datenbankschemas wird aus der Versionsverwaltung geholt und in ein weiteres Schema installiert.<&#47;li>
+<li>Die beiden Schemata werden miteinander verglichen. Werden Abweichungen identifiziert, so werden die Changescripte korrigiert und das gesamte Verfahren wiederholt.<&#47;li><br />
+<&#47;ol><br />
+Es bleibt noch eine Frage: Woher kommen die Changescripte? Einige Tools (z.B. Toad) generieren solche Skripte, aber diese Tools haben zwei Probleme. Erstens haben sie erschreckend h&Atilde;&curren;ufig Bugs. Toad z.B. versuchte zumindest noch in der letzten Version die ich genutzt habe, Unique Constraints und die dazu geh&Atilde;&para;rigen Indizes beide einzelnd anzulegen, was zu unz&Atilde;&curren;hligen Fehlermeldungen bei der Skriptausf&Atilde;&frac14;hrung f&Atilde;&frac14;hrte, aber ich gehe mal davon aus, dass sich mit einiger Suche ein funktionierendes Tool finden l&Atilde;&curren;sst. Zweitens k&Atilde;&para;nnen dieses Tools naturgem&Atilde;&curren;&Atilde;&Yuml; nur DDL. Jeglich DML Statements entziehen sich ihrer Kontrolle. D.h. den Teil der Skripte, die die Daten aktualisieren m&Atilde;&frac14;ssen auf jeden Fall von Hand geschrieben werden. M&Atilde;&frac14;hselig, aber es geht kein Weg daran vorbei.</p>
+<p>Wenn Releases in kurzen Abst&Atilde;&curren;nden aufeinander folgen k&Atilde;&para;nnen die Delta Skripte jeweils f&Atilde;&frac14;r ein Release erstellt werden. Liegen mehr als wenige Wochen zwischen zwei Releases, so sollten die Changescripte direkt zusammen mit der jeweiligen &Atilde;&bdquo;nderung erstellte werden und sollten dann auch in einem automatischen Test gepr&Atilde;&frac14;ft werden, der die oben beschriebenen 5 Punkte automatisch ausf&Atilde;&frac14;hrt. Deutlich <a href="http:&#47;&#47;odetocode.com&#47;Blogs&#47;scott&#47;archive&#47;2008&#47;02&#47;02&#47;11721.aspx">detailliertere Gedanken<&#47;a> &Atilde;&frac14;ber die Erstellung und Verwaltung von Change Scripten hat sich K. Scott Allen gemacht.</p>
+<p>Das alles ist viel Aufwand? Stimmt, gerade beim ersten mal steckt man eine Menge Arbeit in die geeignete Infrastruktur. Aber wer zahlende Kunden hat, schuldet ihnen Qualit&Atilde;&curren;t, und wenn es sich um ein ernst zu nehmendes Projekt handelt, lohnt es sich ganz sicher in diese Fragestellungen ein wenig Gehirnschmalz zu stecken. Wie sicher jeder best&Atilde;&curren;tigen kann, der einmal gen&Atilde;&para;tigt war ein halbes Dutzend Schemata synchron zu halten.</p>

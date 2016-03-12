@@ -1,0 +1,111 @@
+---
+layout: post
+status: publish
+published: true
+title: Copying Objects in Layered Applications
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1263
+wordpress_url: http://blog.schauderhaft.de/?p=1263
+date: '2013-01-06 11:20:49 +0100'
+date_gmt: '2013-01-06 09:20:49 +0100'
+categories:
+- Softwaredevelopment
+tags:
+- hibernate
+- design
+- architecture
+- copying
+comments:
+- id: 9098
+  author: Christian
+  author_email: christian@web.de
+  author_url: ''
+  date: '2013-01-06 18:55:55 +0100'
+  date_gmt: '2013-01-06 16:55:55 +0100'
+  content: 'One comment may be allowed: Never let the Hibernate entities spread about
+    your codebase ... You have your domain model and hibernate is only there for persistence.
+    Everything else ends up in consulting blunder!'
+- id: 9101
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2013-01-06 21:40:09 +0100'
+  date_gmt: '2013-01-06 19:40:09 +0100'
+  content: "@Christian \r\n\r\nThe way you describe it is one option. But as I wrote
+    in the article: What are the benefits you get from Hibernate in that case?\r\n\r\nAnother
+    alternative is to use the Hibernate entities as your domain model. This ties your
+    domain model to tightly to the persistence to really feel comfortable. But it
+    won't kill you (most of the time)\r\n\r\nI actually prefer not to use Hibernate
+    at all, but something less intrusive like Slick or even plain old JDBC."
+- id: 9103
+  author: Josh Stone
+  author_email: jstone@gmail.com
+  author_url: ''
+  date: '2013-01-07 04:15:06 +0100'
+  date_gmt: '2013-01-07 02:15:06 +0100'
+  content: "The .NET community solves this problem by having their domain entities
+    be directly persistable, and using a persistence technology that supports external
+    configuration&#47;persistence mapping such as Fluent NHibernate, as opposed to
+    JPA which litters your domain objects with persistence related annotations.\r\n\r\nAs
+    for copying data between layers, this is still often helpful, and tools like AutoMapper
+    (.NET) or ModelMapper (Java) can make this easy(er)."
+- id: 9110
+  author: Geek Reading January 7, 2013 | Regular Geek
+  author_email: ''
+  author_url: http://regulargeek.com/2013/01/07/geek-reading-january-7-2013/
+  date: '2013-01-07 19:00:46 +0100'
+  date_gmt: '2013-01-07 17:00:46 +0100'
+  content: "[...] Copying Objects in Layered Applications (Schauderhaft) [...]"
+- id: 9128
+  author: Frisian
+  author_email: no.no@no.no
+  author_url: ''
+  date: '2013-01-09 16:29:10 +0100'
+  date_gmt: '2013-01-09 14:29:10 +0100'
+  content: "Having a good domain model doesn't necessariy mean it aligns well with
+    UI and persistence. Reports e.g. usually don't, because they display tabular and
+    denormalized data. That's were CQRS comes into play with the obvious downside
+    of having at least two (command&#47;query) domain models for the same domain.\r\nBesides,
+    using frameworks, that can deal with your domain classes in a non-obtrusive manner,
+    will certainly help. Think Hibernate's UserType or JSF's Converter.\r\nQuite interesting
+    to see that JPA and&#47;or Hibernate are almost associated with annotations polluting
+    domain classes. It's perfectly fine to put the mapping into XML files with both
+    JPA and Hibernate. Hibernate can also be used as a very powerful JDBC mapper for
+    native queries. A shame they don't give more TLC to that part of hibernate ( e.g.
+    http:&#47;&#47;jdevelopment.nl&#47;hibernates-pure-native-scalar-queries-supported&#47;)."
+- id: 9129
+  author: Mark
+  author_email: M@n.com
+  author_url: ''
+  date: '2013-01-09 17:29:58 +0100'
+  date_gmt: '2013-01-09 15:29:58 +0100'
+  content: "@Jens +1 for this article. I am not sure where this concept of concept
+    of [uncessary] copying came from. I think it came from some very old Struts book.\r\n\r\n@Christian,
+    they are not \"hibernate\" entities. They are \"domain\" entities. Hibernate is
+    just a technology to persist them.\r\n\r\n@Josh - Many in the Java world make
+    their \"Hibernate\" entities their Domain entities. I mainly use XML for config.
+    I have used Annotations - there are pros and cons. I have use Fluent, it and it
+    seems pretty good and i like that it is code.\r\n\r\nI prefer to use Hibernate
+    than Slick or plan JDBC because i would rather not have my code be \"intrusive\"
+    and let someone else maintain all that code.\r\n\r\n@Frisian - true,  \"User\"
+    interfaces\" don't align always with Domain entities. But that does not require
+    DTOs or data copying. I use \"projections\" or \"View\" objects, just like you
+    would use in a database. If you use NHibernate  or Hibernate to manage your persistence,
+    \ this is pretty easy and you can still use things like HQL to simplify your queries."
+---
+<p><a href="2012&#47;12&#47;30&#47;dependencies-in-a-three-tiered-application">In my last post I wrote about the dependencies in a layered application<&#47;a>. There is another antipattern going on in many layered applications: Obsessive copying.</p>
+<p>It might look like this:</p>
+<p>The User Interface has some representation of the data input by the user, it gets copied over into some kind of transport object (<a href="&#47;2012&#47;09&#47;02&#47;naming-antipatterns&#47;">often suffixed TO (Arrrrgh)<&#47;a>), which then gets copied over into the domain representation of the data, and finally gets copied over into the persistence representation.</p>
+<p>That's a lot of copying. Not good. In many cases this is just waste. Waste on the runtime side of things when all these objects have to get created and garbage collected and on the implementation side of things when all the stupid code doing the copying is created and maintained. If you look even closer you often see much more copying, when your nice objects get converted to XML, JSON or some other serialized form.</p>
+<p>When you see something like this you should start asking questions: copied over?</p>
+<p>There are cases where you need to do some copying. For example when you transfer data between layers that are physically separate you have to serialize and deserialize them. But if you want to go from <i>domain object<&#47;i> to <i>serialized data stream<&#47;i> do you have to go via a <i>transport object<&#47;i>? Sure it allows you to use some nice magic library to create your JSON or XML or whatever you want to use. But is it really easier to copy data into a TO and then magically convert it into a JSON structure instead of just creating the JSON structure in the first place, possibly using a little Builder pattern?</p>
+<p>If you need different properties in your presentation layer do you have to copy all the stuff over from the domain object? Or maybe you can just provide a thin wrapper providing the additional properties?</p>
+<p>I'm perfectly with you if you don't want the Hibernate mapped entities in your domain logic, because it is bleeding persistence logic in your domain logic. But if you don't use the Hibernate Entities, is Hibernate really offering a benefit for you?</p>
+<p>And beware of reflection for copying. It looks promising in the beginning, but if copying makes any sense at all the structures are different and your reflection based code will become more and more complex and slow. Oh and you might note, that things like Hibernate make extensive use of reflection and&#47;or byte code manipulation.</p>

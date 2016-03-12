@@ -1,0 +1,186 @@
+---
+layout: post
+status: publish
+published: true
+title: Named Parameters in Java - an Alternative
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1148
+wordpress_url: http://blog.schauderhaft.de/?p=1148
+date: '2012-08-05 20:17:45 +0200'
+date_gmt: '2012-08-05 18:17:45 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- dsl
+- Java
+- Named Parameters
+comments:
+- id: 7831
+  author: Geek Reading August 6, 2012 | Regular Geek
+  author_email: ''
+  author_url: http://regulargeek.com/2012/08/06/geek-reading-august-6-2012/
+  date: '2012-08-06 17:57:32 +0200'
+  date_gmt: '2012-08-06 15:57:32 +0200'
+  content: "[...] Named Parameters in Java &acirc;&euro;&ldquo; an Alternative (Schauderhaft)
+    [...]"
+- id: 7847
+  author: Gerard Davison
+  author_email: Gerard.Davison@oracle.com
+  author_url: http://kingsfleet.blogspot.com
+  date: '2012-08-09 14:00:15 +0200'
+  date_gmt: '2012-08-09 12:00:15 +0200'
+  content: "In some cases, for example constructors, it is worth making your parameter
+    object implement Cloneable so it can be used to represent the internal state of
+    the object. This also does away with problems of mutability as a defensive copy
+    can easily be made.\r\n\r\nHere is an example I used recently that uses this pattern:\r\n\r\nhttp:&#47;&#47;java.net&#47;projects&#47;wadl&#47;sources&#47;svn&#47;content&#47;trunk&#47;wadl&#47;wadl-core&#47;src&#47;main&#47;java&#47;org&#47;jvnet&#47;ws&#47;wadl2java&#47;Wadl2Java.java?rev=345\r\n\r\nIn
+    this case it becomes more like a Memento rather than a Builder pattern."
+- id: 7852
+  author: JP
+  author_email: javin.paul@yahoo.com
+  author_url: ''
+  date: '2012-08-10 17:21:46 +0200'
+  date_gmt: '2012-08-10 15:21:46 +0200'
+  content: my way of using <a href="http:&#47;&#47;goo.gl&#47;NkAhE" rel="nofollow">Builder
+    pattern in Java<&#47;a>
+- id: 7865
+  author: JavaPins
+  author_email: ''
+  author_url: http://javapins.com/Schauderhaft-Named-Parameters-in-Java-an-Alternative
+  date: '2012-08-14 22:27:45 +0200'
+  date_gmt: '2012-08-14 20:27:45 +0200'
+  content: |-
+    <strong>Schauderhaft &Acirc;&raquo; Named Parameters in Java &acirc;&euro;&ldquo; an Alternative...<&#47;strong>
+
+    Thank you for submitting this cool story - Trackback from JavaPins...
+- id: 7866
+  author: Frisian
+  author_email: no.no@no.no
+  author_url: ''
+  date: '2012-08-15 08:30:45 +0200'
+  date_gmt: '2012-08-15 06:30:45 +0200'
+  content: "@Jens\r\n@Gerard Davison:\r\nWouldn't it be nice to add an explicit build()
+    method to your builders to be able to do validation there? Chances are, that with
+    five or more optional parameters not all combinations are valid. So doSomething3()
+    will also have to validate the parameters first, instead of just implementing
+    the actual logic. \r\n\r\n@Gerard Davison:\r\nYour Parameters class isn't thread-safe.
+    Splitting it up into an immutable Parameters class and a mutable ParametersBuilder
+    class might be preferrable depending on the use cases."
+- id: 7867
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-08-15 10:57:20 +0200'
+  date_gmt: '2012-08-15 08:57:20 +0200'
+  content: "@Frisian\r\n\r\nOf course this is an option which has some benefits, but
+    of course also adds additional complexity. \r\n\r\nIn my little example I decided
+    I don't get a benefit from it and preferred the shorter, simpler code.\r\n\r\nIn
+    a real use case this might be completely different."
+- id: 7869
+  author: gnet
+  author_email: nhtgnet@gmail.com
+  author_url: ''
+  date: '2012-08-15 16:40:10 +0200'
+  date_gmt: '2012-08-15 14:40:10 +0200'
+  content: "...another alternative using Initializer block\r\n\r\n<a href=\"https:&#47;&#47;gist.github.com&#47;3360682\"
+    &#47; rel=\"nofollow\">"
+- id: 7870
+  author: gnet
+  author_email: nhtgnet@gmail.com
+  author_url: ''
+  date: '2012-08-15 16:41:37 +0200'
+  date_gmt: '2012-08-15 14:41:37 +0200'
+  content: <a href="https:&#47;&#47;gist.github.com&#47;3360682" rel="nofollow">https:&#47;&#47;gist.github.com&#47;3360682<&#47;a>
+- id: 7873
+  author: Marino Flores
+  author_email: marinoflores@gmail.com
+  author_url: ''
+  date: '2012-08-15 17:29:53 +0200'
+  date_gmt: '2012-08-15 15:29:53 +0200'
+  content: Complety agree with you, and acctually this is exactly what Accesors chain
+    do in Lombok http:&#47;&#47;projectlombok.org&#47;api&#47;lombok&#47;experimental&#47;Accessors.html
+- id: 7920
+  author: Frank
+  author_email: frankys.spamschleuder@googlemail.com
+  author_url: ''
+  date: '2012-08-22 14:13:00 +0200'
+  date_gmt: '2012-08-22 12:13:00 +0200'
+  content: "a better alternative (with less code) would be the use of generics (and
+    a static import):\r\n\r\n\r\npublic final class Param  {\r\n\r\n    public static
+    final  T  param(String name, T param) {\r\n        return param;\r\n    }\r\n}\r\n\r\ndoSomething3(\r\n
+    \   param(\"name\", \"Alfred E. Neumann\"),\r\n    param(\"link, \"http:&#47;&#47;blog.schauderhaft.de\"),\r\n
+    \   param(\"ultimateAnswer\", 42),\r\n    param(\"tempFile\", \"c:\\\\temp\\\\x.txt\"),\r\n
+    \   param(\"zip\", 23)\r\n);"
+- id: 7921
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-08-22 14:41:13 +0200'
+  date_gmt: '2012-08-22 12:41:13 +0200'
+  content: "@Frank In this case the parameter names are just Strings without any meaning.
+    \r\n\r\nIf this is sufficient for you, you might as well just use comments.\r\n\r\nOr
+    am I missing something?"
+- id: 10857
+  author: swtor mac
+  author_email: crystalknudson@gmx.net
+  author_url: http://starwarstheoldrepublicmac.blogspot.com/
+  date: '2014-02-10 18:13:36 +0100'
+  date_gmt: '2014-02-10 16:13:36 +0100'
+  content: "Thank you for some other excellent post.\r\nThe place else may just anyone
+    get that type of information in such a perfect means \r\nof writing? I've a presentation
+    next week, and I am on the search for such info."
+---
+<p>In the last installment of this blog I wrote about a way to <a href="&#47;2012&#47;07&#47;29&#47;named-parameters-in-java&#47;">fake Named Parameters in Java<&#47;a>. As so often there are many ways to do this, so here comes another one.</p>
+<p>Instead of static methods producing value objects for each parameter you can use a single parameter object that happens to be a builder:</p>
+<p>The method signature would look like this: </p>
+<pre lang="java">
+void doSomething3(ParameterBuilder pb)<br />
+<&#47;pre></p>
+<p>The usage looks like this:</p>
+<pre lang="java">
+doSomething3(new ParameterBuilder()<br />
+    .name("Alfred E. Neumann")<br />
+    .link("http:&#47;&#47;blog.schauderhaft.de")<br />
+    .ultimateAnswer(42)<br />
+    .tempFile("c:\\temp\\x.txt")<br />
+    .zip(23)<br />
+);<&#47;pre></p>
+<p>and the builder itself like this:</p>
+<pre lang="java">
+public class ParameterBuilder {</p>
+<p>    private String link;<br />
+    private String name;<br />
+    private int answer;<br />
+    private int zip;<br />
+    private String file;</p>
+<p>    public ParameterBuilder name(String aName) {<br />
+        name = aName;<br />
+        return this;<br />
+    }</p>
+<p>    public ParameterBuilder link(String aLink) {<br />
+        link = aLink;<br />
+        return this;<br />
+    }</p>
+<p>    public ParameterBuilder ultimateAnswer(int anAnswer) {<br />
+        answer = anAnswer;<br />
+        return this;<br />
+    }</p>
+<p>    public ParameterBuilder zip(int aZip) {<br />
+        zip = aZip;<br />
+        return this;<br />
+    }</p>
+<p>    public ParameterBuilder tempFile(String aFile) {<br />
+        file = aFile;<br />
+        return this;<br />
+    }</p>
+<p>    &#47;&#47; ... getters for the fields omitted.<br />
+}<br />
+<&#47;pre></p>
+<p>In a sense this is even more similar to named parameters, since you can define default values in the builder, thereby making arguments optional. Also the order of arguments does not matter.</p>
+<p>If you want to use the parameter object for more then transfering a bunch of values from one side of a method signature to the other you should consider actually creating an immutable object from you builder (or at least passing it as an implementation of an immutable interface)</p>

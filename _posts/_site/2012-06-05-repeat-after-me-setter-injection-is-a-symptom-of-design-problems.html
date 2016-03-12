@@ -1,0 +1,13 @@
+<p>I just stumbled across <a href="http:&#47;&#47;steveschols.wordpress.com&#47;2012&#47;06&#47;05&#47;i-was-wrong-constructor-vs-setter-injection&#47;">an article by&Acirc;&nbsp;Steve Schols<&#47;a> in which he compares dependency injection via setter with constructor injection. And he prefers setter injection. </p>
+<p>I don't agree. I especially do not agree with his arguments. Lets take them one by one.</p>
+<blockquote><p>What are the problems with constructor injection?<br />
+No reconfiguration and re-injection<&#47;blockquote></p>
+<p>Why would you want to do that? One reason why many programs are so difficult to think about is that stuff changes around. Think about it. If the state of an object is defined by its constructor you just have to find the place where your object got created in order to understand how it looks like at run time. If the state can be changed through setters you have to find every place where the setter gets called AND if the program control actually came across these places AND in which order in order to understand what state your object is in. </p>
+<p>So don't change the state of your objects.</p>
+<blockquote><p>you could create a circular dependency using Spring. But not by using constructor-based injection<&#47;blockquote></p>
+<p>Excuse me? How is this possibly a drawback. I spent a lot of time to fix problems caused by circular dependencies. Using constructor injection prevents many circular dependencies. Absolutely a good thing.</p>
+<p>He also quotes the spring reference documentation: </p>
+<blockquote><p>The Spring team generally advocates setter injection, because large numbers of constructor arguments can get unwieldy<&#47;blockquote></p>
+<p>Again constructor injection shows you you have a problem. I have yet to see a class that has more then three dependencies which adheres to the Single Responsibility Principle.</p>
+<p>So if you run into problems with constructor injection congratulation! You just found a strong indication of a design problem in your application. Go ahead fix the design problem and proceed using constructor injection.</p>
+<p>Of course there are situations where you can't fix the design problem and in these cases setter injection is a valid workaround. But it is just that: A workaround.</p>

@@ -1,0 +1,140 @@
+---
+layout: post
+status: publish
+published: true
+title: 'Advanced Database Constraints: There Can Be Only One'
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1004
+wordpress_url: http://blog.schauderhaft.de/?p=1004
+date: '2012-03-25 18:17:56 +0200'
+date_gmt: '2012-03-25 16:17:56 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- sql
+- Oracle
+- constraints
+comments:
+- id: 5568
+  author: Martin
+  author_email: martinleanderfoersterling@gmail.com
+  author_url: ''
+  date: '2012-03-26 22:58:46 +0200'
+  date_gmt: '2012-03-26 20:58:46 +0200'
+  content: "Hi Jens,\r\n\r\nan alternative way would be to create a second relation
+    between person and hobby, with the foreign key column in either table (being a
+    1:1 relation). You could add a unique constraint and wouldn't require the check
+    constraint. However, that only works in your specific example where person:hobby
+    is 1:n instead of m:n."
+- id: 5614
+  author: Frank
+  author_email: f.schrader@gmx.de
+  author_url: ''
+  date: '2012-03-30 13:09:26 +0200'
+  date_gmt: '2012-03-30 11:09:26 +0200'
+  content: "The virtual column requires Ora11,  a function based index works on Ora9
+    -Ora11:\r\ncreate unique index UNIQUE_FAVORITE_HOBBY on HOBBY\r\n  ( PERSON_ID
+    \                   ,\r\n    NVL(IS_FAVORITE,TO_CHAR(ID)));\r\nor\r\ncreate unique
+    index UNIQUE_FAVORITE_HOBBY on HOBBY\r\n  ( IS_FAVORITE,\r\n    nvl2(IS_FAVORITE,PERSON_ID,null));\r\n2nd
+    Index stores only favorite hobbies in the index.\r\n\r\nUse 1st index for optimizing
+    access on person_id (or as FK-index).\r\nUse 2nd index for optimizing access on
+    IS_FAVORITE='Y'\r\n\r\nBTW: an unique index is not an unique constraint. An unique
+    constraint uses an index (normal or unique) to enforce the constraint.\r\nBut
+    the constraint is only possible on columns, not on functions.\r\nIt worked only
+    with the virtual column solution:\r\nalter table HOBBY\r\nadd constraint C_UNIQUE_FAVORITE_HOBBY
+    unique (PERSON_ID, IS_FAVORITE_UNIQUE);"
+- id: 5615
+  author: Frank
+  author_email: f.schrader@gmx.de
+  author_url: ''
+  date: '2012-03-30 13:38:23 +0200'
+  date_gmt: '2012-03-30 11:38:23 +0200'
+  content: "correction:\r\nCreates unique constraint with underlying normal index:\r\n
+    \r\nalter table HOBBY add  constraint \r\nC_UNIQUE_FAVORITE_HOBBY unique(PERSON_ID,IS_FAVORITE_UNIQUE)
+    using index\r\n(create index X_FAVORITE_HOBBY on HOBBY\r\n  (PERSON_ID, IS_FAVORITE_UNIQUE)\r\n
+    );\r\n\r\nFkt-based unique index works only without constraint, but the result
+    is the same."
+- id: 5617
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-03-30 15:53:07 +0200'
+  date_gmt: '2012-03-30 13:53:07 +0200'
+  content: "Hi Frank,\r\nyou are of course correct, with both the alternative and
+    the differentiation between unique constraints and their indexes.\r\n\r\ncool"
+- id: 8527
+  author: 'Advanced Database Constraints: Don&#8217;t Look for a Second - .NET Code
+    Geeks'
+  author_email: ''
+  author_url: http://www.dotnetcodegeeks.com/2012/04/advanced-database-constraints-dont-look.html
+  date: '2012-10-16 18:11:36 +0200'
+  date_gmt: '2012-10-16 16:11:36 +0200'
+  content: "[...] you can&#8217;t. Well maybe you just didn&#8217;t try hard enough.
+    This is the second part of the mini series about somewhat special constraints
+    for (Oracle) databases.  Let&#8217;s assume you want to model a [...]"
+---
+<p>One of the powers of <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;RDBMS">RDBMS<&#47;a> as we use them today are constraints. I use unique indexes, not null constraints and foreign keys on a regular basis and if you do any work with RDBMSs you probably do as well.</p>
+<p>From time to time one comes at a point where you think "it would be nice to enforce this with some kind of constraint", but you can't. Well maybe you just didn't try hard enough. This is the first in a little series of articles pointing out some tricks you can do with database constraints.</p>
+<p>I'll talk Oracle here since that is what I know best, but many of these things are possible in other systems as well.</p>
+<p>Lets assume we have a person table and a hobby table which holds the hobbies of a person:</p>
+<pre lang="sql">
+create table person (<br />
+  id number primary key not null,<br />
+  name varchar2(200) not null<br />
+  );</p>
+<p>create table hobby (<br />
+  id number primary key not null,<br />
+  person_id number references person not null,<br />
+  name varchar2(200) not null<br />
+  )<br />
+<&#47;pre> </p>
+<p>Just ignore that the hobby table probably needs some normalization. Now assume you want to flag the favorite hobby of a person and of course there can be only one favorite hobby per person. </p>
+<p>You could create an additional table holding that information, linking person entries and hobby entries, with a unique constraint on the person_id. From a theoretical point of view this is the correct normalized way to do it. But it makes you add a complete table when you just need a flag. There is a somewhat denormalized way to do it, which is in cases like this one simpler to use. </p>
+<pre lang="sql">
+alter table hobby<br />
+add  is_favorite varchar2(1) unique;</p>
+<p>alter table hobby add constraint check_is_favorite<br />
+CHECK (is_favorite = 'Y');<br />
+<&#47;pre></p>
+<p>The idea is to add a <tt>is_favorite<&#47;tt> column and make it unique, but also only allow a single value different from <tt>null<&#47;tt> using a check constraint. Since <tt>null<&#47;tt> values don't get indexed you can have as many <tt>null<&#47;tt> values in a unique column as you want. This does look probmising, but there is a problem. The <tt>is_favorite<&#47;tt> column should only be unique per person, so we have to include the <tt>person_id<&#47;tt>. But now all the <tt>null<&#47;tt> values get indexed, since a unique key only ignores <tt>null<&#47;tt> values when all indexed columns are <tt>null<&#47;tt>. So we have to replace the <tt>null<&#47;tt> values with something unique. We can do that by creating a function based column which is identical to <tt>is_favorite<&#47;tt> for not <tt>null<&#47;tt> values and replaces the <tt>null<&#47;tt> values with the primary key (which of course is unique by definition). </p>
+<pre lang="sql">
+alter table hobby<br />
+add is_favorite_unique as (nvl(is_favorite, id));</p>
+<p>ALTER TABLE hobby ADD CONSTRAINT unique_favorite_hobby<br />
+UNIQUE(person_id, is_favorite_unique);<br />
+<&#47;pre></p>
+<p>If you remove the unique constraint from the is_favorite column you finally have the desired behavior:</p>
+<pre lang="sql">
+create table person (<br />
+  id number primary key not null,<br />
+  name varchar2(200) not null<br />
+  );</p>
+<p>create table hobby (<br />
+  id number primary key not null,<br />
+  person_id number references person not null,<br />
+  name varchar2(200) not null<br />
+  );</p>
+<p>alter table hobby<br />
+add  is_favorite varchar2(1);</p>
+<p>alter table hobby add constraint check_is_favorite<br />
+CHECK (is_favorite = 'Y');</p>
+<p>alter table hobby<br />
+add is_favorite_unique as (nvl(is_favorite, id));</p>
+<p>ALTER TABLE hobby ADD CONSTRAINT unique_favorite_hobby<br />
+UNIQUE(person_id, is_favorite_unique);</p>
+<p>insert into person values (1, 'Jens');<br />
+insert into person values (2, 'Alfred');<br />
+insert into hobby (id, person_id, name, is_favorite) values (10,1, 'coding', 'Y');<br />
+insert into hobby (id, person_id, name, is_favorite) values (20,2, 'soccer', null);<br />
+insert into hobby (id, person_id, name, is_favorite) values (21,2, 'reading', null);<br />
+insert into hobby (id, person_id, name, is_favorite) values (22,2, 'swimming', 'Y');<br />
+-- this fails with a unique exception<br />
+-- insert into hobby (id, person_id, name, is_favorite) values (23,2, 'watching highlander', 'Y');<br />
+<&#47;pre></p>

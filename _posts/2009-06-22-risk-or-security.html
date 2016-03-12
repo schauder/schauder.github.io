@@ -1,0 +1,31 @@
+---
+layout: post
+status: publish
+published: true
+title: Risk or Security
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 158
+wordpress_url: http://blog.schauderhaft.de/?p=158
+date: '2009-06-22 22:27:38 +0200'
+date_gmt: '2009-06-22 21:27:38 +0200'
+categories:
+- The Rest
+tags:
+- Security
+- pki
+comments: []
+---
+<p>I just watched a german video about the <a href="http:&#47;&#47;dubistterrorist.de&#47;">total control through the BKA<&#47;a> (a German organisation comparable to the FBI).</p>
+<p>The attempts to control everything and everybody is based on the common misconception, that more security technology means more security. Often the opposite is true.</p>
+<p>I don't even want to talk about the 'Bundestrojaner', malware that is used by the BKA to spy on our computers. But the normal 'security' features that give a feeling of security, but fail to provide real security.</p>
+<p>1. Biometric Data in Passports. It is said that this would make the documents, passport or others more secure. But this happens at a substantial risk for the owner of the passport. Fingerprints can be stolen as <a href="http:&#47;&#47;www.youtube.com&#47;watch?v=OPtzRQNHzl0">described by the Chaos Computer Club<&#47;a> or less friendly, by <a href="http:&#47;&#47;www.ubergizmo.com&#47;15&#47;archives&#47;2005&#47;04&#47;gang_in_malaysi.html">cutting of the finger<&#47;a>. But even the friendly version of fingerprint theft is dangerous for the owner of the real finger. Assume you want to perform a robbery. A couple of years ago, an important point on your todo list would have been: get gloves. Today you might want to add: attach fake fingerprints of Mr Niceguy. Thereby you'll leave 'proof' that Mr Niceguy is the bad guy. The police will find the fingerprints you left, and will find they match those of Mr. Niceguy. They know this only because Mr Niceguy has a biometric Id. Good Luck to Mr. Niceguy proofing that he is innocent. A couple of years ago somebody sold non existing lawn mowers on ebay and used my names for the account. Thank god he had no fingerprints of myself. By the way: the fundamental flaw in the whole biometric scheme is: Biometric Data is a identifier equivalent to a user id: It is public and unique, it is not a password, which should always be private and not unique at all. Imagine the error message at Google Mail: "You can't use that password, it is already used by user LOLCAT23"</p>
+<p>2. PKI or Public Key Infrastructure has a similar problem. In a PKI every participant gets a certificate, which proofs the identity of the owner. It's exactly what webserver do when you use https: the server proofs its identity through a certificate. But now the idea is, that everybody gets a certificate, similar to an ID. Problem: Do have ever lost anything? Something important? A photo ID? Not to big of a problem, there is a photo on it. A key? Not to big of a problem, exchange the locks that match the key, with a little luck you are done with it for a few hundred bucks. Lost your certificate in a world where PKI matters? You might as well clone yourself and kill the original. Whoever finds the certificate and cracks the password can impersonate you perfectly. He can buy books, cars, close your bank accounts and so on.</p>
+<p>3. You think this is all paranoia? Maybe it is, but maybe the stories told about ec-cards are true. Fact is that banks claim, the PIN of ec-card (similiar to creadit cards where you can pay be inserting a PIN into a terminal) is safely stored in a way that makes it impossible to extract it from a stolen card. But there exists a rumor that says that this is not true. Problem: Since the judges belief the banks, you as a customer have to proof them wrong when your card gets stolen and used immediatly after. The bank will argue that you must have stored the pin next to the card. Good luck convincing your friends at the russian mafia testify for you.</p>
+<p>So the next time a software vendor or a politician tries to sell you some security, think about how this could backfire, and act accordingly</p>

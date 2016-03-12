@@ -1,0 +1,82 @@
+---
+layout: post
+status: publish
+published: true
+title: My Code Reviews - the Technical Process
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1157
+wordpress_url: http://blog.schauderhaft.de/?p=1157
+date: '2012-08-26 08:15:51 +0200'
+date_gmt: '2012-08-26 06:15:51 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- process
+- code review
+- git
+comments:
+- id: 7960
+  author: Geek Reading August 27, 2012 | Regular Geek
+  author_email: ''
+  author_url: http://regulargeek.com/2012/08/27/geek-reading-august-27-2012/
+  date: '2012-08-27 17:52:03 +0200'
+  date_gmt: '2012-08-27 15:52:03 +0200'
+  content: "[...] My Code Reviews &acirc;&euro;&ldquo; the Technical Process (Schauderhaft)
+    [...]"
+- id: 7964
+  author: Michael Fitzmaurice
+  author_email: michael@michaelfitzmaurice.com
+  author_url: http://michaelfitzmaurice.com
+  date: '2012-08-27 22:11:13 +0200'
+  date_gmt: '2012-08-27 20:11:13 +0200'
+  content: If you're using Git, Gerrit is a good tool for code reviews.
+- id: 8304
+  author: James
+  author_email: jamcgive@cisco.com.nospam
+  author_url: ''
+  date: '2012-09-21 17:37:28 +0200'
+  date_gmt: '2012-09-21 15:37:28 +0200'
+  content: Although I'm a little bias I do like Atlassian Crucible+Fisheye as a code
+    review tool.
+- id: 8713
+  author: pintolaranja
+  author_email: pintolaranja@gmail.com
+  author_url: http://whereismycode.pintolaranja.com
+  date: '2012-11-14 15:36:09 +0100'
+  date_gmt: '2012-11-14 13:36:09 +0100'
+  content: "What about pre-commit review? \r\nDid you ever try a tool like reviewboard?
+    I would be interested in having your feedback as a comparison to the solution
+    you describe in this post.\r\n\r\nThanks!"
+- id: 8714
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-11-14 17:07:32 +0100'
+  date_gmt: '2012-11-14 15:07:32 +0100'
+  content: "@pintolaranja No never tried this or any other tool in that domain. I'm
+    actually quite happy with my low tech version. Although some team members want
+    us to consider other options. If and when that happens, it might result in another
+    article."
+---
+<p>I'm doing more and more Code Reviews these days. In the beginning I had a hard time finding a useable workflow, which enabled me to review code somewhat efficient. By now have two different workflows which both work ok for me. Lets start with what didn't work:</p>
+<p>Constantly looking at commmits in SVN. Thats what I tried first. It didn't work at all.</p>
+<p>I found it rather hard to distinguish trivial changes like changing the name of a class (which causes lots of changed files) from important changes, like implementation of some algorithm or feature. So I spend ages looking at files, comparing them with their history just to find out nothing interesting changed.</p>
+<p>Also it wasn't clear which commits where considered complete features and which where just parts that where still work in progress. Even if I could identify commits belonging together I couldn't combine them in a meaningfull way to consider them in a single code review. So I switched to a very manual process.</p>
+<p>Coworkers would send me mails with references to code they want a second opinion about. This worked great because it hat two effects: First I could concentrate on code that already got identified as 'interesting' in some way. Secondly and possibly more important: Since the author of the code sent it in the feedback was much easier to accept then when I just reviewed code that I concidered in need of some reviewing.</p>
+<p>The next challenge was to find a place to put the actual comments. I started with installing all kinds of tools in my IDE. Some of which asked for a conciderable amount of setup and configuration. But appart from eating away CPU cycles they didn't really do anything for me. </p>
+<p>I also don't want my comments in the middle of the production code, committed to version control. Maybe it is just me but I don't like putting stuff in production code that isn't intended to end up in production. Thats why we have separate folders for tests, right?</p>
+<p>So I actually ended up printing all the code for the review on paper (a thin white material, looking somewhat similar to a computer screen but much thinner). Paper is great for code reviews because you can draw arrows all over the place, color stuff and in general be very flexible in what you do. You can also spread out lots of pieces of paper on a normal desktop, which doesn't work when you have only the equivalent of mobile phone display as a monitor.</p>
+<p>By now I switched projects. The challenges are a little different but the tool is the same: code reviews. While in the previous project code reviews where mostly about finding solutions for problematic code, where developers knew something was wrong, but couldn't tell how to fix it. This time we do code reviews as part of the definition of done. So it is much more about finding problems in the code and for me as the new guy in the project to learn about the code base.</p>
+<p>We also have a different version control system: Git. And that is a big difference for me and my code reviews. I had to learn more about Git then I ever learned about SVN in order to just use it. But this learning showed me some awesome ways to use it for code reviews which are beyond what at least I was able to do with SVN.</p>
+<p>When a task is finished by a coworker I run the following script to obtain a list of files that got touched by the developer for the given task:</p>
+<p><tt>git log --all-match --author="<developer name>" --grep="<task tag>" --name-only --format=format: <some commit to start from> HEAD | sort | uniq<&#47;tt></p>
+<p>The task tag is an identifier we use in the commit comments to identify all commits related to a given task. With <tt>--name-only<&#47;tt> and the empty format I get the file names only (no diffs) and also no headers (like author name, comments and so on) except for some blank lines. The <tt>sort | uniq<&#47;tt> sorts the list of files and removes duplicates, i.e. files touched in multiple commits.</p>
+<p>I then proceed reviewing each file one by one. Using the 'Show Annotation' feature of my IDE I can easily identify the changes made lately and distinguish them from old code. I then make all my comments right inside the code with a "REVIEW" tag, so they are easy to search for. I do this now, because with git it is a no brainer to commit these comments in a fresh branch, so I have them version controlled but not in the production code, just as I like it. It also allows easy checking later if the issues found where actually fixed.</p>
+<p>While this all sounds like small stuff and actually it is, it helped me with code reviews tremendously. Right now I'm thinking about trying Mylyn once more and find a way to convert the list of files to a Mylyn task context ... we'll see.</p>

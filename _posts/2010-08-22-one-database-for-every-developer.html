@@ -1,0 +1,102 @@
+---
+layout: post
+status: publish
+published: true
+title: One Database for Every Developer
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 457
+wordpress_url: http://blog.schauderhaft.de/?p=457
+date: '2010-08-22 10:16:24 +0200'
+date_gmt: '2010-08-22 08:16:24 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- database
+comments:
+- id: 689
+  author: Knut Fischer
+  author_email: knut@knutfischer.com
+  author_url: http://blog.knutfischer.com
+  date: '2010-08-22 20:30:31 +0200'
+  date_gmt: '2010-08-22 18:30:31 +0200'
+  content: Thanks for the article, I recommend a central RDBMS with a schema for each
+    user+project combination. We use Junit-Tests to test our java code. I use the
+    username [System.getProperty("user.name")] and a project prefix to create a schema
+    on the central RDBMSs and use that schema in the tests. So each developer and
+    of course the build system always use an own instance. I think its not very usefull
+    if every developer has its own RDBMS installed. I don't want to install, maintain
+    and update a bruch of RDBMSs on my system (and not only because I use osx).
+- id: 690
+  author: Jens Schauder
+  author_email: jens.schauder@lineas.de
+  author_url: http://blog.schauderhaft.de
+  date: '2010-08-22 21:44:18 +0200'
+  date_gmt: '2010-08-22 19:44:18 +0200'
+  content: "It all depends on the project setup. \r\n\r\nMultiple projects per developer,
+    single schema per project and not so database savy developers push toward a central
+    system.\r\n\r\nDistributed or mobile teams push toward a local database.\r\n\r\nWhatever
+    works best is fine, as long as we agree that every developer has his own schema
+    available."
+- id: 691
+  author: Daniel Alexiuc
+  author_email: daniel@alexiuc.com
+  author_url: http://justsomejavaguy.blogspot.com
+  date: '2010-08-22 23:52:23 +0200'
+  date_gmt: '2010-08-22 21:52:23 +0200'
+  content: "Our team of around 6-10 devs had a schema each on a central database managed
+    by the DBA.\r\n\r\nWe switched a few months ago to local Oracle Database instances.
+    It took about a week for the DBA to set everyone up, but the local performance
+    is now better, there is less load on our dev server, and working from home or
+    on a laptop is a breeze."
+- id: 692
+  author: German Viscuso
+  author_email: german@db4o.com
+  author_url: http://developer.db4o.com
+  date: '2010-08-23 19:12:30 +0200'
+  date_gmt: '2010-08-23 17:12:30 +0200'
+  content: "How about if each developer uses db4o (<a href=\"http:&#47;&#47;developer.db4o.com\"
+    rel=\"nofollow\">http:&#47;&#47;developer.db4o.com<&#47;a>) for mocking and tests?
+    (eg. <a href=\"http:&#47;&#47;community.icburner.com&#47;blogs&#47;vs2010tests&#47;archive&#47;2009&#47;06&#47;30&#47;db4o-poco-repository-using-visual-studio-2010-net-4-0-beta-1-and-asp-net-mvc-1-0.aspx\"
+    rel=\"nofollow\">http:&#47;&#47;community.icburner.com&#47;blogs&#47;vs2010tests&#47;archive&#47;2009&#47;06&#47;30&#47;db4o-poco-repository-using-visual-studio-2010-net-4-0-beta-1-and-asp-net-mvc-1-0.aspx<&#47;a>)
+    They can even be kept in sync with <a href=\"http:&#47;&#47;developer.db4o.com&#47;Solutions&#47;ReplicationServices.aspx\"
+    rel=\"nofollow\">dRS<&#47;a> (sync technology) which even syncs to&#47;from relational
+    via Hibernate.\r\nBest!\r\nGerman"
+- id: 693
+  author: Krzysztof Kotlarski
+  author_email: kkotlarski@gmail.com
+  author_url: http://www.kotlarski.net
+  date: '2010-08-23 19:48:58 +0200'
+  date_gmt: '2010-08-23 17:48:58 +0200'
+  content: Sounds reasonable but can you recomend some version control soft to make
+    this solution complete? Let say you have 5 coworkers and 3 projects - what isnt
+    much - that makes 18 instances and a lot of pain keeping them up to date manually
+- id: 697
+  author: One Database for Every Developer
+  author_email: ''
+  author_url: http://www.refreshthenet.com/2010/08/25/one-database-for-every-developer/
+  date: '2010-08-25 09:19:50 +0200'
+  date_gmt: '2010-08-25 07:19:50 +0200'
+  content: "[...] via Schauder&Acirc;&shy;haft &Acirc;&raquo; One Data&Acirc;&shy;base
+    for Every Devel&Acirc;&shy;oper. [...]"
+- id: 699
+  author: Joe Turner
+  author_email: syphon123@gmail.com
+  author_url: http://www.joeturner.info
+  date: '2010-08-25 15:59:12 +0200'
+  date_gmt: '2010-08-25 13:59:12 +0200'
+  content: "@Krzysztof Kotlarski you wouldn't need version control if you are setting
+    up the database schema using a system such as migrations in Ruby on Rails. This
+    gives forward and backward movement through the history of the schema. Tie that
+    in with fixtures to pre-populate the database with records and you then have ultimate
+    control"
+---
+<p>How many databases run in your teams development environment? One for the complete team? I have seen many places like that, but please tell me: Why? You aren't working on a shared files system aren't you? How is a developer supposed to change the structure of that database without interrupting the work of the other developers? And just in case you haven't noticed: Pretty much every RDBMS vendor offers free versions of their database which can run on a developer machine.</p>
+<p>So when you answered the second question above with 'yes' you have a task for tomorrow: Make sure every developer has her own database instance (or schema or whatever you need to work independently from the rest of the team). In addition to that: you need an instance for the automatic tests of your Continuous Integration system, one large one for performance and scalability tests, one for manual tests&#47;integration and of course one for production.</p>
+<p>And just in case you are now thinking: "Hell how am I supposed to keep all these databases in sync?" You are having a gapping hole in your software development process. I'll cover that in a different post.</p>

@@ -1,0 +1,142 @@
+---
+layout: post
+status: publish
+published: true
+title: TDD, do we really have to do it?
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1049
+wordpress_url: http://blog.schauderhaft.de/?p=1049
+date: '2012-04-15 09:48:06 +0200'
+date_gmt: '2012-04-15 07:48:06 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- testing
+- TDD
+- science
+comments:
+- id: 5825
+  author: Andreas Leidig
+  author_email: leider@me.com
+  author_url: http://pboop.wordpress.com
+  date: '2012-04-15 13:02:00 +0200'
+  date_gmt: '2012-04-15 11:02:00 +0200'
+  content: "You are hitting the weak spot. That is great. But this can be dangerous:
+    Many developers I know have a repulsive attitude towards testing in general and
+    especially TDD.\r\n\r\nIf I didn't know you personally it would be hard for me
+    to not take you as one of them. You recommend the technique at the end. It is
+    easy to overlook, although you write clearly that you advise people to try it.\r\n\r\nTo
+    the 2nd part of the title: \"do we really have to do it?\" - Of course not. Nobody
+    has to do anything! - What we all have to do is to consciously reflect our work,
+    their results and the techniques we are working with. Then identify potentials
+    to improve.\r\n\r\nTDD is it worth it? - Everybody has to decide herself. To me
+    the big big advantage is the influence on design it produces indirectly: Small
+    units of separated code, each with it's own responsibilities. Additionally explained
+    and \"verified\" by tests. I have a guarantee of the behavior of the unit. - I
+    like the results of good TDD. If I can get them with other approaches I am also
+    happy."
+- id: 5826
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2012-04-15 13:08:42 +0200'
+  date_gmt: '2012-04-15 11:08:42 +0200'
+  content: "Hi Andreas,\r\nthanks for the comment, maybe your comment prevents some
+    unsolicited flames.\r\n\r\nOn the other hand: There is nothing like  a nice flame
+    war on reddit for driving traffic to your site. :-)"
+- id: 5842
+  author: Roger Lipscombe
+  author_email: roger@differentpla.net
+  author_url: http://www.differentpla.net/
+  date: '2012-04-15 20:59:50 +0200'
+  date_gmt: '2012-04-15 18:59:50 +0200'
+  content: "I think that TDD is a valuable tool to have in the toolbox. It lets you
+    explore the design by writing tests as if you were a consumer of the interface
+    (the clue's in the name).\r\n\r\nHowever, it's not a panacea. There are some situations
+    where I've found that it's not a great fit. In those situations, just go ahead
+    and write the code, being mindful of good techniques.\r\n\r\nYou'll go back later
+    and, either because you're finding it hard to add unit tests, or because you notice
+    code smells, you'll have to do some refactoring. This is valid too.\r\n\r\nLike
+    I say: it's another tool in the box, and it is a good tool. Use it when appropriate,
+    but don't marry it."
+- id: 5857
+  author: Five Blogs &acirc;&euro;&ldquo; 16 April 2012 &laquo; 5blogs
+  author_email: ''
+  author_url: http://5blogs.wordpress.com/2012/04/16/five-blogs-16-april-2012/
+  date: '2012-04-16 08:43:16 +0200'
+  date_gmt: '2012-04-16 06:43:16 +0200'
+  content: "[...] TDD, do we really have to do it? Written by: Jens Schauder [...]"
+- id: 11038
+  author: Marc LY
+  author_email: marc.agile.dev@gmail.com
+  author_url: ''
+  date: '2014-04-26 06:10:34 +0200'
+  date_gmt: '2014-04-26 04:10:34 +0200'
+  content: "I'll try to make it simple, clear, yet personal but mainly a short answer.
+    Just notice how much personal the experience is (mine).\r\n\r\nAfter trying different
+    ways of developping, I'm able now to cry out loud that a non tested code is not
+    necessarily a bad one but it's the begining of something that can turn wrong without
+    anybody knowing before it happens (to go wrong).\r\nHaving said that, one can
+    also acknowledge the fact that even a \"fully\" tested code can go wrong (even
+    without any modification). \"Fully\" really can only mean \"at the maximum\" (depending
+    on the cost, the efficiency, blabla...).\r\n\r\nWith that in mind, what constitute
+    of the whole set of tests is a \"safety net\", a protection. We all test our code
+    in some \"manual\" way at least and even with automatic tests, we continue to
+    test by hand at some point.\r\nBut because almost every test is automated and
+    also because the computer can check something a million, trillion and even faster
+    than what we can check by hand, having a safety net composed of almost all the
+    test cases possible reduces the amount of time we have to spend testing thing
+    by hand and we can still focus on testing the important things by hand (and actually,
+    automate those tests too).\r\n\r\nBut test can be \"good\" when they are write
+    \"after\" a code but they are rarely good in general. The reason is simple : a
+    code that is written without having any test in mind is hardly testable ; and
+    adapting that code to make it testable is a change in the code and thus, a chance
+    to introduce bad behaviours.\r\n\r\nWhen one writes the test after the code, only
+    when the test is written by an other one is acceptable but still not good enough
+    in general because then, the tests will match the code or fit it the best way
+    possible: how can we know that 12345251 is prime if we don't know it? do we trust
+    our primality check function and add the answer to the test?\r\nOr is it better
+    to know first that 12345251 is prime or not and write the test over that, then
+    apply that test to the implemented function?\r\n\r\nNow if one writes the test
+    a blind way, one better does it before the code itself.\r\n\r\nAbout TDD, that
+    is also test-first (but not only that), it constitutes a lot of thing and the
+    focus is made on helping writing code = test code + production code.\r\nAlmost
+    only in TDD can a test auto-checks itself (by the process of TDD)... but still
+    you can write a wrong test and make mistakes!\r\nAnd only by writing test-first
+    can you \"guide yourself\" on the path of the solution... each small test of the
+    TDD process constitute (at least) a micro-specification of the code you have or
+    want to write.\r\nEach of these single TDD test thus helps you on the way of developping
+    the whole functionality.\r\n\r\nA lot of things come with that practice of TDD
+    too: you have a specification documentation (in code!) that is compiled and proves
+    that every function you wrote is tested and thus used at least once (in the test!).
+    You also have your unit-tests. You also have your validation tests. You know precisely
+    how to use each function you wrote... and now you can focus on high level testing
+    = system testing, integration testing, functional testing etc.\r\n\r\nSo, DO WE
+    HAVE TO TDD?\r\n\r\nNo one method can be good enough for every code you'll ever
+    have to write! so if you can recognize the piece of code, TDD is useless about,
+    then just don't use TDD. But try writing test first when ever possible anyway.\r\nIn
+    all other cases... and even in case of doubt, yes, definitely YOU SHOULD EVER
+    TDD!\r\nThe reason why is simple: 1) if you fail, at least you tried and we've
+    learn something and 2) TDD forces your test to be unit-usable by forcing each
+    function to be unit-testable.\r\nOnly that simple fact of making a function usable
+    completely decoupled from any other functions or contexts is THE most valuable
+    thing you'll ever got from any method ever.\r\n\r\nThe meaning of making a function
+    is to make it usable in the simplest context, that is no context at all! and the
+    technique to achieve that is used in unit-testing ; so used in TDD ^_^~\r\n\r\n(P.S.
+    : to understand \"decoupled\" in the context of unit-test, one may search for
+    \"stub\", \"fake functions\" and \"mock\" for example)."
+---
+<p>Many really smart people tell us we have to use TDD if we want to create code that is worth a penny. For example take <a href="http:&#47;&#47;butunclebob.com&#47;ArticleS.UncleBob.TheThreeRulesOfTdd">this article about TDD by Uncle Bob<&#47;a> (one of the moderate ones). He describes the benefits of TDD in paragraphs like this:</p>
+<blockquote><p>If all your code works every minute, how often will you use a debugger? Answer, not very often. It's easier to simply hit Ctrl-Z a bunch of times to get the code back to a working state, and then try to write the last minutes worth again. And if you aren't debugging very much, how much time will you be saving? How much time do you spend debugging now? How much time do you spend fixing bugs once you've debugged them? What if you could decrease that time by a significant fraction?<&#47;blockquote></p>
+<p>But the one thing he does not provide is anything close to a proof. He offers his own experience, which might be distorted for all kinds of things. </p>
+<p>Yet with a practice so simple (note: I didn't write easy) as TDD and so many people advocating it one would like to see some proof of the benefits of TDD. After writing a little piece about <a href="&#47;2012&#47;02&#47;12&#47;where-is-the-science-in-software-development&#47;">opportunities for more research in software development<&#47;a> I was recommended this the book: <a href="http:&#47;&#47;www.amazon.de&#47;gp&#47;product&#47;B004D4YI6G&#47;ref=as_li_ss_tl?ie=UTF8&tag=schauderhafte-21&linkCode=as2&camp=1638&creative=19454&creativeASIN=B004D4YI6G">Making Software: What Really Works, and Why We Believe It<&#47;a><img src="http:&#47;&#47;www.assoc-amazon.de&#47;e&#47;ir?t=schauderhafte-21&l=as2&o=3&a=B004D4YI6G" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" &#47;>. It is highly recommended for anybody interested in what works and what doesn't work in software development. Just be warned it is a little harder to read than <a target="_blank" href="http:&#47;&#47;www.amazon.de&#47;gp&#47;feature.html&#47;?ie=UTF8&site-redirect=de&tag=schauderhafte-21&linkCode=ur2&docId=1000624893&camp=1638&creative=19454">Harry Potter<&#47;a><img src="https:&#47;&#47;www.assoc-amazon.de&#47;e&#47;ir?t=schauderhafte-21&l=ur2&o=3" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" &#47;></p>
+<p>There actually is a chapter about TDD in it. The result: Not a clear win. I'm not even trying to put the details in here, but the result is basically: Although they tried they couldn't prove TDD to be as effective as many people claimed. But they also showed it is not as costly as many people claimed. And I think they mist at least one point: TDD can teach you a lot about software development and software design on the micro level.</p>
+<p>So what is the answer to the question in the title: Do we have to do TDD?</p>
+<p>Nope, don't think so. There are alternatives, like writing your tests after the code. But I recommend TDD to everybody to try it at least for some time. Its a great chance to learn a lot.</p>

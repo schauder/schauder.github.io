@@ -1,0 +1,77 @@
+---
+layout: post
+status: publish
+published: true
+title: Dependencies in a Three Tiered Application
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1257
+wordpress_url: http://blog.schauderhaft.de/?p=1257
+date: '2012-12-30 11:00:00 +0100'
+date_gmt: '2012-12-30 09:00:00 +0100'
+categories:
+- Softwaredevelopment
+tags:
+- design
+- architecture
+- dependencies
+comments:
+- id: 9021
+  author: ralfw
+  author_email: twitter.ralfw@example.com
+  author_url: http://twitter.com/ralfw
+  date: '2012-12-30 11:38:58 +0100'
+  date_gmt: '2012-12-30 09:38:58 +0100'
+  content: "I don&Acirc;&acute;t understand what the difference is between \"A ->
+    B\" and \"A depends on B\" and \"A.f() is calling B.g()\". [1]\r\n\r\nTo me, dependency
+    means, that some code (A) cannot function without some other code (B). (Whether
+    A knows a concrete B or just an abstraction like a B-interface, is irrelevant,
+    I&Acirc;&acute;d say.)\r\n\r\nThat said, I&Acirc;&acute;m wondering if what you
+    propose would really be an improvement.\r\n\r\nWhat you&Acirc;&acute;re saying
+    is: The UI calling the Domain is ok. But the Domain should not call Persistence.
+    The Domain should not know about any UI or Persistence interfaces. But the Domain
+    as well as Persistence are allowed to know Domain interfaces.\r\n\r\nThis partial
+    inversion would decouple Domain from Persistence, whereas Domain is already decoupled
+    from UI today.\r\n\r\nThe Domain would gain the sovereignty for defining interfaces.\r\n\r\nAlthough
+    this seems to be better than today&Acirc;&acute;s dependency patterns... I&Acirc;&acute;m
+    wondering, why stop there?\r\n\r\nWhy should any \"component\" depend on any other?
+    Why should the UI need to know about a Domain interface to call or implement?
+    Why should Persistence need to know or implement?\r\n\r\nSure, UI, Domain, and
+    Persistence need to work together; they need to be \"wired up\" to form a whole.
+    But does a UI need to know there are Domain objects providing some services? Does
+    Persistence need to depend on such services?\r\n\r\nDoes a motor know about a
+    fuel tank? No. Does a fuel tank know about a motor? No. Does a spark plug know
+    about a cylinder? No. Does a cylinder know about a spark plug? No. Does a key
+    on your keyboard know about the board it&Acirc;&acute;s attached to or the other
+    way around? No.\r\n\r\nAll these things - each serving a particular purpose -
+    just have a form of their own. Some designer shaped those forms in a way so they
+    fit together easily. But neither plug nor socket depend on each other.\r\n\r\nThis
+    highly successful \"principle of mutual oblivion\" :-) to me needs to be applied
+    much more to software. Instead of shifting around dependencies we should strive
+    for getting rid of as many as possible.\r\n\r\n---\r\n[1] In order to be able
+    to differentiate between dependency and data flow I switched from using \"->\"
+    as the dependency symbol in texts to \"-*\". So \"A -* B\" means \"A depends on
+    B\", and \"A -> B\" means \"data flows from A to B\".\r\n\r\nBeing able to easily
+    express both relationships is pretty powerful in design conversations."
+---
+<p>When people working on a multitiered application get asked to draw their architecture, often something like this emerges:</p>
+<p><tt>UI -> Domain -> Persistence<&#47;tt></p>
+<p>This is all nice until you start to wonder what the arrows actually mean. </p>
+<p>Is it data flow? Probably not, except when you are working on an application that takes input, stores it somewhere but never retrieves it back.</p>
+<p>Is it dependencies? Hopefully not, or everything depends on your persistence layer. You really don't want that.</p>
+<p>It might be calls: The UI gets triggered by the user in some way (say hitting a save button). The UI calls the domain logic tod do its stuff which in tern calls the persistence layer to store the stuff, load some other stuff and this gets returned up the stack until it gets displayed in the UI.</p>
+<p>While this is valid information to convey it often isn't what people think they are conveying. Instead they claim this are dependencies. And maybe they are. But if you want to document your dependencies your diagram should look like this most of the time:</p>
+<p><tt>UI -> Domain <- Persistence<&#47;tt></p>
+<p>The Domain should be the center of your architecture and there for at the center of your dependencies. Everything else, i.e. all the interfaces (in the general sense) should depend on the domain. Not the other way round. </p>
+<p>You achieve that by defining interfaces (in the Java sense) <strong>inside your domain<&#47;strong> which then get implemented or used by the UI or the Persistence layer.</p>
+<p>If you want you can have those interfaces in seperate layers you can:</p>
+<p><tt>UI -> Presentation Interface  Persistence Interface <- Persistence Implementation<&#47;tt></p>
+<p>Just take care that the design of the <strong>Presentation Interface<&#47;strong> and the <strong>Persistence Interface<&#47;strong> is driven by the domain, not by some UI or Persistence technology. </p>
+<p>As a side note: If you are using Hibernate &#47; JPA with annotation based mapping you are either violating this design principle, because your persistence technology (JPA) bleeds into the domain logic (annotations on the domain classes) or you have to copy all the data from your entity classes into your domain classes which really is cumbersome and reintroduces the kind of boilerplate code we wanted to get rid of with tools like Hibernate in the first place.</p>
+<p>How to resolve that issue is a topic for another day.</p>

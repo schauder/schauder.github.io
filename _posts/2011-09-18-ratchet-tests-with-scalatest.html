@@ -1,0 +1,114 @@
+---
+layout: post
+status: publish
+published: true
+title: Ratchet Tests with ScalaTest
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 926
+wordpress_url: http://blog.schauderhaft.de/?p=926
+date: '2011-09-18 06:17:21 +0200'
+date_gmt: '2011-09-18 04:17:21 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- testing
+- trait
+- scalatest
+comments:
+- id: 4270
+  author: Eric Torreborre
+  author_email: etorreborre@yahoo.com
+  author_url: http://specs2.org
+  date: '2011-09-19 02:18:18 +0200'
+  date_gmt: '2011-09-19 00:18:18 +0200'
+  content: 'Interesting, that looks like the pendingUntilFixed method: http:&#47;&#47;www.scalatest.org&#47;scaladoc-1.5.1&#47;org&#47;scalatest&#47;Suite.html
+    but more like ''successUntilFixed'' in that case.'
+- id: 4271
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2011-09-19 06:34:56 +0200'
+  date_gmt: '2011-09-19 04:34:56 +0200'
+  content: "@Eric \r\nI agree it is similar. \r\n\r\nAn important difference is the
+    fact that the information if a test is expected to fail is out side the test.This
+    allows it to work with Suites where the number of tests is determined dynamically.\r\n\r\nImagine
+    a case where a list of packages is created through checkstyle or something similar
+    and then a test is created for each package:\r\n\r\n<code>\r\nval list = createListOfPackages()\r\nlist.foreach{p
+    =>\r\n    test(\"do a a test with \" + p ){ p should be not to big}\r\n}\r\n<&#47;code>\r\n\r\nWith
+    pending until fixed I would have to code the logic into the test."
+- id: 4291
+  author: Eric Torreborre
+  author_email: etorreborre@yahoo.com
+  author_url: http://specs2.org
+  date: '2011-09-21 01:09:43 +0200'
+  date_gmt: '2011-09-20 23:09:43 +0200'
+  content: "You can still write something like:\r\n\r\nval pendingTests = Seq(\"p1\",
+    \"p45\")\r\n\r\ndef testOrPending[T](name: String, id: String)(expectations: =>T)
+    = test(name + \" \" +id) {\r\n    if (pendingTests contains p) pendingUntilFixed(expectations)\r\n
+    \   else expectations\r\n}\r\n\r\nval list = createListOfPackages()\r\nlist.foreach{p
+    =>\r\n  testOrPending(\"do a a test with \", p) { \r\n    p should be not to big\r\n
+    \ }\r\n}"
+- id: 4297
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2011-09-22 06:19:55 +0200'
+  date_gmt: '2011-09-22 04:19:55 +0200'
+  content: "@Eric you are right."
+---
+<p>Ever found more broken things in a project than you possible could fix in one go? I'm exactly in that situation. We have a test which checks for certain dependencies in our project. The problem: We discovered that the test was broken and didn't report all disallowed dependencies. We do know how to fix it, but if we do it will fail. And since there are many violations it will take quite some time to fix all of them. But of course we want to prevent even more violations of our dependency rules. </p>
+<p>The solution could be a ratchet on the tests. A contraption which accepts broken tests, but which doesn't allow tests to fail once they succeeded.</p>
+<p>For ScalaTest you can create appropriate tests using this simple <tt>Ratchet<&#47;tt> trait</p>
+<pre lang="scala">
+package de.schauderhaft.ratchet<br />
+import org.scalatest.AbstractSuite<br />
+import org.scalatest.Suite<br />
+import org.scalatest.TestFailedException</p>
+<p>trait Ratchet extends AbstractSuite {<br />
+    self : Suite =></p>
+<p>    private var tests = Set[String]()</p>
+<p>    def ratchet(ratchetedTests : Set[String]) {<br />
+        tests = ratchetedTests<br />
+    }</p>
+<p>    override abstract def withFixture(theTest : NoArgTest) {<br />
+        if (tests.contains(theTest.name)) {<br />
+            var failedToFail = false<br />
+            try {<br />
+                super.withFixture(theTest)<br />
+                failedToFail = true<br />
+            } catch {<br />
+                case ex : TestFailedException =><br />
+            }<br />
+            if (failedToFail)<br />
+                fail("Remove '%s' from the ratchet it doesn't fail anymore".format(theTest.name))<br />
+        } else<br />
+            super.withFixture(theTest)<br />
+    }<br />
+}<br />
+<&#47;pre></p>
+<p>It adds a <tt>ratchet<&#47;tt> method to your suite. You pass it a <tt>Set<&#47;tt> of test names. These are the tests that you expect to fail. If they do fail, the <tt>Ratchet<&#47;tt> will convert that failure to a success. If a test which you expect to fail succeeds, the <tt>Ratchet<&#47;tt> will make sure it does fail with a message saying you should remove it from the tests expected to fail. Tests not registered with the <tt>ratchet<&#47;tt> method behave just as normal tests do. This is how the contraption looks in action with an example test suite: (Note tests which start witch 'expected:' do fail</p>
+<pre lang="scala">
+class RatchetTestDemo extends FunSuite with ShouldMatchers with Ratchet {<br />
+    ratchet(Set(<br />
+        "a failing test with ratchet does not fail",<br />
+        "expected: a succeeding test with ratchet fails"))</p>
+<p>    test("a failing test with ratchet does not fail") {<br />
+        fail<br />
+    }</p>
+<p>    test("expected: a failing test without ratchet fails") {<br />
+        fail<br />
+    }</p>
+<p>    test("a succeeding test without ratchet succeeds") {<br />
+    }</p>
+<p>    test("expected: a succeeding test with ratchet fails") {<br />
+        println("hallo")<br />
+    }<br />
+}<br />
+<&#47;pre></p>

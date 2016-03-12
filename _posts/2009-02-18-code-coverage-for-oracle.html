@@ -1,0 +1,53 @@
+---
+layout: post
+status: publish
+published: true
+title: 'Code Coverage for Oracle '
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 135
+wordpress_url: http://blog.schauderhaft.de/2009/02/18/code-coverage-for-oracle/
+date: '2009-02-18 19:35:36 +0100'
+date_gmt: '2009-02-18 18:35:36 +0100'
+categories:
+- Softwareentwicklung
+- Datenbank
+tags: []
+comments:
+- id: 137
+  author: Tim High
+  author_email: timothy.high@gmail.com
+  author_url: http://timhigh.wordpress.com
+  date: '2009-02-18 19:43:43 +0100'
+  date_gmt: '2009-02-18 18:43:43 +0100'
+  content: "Actually, I wasn't working with Oracle on this. My repeated \"thanks\"
+    to Oracle is for the plethora of tools they provide out-of-the-(rather expensive)-box.\r\n\r\nBut
+    enough people out there ask for it, maybe they will see some value in adding more
+    support for something like this. At the very least, we can open source our project,
+    and all work together to make the whole process a lot smoother."
+- id: 455
+  author: Ira Baxter
+  author_email: idbaxter@semdesigns.com
+  author_url: http://www.semanticdesigns.com/Products/TestCoverage
+  date: '2010-06-09 01:12:04 +0200'
+  date_gmt: '2010-06-08 23:12:04 +0200'
+  content: Semantic Designs is putting finishing touches on PL&#47;SQL test coverage
+    tools; see http:&#47;&#47;www.semanticdesigns.com&#47;Products&#47;TestCoverage
+    for general discussion of SD's style of test coverage tools.   Beta testers are
+    encouraged to inquire to  idbaxter@semanticdesigns.com.
+---
+<p>I try to minimize the use of database specific programming languages like PL&#47;SQL. It is just annoying to work with a language that is just badly designed and has hardly any serious tool support. It (and the IDEs around it) is lacking in so many ways. All the things I would expect from the most basic development environment are missing.</p>
+<p>Yet sometimes we can&acirc;&euro;&trade;t help it and just have to use PL&#47;SQL for performance or political reasons, but it really hurts.<br />
+And the frustrating part: Nobody seems to care.</p>
+<p>Nobody? There are a few guys working on these things. I wrote <a href="&#47;2008&#47;12&#47;19&#47;news-on-testing-for-databases&#47;">about Tim High<&#47;a> before. Yesterday he left a <a href="&#47;2008&#47;12&#47;19&#47;news-on-testing-for-databases&#47;#comment-136">comment<&#47;a> on the post to inform me that he wrote another article that might interest me. Completely superfluous. I already picked it up on DZone and marked it for future reference in my blog. So here it is:</p>
+<p><a href="http:&#47;&#47;timhigh.wordpress.com&#47;2009&#47;02&#47;17&#47;test-coverage-reporting-on-oracle-10g&#47;trackback&#47;">Test Coverage Reporting on Oracle 10g<&#47;a></p>
+<p>Tim uses the data from the profiler to gather line coverage data and even puts it in a very nice report.<br />
+<img src="http:&#47;&#47;timhigh.files.wordpress.com&#47;2009&#47;02&#47;report-example.png?w=450&amp;h=317" alt="Image of a code coverage report for a oracle package" &#47;></p>
+<p>While beautiful in the result it is a tough way to get there with many scripts and some requirements on the code style. But its &acirc;&euro;&oelig;better than nothing&acirc;&euro; as the saying goes in northern westfalia. So my next project which requires more than trivial PL&#47;SQL code will get code coverag. Isn't that great?</p>
+<p>Apparently Tim worked together with Oracle on this so there is the very slight chance that Oracle or Toad or their competition will realize that there is a difference between a GUI for easy SQL hacking and a IDE that allows controlled software development.</p>

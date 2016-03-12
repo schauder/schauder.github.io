@@ -1,0 +1,138 @@
+---
+layout: post
+status: publish
+published: true
+title: 'The Problem with an Evolutionary Architecture and YAGNI '
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1136
+wordpress_url: http://blog.schauderhaft.de/?p=1136
+date: '2012-06-17 06:24:40 +0200'
+date_gmt: '2012-06-17 04:24:40 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- software architecture
+- evolutionary architecture
+- yagni
+comments:
+- id: 6962
+  author: Kurt
+  author_email: kurt.haeusler@gmail.com
+  author_url: http://kurthaeusler.wordpress.com
+  date: '2012-06-17 09:14:07 +0200'
+  date_gmt: '2012-06-17 07:14:07 +0200'
+  content: "You just have to give the developers the responsibility for the code,
+    and the freedom to take care of it.\r\nIf a developer knows the buck stops with
+    him, he will do it right.\r\n\r\nIn the \"Time goes by\" bit, did the source code
+    automatically rot? Or were people working on it? Weren't they continuously considering
+    the quality of the design? Or were they waiting for some coaching? Were they waiting
+    for a code review?\r\n\r\nWhat I hear often is that developers want to do the
+    right thing, but someone told them they have to use a framework that makes TDD
+    hard. Or they have to use a data-centric model driven approach that makes refactoring
+    expensive. Or some architect doesn't want developers writing \"their own tests
+    willy nilly or there will be chaos\" so the developers keep hacking away without
+    tests until the \"architecture team\" or some coach can tell them the official
+    way it is to be done.\r\n\r\nGet rid of all supposed authorities beyond the judgement
+    of the individual or pair of developers:\r\n\r\nGet rid of architects.\r\nGet
+    rid of standards.\r\nGet rid of coaches.\r\n\r\nGet rid of anything that allows
+    the professional developer to delegate responsibility for internal quality to
+    some other party.\r\n\r\nGet rid of anything that stands in the way of the freedom
+    to craft clean code!\r\nRaise the bar, and allow developers to raise with it!"
+- id: 6963
+  author: Ralf Westphal
+  author_email: info@ralfw.de
+  author_url: http://ralfw.blogspot.com
+  date: '2012-06-17 11:35:28 +0200'
+  date_gmt: '2012-06-17 09:35:28 +0200'
+  content: "@Jens: But you know the solution. You even gave it away: do code reviews.\r\n\r\nWhenever
+    you feel surprised by how code looks, then that&Acirc;&acute;s a sign of having
+    not seen the code for a long time - but somehow it has changed. Since code does
+    not change by itself, somebody must have changed it. Why haven&Acirc;&acute;t
+    you then seen those changes right after they were applied? Because your team is
+    not used to collective code reviews.\r\n\r\nDoing collective code reviews solves
+    two problems: it saves you from the kind of surprises you experienced. And it
+    helps lowering the number of explicit standards required. Since you&Acirc;&acute;re
+    sitting together regularly you don&Acirc;&acute;t need to write a thick book of
+    standards once and for all; instead whatever conventions are needed is constantly
+    discussed&#47;negotiated.\r\n\r\nIn addition collective code reviews help sharing
+    knowledge among the team members (technical knowledge as well as domain knowledge).\r\n\r\n\r\n@Kurt:
+    I agree that taking up responsibility is a good think. Don&Acirc;&acute;t hide
+    behind a tool or a management rule etc. But since responsibility can only be accepted
+    and not assigned, it is important to actually feel able to accept it. Accepting
+    responsibility thus requires ability and capability.\r\n\r\nWhere does ability
+    and capability come from? It requires effort. It requires even more effort in
+    the face of other forces seemingly trying to keep you away from learning. And
+    it requires abilities and capabilities on the meta level: in order to become able
+    with regard to method XYZ you need to be able to learn.\r\n\r\nThis is where teachers
+    and coaches come it. They help with learning.\r\n\r\nIf you expect developers
+    to be able to learn everything by themselves, if you expect teams to be able to
+    go through any change process itself... then I&Acirc;&acute;d say you either have
+    only to do with top 5% people or you&Acirc;&acute;re arguing from a pure ideological
+    standpoint.\r\n\r\nSorry, Kurt. But your list of \"get rid of...\" to me is a
+    bit too general for my taste."
+- id: 6972
+  author: Gene Hughson
+  author_email: genehughson@hotmail.com
+  author_url: http://genehughson.wordpress.com
+  date: '2012-06-17 17:25:04 +0200'
+  date_gmt: '2012-06-17 15:25:04 +0200'
+  content: "Jens,\r\n\r\nGreat post.  While many do seem to be betting the farm on
+    evolutionary architecture, it's far from universal.  I posted <a href=\"http:&#47;&#47;genehughson.wordpress.com&#47;2012&#47;06&#47;11&#47;emergent-architectures-and-growing-pains&#47;\"
+    rel=\"nofollow\">this<&#47;a> just last week discussing the debate.  Since then,
+    I've seen even more (including your post) coming out to challenge the notion that
+    a sustainable architecture can emerge by accident.  Throwing out architectural
+    design because some (many?) do it poorly is like banning singing because some
+    (many?) do it poorly.  A much better response is to respond to the shortcomings."
+- id: 6975
+  author: Ralf Westphal
+  author_email: info@ralfw.de
+  author_url: http://ralfw.blogspot.com
+  date: '2012-06-17 17:57:04 +0200'
+  date_gmt: '2012-06-17 15:57:04 +0200'
+  content: "@Gene: You&Acirc;&acute;re equating \"emergence\" with \"evolution\" it
+    seems. Do you intend to do so? To me there seems to be a difference.\r\n\r\nEvolutionary
+    architecture or evolving architecture just describes there is, well, change over
+    time. The term acknowledges that architecture cannot be planned once, but needs
+    to be constantly adapted to new&#47;changing requirements. Nevertheless it can
+    planned in small steps.\r\n\r\nEmergent architecture on the other hand - at least
+    to me - describes a less planned architecture. It&Acirc;&acute;s not (that much)
+    thought about beforehand, but rather \"happens\" (through the application of coding
+    principles) and later on can be analyzed.\r\n\r\nI&Acirc;&acute;m all for evolutionary
+    architecture, but I&Acirc;&acute;m doubtfull about emergent architecture."
+- id: 6977
+  author: Gene Hughson
+  author_email: genehughson@hotmail.com
+  author_url: http://genehughson.wordpress.com
+  date: '2012-06-17 18:08:00 +0200'
+  date_gmt: '2012-06-17 16:08:00 +0200'
+  content: "Ralf,\r\n\r\nThe first sentence of my comment was poorly worded.  I should
+    have been clearer.  I see it this way...emergent architectures are evolutionary,
+    but not all evolutionary architectures are emergent.  \r\n\r\nYour last sentence
+    capture's my opinion perfectly."
+- id: 7037
+  author: Geek Reading June 18, 2012 | Regular Geek
+  author_email: ''
+  author_url: http://regulargeek.com/2012/06/18/geek-reading-june-18-2012/
+  date: '2012-06-18 18:00:46 +0200'
+  date_gmt: '2012-06-18 16:00:46 +0200'
+  content: "[...] The Problem with an Evolutionary Architecture and YAGNI (Schauderhaft)
+    [...]"
+---
+<p>Among the software architects with a strong voice on conferences, twitter and in the blogosphere there is wide spread agreement that one should bet on evolutionary architecture.</p>
+<p>The idea behind an evolutionary architecture is that you make decision as late as possible and responsible. Instead of dreaming up a detailed architecture up front you only decide on the parts immediately needed. The point is that this allows you to start earlier to produce actual software because you don't have to wait two weeks for the architect to finish her UML diagrams. This allows to actually deploy software and get feedback from the users, which is pretty much the basis for all things agile. It also helps to avoid the fallacy of over designing and regulating stuff that is actually irrelevant for the application, also known as YAGNI: You ain't gonna need it.</p>
+<p>I try to follow this approach. I have a hard time to imagine anything else to work. Maybe there are people out there that can simulate the result of 10 developers working for a year in their head and based on that make the proper decision up front. I'm certainly not that kidn of super hero.</p>
+<p>But the world is not perfect. I experienced in multiple cases a situation as the following: I sit together with a developer to code a part of a system that is kind of different then everything else done so far. Maybe the first form of the project, or the first interface to another system. So there is plenty of space for some architecture decisions. We put some down in code, the once we actually need right now. Since we know this code is going to be a template we actually put a little extra effort in to make some decision more obvious. Maybe through comments, maybe through making the code extra clean. Other decisions we more or less consiously put back because we don't have enough information. </p>
+<p>Then time goes by.</p>
+<p>When I come back to the code, or to places where it got used, or places where the approach was copied to I often find ...</p>
+<p>... a mess.</p>
+<p>The frustrating part is: It is my own mess. While my fellow developers used the code we wrote as a base for their own work. they used and amplified everything they found. The good parts as well as the bad parts. And while the good parts are hardly noticed (thats after all how good code should behave: just working away without drawing attention) the bad part stick out like a sore thumb. Actually in many cases the sore thumb stuck out for a long time without anybody (or at least without me) noticing until it got caught in door and prevents the door from closing in a very painfull way.</p>
+<p>So while code got used and reused in some way a design decision was necessary. But since the one primarly responsible for such decisions didn't noticed it wasn't made at all, or it was made in an inappropiate way, often without even noticing that a decision was being made.</p>
+<p>I love (to write) blog posts that describe an important, serious problem and then provide a nice clean solution to it. Unfortunatly this isn't one of that kind. I have no solution to the problem. All I can come up with is: Write cleaner code. Coach the team to at least identify design challanges before they turn into problems. Do code reviews. </p>
+<p>But if you have a better idea. Let me know.</p>

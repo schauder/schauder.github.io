@@ -1,0 +1,58 @@
+<p>One of the powers of <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;RDBMS">RDBMS<&#47;a> as we use them today are constraints. I use unique indexes, not null constraints and foreign keys on a regular basis and if you do any work with RDBMSs you probably do as well.</p>
+<p>From time to time one comes at a point where you think "it would be nice to enforce this with some kind of constraint", but you can't. Well maybe you just didn't try hard enough. This is the first in a little series of articles pointing out some tricks you can do with database constraints.</p>
+<p>I'll talk Oracle here since that is what I know best, but many of these things are possible in other systems as well.</p>
+<p>Lets assume we have a person table and a hobby table which holds the hobbies of a person:</p>
+<pre lang="sql">
+create table person (<br />
+  id number primary key not null,<br />
+  name varchar2(200) not null<br />
+  );</p>
+<p>create table hobby (<br />
+  id number primary key not null,<br />
+  person_id number references person not null,<br />
+  name varchar2(200) not null<br />
+  )<br />
+<&#47;pre> </p>
+<p>Just ignore that the hobby table probably needs some normalization. Now assume you want to flag the favorite hobby of a person and of course there can be only one favorite hobby per person. </p>
+<p>You could create an additional table holding that information, linking person entries and hobby entries, with a unique constraint on the person_id. From a theoretical point of view this is the correct normalized way to do it. But it makes you add a complete table when you just need a flag. There is a somewhat denormalized way to do it, which is in cases like this one simpler to use. </p>
+<pre lang="sql">
+alter table hobby<br />
+add  is_favorite varchar2(1) unique;</p>
+<p>alter table hobby add constraint check_is_favorite<br />
+CHECK (is_favorite = 'Y');<br />
+<&#47;pre></p>
+<p>The idea is to add a <tt>is_favorite<&#47;tt> column and make it unique, but also only allow a single value different from <tt>null<&#47;tt> using a check constraint. Since <tt>null<&#47;tt> values don't get indexed you can have as many <tt>null<&#47;tt> values in a unique column as you want. This does look probmising, but there is a problem. The <tt>is_favorite<&#47;tt> column should only be unique per person, so we have to include the <tt>person_id<&#47;tt>. But now all the <tt>null<&#47;tt> values get indexed, since a unique key only ignores <tt>null<&#47;tt> values when all indexed columns are <tt>null<&#47;tt>. So we have to replace the <tt>null<&#47;tt> values with something unique. We can do that by creating a function based column which is identical to <tt>is_favorite<&#47;tt> for not <tt>null<&#47;tt> values and replaces the <tt>null<&#47;tt> values with the primary key (which of course is unique by definition). </p>
+<pre lang="sql">
+alter table hobby<br />
+add is_favorite_unique as (nvl(is_favorite, id));</p>
+<p>ALTER TABLE hobby ADD CONSTRAINT unique_favorite_hobby<br />
+UNIQUE(person_id, is_favorite_unique);<br />
+<&#47;pre></p>
+<p>If you remove the unique constraint from the is_favorite column you finally have the desired behavior:</p>
+<pre lang="sql">
+create table person (<br />
+  id number primary key not null,<br />
+  name varchar2(200) not null<br />
+  );</p>
+<p>create table hobby (<br />
+  id number primary key not null,<br />
+  person_id number references person not null,<br />
+  name varchar2(200) not null<br />
+  );</p>
+<p>alter table hobby<br />
+add  is_favorite varchar2(1);</p>
+<p>alter table hobby add constraint check_is_favorite<br />
+CHECK (is_favorite = 'Y');</p>
+<p>alter table hobby<br />
+add is_favorite_unique as (nvl(is_favorite, id));</p>
+<p>ALTER TABLE hobby ADD CONSTRAINT unique_favorite_hobby<br />
+UNIQUE(person_id, is_favorite_unique);</p>
+<p>insert into person values (1, 'Jens');<br />
+insert into person values (2, 'Alfred');<br />
+insert into hobby (id, person_id, name, is_favorite) values (10,1, 'coding', 'Y');<br />
+insert into hobby (id, person_id, name, is_favorite) values (20,2, 'soccer', null);<br />
+insert into hobby (id, person_id, name, is_favorite) values (21,2, 'reading', null);<br />
+insert into hobby (id, person_id, name, is_favorite) values (22,2, 'swimming', 'Y');<br />
+-- this fails with a unique exception<br />
+-- insert into hobby (id, person_id, name, is_favorite) values (23,2, 'watching highlander', 'Y');<br />
+<&#47;pre></p>

@@ -1,0 +1,90 @@
+---
+layout: post
+status: publish
+published: true
+title: 'Advanced Database Constraints: Don''t Look for a Second'
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1062
+wordpress_url: http://blog.schauderhaft.de/?p=1062
+date: '2012-04-08 09:31:28 +0200'
+date_gmt: '2012-04-08 07:31:28 +0200'
+categories:
+- Softwaredevelopment
+tags:
+- sql
+- constraints
+- deferred
+comments: []
+---
+<p>One of the powers of RDBMS as we use them today are constraints. I use unique indexes, not null constraints and foreign keys on a regular basis and if you do any work with RDBMSs you probably do as well.</p>
+<p>From time to time one comes at a point where you think &acirc;&euro;&oelig;it would be nice to enforce this with some kind of constraint&acirc;&euro;, but you can&acirc;&euro;&trade;t. Well maybe you just didn&acirc;&euro;&trade;t try hard enough. This is the second part of the <a href="&#47;2012&#47;03&#47;25&#47;advanced-database-constraints-there-can-be-only-one&#47;">mini series<&#47;a> about somewhat special constraints for (Oracle) databases. </p>
+<p>Let's assume you want to model a system of superheroes an villain. Each superhero has an arch_villain and each villain has an arch superhero. Thats simple, isn't it?</p>
+<pre lang="sql">
+create table super_hero (<br />
+  id number(10),<br />
+  name varchar2(200) not null unique,<br />
+  arch_villain_id number(10) not null,<br />
+  CONSTRAINT super_hero_pk PRIMARY KEY (id)<br />
+);</p>
+<p>create table villain   (<br />
+  id number(10),<br />
+  name varchar2(200) not null unique,<br />
+  arch_hero_id number(10) not null,<br />
+  CONSTRAINT villain_pk PRIMARY KEY (id)<br />
+);</p>
+<p>alter table super_hero<br />
+add constraint arch_villain_fk<br />
+foreign key(arch_villain_id)<br />
+references villain(id);</p>
+<p>alter table villain<br />
+add constraint arch_hero_fk<br />
+foreign key(arch_hero_id)<br />
+references super_hero(id);<br />
+<&#47;pre></p>
+<p>Not so fast. Try to insert a row into these tables. It doesn't work. Before you can insert the first super hero you have to insert a first villain to serve as a arch villain for our super hero. But this arch villain needs a super hero first for use as arch super hero. A vicious circle.</p>
+<p>Looks like we have to drop at least one of our constraints. Actually no. We can make it a deferred constraint like so:</p>
+<pre lang="sql">
+create table super_hero (<br />
+  id number(10),<br />
+  name varchar2(200) not null unique,<br />
+  arch_villain_id number(10) not null,<br />
+  CONSTRAINT super_hero_pk PRIMARY KEY (id)<br />
+);</p>
+<p>create table villain   (<br />
+  id number(10),<br />
+  name varchar2(200) not null unique,<br />
+  arch_hero_id number(10) not null,<br />
+  CONSTRAINT villain_pk PRIMARY KEY (id)<br />
+);</p>
+<p>alter table super_hero<br />
+add constraint arch_villain_fk<br />
+foreign key(arch_villain_id)<br />
+references villain(id)<br />
+deferrable initially deferred;</p>
+<p>alter table villain<br />
+add constraint arch_hero_fk<br />
+foreign key(arch_hero_id)<br />
+references super_hero(id)<br />
+deferrable initially deferred;<br />
+<&#47;pre></p>
+<p>Now we can enter our data in a pretty natural way:</p>
+<pre lang="sql">
+insert into super_hero(id, name, arch_villain_id) values (1, 'Spider-Man', 2);</p>
+<p>insert into villain(id, name, arch_hero_id) values(2, 'Green Goblin', 1);</p>
+<p>commit;<br />
+<&#47;pre></p>
+<p>What happend? Are the constraints still there? Yes they are:</p>
+<pre lang="sql">
+insert into super_hero(id, name, arch_villain_id) values (1, 'Spider-Man', 2);</p>
+<p>insert into villain(id, name, arch_hero_id) values(3, 'Green Goblin', 1);</p>
+<p>commit; -- fails with ORA-02091: transaction rolled back ORA-02291: integrity constraint (USER_1DA56.ARCH_VILLAIN_FK) violated - parent key not found : commit<br />
+<&#47;pre></p>
+<p>But they are only enforced on commit, not after every DML statement like it is done normaly.</p>
+<p>Many Java developer know this feature due to a bug in hibernate that causes illegal intermediate inserts&#47;updates. Most database developers know this feature more as a performance tuning tool. When you insert or update millions of rows Oracle has to executes additional statementes in order to verify constraints. This can cost a considerable amount of performance and often can be done much more efficient when one waits until all the data has its final state.</p>

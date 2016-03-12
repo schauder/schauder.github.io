@@ -1,0 +1,170 @@
+---
+layout: post
+status: publish
+published: true
+title: Five Reasons Why You Should Keep Your Package Dependencies Cycle Free
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 1480
+wordpress_url: http://blog.schauderhaft.de/?p=1480
+date: '2014-11-09 12:17:08 +0100'
+date_gmt: '2014-11-09 10:17:08 +0100'
+categories:
+- Uncategorized
+tags: []
+comments:
+- id: 347467
+  author: Gunnar
+  author_email: gunnar.morling@googlemail.com
+  author_url: http://gunnarmorling.de/
+  date: '2014-11-15 19:56:14 +0100'
+  date_gmt: '2014-11-15 17:56:14 +0100'
+  content: "Hi, nice post and I agree in general, I find one exception to this rule
+    acceptable, though: I don't mind a dependency between a package and a sub-package
+    of the same.\r\n\r\nI find this beneficial to separate the core contents of a
+    package and utility functionality around it, e.g. say \"com.acme.model\" and \"com.acme.model.builders\".
+    Both packages are meant to work together and the sub-package solely exists to
+    provide a guiding structure of the contents. Another example would be \"com.acme.service\"
+    and \"com.acme.service.impl\" where the former would be a public API and ther
+    latter the implementation of the same. I wouldn't mind the impl stuff being using
+    internally in API classes (i.e. within methods etc. not exposed through signatures),
+    e.g. if there is a public factory for an API class which returns an implementation
+    from \"impl\".\r\n\r\n--Gunnar"
+- id: 347497
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2014-11-15 20:31:40 +0100'
+  date_gmt: '2014-11-15 18:31:40 +0100'
+  content: "Hi Gunnar,\r\nI agree, with your implied statement that some circles are
+    worse then others. But if two package (subpackages or not) don't have a clear
+    enough separation to keep them circle free, I wouldn't even bother. \r\n\r\nThe
+    examples you give also sound a little fishy to me. To me they seem to violate
+    the rule, don't  name packages for the type of classes, that they contain. Just
+    because a bunch of packages implement the same pattern (builder) doesn't mean
+    they work closely together and therefore be in the same package.\r\n\r\nAlso I'm
+    very wary of \"impl\" packages. And a an \"api\" package that depends on it's
+    associated \"impl\" package sound really strange to me. It also  means the that
+    anybody using the api package can has to know the impl package as well. That doesn't
+    sound good."
+- id: 347512
+  author: Gunnar
+  author_email: gunnar.morling@googlemail.com
+  author_url: http://gunnarmorling.de/
+  date: '2014-11-15 20:50:49 +0100'
+  date_gmt: '2014-11-15 18:50:49 +0100'
+  content: "Hey, thanks for the reply :)\r\n\r\nMy point is, I don't see the need
+    (or a value in) to forbid this form of cycles (super  sub-package). They are not
+    meant to be used alone, the sub-package only is there the give some kind of structure
+    and make things more comprehensible. Really it's just a kind of \"grouping\" of
+    the contents of one logical package.\r\n\r\n> Also I&acirc;&euro;&trade;m very
+    wary of &acirc;&euro;&oelig;impl&acirc;&euro;\x9D packages\r\n\r\nInteresting,
+    why that? It's a common and established pattern in many code bases in order to
+    separate APIs meant to be accessed by users from implementation-only parts of
+    a library.\r\n\r\n> It also means the that anybody using the api package can has
+    to know the impl package as well.\r\n\r\nNo; As said, I only wouldn't mind *internal*
+    references from API to \"impl\", i.e. in local variables or private fields. E.g.
+    like so:\r\n\r\n&#47;&#47; public package\r\ninterface MyService {\r\n    default
+    MyService getInstance() { return new MyDefaultService(); }\r\n\r\n    &#47;&#47;service
+    methods... \r\n}\r\n\r\n&#47;&#47; impl package\r\nclass MyDefaultService implements
+    MyService {\r\n    &#47;&#47; service method implementations\r\n}\r\n\r\n--Gunnar"
+- id: 353245
+  author: benontherun
+  author_email: twitter.68459659@example.com
+  author_url: https://twitter.com/benontherun
+  date: '2014-11-09 21:54:31 +0100'
+  date_gmt: '2014-11-09 19:54:31 +0100'
+  content: 'RT @jensschauder: I blogged: Five Reasons Why You Should Keep Your Package
+    Dependencies Cycle Free http:&#47;&#47;t.co&#47;aULte1P2P4'
+- id: 353247
+  author: nipafx
+  author_email: twitter.2847809129@example.com
+  author_url: https://twitter.com/nipafx
+  date: '2014-11-09 14:03:58 +0100'
+  date_gmt: '2014-11-09 12:03:58 +0100'
+  content: 'RT @jensschauder: I blogged: Five Reasons Why You Should Keep Your Package
+    Dependencies Cycle Free http:&#47;&#47;t.co&#47;aULte1P2P4'
+- id: 353249
+  author: jensnerche
+  author_email: twitter.60322770@example.com
+  author_url: https://twitter.com/jensnerche
+  date: '2014-11-09 12:33:43 +0100'
+  date_gmt: '2014-11-09 10:33:43 +0100'
+  content: 'RT @jensschauder: I blogged: Five Reasons Why You Should Keep Your Package
+    Dependencies Cycle Free http:&#47;&#47;t.co&#47;aULte1P2P4'
+- id: 353251
+  author: jordi9
+  author_email: twitter.16039195@example.com
+  author_url: https://twitter.com/jordi9
+  date: '2014-11-14 20:09:04 +0100'
+  date_gmt: '2014-11-14 18:09:04 +0100'
+  content: Five Reasons Why You Should Keep Your Package Dependencies Cycle Free http:&#47;&#47;t.co&#47;etEnyhTBYX
+- id: 355229
+  author: carloschacin
+  author_email: twitter.48364078@example.com
+  author_url: https://twitter.com/carloschacin
+  date: '2014-11-24 05:09:18 +0100'
+  date_gmt: '2014-11-24 03:09:18 +0100'
+  content: Five Reasons Why You Should Keep Your Package Dependencies Cycle Free http:&#47;&#47;t.co&#47;oyQsdHQSMw
+- id: 356909
+  author: flyingedivad
+  author_email: twitter.200228528@example.com
+  author_url: https://twitter.com/flyingedivad
+  date: '2014-11-25 23:18:03 +0100'
+  date_gmt: '2014-11-25 21:18:03 +0100'
+  content: 'RT @jensschauder: I blogged: Five Reasons Why You Should Keep Your Package
+    Dependencies Cycle Free http:&#47;&#47;t.co&#47;aULte1P2P4'
+- id: 391701
+  author: 'Java Weekly 46: Joda-Time to Java8, new Apache Tamaya, Java internals and
+    more... - Thoughts on Java -'
+  author_email: ''
+  author_url: http://thorben-janssen.preview127.rmkr.net/java-weekly-46-joda-time-to-java8-new-apache-tamaya-java-internals-and-more/
+  date: '2015-04-24 05:36:30 +0200'
+  date_gmt: '2015-04-24 03:36:30 +0200'
+  content: "[&#8230;] Getting more responsibilities as a developers also means, that
+    you have less time to write code. In the worst case you are spending all your
+    time working on your responsibilities and no time implementing something. But
+    it is essential, that you spend at least some time writing code to stay effective.
+    Pet Kua explains in his article&Acirc;&nbsp;HOW DO I STILL WRITE CODE AS A TECH
+    LEAD?&Acirc;&nbsp;how to handle this situation.   Do you take care that your package
+    dependencies contain no cycles? Jens Schauder does and he gives 5 reasons why
+    you should do the same:&Acirc;&nbsp;FIVE REASONS WHY YOU SHOULD KEEP YOUR PACKAGE
+    DEPENDENCIES CYCLE FREE. [&#8230;]"
+- id: 398081
+  author: Smout
+  author_email: e.smout@edpnet.be
+  author_url: ''
+  date: '2015-06-24 16:23:37 +0200'
+  date_gmt: '2015-06-24 14:23:37 +0200'
+  content: Force-fitting hierarchical relationships onto everything simply doesn't
+    work in the real world.  That was observed >40 years ago already when the relational
+    model of data was invented to overcome the limitations and inadequacies of the
+    then-prevailing hierarchical systems.  Sometimes things simply are related despite
+    being on opposite sides of some organizational boundary.
+- id: 400921
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2015-08-08 10:09:03 +0200'
+  date_gmt: '2015-08-08 08:09:03 +0200'
+  content: "@Smout Forcing ONE hierachy on everyting (as hierachical datatabases)
+    need to do is severly limiting, although it has tremendous value when it works.
+    But that is not what I am suggesting here. Instead I recommend to create multiple
+    orthogonal labeling schemes. And directed dependencies between them. This is something
+    completely different."
+---
+<p>If you are so unlucky to work with me in a project, you will suffer from the rule that all package dependencies must be cycle free. I will not only require this, but I will also create a unit test ensuring it using <a href="http:&#47;&#47;schauder.github.io&#47;degraph&#47;">Degraph<&#47;a>. Here are the reasons why I think a cycle free package structure is beneficial for a project.</p>
+<ol>
+<li><strong>Helpful abstractions<&#47;strong>: If you implement stuff without thinking to much about dependencies you end up with cyclic dependencies almost for sure. In order to break those cycles you often have to introduce new abstractions in the form of interfaces. These interfaces often turnout to create a cleaner abstraction of what is going on in the application than the direct dependency that was there before.
+<p>For example consider two packages <tt>Something<&#47;tt> and <tt>Other<&#47;tt> that depend on each other. As it is described, there is no way to tell why they depend on each other. But in order to break one of the dependencies you might decide to introduce an interface. The name of that interface might include valuable additional information about the relationship of the two. Imagine the interface ends up being named <tt>SomethingDeletionListener<&#47;tt> and located in <tt>Somehting<&#47;tt> and implemented in <tt>Other<&#47;tt>. This already tells you something about the relationship of the two packages, doesn't it?<&#47;li></p>
+<li><strong>Clean Orthogonal Package Structure<&#47;strong>: Whenever you organize something in a tree like structure you probably want an orthogonal structure in that tree. This means on all subbranches of a branch are elements of single categorization. A good example is <tt>Customer<&#47;tt>, <tt>Order<&#47;tt>, <tt>Wishlist<&#47;tt> a different, also good example is <tt>UserInterface<&#47;tt>, <tt>Persistence<&#47;tt>, <tt>Domain<&#47;tt>. These kinds of structures gives a clear indication where a class belongs. If you mix the two approaches you end up with something like <tt>Customer<&#47;tt>, <tt>Order<&#47;tt>, <tt>Persistence<&#47;tt>. In such a structure it is not at all clear where classes for the persistence of customers belong. The result is a mess, which typically results in cycles in the dependencies, since a question like should <tt>Customer<&#47;tt> depend on <tt>Persistence<&#47;tt> or the other way around doesn't even make sense.<&#47;li>
+<li><strong>Enables reuse<&#47;strong>: Ever tried to reuse a package or even just a single class from a project that doesn't care about dependencies? I tried. In 9 out of 10 cases I had two choices: Either take the complete project (not really an option), or do some heavy refactoring of the class before it even compiles without all the other stuff in the project. On the other hand in projects where package dependencies form a nice directed acyclic graph, it is perfectly clear what has to go with the class. Also the stuff people are interested in reusing is typically close to the leaves of the graph and can be extracted on it's own or with very few dependencies.<&#47;li>
+<li><strong>Enables partial rewrites<&#47;strong>: Sometimes an idea once considered great turns out to be a really bad one. Sometimes it is so bad, you want to redo it. Acyclic dependencies limit the amount of code affected by the change. With cyclic dependencies often the complete application is at least in danger of being affected.<&#47;li>
+<li><strong>Independent deployment<&#47;strong>: On the other hand, sometimes ideas actually turn out to be great. Maybe so great that they get used so heavily, that you need to scale it up and deploy it on three additional servers on its own, to handle the heavy load. Good luck in splitting your application in two or more parts that can be deployed separately when you have tangles between the packages. With a cycle free structure, the places where you can cut should be rather obvious.<&#47;li>
+<p><&#47;ol></p>

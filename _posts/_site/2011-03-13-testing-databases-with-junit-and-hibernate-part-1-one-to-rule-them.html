@@ -1,0 +1,274 @@
+<p>Databases are an extremely important part of almost every enterprise application. Yet there is very little support for testing your database, which results in very little tests coverage of database related code out in the wild. In a desperate attempt to change that at least a little the article series starting with this article will describe some of the problems and possible partial solutions based on Hibernate and JUnit.<br />
+As an example I use the following little set of Hibernate entity classes and the database schema Hibernate will create from it:</p>
+<pre lang="java">
+@Entity<br />
+public class SuperHero extends AbstractEntity {</p>
+<p>	@NotEmpty<br />
+	@Column(unique = true)<br />
+	public String name;</p>
+<p>	@ManyToOne<br />
+	@NotNull<br />
+	public SuperPower power;</p>
+<p>	@NotEmpty<br />
+	public String weakness;</p>
+<p>	@NotEmpty<br />
+	public String secretIdentity;<br />
+}<br />
+<&#47;pre></p>
+<pre lang="java">
+@Entity<br />
+public class SuperPower extends AbstractEntity {</p>
+<p>	@NotEmpty<br />
+	@Column(unique = true)<br />
+	public String name;</p>
+<p>	@NotEmpty<br />
+	public String description;</p>
+<p>	@NotNull<br />
+	@ManyToOne<br />
+	public SuperPowerType type;<br />
+}<&#47;pre></p>
+<pre lang="java">
+@Entity<br />
+public class SuperPowerType extends AbstractEntity {</p>
+<p>	@NotEmpty<br />
+	@Column(unique = true)<br />
+	public String name;</p>
+<p>	@NotNull<br />
+	@Length(min = 30)<br />
+	public String description;<br />
+}<br />
+<&#47;pre></p>
+<p>As you can see (and if you don't I tell you) a SuperHero references a SuperPower and a SuperPower references a SuperPowerType. All have some mandatory attributes.<br />
+All three entities have a common supertype providing id and version.</p>
+<pre lang="java">
+@MappedSuperclass<br />
+public class AbstractEntity {</p>
+<p>	@SuppressWarnings("unused")<br />
+	@Id<br />
+	@GeneratedValue<br />
+	public Long id;<br />
+	@SuppressWarnings("unused")<br />
+	@Version<br />
+	private Long version;<br />
+}<br />
+<&#47;pre></p>
+<p>For brevity I skipped on getters and setters.</p>
+<p>Finally there is a <tt>SuperHeroRepository<&#47;tt> which I want to test. It has a single method returning a <tt>SuperHero<&#47;tt> based on the a <tt>SuperPower<&#47;tt><br />
+A simple test for the SuperHeroRepository might work like this:</p>
+<p>Create a <tt>SuperHero<&#47;tt> and make sure I can retrieve it again using the <tt>SuperHeroRepository<&#47;tt>.</p>
+<p>Easy, isn't it? Well ... lets see what you really have to do</p>
+<ul>
+<li> create an empty database<&#47;li>
+<li> create a <tt>SuperPowerType<&#47;tt>, making sure you have all the mandatory fields filled<&#47;li>
+<li> create a <tt>SuperPower<&#47;tt> of that type, making sure you have all the mandatory fields filled<&#47;li>
+<li> create a <tt>SuperHero<&#47;tt>, making sure you have all the mandatory fields filled<&#47;li>
+<li> use the repository to retrieve <tt>SuperHero<&#47;tt>s<&#47;li>
+<li> assert you got the expected result.<&#47;li><br />
+<&#47;ul><br />
+So we have to fill all the mandatory fields and provide a SuperPowerType (again with all the mandatory fields) although nothing in the test is concerned with SuperPowerTypes. If you still don't believe this results in ugly code have a look at this naive implementation.</p>
+<pre lang="java">
+public class SuperHeroRepository1Test {<br />
+	private SessionFactory sessionFactory;<br />
+	private Session session = null;</p>
+<p>	@Before<br />
+	public void before() {<br />
+		&#47;&#47; setup the session factory<br />
+		AnnotationConfiguration configuration = new AnnotationConfiguration();<br />
+		configuration.addAnnotatedClass(SuperHero.class)<br />
+				.addAnnotatedClass(SuperPower.class)<br />
+				.addAnnotatedClass(SuperPowerType.class);<br />
+		configuration.setProperty("hibernate.dialect",<br />
+				"org.hibernate.dialect.H2Dialect");<br />
+		configuration.setProperty("hibernate.connection.driver_class",<br />
+				"org.h2.Driver");<br />
+		configuration.setProperty("hibernate.connection.url", "jdbc:h2:mem");<br />
+		configuration.setProperty("hibernate.hbm2ddl.auto", "create");</p>
+<p>		sessionFactory = configuration.buildSessionFactory();<br />
+		session = sessionFactory.openSession();<br />
+	}</p>
+<p>	@Test<br />
+	public void returnsHerosWithMatchingType() {</p>
+<p>		&#47;&#47; create the objects needed for testing<br />
+		SuperPowerType powerType = new SuperPowerType();<br />
+		powerType.name = "TheType";<br />
+		powerType.description = "12345678901234567890aDescription";</p>
+<p>		SuperPower superpower = new SuperPower();<br />
+		superpower.name = "SuperPower";<br />
+		superpower.description = "Description";<br />
+		superpower.type = powerType;</p>
+<p>		SuperHero hero = new SuperHero();<br />
+		hero.name = "Name";<br />
+		hero.power = superpower;<br />
+		hero.weakness = "None";<br />
+		hero.secretIdentity = "Mr. Jones";</p>
+<p>		&#47;&#47; storing the objects for the test in the database<br />
+		session.save(powerType);<br />
+		session.save(superpower);<br />
+		session.save(hero);</p>
+<p>		SuperHeroRepository heroRepository = new SuperHeroRepository(session);<br />
+		List<SuperHero> heroes = heroRepository.loadBy(superpower);<br />
+		assertNotNull(heroes);<br />
+		assertEquals(1, heroes.size());<br />
+	}</p>
+<p>	@After<br />
+	public void after() {<br />
+		session.close();<br />
+		sessionFactory.close();<br />
+	}<br />
+}<br />
+<&#47;pre></p>
+<p>There is really only one positive thing I can say about this test: it uses H2 in In-Memory mode so it is reasonable fast. There is the first lesson: *Use an in memory database for testing if possible. It's easily 100*faster then a disc based database*</p>
+<p>So obviously we want to refactor this monster, which might after some method extracting result into something like this:</p>
+<pre lang="java">
+public class SuperHeroRepository2Test {</p>
+<p>	private SessionFactory sessionFactory;<br />
+	private Session session;</p>
+<p>	@Before<br />
+	public void before() {<br />
+		sessionFactory = createSessionFactory();<br />
+		session = sessionFactory.openSession();<br />
+		Transaction transaction = session.beginTransaction();<br />
+	}</p>
+<p>	@Test<br />
+	public void returnsHerosWithMatchingType() {</p>
+<p>		SuperPowerType powerType = createSuperPowerType();<br />
+		session.save(powerType);</p>
+<p>		SuperPower superpower = createSuperPower(powerType);<br />
+		session.save(superpower);</p>
+<p>		SuperHero hero = createSuperHero(superpower);<br />
+		session.save(hero);</p>
+<p>		SuperHeroRepository heroRepository = new SuperHeroRepository(session);<br />
+		List<SuperHero> heroes = heroRepository.loadBy(superpower);</p>
+<p>		assertNotNull(heroes);<br />
+		assertEquals(1, heroes.size());<br />
+	}</p>
+<p>	private SessionFactory createSessionFactory() {<br />
+		AnnotationConfiguration configuration = new AnnotationConfiguration();<br />
+		configuration.addAnnotatedClass(SuperHero.class)<br />
+				.addAnnotatedClass(SuperPower.class)<br />
+				.addAnnotatedClass(SuperPowerType.class);<br />
+		configuration.setProperty("hibernate.dialect",<br />
+				"org.hibernate.dialect.H2Dialect");<br />
+		configuration.setProperty("hibernate.connection.driver_class",<br />
+				"org.h2.Driver");<br />
+		configuration.setProperty("hibernate.connection.url", "jdbc:h2:mem");<br />
+		configuration.setProperty("hibernate.hbm2ddl.auto", "create");</p>
+<p>		SessionFactory sessionFactory = configuration.buildSessionFactory();<br />
+		return sessionFactory;<br />
+	}</p>
+<p>	private SuperHero createSuperHero(SuperPower superpower) {<br />
+		SuperHero hero = new SuperHero();<br />
+		hero.name = "Name";<br />
+		hero.power = superpower;<br />
+		hero.weakness = "None";<br />
+		hero.secretIdentity = "Mr. Jones";<br />
+		return hero;<br />
+	}</p>
+<p>	private SuperPower createSuperPower(SuperPowerType powerType) {<br />
+		SuperPower superpower = new SuperPower();<br />
+		superpower.name = "SuperPower";<br />
+		superpower.description = "Description";<br />
+		superpower.type = powerType;<br />
+		return superpower;<br />
+	}</p>
+<p>	private SuperPowerType createSuperPowerType() {<br />
+		SuperPowerType powerType = new SuperPowerType();<br />
+		powerType.name = "TheType";<br />
+		powerType.description = "12345678901234567890aDescription";<br />
+		return powerType;<br />
+	}<br />
+}<br />
+<&#47;pre></p>
+<p>This would be ok, if this would be the only test of this kind. But other similar test need the SessionFactory as well so I will move all the SessionFactory, Session and Transaction stuff into a <a href="&#47;2009&#47;10&#47;04&#47;junit-rules&#47;">Rule<&#47;a> </p>
+<pre lang="java">
+public class SessionFactoryRule implements MethodRule {<br />
+	private SessionFactory sessionFactory;<br />
+	private Transaction transaction;<br />
+	private Session session;</p>
+<p>	@Override<br />
+	public Statement apply(final Statement statement, FrameworkMethod method,<br />
+			Object test) {<br />
+		return new Statement() {</p>
+<p>			@Override<br />
+			public void evaluate() throws Throwable {<br />
+				sessionFactory = createSessionFactory();<br />
+				createSession();<br />
+				beginTransaction();<br />
+				try {<br />
+					statement.evaluate();<br />
+				} finally {<br />
+					shutdown();<br />
+				}<br />
+			}</p>
+<p>		};<br />
+	}</p>
+<p>	private void shutdown() {<br />
+		try {<br />
+			try {<br />
+				try {<br />
+					transaction.rollback();<br />
+				} catch (Exception ex) {<br />
+					ex.printStackTrace();<br />
+				}<br />
+				session.close();<br />
+			} catch (Exception ex) {<br />
+				ex.printStackTrace();<br />
+			}<br />
+			sessionFactory.close();<br />
+		} catch (Exception ex) {<br />
+			ex.printStackTrace();<br />
+		}<br />
+	}</p>
+<p>	private SessionFactory createSessionFactory() {<br />
+		AnnotationConfiguration configuration = new AnnotationConfiguration();<br />
+		configuration.addAnnotatedClass(SuperHero.class)<br />
+				.addAnnotatedClass(SuperPower.class)<br />
+				.addAnnotatedClass(SuperPowerType.class);<br />
+		configuration.setProperty("hibernate.dialect",<br />
+				"org.hibernate.dialect.H2Dialect");<br />
+		configuration.setProperty("hibernate.connection.driver_class",<br />
+				"org.h2.Driver");<br />
+		configuration.setProperty("hibernate.connection.url", "jdbc:h2:mem");<br />
+		configuration.setProperty("hibernate.hbm2ddl.auto", "create");</p>
+<p>		SessionFactory sessionFactory = configuration.buildSessionFactory();<br />
+		return sessionFactory;<br />
+	}</p>
+<p>	public Session createSession() {<br />
+		session = sessionFactory.openSession();<br />
+		return session;<br />
+	}</p>
+<p>	public void commit() {<br />
+		transaction.commit();<br />
+	}</p>
+<p>	public void beginTransaction() {<br />
+		transaction = session.beginTransaction();<br />
+	}</p>
+<p>	public Session getSession() {<br />
+		return session;<br />
+	}<br />
+}<br />
+<&#47;pre></p>
+<p>Which leaves the test in a somewhat acceptable state.</p>
+<pre lang="java">
+public class SuperHeroRepository3Test {</p>
+<p>	@Rule<br />
+	public final SessionFactoryRule sf = new SessionFactoryRule();</p>
+<p>	@Test<br />
+	public void returnsHerosWithMatchingType() {<br />
+		Session session = sf.getSession();</p>
+<p>		SuperPowerType powerType = createSuperPowerType();<br />
+		session.save(powerType);</p>
+<p>		SuperPower superpower = createSuperPower(powerType);<br />
+		session.save(superpower);</p>
+<p>		SuperHero hero = createSuperHero(superpower);<br />
+		session.save(hero);</p>
+<p>		sf.commit();</p>
+<p>		SuperHeroRepository heroRepository = new SuperHeroRepository(session);<br />
+		List<SuperHero> heroes = heroRepository.loadBy(superpower);</p>
+<p>		assertNotNull(heroes);<br />
+		assertEquals(1, heroes.size());<br />
+	}</p>
+<p>        &#47;&#47; ... private methods more or less as before<br />
+}<br />
+<&#47;pre></p>
+<p>All the <tt>SessionFactory<&#47;tt> creation is now moved out into a Rule and is therefore perfectly reusable. You now can change the way you create your <tt>SessionFactory<&#47;tt> at a single point for all tests in need of a database. This is nice and it shall be enough for today. Next week we'll take care of our <tt>SuperHero<&#47;tt> and her dependencies.</p>

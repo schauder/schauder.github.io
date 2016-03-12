@@ -1,0 +1,175 @@
+---
+layout: post
+status: publish
+published: true
+title: The Scala Collection API Sucks ... Or is it a Work of Beauty?
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 664
+wordpress_url: http://blog.schauderhaft.de/?p=664
+date: '2010-12-19 10:17:07 +0100'
+date_gmt: '2010-12-19 08:17:07 +0100'
+categories:
+- Softwaredevelopment
+tags:
+- scala
+- collection
+comments:
+- id: 2583
+  author: The Scala Collection API Sucks &acirc;&euro;&brvbar; Or is it a Work of
+    Beauty?
+  author_email: ''
+  author_url: http://codebix.com/posts/post/153469/The-Scala-Collection-API-Sucks-%e2%80%a6-Or-is-it-a-Work-of-Beauty
+  date: '2010-12-19 10:41:08 +0100'
+  date_gmt: '2010-12-19 08:41:08 +0100'
+  content: "[...] to look at the ScalaDoc for something like List, which should be
+    simple. And then discover it... [full post]    Jens Schauder     Schauderhaft
+    \  softwaredevelopmentcollectionscala            0        0        [...]"
+- id: 2598
+  author: Lautaro
+  author_email: lbrasseur@yahoo.com
+  author_url: http://blog.oxenstudio.com.ar/
+  date: '2010-12-20 17:50:53 +0100'
+  date_gmt: '2010-12-20 15:50:53 +0100'
+  content: "Great article, it sounds interesting. I'll take a look to Scala collections.\r\n\r\nCocoa
+    (Apple's Objective-C platform) tries tries to handle mutability with inheritance.
+    For example, NSMutableArray inherits from NSArray and adds methods for modifying
+    the array. The problem here is that you can't (until my knowledge) change the
+    array implementation, as it can be done in Java. It seems that Scala allows the
+    best of both worlds."
+- id: 2605
+  author: spear
+  author_email: goblin12@wippies.com
+  author_url: ''
+  date: '2010-12-21 06:04:44 +0100'
+  date_gmt: '2010-12-21 04:04:44 +0100'
+  content: The world class language designer, a template metaprogramming and C++ guru,
+    Andrei Alexandrescu considered the Scala's approach for D and abandoned it ( http:&#47;&#47;www.digitalmars.com&#47;webnews&#47;newsgroups.php?art_group=digitalmars.D&amp;article_id=124972
+    ). He saw little value in it and provides a heap friendly and highly modern alternative
+    in the D 2.0 programming language. It also has a revolutionary iterator pattern
+    not seen anywhere else. You might be interested in the D 2.0 programming language.
+- id: 2606
+  author: Jens Schauder
+  author_email: jens.schauder@lineas.de
+  author_url: http://blog.schauderhaft.de
+  date: '2010-12-21 07:24:42 +0100'
+  date_gmt: '2010-12-21 05:24:42 +0100'
+  content: That's interesting ... would love to know why he abandoned it.
+- id: 2611
+  author: Daniel Sobral
+  author_email: Dcsobral@gmail.com
+  author_url: ''
+  date: '2010-12-22 01:43:23 +0100'
+  date_gmt: '2010-12-21 23:43:23 +0100'
+  content: "An advanced type system is required to pull off what scala 2.8's collection
+    accomplished. It wasn't possible with scala 2.7, for instance. Since D seems to
+    use templates, it isn't bound by the same constraints, so it might have been possible
+    to do it.\r\n\r\nAs for the iterator, I wonder what's the deal. C++ has an awful
+    thing called iterator, which is very different from what java has."
+- id: 2614
+  author: bob
+  author_email: bob@bob.com
+  author_url: ''
+  date: '2010-12-22 06:30:24 +0100'
+  date_gmt: '2010-12-22 04:30:24 +0100'
+  content: "<blockquote>\r\nThe <em>world class<&#47;em> language designer, a template
+    metaprogramming and C++ <em>guru<&#47;em>, Andrei Alexandrescu considered the
+    Scala&acirc;&euro;&trade;s approach for D and abandoned it ( http:&#47;&#47;www.digitalmars.com&#47;webnews&#47;newsgroups.php?art_group=digitalmars.D&amp;article_id=124972
+    ). He saw little value in it and provides a heap friendly and <em>highly modern<&#47;em>
+    alternative in the D 2.0 programming language. It also has a <em>revolutionary<&#47;em>
+    iterator pattern <em>not seen anywhere else<&#47;em>. You might be interested
+    in the D 2.0 programming language.\r\n<&#47;blockquote>\r\n\r\nThese little verbal
+    ejaculations of love make reading your comment much more enjoyable."
+- id: 2615
+  author: Name (required)
+  author_email: mail@whydouneeddis.fuckyou
+  author_url: ''
+  date: '2010-12-22 06:49:26 +0100'
+  date_gmt: '2010-12-22 04:49:26 +0100'
+  content: "It's a range, not an iterator, you uneducated fool.\r\n\r\nBut seriously,
+    as far as I am aware our world class language designer rejected the idea of container
+    inheritance because it didn't seem useful to him. He cited Java as an example
+    how this idea fails. Further, he was arguing an object oriented (inheritance based)
+    API could be built on top of the containers. He also believes in compile time
+    duck typing (yep.) and possibly has an uncontrollable feat for virtual functions.\r\n\r\nIf
+    you really care about Andrei's opinion, you should try posting on the D newsgroup,
+    using the link to Andrei's thread as provided by the Andrei minion&#47;undercover
+    agent."
+- id: 2627
+  author: Nona Mills
+  author_email: nmills@hotmail.com
+  author_url: http://nonamills.co.cc/
+  date: '2010-12-22 19:25:30 +0100'
+  date_gmt: '2010-12-22 17:25:30 +0100'
+  content: The world class language designer, a template metaprogramming and C++ guru,
+    Andrei Alexandrescu considered the Scala's approach for D and abandoned it ( http:&#47;&#47;www.digitalmars.com&#47;webnews&#47;newsgroups.php?art_group=digitalmars.D&amp;article_id=124972
+    ). He saw little value in it and provides a heap friendly and highly modern alternative
+    in the D 2.0 programming language. It also has a revolutionary iterator pattern
+    not seen anywhere else. You might be interested in the D 2.0 programming language.
+- id: 2655
+  author: Shane Magrath
+  author_email: shane@magrath.net.au
+  author_url: ''
+  date: '2010-12-25 00:09:05 +0100'
+  date_gmt: '2010-12-24 22:09:05 +0100'
+  content: "For my christmas treat for myself :-), I've started working through the
+    Scala 2.8 Collections, and like many my first reaction was \"What?!\"\r\n\r\nBut
+    I persisted and realised, like many problems in software engineering, Collections
+    at first appear \"simple\" -  they're just arrays, right? But they're not - once
+    you try to do a lot with them, they're subtle. Example: treating a String as a
+    Collection of characters, or a number as a Collection of digits,...\r\n\r\nThat
+    never ending quest to reduce things down to their most common factors...\r\nso
+    at this stage, my vote is for \"Beautiful\", but work required until I fully \"get
+    it\"."
+- id: 3403
+  author: Mac
+  author_email: windowsxp@yahoo.com
+  author_url: http://www.usenetradar.com
+  date: '2011-04-21 20:59:23 +0200'
+  date_gmt: '2011-04-21 18:59:23 +0200'
+  content: I also    believe  so  , perfectly  composed  post! .
+---
+<p>A <a href="&#47;2010&#47;12&#47;05&#47;is-it-bad-to-use-scala-as-java-with-a-more-concise-syntax&#47;comment-page-1&#47;#comment-1246">commenter<&#47;a> on my <a href="&#47;2010&#47;12&#47;05&#47;is-it-bad-to-use-scala-as-java-with-a-more-concise-syntax&#47;">last post<&#47;a> was a little ... irritated by the Scala Collection API (and so are probably others):</p>
+<blockquote><p>
+Scala libraries are a mess.  Its baffling to look at the ScalaDoc for  something like List, which should be simple.  And then discover it  extends 30 other classes and has 50 traits.<br />
+<&#47;blockquote></p>
+<p>And I must admit the first time I looked at it I was kind of confused. Lets look at a simple example: <tt>List<&#47;tt>. <tt><a href="http:&#47;&#47;www.scala-lang.org&#47;api&#47;current&#47;scala&#47;collection&#47;immutable&#47;List.html">scala.collection.immutable.List<&#47;a><&#47;tt> to be precise. It inherits directly from<br />
+<tt>LinearSeq<&#47;tt>, <tt>Product<&#47;tt>, <tt>GenericTraversableTemplate<&#47;tt> and <tt>LinearSeqOptimized<&#47;tt>, and indirectly from : <tt>LinearSeqOptimized<&#47;tt>, <tt>Product<&#47;tt>, <tt>LinearSeq<&#47;tt>, <tt>LinearSeq<&#47;tt>, <tt>LinearSeqLike<&#47;tt>, <tt>Seq<&#47;tt>, <tt>SeqLike<&#47;tt>, <tt>PartialFunction<&#47;tt>, <tt>Iterable<&#47;tt>, <tt>IterableLike<&#47;tt>, <tt>Equals<&#47;tt>, <tt>Traversable<&#47;tt>, <tt>Immutable<&#47;tt>, <tt>GenericTraversableTemplate<&#47;tt>, <tt>TraversableLike<&#47;tt>, <tt>TraversableOnce<&#47;tt>, <tt>FilterMonadic<&#47;tt>, <tt>HasNewBuilder<&#47;tt>, <tt>AnyRef<&#47;tt> and <tt>Any<&#47;tt>. Most of which have type parameters, making them even more intimidating. </p>
+<p>Obviously you are tempted to compare it to lets say <tt><a href="http:&#47;&#47;download.oracle.com&#47;javase&#47;1.5.0&#47;docs&#47;api&#47;java&#47;util&#47;ArrayList.html">java.util.ArrayList<&#47;a><&#47;tt>. It implements or inherits only the following interfaces and classes: <tt>Object<&#47;tt>, <tt>AbstractCollection<&#47;tt>, <tt>AbstractList<&#47;tt>, <tt>ArrayList<&#47;tt>, <tt>Cloneable<&#47;tt>, <tt>Collection<&#47;tt>, <&#47;tt>List<&#47;tt>, <tt>RandomAccess<&#47;tt>, <tt>Serializable<&#47;tt>.</p>
+<p>Why the huge difference? Scalas collection API is extremely modular. Every little aspect of what the unexpected developer might consider a simple class is factored in its own little trait which gets reused for various 'collections'. Let's try to tear it apart. </p>
+<p>If you consider the concept of a List you might say a List is just a bunch of elements I can access by their index. This is probably the way most developers think about lists most of the time. And thats OK. Actually if you are operating on that level Scala is easier to work with than Java. In Java you write code like </p>
+<pre lang="java">
+List<String> myList = Arrays.asList("one", "two");<br />
+String one = myList.get(0);<br />
+<&#47;pre></p>
+<p>in Scala you'll simply write </p>
+<pre lang="scala">
+var myList = List("one", "two")<br />
+val one = myList(0);<br />
+<&#47;pre></p>
+<p>The Scala version is shorter, you don't have to know other classes but <tt>List<&#47;tt> and you don't have to specify the type parameter, since it is inferred.</p>
+<p>But if you are a specialist in collections you'll know there is much more to a list.</p>
+<p>Different implementations of lists my differ in the performance of various methods like</p>
+<ul>
+<li> accessing the first element<br />
+<&#47;li>
+<li> accessing the last element<br />
+<&#47;li>
+<li> adding an element at the beginning or at the end<br />
+<&#47;li><&#47;ul></p>
+<p>When this kind of difference is important to you take care of it by using an apropriate implementation, like <tt>ArrayList<&#47;tt> or <tt>LinkedList<&#47;tt>. But this is really overspecifying your requirements since you don't really want the specific implementation, you only want a specific runtime behavior.</p>
+<p>This is exactly what you do when you specify that you want a <tt>LinearSeq<&#47;tt> or a <tt>IndexedSeq<&#47;tt> in Scala. Sorry Java, Scala wins again.</p>
+<p>There are two fundamentally different ways in dealing with a <tt>List<&#47;tt> (or actually with any Collection): mutable or immutable and of course there is the case when you just don't care.</p>
+<p>In Scala you can specify this by using the traits defined in <tt>scala.collection<&#47;tt>, <tt>scala.collection.immutable<&#47;tt> or <tt>scala.collection.mutable<&#47;tt>. In Java you'll wrap your instances with <tt>Collections.immutableList<&#47;tt>(..) calls, which is quite noisy And there is really no (clean) way to ensure that a given method only gets passed one or the other variation. In Scala the compiler will make sure you get the correct variant or a compile time error.</p>
+<p>When broadening the discussion to collections in general you'll want to iterate through all elements. Or do you want to enumerate all elements? What is the difference anyway? Here Java bites you with its stubborn backwards compatibility, leaving you with two very similiar interfaces which mainly differ in their respective time of conception: Iterable and Enumerable.</p>
+<p>In Scala you have two traits as well:Traversable and Iterable. These look very similar but have very specific different meaning: The later guarantees a processing of its elements one after the other, while the first only guarantees that each element gets processed, but possibly in parallel (As of now the actual implementation of parallel collections is work in process, but the traits are already there). One more point for Scala.</p>
+<p>On top of that Scala provides a lot of methods on collections which make only sense in the presence of closures, like <tt>map<&#47;tt>, <tt>filter<&#47;tt> and many more. Obviously there is nothing comparable in the Java libraries.</p>
+<p>But when everything is so nice, why do people make a statement like that quoted at the beginning of this article? Well all the different aspects mentioned above come in their own seperate traits. Then there are the XXXLike traits which implement all the methods of XXX based on very few methods  so that you don't have to provide only those few when you want to create an implementation of XXX. Then there are companion objects which provide nice concise way to instanciate default implementations of the collection at hand. And finally you have a similiar set of traits for dealing with various aspects for the functional&#47;closure based features of collections. Therefore you end up with a huge number of traits. If you want to know where method x is actually implemented you might have to do quite some searching. Thats <a href="&#47;2010&#47;12&#47;05&#47;the-cost-of-modularity&#47;">the cost of modularity<&#47;a>.</p>
+<p>One thing to lessen the cost of modularity is documentation. Concerning Scala collections you should obviously consult <a href="http:&#47;&#47;www.scala-lang.org&#47;api&#47;current&#47;index.html">ScalaDoc<&#47;a>. Note that in ScalaDoc you can click on the different traits extended by a class to hide or show the methods comming from that trait. There is also a nice <a href="http:&#47;&#47;www.scala-lang.org&#47;docu&#47;files&#47;collections-api&#47;collections.html">documentation of the different collection variants<&#47;a> written by Odersky which will help you deciding which trait you really need. And there is another piece by Odersky which describes the <a href="http:&#47;&#47;www.scala-lang.org&#47;docu&#47;files&#47;collections-api&#47;collections-impl.html#">internal workings of the collection API<&#47;a>.</p>
+<p>So when starting with Scala, just start with Set, Seq (instead of List) and Map from scala.collection to get at the Java level. And from there start exploring.</p>

@@ -1,0 +1,10 @@
+<p>I try to write my code test first nowadays. But of course it happens that I have to work with code that doesn't have tests. Maybe I was undisciplined and skipped the tests, or somebody else wrote it, or what ever. When it is feasible I try to add test until I have 100% or close to 100% coverage. But sometimes I come across really trivial code. Like a simple two or three line method. Or a bunch of getters and setters. And then I ask my self. </p>
+<p>"<strong>Should I test such trivial stuff?<&#47;strong>"</p>
+<p>The answer IMHO is "<strong>YES!!<&#47;strong>"</p>
+<p>The arguments are really simple: </p>
+<ul>
+<li>if it is trivial to write and understand it should be trivial to test. So we are not talking about hours of work here.<&#47;li>
+<li>If somebody is adding stuff to this code she might not realize it is not properly tested.<&#47;li>
+<li>And last but not least: over and over again I have written tests for trivial stuff just to see them turn red on me immediately. Bugs like to hide in trivial code, because nobody really looks at trivial code, and trivial code tends to get created via cut'n'paste which offers lot of opportunities for bugs.<&#47;li><br />
+<&#47;ul></p>
+<p>So write a test for that little piece of code. If you have lots of pieces like it, consider to make a little test helper using reflection or a dynamic language. Make 100% your standard.</p>

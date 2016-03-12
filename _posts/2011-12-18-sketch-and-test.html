@@ -1,0 +1,75 @@
+---
+layout: post
+status: publish
+published: true
+title: Sketch and Test
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 983
+wordpress_url: http://blog.schauderhaft.de/?p=983
+date: '2011-12-18 07:39:26 +0100'
+date_gmt: '2011-12-18 05:39:26 +0100'
+categories:
+- Softwaredevelopment
+tags:
+- process
+- testing
+- design
+- TDD
+comments:
+- id: 4638
+  author: Ralf Westphal
+  author_email: info@ralfw.de
+  author_url: http://ralfw.blogspot.com
+  date: '2011-12-18 11:44:03 +0100'
+  date_gmt: '2011-12-18 09:44:03 +0100'
+  content: "I don&Acirc;&acute;t find this state of mind you were in not unusual.
+    In fact I suffer from it all the time ;-) It&Acirc;&acute;s plain uncertainty.
+    Sometimes it&Acirc;&acute;s deep, sometimes it&Acirc;&acute;s shallow uncertainty.\r\n\r\nIf
+    it&Acirc;&acute;s deep, if I hardly have a clue as to what the solution could
+    look like (and I don&Acirc;&acute;t mean the code structure), I do a spike. That&Acirc;&acute;s
+    what you did, I&Acirc;&acute;d say: a spike solution. The sole purpose is to gain
+    knowledge, to remove uncertainty, to get a grip on problem and solution.\r\n\r\nIn
+    that case neither form nor correctness matter. No hold barred. Do whatever you
+    need to do to increase uncertainty.\r\n\r\nMaybe you have to find out how to use
+    an API. Maybe you have to find out if some solution approach actually works. Maybe
+    you have to find out how some data really looks like. Whatever. Get your hands
+    really dirty.\r\n\r\nAnd then, once you understand the problem and know your tools,
+    then design your piece of code whatever way you like, maybe using TDD, maybe using
+    UML. Whatever.\r\n\r\nWhat strikes me strange, though, is \"This happens when
+    I don&acirc;&euro;&trade;t have a plan of how the code should look in the end\".
+    You&Acirc;&acute;re saying you don&Acirc;&acute;t use TDD if you don&Acirc;&acute;t
+    know how the structure of your code should be. That&Acirc;&acute;s strange. Because
+    I thought that&Acirc;&acute;s what TDD is all about: a sure way to come up with
+    the optimal code structure. No need to know it beforehand."
+- id: 4639
+  author: Jens Schauder
+  author_email: jens@schauderhaft.de
+  author_url: http://blog.schauderhaft.de
+  date: '2011-12-18 11:50:14 +0100'
+  date_gmt: '2011-12-18 09:50:14 +0100'
+  content: "Hi Ralf,\r\n\r\n\"I thought that&Acirc;&acute;s what TDD is all about:
+    a sure way to come up with the optimal code structure. No need to know it beforehand.\"\r\n\r\nIt
+    might be that it is for some people. For me this is kind of true in a limited
+    sense. I plan to write about that in another post.\r\n\r\nGreat you found the
+    hook ;-)\r\n\r\n\"Do whatever you need to do to increase uncertainty.\"\r\n\r\nI
+    guess you meant \"decrease\"?"
+---
+<p>I try to do TDD as much as I can. But sometimes (for example last Friday) I don't know how to get started. This happens when I don't have a plan of how the code should look in the end, possibly because don't completely understand part of the problem. Especially I didn't know how I would be able to test it, due to the fact it the code had to interact with a different system and a database.</p>
+<p>The <a href="http:&#47;&#47;www.amazon.de&#47;gp&#47;product&#47;020161622X?ie=UTF8&tag=schauderhafte-21&linkCode=shr&camp=3206&creative=21426&creativeASIN=020161622X&ref_=sr_1_1&qid=1324160771&sr=8-1">pragmatic programmer<&#47;a> recommends a tracer bullet or spike in this case. This means you implement some kind of prototype in order to clarify how to implement it properly. </p>
+<p>And than you throw that away and implement it properly again, which for me means test driven.</p>
+<p>Do you really do that? For me this goes against the principle of baby steps and of refactoring instead of rewriting code. </p>
+<p>Also I was fearing it wouldn't help much, because the problem wasn't so much that I was unclear about the code, but about how to test it.</p>
+<p>So last Friday I tried a different approach. I call it 'Sketch and Test' </p>
+<p>I started by implementing the complete thing in one single class. Without tests (scary, I know). But I never actually executed the code. I just wrote it as I thought it should work. </p>
+<p>Once this <strong>sketch<&#47;strong> was finished I looked at the code and considered the changes I needed to make in order to test it. </p>
+<p>I did the changes and finally created the tests, fixing the bugs I found in the progress.</p>
+<p>Only when all the tests where in place and green I actually started the application and tested the new feature. </p>
+<p>It worked, i.e. the feature did what I expected. The code qualifies as clean and I had complete code coverage with the only exception of some weird exception handling code, that I found hard to trigger in tests.</p>
+<p>What do you think? Is this a viable approach? Or is it just a symptom of my limited TDD skills? Or both?</p>

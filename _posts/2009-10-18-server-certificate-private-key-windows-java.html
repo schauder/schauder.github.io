@@ -1,0 +1,62 @@
+---
+layout: post
+status: publish
+published: true
+title: Moving a Server Certificate and Private Key from Windows to a Java Key Store
+author:
+  display_name: Jens Schauder
+  login: admin
+  email: jens@schauderhaft.de
+  url: http://blog.schauderhaft.de
+author_login: admin
+author_email: jens@schauderhaft.de
+author_url: http://blog.schauderhaft.de
+wordpress_id: 268
+wordpress_url: http://blog.schauderhaft.de/?p=268
+date: '2009-10-18 10:55:04 +0200'
+date_gmt: '2009-10-18 08:55:04 +0200'
+categories:
+- The Rest
+tags:
+- Security
+- pki
+- Java
+- private key
+- public key
+- certificate
+- ssl
+- tomcat
+- keystore
+- keytool
+- pfx
+comments:
+- id: 307
+  author: nfl jerseys
+  author_email: goodlioir@gmail.com
+  author_url: http://www.jerseysnfl.com
+  date: '2009-11-04 10:34:39 +0100'
+  date_gmt: '2009-11-04 08:34:39 +0100'
+  content: "I was on Yahoo and found your blog. Read a few of your other posts. Good
+    work. I am looking \r\n\r\nforward to reading more from you in the future.\r\n\r\nTom
+    Stanley"
+---
+<p>[caption id="attachment_269" align="alignleft" width="300" caption="keys"]<img class="size-medium wp-image-269" title="1180565_82303190" src="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2009&#47;10&#47;1180565_82303190-300x279.jpg" alt="1180565_82303190" width="300" height="279" &#47;>[&#47;caption]</p>
+<p>Some days ago I was asked to set up a tomcat server for SSL. You'd think this is a <a href="http:&#47;&#47;tomcat.apache.org&#47;tomcat-5.5-doc&#47;ssl-howto.html">no brainer<&#47;a>. And it actually is when you proceed along the paved path. But if you deviate only a little, you are in big trouble. I solved the trouble I got in, and here is my story as a warning (and a helper for you).</p>
+<p>Normally you would use the java <a href="http:&#47;&#47;java.sun.com&#47;javase&#47;6&#47;docs&#47;technotes&#47;tools&#47;windows&#47;keytool.html">keytool<&#47;a>, to generate a certificate request, get that request signed by a certification authority (CA) and import it back into the the keystore. A little configuration in tomcat itself and you are done. Pretty easy.</p>
+<p>But with the task at hand the problem was: The certificate was already there. Signed by a CA. Somewhere 'in windows'. So the first question was: where the heck is this certificate stored in windows? It is in the certificate store, which I found under</p>
+<pre>Start\All programs\Administrative  tools\Public key management<&#47;pre><br />
+Of course the exact location will vary, depending on your Windows version and language used. Once you find the certificate store, you'll have to find the correct certificate. It should be under</p>
+<pre>Certificates (Local Computer) -> Personal -> Certificates<&#47;pre><br />
+If you find more then one, you must identify the correct one. It should have the name of the domain you want to serve and it should have 'Intended Purposes' of 'Server Authentication'.</p>
+<p>Now that you have found and identified the certificate to use, the question is: how do you get it into the tomcat&#47;java keystore? Well, first you have to export it into a file. In order to do that, select the certificate. Right click on it and select</p>
+<pre>All Taks -> Export ...<&#47;pre><br />
+Most of the screens of the following wizard can be left as they are, with one important exception: You must ensure that the private key is exported along with the certificate. Of course you need to remember the location where you store the file, and the password you use for protection.</p>
+<p><img class="alignright size-medium wp-image-273" title="screenshotCertificateExportWizard" src="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2009&#47;10&#47;screenshotCertificateExportWizard-300x230.png" alt="screenshotCertificateExportWizard" width="300" height="230" &#47;>See the screenshot on the side. So all that is left to do is to load that certificate into the keystore, right? Well yes. The problem is: the Java keytool doesn't support importing of private keys, and even for certificates without private key, the keytool doesn't understand the <tt>pfx<&#47;tt> format which Microsoft uses.</p>
+<p>Fortunatly other people had the same problem before and implemented a solution: The developers of <a href="http:&#47;&#47;jetty.mortbay.com&#47;jetty&#47;">Jetty<&#47;a>. The Jetty download contains a jar File which we can use to load the certificate. You just need the Jetty jar, e.g.</p>
+<pre>jetty-6.1.3.jar<&#47;pre><br />
+Which is contained in the <a href="http:&#47;&#47;dist.codehaus.org&#47;jetty&#47;jetty-6.1.x&#47; ">normal download<&#47;a><br />
+and can issue the following command.</p>
+<pre>java -classpath jetty-6.1.3.jar org.mortbay.jetty.security.PKCS12Import <PFX-Datei> <keystorename><&#47;pre><br />
+obviously you'll have to replaces the pointy brackets with the file name of the exported certifcate and the keystore. <strong>Warning: I don't know what happens if the keystore already exists, I only tried it with a not existing one.<&#47;strong></p>
+<p>Voila your keystore is ready for use with Tomcat.</p>
+<p>If you like this article you should also thank Chris Barber, who's <a href="http:&#47;&#47;www.cb1inc.com&#47;2007&#47;04&#47;30&#47;converting-pfx-certificates-to-java-keystores">article was very helpful<&#47;a></p>
