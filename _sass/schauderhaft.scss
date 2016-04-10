@@ -1,0 +1,50 @@
+/*
+* pages
+*/
+
+.page-title {
+  font-size: 36px;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+/*
+events
+*/
+.event-meta {
+  overflow: auto;
+}
+
+.post-list img.icon {
+  display: block;
+  max-height: 32px;
+  float: none;
+}
+
+img.speaker {
+  float: left;
+  width: 200px;
+  margin: 10px;
+}
+
+img.speaker.right {
+  float: right;
+}
+
+.navbar-image {
+  height: 48px;
+  float: left;
+}
+
+#brand.navbar-brand {
+  margin-left: 0;
+  font-size: x-large;
+}
+
+.navbar-menu-item {
+  font-size: large;
+}
+
+.overview h3 {
+  margin-bottom: 0;
+}
