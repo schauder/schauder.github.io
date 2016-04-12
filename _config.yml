@@ -1,2 +1,8 @@
 permalink: /:year/:month/:day/:title
 title: Schauderhaft
+
+include: ['_pages']
+
+# Build settings
+markdown: kramdown
+future: true
