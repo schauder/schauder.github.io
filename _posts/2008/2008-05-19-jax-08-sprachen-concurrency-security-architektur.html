@@ -29,55 +29,55 @@ tags:
 - jax08
 comments: []
 ---
-<p>Wie schon <a href="&#47;2008&#47;04&#47;24&#47;komplexitat-und-die-neuen-sprachen&#47;">erw&Atilde;&curren;hnt<&#47;a> war ich vor ein paar Wochen auf der <a href="http:&#47;&#47;it-republik.de&#47;jaxenter&#47;blog&#47;2008&#47;02&#47;12&#47;dynamische-sprachen-ruby-jruby-groovy-co&#47;">JAX 08<&#47;a>, und ich bin immer noch mit den Nachwirkungen besch&Atilde;&curren;ftigt. Hier meine pers&Atilde;&para;nliche Zusammenfassung der wesentlichen Erkenntnisse.</p>
-<p><strong>Sprachen<&#47;strong></p>
-<p>Das aktuelle Thema &Atilde;&frac14;berhaupt ist sicherlich Sprachen. Durch die Allgegenwart von zwei wesentlichen Laufzeitumgebungen (JVM von Java&#47;Sun und der CLR von .NET&#47;Microsoft) ist es extrem einfach neue Sprachen mal auszuprobieren. Zu dem Thema empfehle ich den <a href="http:&#47;&#47;www.voelter.de&#47;data&#47;articles&#47;trends2007.pdf">Artikel von Markus V&Atilde;&para;lter<&#47;a>.</p>
+<p>Wie schon <a href="/2008/04/24/komplexitat-und-die-neuen-sprachen/">erw&Atilde;&curren;hnt</a> war ich vor ein paar Wochen auf der <a href="http://it-republik.de/jaxenter/blog/2008/02/12/dynamische-sprachen-ruby-jruby-groovy-co/">JAX 08</a>, und ich bin immer noch mit den Nachwirkungen besch&Atilde;&curren;ftigt. Hier meine pers&Atilde;&para;nliche Zusammenfassung der wesentlichen Erkenntnisse.</p>
+<p><strong>Sprachen</strong></p>
+<p>Das aktuelle Thema &Atilde;&frac14;berhaupt ist sicherlich Sprachen. Durch die Allgegenwart von zwei wesentlichen Laufzeitumgebungen (JVM von Java/Sun und der CLR von .NET/Microsoft) ist es extrem einfach neue Sprachen mal auszuprobieren. Zu dem Thema empfehle ich den <a href="http://www.voelter.de/data/articles/trends2007.pdf">Artikel von Markus V&Atilde;&para;lter</a>.</p>
 <p>Meine pers&Atilde;&para;nlichen Erkenntnisse dazu:</p>
 <ul>
-<li>Fast(?) nichts von den Konzepten ist neu. Die Basis f&Atilde;&frac14;r funktionale Sprache z.B. ist das Lambda Kalk&Atilde;&frac14;l von 1930. Insbesondere das Polyglotte Programmieren ist doch l&Atilde;&curren;ngst Standard. Ich z.B. z&Atilde;&curren;hle in den meisten Projekten mindestens Java, SQL, PL&#47;SQL, HTML und CSS zu meinem Handwerkszeug. Was sich &Atilde;&curren;ndern k&Atilde;&para;nnte, ist warum wir zwei oder mehr Sprachen einsetzen: Weil bestimmte Aspekte in der einen, andere in der zweiten Sprache besser darstellbar sind. W&Atilde;&curren;hrend bisher der Grund der Mangel an Alternativen ist. (Ja ich wei&Atilde;&Yuml;, man kann auch in Oracle mit Java arbeiten. Aber wer das einwirft hat es noch nicht ernsthaft ausprobiert).<&#47;li>
+<li>Fast(?) nichts von den Konzepten ist neu. Die Basis f&Atilde;&frac14;r funktionale Sprache z.B. ist das Lambda Kalk&Atilde;&frac14;l von 1930. Insbesondere das Polyglotte Programmieren ist doch l&Atilde;&curren;ngst Standard. Ich z.B. z&Atilde;&curren;hle in den meisten Projekten mindestens Java, SQL, PL/SQL, HTML und CSS zu meinem Handwerkszeug. Was sich &Atilde;&curren;ndern k&Atilde;&para;nnte, ist warum wir zwei oder mehr Sprachen einsetzen: Weil bestimmte Aspekte in der einen, andere in der zweiten Sprache besser darstellbar sind. W&Atilde;&curren;hrend bisher der Grund der Mangel an Alternativen ist. (Ja ich wei&Atilde;&Yuml;, man kann auch in Oracle mit Java arbeiten. Aber wer das einwirft hat es noch nicht ernsthaft ausprobiert).</li>
 <li>Wir werden uns damit besch&Atilde;&curren;ftigen m&Atilde;&frac14;ssen. Hei&Atilde;&Yuml;e Kandidaten f&Atilde;&frac14;r die praktische Anwendung sind f&Atilde;&frac14;r mich: Groovy und Scala.<br />
-Auch spannend finde ich Haskell. Ich habe vor vielen Jahren an der Uni <a href="http:&#47;&#47;de.wikipedia.org&#47;wiki&#47;Miranda_%28Programmiersprache%29">Miranda <&#47;a>gelernt und h&Atilde;&curren;tte nie gedacht, dass dies mal im Berufsleben relevant werden k&Atilde;&para;nnte.<br />
-Als Physiker, der einmal intensiv mit Fortran gearbeitet hat finde ich auch <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Fortress_%28programming_language%29">Fortress <&#47;a>sehr beeindruckend. Dies Sprache kann zumindest f&Atilde;&frac14;r Mathematiker und &Atilde;&curren;hnliche <a href="http:&#47;&#47;research.sun.com&#47;projects&#47;plrg&#47;faq&#47;NAS-CG.pdf">sehr leserlich gerendert<&#47;a> werden und ist speziell auf (massiv)parallele Ausf&Atilde;&frac14;hrung ausgerichtet.<&#47;li><br />
-<&#47;ul><br />
+Auch spannend finde ich Haskell. Ich habe vor vielen Jahren an der Uni <a href="http://de.wikipedia.org/wiki/Miranda_%28Programmiersprache%29">Miranda </a>gelernt und h&Atilde;&curren;tte nie gedacht, dass dies mal im Berufsleben relevant werden k&Atilde;&para;nnte.<br />
+Als Physiker, der einmal intensiv mit Fortran gearbeitet hat finde ich auch <a href="http://en.wikipedia.org/wiki/Fortress_%28programming_language%29">Fortress </a>sehr beeindruckend. Dies Sprache kann zumindest f&Atilde;&frac14;r Mathematiker und &Atilde;&curren;hnliche <a href="http://research.sun.com/projects/plrg/faq/NAS-CG.pdf">sehr leserlich gerendert</a> werden und ist speziell auf (massiv)parallele Ausf&Atilde;&frac14;hrung ausgerichtet.</li><br />
+</ul><br />
 Womit wir bei einem weiteren Thema sind:</p>
-<p><strong>Concurrency<&#47;strong></p>
+<p><strong>Concurrency</strong></p>
 <p>Das Moore'sche Gesetz als Basis des Quaketunings (18 Monate Quake spielen, schon ist die Anwendung doppelt so schnell) ist am Ende. Als 'horizontale Ausweichbewegung' werden uns von AMD und Intel Mehrkern CPUs auf den Schreibtisch gestellt. Dadurch geraten &Atilde;&frac14;berall Leute in Panik, existierende Anwendungen w&Atilde;&frac14;rden nun wie die Fliegen von den W&Atilde;&curren;nden fallen, da Threadingprobleme sich nun manifestieren.</p>
 <p>Nun ja, ich wei&Atilde;&Yuml; nicht was f&Atilde;&frac14;r Anwendungen ihr schreibt, aber ich schreibe beruflich entweder Swing oder Webanwendungen, die auf Datenbanken gehen. Nur ein sehr kleiner Teil der Arbeit steckt in komplexen Algorithmen, und ich habe noch nie etwas davon parallelisiert. Datenbanken und Webserver laufen 'schon immer' auf Mehrprozessormaschinen. Es sind heute halt 512 statt 16. Die Art und Weise wie dort Parallelverarbeitung eingesetzt wird, ist extrem einfach und daher handhabbar: Jede Anfrage bekommt einen Thread, und darf ihn f&Atilde;&frac14;r sich alleine verwenden, bis die Anfrage abgearbeitet ist. Zumindest sieht es aus der Sicht des Entwicklers so aus.</p>
-<p>Nur in Swing muss man typischer Weise mit mehreren Threads arbeiten, da lang laufende Aktionen sonst die Darstellung der Anwendung blockieren. Dies wird man aber wenn irgend m&Atilde;&para;glich minimieren,  da jeder der <a href="http:&#47;&#47;www.amazon.de&#47;gp&#47;redirect.html?ie=UTF8&amp;location=http%3A%2F%2Fwww.amazon.de%2FConcurrent-Programming-Java-Principles-Addison-Wesley%2Fdp%2F0321256174%3Fie%3DUTF8%26s%3Dbooks-intl-de%26qid%3D1211220705%26sr%3D1-5&amp;site-redirect=de&amp;tag=schauderhafte-21&amp;linkCode=ur2&amp;camp=1638&amp;creative=6742">Doug Leas Buch<&#47;a><img src="http:&#47;&#47;www.assoc-amazon.de&#47;e&#47;ir?t=schauderhafte-21&amp;l=ur2&amp;o=3" style="border: medium none  ! important; margin: 0px ! important" border="0" height="1" width="1" &#47;> gelesen hat, wei&Atilde;&Yuml; wie schwierig Concurrency ist.</p>
+<p>Nur in Swing muss man typischer Weise mit mehreren Threads arbeiten, da lang laufende Aktionen sonst die Darstellung der Anwendung blockieren. Dies wird man aber wenn irgend m&Atilde;&para;glich minimieren,  da jeder der <a href="http://www.amazon.de/gp/redirect.html?ie=UTF8&amp;location=http%3A%2F%2Fwww.amazon.de%2FConcurrent-Programming-Java-Principles-Addison-Wesley%2Fdp%2F0321256174%3Fie%3DUTF8%26s%3Dbooks-intl-de%26qid%3D1211220705%26sr%3D1-5&amp;site-redirect=de&amp;tag=schauderhafte-21&amp;linkCode=ur2&amp;camp=1638&amp;creative=6742">Doug Leas Buch</a><img src="http://www.assoc-amazon.de/e/ir?t=schauderhafte-21&amp;l=ur2&amp;o=3" style="border: medium none  ! important; margin: 0px ! important" border="0" height="1" width="1" /> gelesen hat, wei&Atilde;&Yuml; wie schwierig Concurrency ist.</p>
 <p>Viele der neuen Sprachen haben aber Konstrukte, die die Verteilte Ausf&Atilde;&frac14;hrung unterst&Atilde;&frac14;tzen und es ist ja nicht so, dass wir die nicht zu nutzen w&Atilde;&frac14;ssten. Unabh&Atilde;&curren;ngig von der Anzahl der Prozessoren gibt es n&Atilde;&curren;mlich einen Bereich, in dem Concurrency eine Rolle spielen sollte: bei dem Zugriff auf verteilte Ressourcen. Egal ob es die Datenbank oder der entfernte Web Service ist, wenn wir eine Anfrage abschicken und warten, bis die Antwort kommt, bevor wir die n&Atilde;&curren;chste Anfrage lostreten verschwenden wir mindestens Zeit, und meist auch wertvolle Ressourcen (mindestens den wartenden Thread). Je nachdem wie knapp die Ressourcen sind, wird man fr&Atilde;&frac14;her oder sp&Atilde;&curren;ter gen&Atilde;&para;tigt sein, die Anfragen parallel anzusto&Atilde;&Yuml;en und anschlie&Atilde;&Yuml;end die Ergebnisse zusammenzuf&Atilde;&frac14;hren. Sch&Atilde;&para;n wenn die Sprache mit der man dies tut, ein solches Vorgehen angemessen unterst&Atilde;&frac14;tzt.</p>
-<p><strong>Security<&#47;strong></p>
+<p><strong>Security</strong></p>
 <p>Es gibt immer wieder Stimmen, die meinen, Security w&Atilde;&frac14;rde jetzt DAS gro&Atilde;&Yuml;e Thema. Vertraut mir, wird es nicht. Genauso wenig wie Gasmasken oder Panzert&Atilde;&frac14;ren DAS gro&Atilde;&Yuml;e Thema werden. Aber Security ist ein Dauerbrenner, den niemand ignorieren sollte. Oder schlie&Atilde;&Yuml;t ihr euer Auto und eure Wohnung nicht ab?  Daher gab es auch auf der JAX Vortr&Atilde;&curren;ge zu diesem Thema.</p>
 <p>F&Atilde;&frac14;r mich die wichtigsten Punkt waren dabei:</p>
 <ul>
-<li> * Der <a href="http:&#47;&#47;de.wikipedia.org&#47;wiki&#47;Demingkreis">Deming Zyklus<&#47;a> gilt auch hier. D.h.
+<li> * Der <a href="http://de.wikipedia.org/wiki/Demingkreis">Deming Zyklus</a> gilt auch hier. D.h.
 <ul>
-<li> Plant was eure Sicherheitsziele sind und was ihr daf&Atilde;&frac14;r tun m&Atilde;&frac14;sst. Wollt ihr euch gegen Skriptkiddies sch&Atilde;&frac14;tzen? Oder haltet ihr die NSA f&Atilde;&frac14;r euren Feind? In letzterem Fall k&Atilde;&para;nnte aber auch ein Psychater helfen :-)<&#47;li>
-<li> F&Atilde;&frac14;hrt die Ma&Atilde;&Yuml;nahmen durch.<&#47;li>
-<li> Pr&Atilde;&frac14;ft, ob die Ma&Atilde;&Yuml;nahmen wirksam sind.<&#47;li>
-<li> Wenn die Pr&Atilde;&frac14;fung negativ ausf&Atilde;&curren;llt, reagiert darauf.<&#47;li><br />
-<&#47;ul><br />
-<&#47;li></p>
-<li> Schwierig an dem Security Thema ist, dass selbst gigantische Sicherheitsprobleme nicht von allen erkannt werden. Wenn ich in mein Haus eine T&Atilde;&frac14;r aus Pappe einbaue, brauche ich keinen Experten um zu erkennen, dass das eine schlechte Idee ist. Bei Software ist das ganze deutlich weniger offensichtlich. Ich habe die privaten Schl&Atilde;&frac14;ssel f&Atilde;&frac14;r Zertifikate schon gemailt bekommen. Daher gibt es eine ganz wichtige Aufgabe, wenn eine Anwendung 'sicher' werden muss: Awareness schaffen. Alle Beteiligten (Entwickler, Designer, Tester, Administratoren, Anwender, ...) m&Atilde;&frac14;ssen in Sachen Security geschult werden. Denn was n&Atilde;&frac14;tzt die sch&Atilde;&para;ne Sicherheitsarchitektur, wenn der Benutzer seines Sohnes Namen als Passwort verwendet und das auch noch per E-Mail verschickt und auf den Monitorrahmen schreibt?<&#47;li>
+<li> Plant was eure Sicherheitsziele sind und was ihr daf&Atilde;&frac14;r tun m&Atilde;&frac14;sst. Wollt ihr euch gegen Skriptkiddies sch&Atilde;&frac14;tzen? Oder haltet ihr die NSA f&Atilde;&frac14;r euren Feind? In letzterem Fall k&Atilde;&para;nnte aber auch ein Psychater helfen :-)</li>
+<li> F&Atilde;&frac14;hrt die Ma&Atilde;&Yuml;nahmen durch.</li>
+<li> Pr&Atilde;&frac14;ft, ob die Ma&Atilde;&Yuml;nahmen wirksam sind.</li>
+<li> Wenn die Pr&Atilde;&frac14;fung negativ ausf&Atilde;&curren;llt, reagiert darauf.</li><br />
+</ul><br />
+</li></p>
+<li> Schwierig an dem Security Thema ist, dass selbst gigantische Sicherheitsprobleme nicht von allen erkannt werden. Wenn ich in mein Haus eine T&Atilde;&frac14;r aus Pappe einbaue, brauche ich keinen Experten um zu erkennen, dass das eine schlechte Idee ist. Bei Software ist das ganze deutlich weniger offensichtlich. Ich habe die privaten Schl&Atilde;&frac14;ssel f&Atilde;&frac14;r Zertifikate schon gemailt bekommen. Daher gibt es eine ganz wichtige Aufgabe, wenn eine Anwendung 'sicher' werden muss: Awareness schaffen. Alle Beteiligten (Entwickler, Designer, Tester, Administratoren, Anwender, ...) m&Atilde;&frac14;ssen in Sachen Security geschult werden. Denn was n&Atilde;&frac14;tzt die sch&Atilde;&para;ne Sicherheitsarchitektur, wenn der Benutzer seines Sohnes Namen als Passwort verwendet und das auch noch per E-Mail verschickt und auf den Monitorrahmen schreibt?</li>
 <li> Security hei&Atilde;&Yuml;t nicht einfach Benutzer Authentifizierung und Authorisierung sondern durchdringt den gesamten Entwicklungsprozess.
 <ul>
-<li> Bei der Analyse m&Atilde;&frac14;ssen die Anforderungen aufgenommen werden.<&#47;li>
-<li> Diese m&Atilde;&frac14;ssen bei der Architektur und dem Design ber&Atilde;&frac14;cksichtigt werden.<&#47;li>
-<li> Es muss nat&Atilde;&frac14;rlich implementiert werden,<&#47;li>
-<li> aber auch getestet,<&#47;li>
-<li> deployed<&#47;li>
-<li> und genutzt<&#47;li><br />
-<&#47;ul><br />
-Und wie ich oben skizziert habe, gibt es auch in den Bereichen Herausforderungen, wo man sie normalerweise vielleicht nicht erwartet.<&#47;li><br />
-<&#47;ul><br />
-<strong>Architektur<&#47;strong></p>
-<p>Ist ein weiterer Dauerbrenner, und &Atilde;&curren;hnlich wie bei Security lautet hier mein Hinweis <a href="http:&#47;&#47;de.wikipedia.org&#47;wiki&#47;Demingkreis">Deming Circle<&#47;a>! Eine Architektur hat eine Aufgabe zu erf&Atilde;&frac14;llen. Die Aufgabe sollte vorher klar sein und nachher muss gepr&Atilde;&frac14;ft werden, dass die Aufgabe gel&Atilde;&para;st wurde. Ansonsten ist Architektur ein Unfall oder Selbstbefriedigung des Architekten.</p>
+<li> Bei der Analyse m&Atilde;&frac14;ssen die Anforderungen aufgenommen werden.</li>
+<li> Diese m&Atilde;&frac14;ssen bei der Architektur und dem Design ber&Atilde;&frac14;cksichtigt werden.</li>
+<li> Es muss nat&Atilde;&frac14;rlich implementiert werden,</li>
+<li> aber auch getestet,</li>
+<li> deployed</li>
+<li> und genutzt</li><br />
+</ul><br />
+Und wie ich oben skizziert habe, gibt es auch in den Bereichen Herausforderungen, wo man sie normalerweise vielleicht nicht erwartet.</li><br />
+</ul><br />
+<strong>Architektur</strong></p>
+<p>Ist ein weiterer Dauerbrenner, und &Atilde;&curren;hnlich wie bei Security lautet hier mein Hinweis <a href="http://de.wikipedia.org/wiki/Demingkreis">Deming Circle</a>! Eine Architektur hat eine Aufgabe zu erf&Atilde;&frac14;llen. Die Aufgabe sollte vorher klar sein und nachher muss gepr&Atilde;&frac14;ft werden, dass die Aufgabe gel&Atilde;&para;st wurde. Ansonsten ist Architektur ein Unfall oder Selbstbefriedigung des Architekten.</p>
 <p>Durch das Thema Nr.1 'Sprachen' gewinnen wir gerade im Bereich Architektur gerade gewaltig an M&Atilde;&para;glichkeiten:</p>
 <ul>
-<li>Unterschiedliche Sprachen f&Atilde;&frac14;r unterschiedliche Bereiche.<&#47;li>
-<li>DSLs f&Atilde;&frac14;r Spezialf&Atilde;&curren;lle<&#47;li>
-<li>AOP oder spezielle Sprachstrukturen f&Atilde;&frac14;r die Umsetzung von Architekturentscheidungen<&#47;li><br />
-<&#47;ul><br />
-<strong>SOA und BPM<&#47;strong></p>
-<p><a href="&#47;2008&#47;04&#47;23&#47;konferenzen-und-big-player-sessions&#47;">Viel Hype und (fast) nichts dahinter<&#47;a>.</p>
-<p><strong>Das 5. Element (Quintessenz)<&#47;strong></p>
+<li>Unterschiedliche Sprachen f&Atilde;&frac14;r unterschiedliche Bereiche.</li>
+<li>DSLs f&Atilde;&frac14;r Spezialf&Atilde;&curren;lle</li>
+<li>AOP oder spezielle Sprachstrukturen f&Atilde;&frac14;r die Umsetzung von Architekturentscheidungen</li><br />
+</ul><br />
+<strong>SOA und BPM</strong></p>
+<p><a href="/2008/04/23/konferenzen-und-big-player-sessions/">Viel Hype und (fast) nichts dahinter</a>.</p>
+<p><strong>Das 5. Element (Quintessenz)</strong></p>
 <p>Die Probleme bleiben die alten. Die L&Atilde;&para;sungen sind auch nicht neu. Die Zeiten bleiben interessant.</p>

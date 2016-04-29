@@ -31,35 +31,35 @@ comments:
   date_gmt: '2015-03-22 12:32:04 +0100'
   content: 'Funny - we wrote about checklists in parallel. :) Here''s my definition
     of done, a checklist for finishing a task like fixing a bug or coding a feature:
-    http:&#47;&#47;stevenschwenke.de&#47;definitionOfDone'
+    http://stevenschwenke.de/definitionOfDone'
 - id: 400922
   author: chr_kram
   author_email: twitter.2726854495@example.com
   author_url: https://twitter.com/chr_kram
   date: '2015-03-01 15:31:19 +0100'
   date_gmt: '2015-03-01 13:31:19 +0100'
-  content: 'RT @jensschauder: I blogged: Checklists for the win! http:&#47;&#47;t.co&#47;R2GLHesz5f'
+  content: 'RT @jensschauder: I blogged: Checklists for the win! http://t.co/R2GLHesz5f'
 ---
-<p>I recently read <a href="http:&#47;&#47;www.amazon.de&#47;gp&#47;product&#47;B0037Z8SLI?ie=UTF8&camp=3206&creative=21426&creativeASIN=B0037Z8SLI&linkCode=shr&tag=schauderhafte-21&linkId=BIBV5YRTEHRYEC3Q&qid=1425213863&sr=8-1">"The Checklist Manifesto"<&#47;a> and boy was it a great read.</p>
+<p>I recently read <a href="http://www.amazon.de/gp/product/B0037Z8SLI?ie=UTF8&camp=3206&creative=21426&creativeASIN=B0037Z8SLI&linkCode=shr&tag=schauderhafte-21&linkId=BIBV5YRTEHRYEC3Q&qid=1425213863&sr=8-1">"The Checklist Manifesto"</a> and boy was it a great read.</p>
 <p>First it was fun to read! Checklists sound like the manifestation of boring, right? How about a story of surgeon who takes care of a minor flesh wound, when the blood pressure of the patient suddenly drops to almost zero. Cutting the patient open the surgeon finds the body filled with blood! Now if checklists are deemed appropriate for avoiding stories like this, they suddenly aren't that boring anymore, right? And the book is full with stories like this. If you imagine stories that you read visually and can't look at blood, sorry, this book isn't for you. Everybody else: Go get and read it.</p>
 <p>Professionals of various kinds use checklists. Medical doctors, Pilots of course and many more. Yet many people claim they don't need checklists. They are smart enough to do the right things. Their job is too complicated to be pressed in simple checklists. Really? So the job of a pilot is somehow "simple"? Or that of a surgeon? Of course it isn't. But still there are many things that are actually rather simple. And it is rather difficult to not forget about those. That's when checklists help.</p>
 <p>Since I finished the book I established two checklists for myself: </p>
 <p>One checklist I go through every morning at work. It looks something like this (without the italics, those are just for you so you can make sense out of the few words) and is written on a post-it taped to my monitor:</p>
 <ul>
-<li>Check mail. <i>Yes I'm proud that sometimes I'm so focused that I don't check mail at all, so I need it on my checklist<&#47;i><&#47;li>
-<li>Check calendar. <i>To make sure I'm aware of all important appointments today<&#47;i><&#47;li>
-<li>Check logs. <i>Of all servers, so if there is a new problem, I learn about it.<&#47;i><&#47;li>
-<li>Check Jenkins. <i>Mail notification doesn't work, too much E-mails.<&#47;i><&#47;li>
-<li>Fill out time sheet. <i>In the morning I remember what I did yesterday and I can enter the time I started to work.<&#47;i><&#47;li><br />
-<&#47;ul></p>
+<li>Check mail. <i>Yes I'm proud that sometimes I'm so focused that I don't check mail at all, so I need it on my checklist</i></li>
+<li>Check calendar. <i>To make sure I'm aware of all important appointments today</i></li>
+<li>Check logs. <i>Of all servers, so if there is a new problem, I learn about it.</i></li>
+<li>Check Jenkins. <i>Mail notification doesn't work, too much E-mails.</i></li>
+<li>Fill out time sheet. <i>In the morning I remember what I did yesterday and I can enter the time I started to work.</i></li><br />
+</ul></p>
 <p>The second checklist is for debugging problems with dependency injection. As much as I like the Springframework, from time to time it complains about being unable to instantiate a bean, because a dependency is missing, although the bean is right there in my IDE. For this I created a checklist that lists all the various possible reasons for this problem:</p>
 <ul>
-<li>What exactly is the problem described in the stacktrace. No bean of matching type? Or no bean of matching name? Or more than one bean?<&#47;li>
-<li>Is the bean that should get found in the correct source path <i>I have a history of putting beans in <tt>test<&#47;tt> instead of <tt>main<&#47;tt><&#47;i><&#47;li>
-<li>Does the bean that should get found implement the correct interface? <i>Here it is important to check the full name<&#47;i><&#47;li>
-<li>Does it have the correct name?<&#47;li>
-<li>Are the scopes compatible? <i>I'm not sure if this will actually result in the same problem<&#47;i><&#47;li><br />
-<&#47;ul></p>
+<li>What exactly is the problem described in the stacktrace. No bean of matching type? Or no bean of matching name? Or more than one bean?</li>
+<li>Is the bean that should get found in the correct source path <i>I have a history of putting beans in <tt>test</tt> instead of <tt>main</tt></i></li>
+<li>Does the bean that should get found implement the correct interface? <i>Here it is important to check the full name</i></li>
+<li>Does it have the correct name?</li>
+<li>Are the scopes compatible? <i>I'm not sure if this will actually result in the same problem</i></li><br />
+</ul></p>
 <p>I store this one in Evernote and will pull it up when I get this kind of problem the next time.</p>
 <p>The first checklist already proved highly useful. The second has still to be tested. I just created it when I tried to fix just that kind of problem the last time.</p>
 <p>What checklists do you use?</p>

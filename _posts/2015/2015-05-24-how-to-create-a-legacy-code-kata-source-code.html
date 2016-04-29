@@ -30,9 +30,9 @@ comments:
   date: '2015-05-24 23:02:07 +0200'
   date_gmt: '2015-05-24 21:02:07 +0200'
   content: 'RT @jensschauder: I blogged: How to Create a Legacy Code Kata Source Code
-    http:&#47;&#47;t.co&#47;B06lJsiCwl'
+    http://t.co/B06lJsiCwl'
 ---
-<p>From time to time I do  a Clean Code Workshop for coworkers or customers. A large part of these workshops deals with legacy code. I always start with the <a href="https:&#47;&#47;github.com&#47;jbrains&#47;trivia">Ugly Trivia Game by J. B. Rainsberger<&#47;a>, which actually isn't by him, but I use his version anyway. While it is a great resource it gets boring after you have reviewed, tested, refactored, tested it some more and reviewed the tests and refactorings. Also: does it really look like the average legacy code we find in our projects? I don't think so. Real life legacy code has more dependencies and does more really stupid stuff. My favorite so far was a class that loaded stuff from the database in the constructor. Not fun.</p>
+<p>From time to time I do  a Clean Code Workshop for coworkers or customers. A large part of these workshops deals with legacy code. I always start with the <a href="https://github.com/jbrains/trivia">Ugly Trivia Game by J. B. Rainsberger</a>, which actually isn't by him, but I use his version anyway. While it is a great resource it gets boring after you have reviewed, tested, refactored, tested it some more and reviewed the tests and refactorings. Also: does it really look like the average legacy code we find in our projects? I don't think so. Real life legacy code has more dependencies and does more really stupid stuff. My favorite so far was a class that loaded stuff from the database in the constructor. Not fun.</p>
 <p>Therefor I like to create a little code base for working with legacy code that is very realistic but still small enough so one can handle it in the setting of a workshop and it is actually really simple to do that:</p>
 <p>First pick some class that is ugly. Big methods are great. Sometimes you come a cross classes that are super tangled with 2-5 other classes. Those are super awesome. Don't pick anything to large. A class with 5000 lines just create more work, not more learning opportunities.</p>
 <p>Second copy that class (or that small class cluster) in a new project. No dependencies, none of the other stuff it works with. Most likely it wont compile, we gonna fix that in the next step.</p>
@@ -40,11 +40,11 @@ comments:
 <ul>
 <li>
 Just add simple libraries like logging or Apache commons to the project.<br />
-<&#47;li>
+</li>
 <li>
 Create missing classes using your IDE, will all the right methods. If the methods look like getter and setter, actually make them getter and setter.<br />
-<&#47;li>
+</li>
 <li>
-If the methods look more complicated just throw a <tt>SomethingTerribleIsHappeningHere<&#47;tt> exception.<br />
-<&#47;li><&#47;ul></p>
+If the methods look more complicated just throw a <tt>SomethingTerribleIsHappeningHere</tt> exception.<br />
+</li></ul></p>
 <p>This is really fast, works with 98% of all legacy code I came across so far and creates some mean challenges for working with legacy code.</p>

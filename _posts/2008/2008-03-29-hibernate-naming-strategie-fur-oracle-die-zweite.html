@@ -35,8 +35,8 @@ comments:
   date: '2009-03-07 21:25:55 +0100'
   date_gmt: '2009-03-07 20:25:55 +0100'
   content: "You might be interested in the entry announcing the first release of the
-    Hibernate NamingStrategy for Oracle: \r\n\r\nhttp:&#47;&#47;blog.schauderhaft.de&#47;2009&#47;03&#47;07&#47;oracle-naming-strategy-for-hibernate-released-as-a-proper-open-source-project&#47;\r\n\r\nAnd
-    of course the Open Source Project\r\n\r\nhttp:&#47;&#47;code.google.com&#47;p&#47;hibernate-naming-strategy-for-oracle&#47;"
+    Hibernate NamingStrategy for Oracle: \r\n\r\nhttp://blog.schauderhaft.de/2009/03/07/oracle-naming-strategy-for-hibernate-released-as-a-proper-open-source-project/\r\n\r\nAnd
+    of course the Open Source Project\r\n\r\nhttp://code.google.com/p/hibernate-naming-strategy-for-oracle/"
 - id: 4845
   author: Dominik S.
   author_email: dominik.schmid@ilu.ch
@@ -103,17 +103,17 @@ comments:
     tString = tokens[i];\r\n                if (maxLength < tString.Length)\r\n                {\r\n
     \                   maxLength = tString.Length;\r\n                    index =
     i;\r\n                }\r\n            }\r\n            return index;\r\n        }\r\n\r\n\r\n\r\n
-    \   }\r\n\r\n\r\n<&#47;pre>\r\n\r\nEs hat darin noch eine kleine Modifikation:
+    \   }\r\n\r\n\r\n</pre>\r\n\r\nEs hat darin noch eine kleine Modifikation:
     Collection tables werden bei uns mit einem vorangestellten &acirc;&euro;&oelig;lt_&acirc;&euro;\x9D
     benannt.\r\n\r\nHoffe, das n&Atilde;&frac14;tzt jemandem.\r\n\r\n<b>-- English
-    summary:<&#47;b>\r\n\r\nI&acirc;&euro;&trade;ve translated the NamingStrategy
+    summary:</b>\r\n\r\nI&acirc;&euro;&trade;ve translated the NamingStrategy
     for Oracle to NHibernate and C#. Small additions:\r\n- I&acirc;&euro;&trade;m
     not using the IsMultipleUpperToLower() method in AddUnderscores() because I&acirc;&euro;&trade;m
     not happy with the result when there&acirc;&euro;&trade;s a bunch of consecutive
     uppercase characters present.\r\n- We want our collection tables to be called
     lt_* so the above code reflects that."
 ---
-<p>Vor einiger Zeit habe ich eine einfache <a href="&#47;2008&#47;02&#47;22&#47;hibernate-namingstrategy-fur-oracle&#47;">Naming Strategie<&#47;a> vorgestellt, die sicherstellt, dass die generierten Namen sich an die etwas geizigen Beschr&Atilde;&curren;nkungen von Oracle h&Atilde;&curren;lt. Ich habe die Starategie noch einmal ein wenig &Atilde;&frac14;berarbeitet. Sie verteilt jetzt gro&Atilde;&Yuml;z&Atilde;&frac14;giger Underscores, so dass sie mehr Stellen hat, an denen sie einen Namen k&Atilde;&frac14;rzen kann.</p>
+<p>Vor einiger Zeit habe ich eine einfache <a href="/2008/02/22/hibernate-namingstrategy-fur-oracle/">Naming Strategie</a> vorgestellt, die sicherstellt, dass die generierten Namen sich an die etwas geizigen Beschr&Atilde;&curren;nkungen von Oracle h&Atilde;&curren;lt. Ich habe die Starategie noch einmal ein wenig &Atilde;&frac14;berarbeitet. Sie verteilt jetzt gro&Atilde;&Yuml;z&Atilde;&frac14;giger Underscores, so dass sie mehr Stellen hat, an denen sie einen Namen k&Atilde;&frac14;rzen kann.</p>
 <p>Nat&Atilde;&frac14;rlich gilt wieder: Benutzung auf eigene Gefahr.</p>
 <pre>
 public class OracleNamingStrategy<br />
@@ -129,7 +129,7 @@ public class OracleNamingStrategy<br />
     {<br />
       if (Character.isLowerCase(buf.charAt(i - 1)) &amp;&amp;<br />
           Character.isUpperCase(buf.charAt(i))<br />
-      &#47;&#47; &amp;&amp; Character.isLowerCase(buf.charAt(i + 1))<br />
+      // &amp;&amp; Character.isLowerCase(buf.charAt(i + 1))<br />
       )<br />
       {<br />
         buf.insert(i++, '_');<br />
@@ -272,4 +272,4 @@ public class OracleNamingStrategy<br />
   {</p>
 <p>    return abbreviateName(super.classToTableName(addUnderscores(aClassName)));<br />
   }<br />
-}<&#47;pre></p>
+}</pre></p>

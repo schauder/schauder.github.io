@@ -27,7 +27,7 @@ comments: []
 ---
 <p>When learning a new language or framework one of my early questions is nowadays: What about testing? Obviously I asked that for Scala as well.<br />
 If there is anything to complain about I guess it is once more the large number of options one has.</p>
-<p><strong><a href="http:&#47;&#47;junit.org&#47;">JUnit<&#47;a><&#47;strong></p>
+<p><strong><a href="http://junit.org/">JUnit</a></strong></p>
 <p>Scala is highly compatible with Java and this includes the popular testing framework Junit. You can just write your tests using JUnit as you are used to but replacing Java classes with Scala classes</p>
 <pre lang="scala">
 class ConnectionTest {<br />
@@ -40,10 +40,10 @@ class ConnectionTest {<br />
         assertEquals(con.hashCode, con.hashCode)<br />
     }<br />
 }<br />
-<&#47;pre></p>
-<p>This works nice. But I promise once you get used to some Scala goodness you'll want to use it inside your tests as well. So time to look at some Scala test framework. There are two major test frameworks for Scala: <a href="http:&#47;&#47;code.google.com&#47;p&#47;specs&#47;">Specs<&#47;a> and <a href="http:&#47;&#47;www.scalatest.org&#47;">ScalaTest<&#47;a>. </p>
+</pre></p>
+<p>This works nice. But I promise once you get used to some Scala goodness you'll want to use it inside your tests as well. So time to look at some Scala test framework. There are two major test frameworks for Scala: <a href="http://code.google.com/p/specs/">Specs</a> and <a href="http://www.scalatest.org/">ScalaTest</a>. </p>
 <p><strong>ScalaTest</p>
-<p><&#47;strong>I picked ScalaTest because it allows for lots of different testing styles. So lots of opportunities for experimentation. The style I prefer so far is based on 'features'. Very differently from JUnit single tests aren't defined in separate methods, but all tests are placed directly inside the body of the class and thus are executed once the class is instantiated. (Judging by the API there are ways to <a href="http:&#47;&#47;www.scalatest.org&#47;scaladoc&#47;doc-1.2&#47;org&#47;scalatest&#47;OneInstancePerTest.html">fine tune that<&#47;a>, but I haven't explored them yet.)</p>
+<p></strong>I picked ScalaTest because it allows for lots of different testing styles. So lots of opportunities for experimentation. The style I prefer so far is based on 'features'. Very differently from JUnit single tests aren't defined in separate methods, but all tests are placed directly inside the body of the class and thus are executed once the class is instantiated. (Judging by the API there are ways to <a href="http://www.scalatest.org/scaladoc/doc-1.2/org/scalatest/OneInstancePerTest.html">fine tune that</a>, but I haven't explored them yet.)</p>
 <p>Tests are grouped in features and each test is named scenario. Since tests aren't methods but method calls you can't use the method name as the name of the test. Instead you provide a String parameter. This allows for loooong descriptive names. At least I consider this a good thing. One feature spec of a little project I am working on looks like this.</p>
 <pre lang="scala">
 class ImageComparisonTest extends FeatureSpec {</p>
@@ -59,11 +59,11 @@ class ImageComparisonTest extends FeatureSpec {</p>
         }<br />
     }<br />
 }<br />
-<&#47;pre></p>
-<p>The Trait FeatureSpec makes the feature and scenario methods available. The 'pending' statements mark the test as .. well .. pending because neither the test nor the code is implemented yet. Pending tests are reported as 'Ignored'. The simplest way to make assertions in a test is to call assert or other methods of the <a href="http:&#47;&#47;www.scalatest.org&#47;scaladoc&#47;doc-1.2&#47;org&#47;scalatest&#47;Assertions.html">Assertions object<&#47;a>. But one can also mix in various traits for different styles of specifying assertions. For example ShouldMatchers provide a nice DSL allowing statements like this:</p>
+</pre></p>
+<p>The Trait FeatureSpec makes the feature and scenario methods available. The 'pending' statements mark the test as .. well .. pending because neither the test nor the code is implemented yet. Pending tests are reported as 'Ignored'. The simplest way to make assertions in a test is to call assert or other methods of the <a href="http://www.scalatest.org/scaladoc/doc-1.2/org/scalatest/Assertions.html">Assertions object</a>. But one can also mix in various traits for different styles of specifying assertions. For example ShouldMatchers provide a nice DSL allowing statements like this:</p>
 <pre lang="scala">
 (5 * 23) should equal (115)<br />
-<&#47;pre></p>
+</pre></p>
 <p>This stile of specifying assertions also guarantees really nice error messages in the case of a failing assertion. This test</p>
 <pre lang="scala">
 class SomeTest extends FeatureSpec with ShouldMatchers<br />
@@ -76,13 +76,13 @@ class SomeTest extends FeatureSpec with ShouldMatchers<br />
     	}<br />
     }<br />
 }<br />
-<&#47;pre></p>
+</pre></p>
 <p>results in this error message when executed:</p>
 <pre>
 [error] Test Failed: Feature: ShouldMatcher provide nice error messages Making a stupid assertion<br />
 org.scalatest.TestFailedException: 115 did not equal 116<br />
         at org.scalatest.matchers.Matchers$class.newTestFailedException(Matchers.scala:148)<br />
-<&#47;pre></p>
+</pre></p>
 <p>In JUnit tests I sometimes have empty lines or even comments in my tests in order to visually seperate the setup the actual action I want to test and the assertion. With ScalaTest you have a much nicer way to do that: the GivenWhenThen trait. With it you don't put comments in your code, but method calls with a string parameter, which once again will end up in the output of your test:</p>
 <pre lang="scala">
 class SomeTest extends FeatureSpec with ShouldMatchers with GivenWhenThen<br />
@@ -101,7 +101,7 @@ class SomeTest extends FeatureSpec with ShouldMatchers with GivenWhenThen<br />
     	}<br />
     }<br />
 }<br />
-<&#47;pre></p>
+</pre></p>
 <p>While in this trivial case and with the weak syntax highlighting of my blog this might be a little distraction, it is really a nice form of in line commenting tests.</p>
-<p>Of course you don't just write test, you want them executed as well. There are Runners for JUnit and TestNG so you can execute your ScalaTests with the testing framework you are used to. But I absolutely recommend the use of sbt to execute your tests directly. <a href="http:&#47;&#47;code.google.com&#47;p&#47;simple-build-tool&#47;">Sbt is a simple build tool<&#47;a>. Setup is extremely easy, you start it enter the command <tt>~test<&#47;tt> and it will run all your tests whenever you save your code. Really nice, especially since it is much faster then the scala compilers inside the IDEs I have seen so far.	</p>
+<p>Of course you don't just write test, you want them executed as well. There are Runners for JUnit and TestNG so you can execute your ScalaTests with the testing framework you are used to. But I absolutely recommend the use of sbt to execute your tests directly. <a href="http://code.google.com/p/simple-build-tool/">Sbt is a simple build tool</a>. Setup is extremely easy, you start it enter the command <tt>~test</tt> and it will run all your tests whenever you save your code. Really nice, especially since it is much faster then the scala compilers inside the IDEs I have seen so far.	</p>
 <p>This was only a tiny glimpse into the possibilities of testing with Scala(Test). I'm looking forward to explore even more.</p>

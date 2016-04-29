@@ -61,40 +61,40 @@ comments:
 ---
 <p>Single Sign On ist in weiten Bereichen immer noch ein frommer Wunsch, und so kommt es, dass immer noch jede neue Anwendung eine Log On Maske ben&Atilde;&para;tigt, und zu einer solchen Log On Maske geh&Atilde;&para;rt nat&Atilde;&frac14;rlich das Eingabefeld f&Atilde;&frac14;r das Passwort.</p>
 <p>Mit dieser Aufgabe befinden sich wohl die allermeisten Entwickler auf ganz d&Atilde;&frac14;nnem Eis. Wir sprechen von IT-Sicherheit und Verschl&Atilde;&frac14;sselung und damit von Dingen die schwer zu verstehen sind und die richtig unangenehm werden, wenn sie schief gehen.</p>
-<p>Wie schwierig das zu sein scheint sieht man, wenn man danach <a title="Suche nach java passwort verschl&Atilde;&frac14;sseln" href="http:&#47;&#47;www.google.de&#47;search?q=java+passwort+verschl%C3%BCsseln" target="_blank">googelt.<&#47;a></p>
+<p>Wie schwierig das zu sein scheint sieht man, wenn man danach <a title="Suche nach java passwort verschl&Atilde;&frac14;sseln" href="http://www.google.de/search?q=java+passwort+verschl%C3%BCsseln" target="_blank">googelt.</a></p>
 <p>Denn dort ist zumindest zur Zeit fast nur Bl&Atilde;&para;dsinn zu finden, dabei ist eine sinnvolle L&Atilde;&para;sung oft einfacher, als das was da so vorgeschlagen wird:</p>
 <ol>
-<li><a title="Eine Passwortverschl&Atilde;&frac14;sselungs Bibliothek aus einer Klasse" href="http:&#47;&#47;www.mindrot.org&#47;projects&#47;jBCrypt&#47;" target="_blank">jBCrypt<&#47;a> herunterladen und mit in den Sourcepfad mit aufnehmen<&#47;li>
+<li><a title="Eine Passwortverschl&Atilde;&frac14;sselungs Bibliothek aus einer Klasse" href="http://www.mindrot.org/projects/jBCrypt/" target="_blank">jBCrypt</a> herunterladen und mit in den Sourcepfad mit aufnehmen</li>
 <li>Passwort hashen:
-<pre>String hashed = BCrypt.hashpw(password, BCrypt.gensalt());<&#47;pre><br />
-Das Ergebnis dieses Aufrufes kann dann entspannt in der Datenbank oder wo auch immer gespeichert werden.<&#47;li></p>
+<pre>String hashed = BCrypt.hashpw(password, BCrypt.gensalt());</pre><br />
+Das Ergebnis dieses Aufrufes kann dann entspannt in der Datenbank oder wo auch immer gespeichert werden.</li></p>
 <li>Wenn ein Benutzer sich anmeldet, kann mit folgendem Aufruf, dass eingegebene Passwort &Atilde;&frac14;berpr&Atilde;&frac14;ft werden:
 <pre>if (BCrypt.checkpw(candidate, hashed))<br />
     System.out.println("It matches");<br />
 else<br />
-    System.out.println("It does not match");<&#47;pre><br />
-<&#47;li><br />
-<&#47;ol><br />
+    System.out.println("It does not match");</pre><br />
+</li><br />
+</ol><br />
 Viel einfacher geht es ja nun wirklich nicht. Bleibt noch die Frage:</p>
-<p><strong>Warum so und nicht anders?<&#47;strong></p>
+<p><strong>Warum so und nicht anders?</strong></p>
 <p>Ich gehe einfach die Varianten durch, die ich bisher zu Gesicht bekommen habe:</p>
 <ul>
-<li>"Wir m&Atilde;&frac14;ssen die Passw&Atilde;&para;rter nicht verschl&Atilde;&frac14;sseln, so wichtig sind die Daten nicht und da kommen ja eh nur interne Mitarbeiter dran."<&#47;li><br />
-<&#47;ul><br />
+<li>"Wir m&Atilde;&frac14;ssen die Passw&Atilde;&para;rter nicht verschl&Atilde;&frac14;sseln, so wichtig sind die Daten nicht und da kommen ja eh nur interne Mitarbeiter dran."</li><br />
+</ul><br />
 Na dann lasst die Passwortabfrage ganz weg. Wenn der Benutzer gen&Atilde;&para;tigt wird ein Passwort einzugeben, wird er mit gro&Atilde;&Yuml;er Wahrscheinlichkeit ein Passwort verwenden, dass er auch wo anders verwendet. Und er wird es im Zweifelsfall nicht witzig finden, wenn der DBA das im Klartext in der Datenbank vor findet.</p>
 <ul>
-<li>Base64 Encoding, ROT13<&#47;li><br />
-<&#47;ul><br />
+<li>Base64 Encoding, ROT13</li><br />
+</ul><br />
 Man denkt es ist ein Scherz, aber ist es aber leider nicht. Beides sind keine Verschl&Atilde;&frac14;sselungsverfahren, bzw. k&Atilde;&para;nnen von einem intelligenten Grundsch&Atilde;&frac14;ler mit Papier und Bleistift "entschl&Atilde;&frac14;sselt" werden.</p>
 <ul>
-<li>Echte Verschl&Atilde;&frac14;sselungsverfahren (DES, AES ...)<&#47;li><br />
-<&#47;ul><br />
-Schon nicht schlecht.  Aber haben diese Verfahren haben einen Nachteil: Man kann das Passwort wieder entschl&Atilde;&frac14;sseln. Das ist aber gar nicht notwendig, da es reicht beim Login, das eingegebene Passwort auch zu verschl&Atilde;&frac14;sseln und das Ergebnis mit dem gespeichertem verschl&Atilde;&frac14;sseltem Passwort zu vergleichen. Die M&Atilde;&para;glichkeit das Passwort wieder zu entschl&Atilde;&frac14;sseln stellt nur ein unn&Atilde;&para;tiges Sicherheitsrisiko dar. Verfahren die nicht umkehrbar sind hei&Atilde;&Yuml;en <a href="http:&#47;&#47;de.wikipedia.org&#47;wiki&#47;Hash#Zus.C3.A4tzliche_Forderungen_f.C3.BCr_kryptographisch_sichere_Hash-Funktionen" target="_blank">Hash <&#47;a>oder Digest.</p>
+<li>Echte Verschl&Atilde;&frac14;sselungsverfahren (DES, AES ...)</li><br />
+</ul><br />
+Schon nicht schlecht.  Aber haben diese Verfahren haben einen Nachteil: Man kann das Passwort wieder entschl&Atilde;&frac14;sseln. Das ist aber gar nicht notwendig, da es reicht beim Login, das eingegebene Passwort auch zu verschl&Atilde;&frac14;sseln und das Ergebnis mit dem gespeichertem verschl&Atilde;&frac14;sseltem Passwort zu vergleichen. Die M&Atilde;&para;glichkeit das Passwort wieder zu entschl&Atilde;&frac14;sseln stellt nur ein unn&Atilde;&para;tiges Sicherheitsrisiko dar. Verfahren die nicht umkehrbar sind hei&Atilde;&Yuml;en <a href="http://de.wikipedia.org/wiki/Hash#Zus.C3.A4tzliche_Forderungen_f.C3.BCr_kryptographisch_sichere_Hash-Funktionen" target="_blank">Hash </a>oder Digest.</p>
 <ul>
-<li>MD5<&#47;li><br />
-<&#47;ul><br />
+<li>MD5</li><br />
+</ul><br />
 MD5 ist ein solcher Digest. Aber er hat mehrere Probleme. Erstens gilt er seit geraumer Zeit nicht mehr als sonderlich sicher, auch nicht f&Atilde;&frac14;r den Bereich f&Atilde;&frac14;r den er prinzipiell geeignet und gedacht ist, die Signatur von Dokumenten. Zweitens und das ist das Entscheidende: Er ist schnell. Das ist gut, f&Atilde;&frac14;r Server die Dokumente mit Hilfe von MD5 verarbeiten wollen, und es ist gut, f&Atilde;&frac14;r den Angreifer, der eine Liste von verschl&Atilde;&frac14;sselten Passworten per Brute Force angreifen will.</p>
 <p>Was wir brauchen ist ein langsamer Algorithmus. Der einen solche Brute Force Angriff unm&Atilde;&para;glich macht. Um einen Algorithmus langsam zu machen gibt es ein einfaches Mittel: Man wendet ihn sehr oft hintereinander an. Es bleibt aber immer noch ein Problem: Sogenannte Rainbowtables. Der Angreifer berechnet einfach f&Atilde;&frac14;r alle m&Atilde;&para;glichen Passw&Atilde;&para;rter bis zu einer gewissen Maximall&Atilde;&curren;nge den entsprechenden Hashwert und speichert das Ergebnis in einer Tabelle. Um ein bestimmtes Passwort zu ermitteln muss er nur den Hashwert in der Tabelle nachschlagen. Um dies zu verhindern, muss das Passwort lang genug sein. Um dies sicherzustellen wird es vom Algorithmus zun&Atilde;&curren;chst umeine beachtliche Anzahl zus&Atilde;&curren;tzliche Zeichen verl&Atilde;&curren;ngert, bevor es gehasht wird, dies nennt man "salzen". Das Salz wir mit abgespeichert, da sein Wert an sich irrelevant ist und nur dazu dient, dass keine Standard Rainbowtables verwendet werden k&Atilde;&para;nnen, sondern dass jeder Angriffsversuch jedes Passwort einzeln angreifen muss.</p>
-<p>Dies haben andere nat&Atilde;&frac14;rlich auch schon wesentlich genauer und auf englisch <a href="http:&#47;&#47;www.matasano.com&#47;log&#47;958&#47;enough-with-the-rainbow-tables-what-you-need-to-know-about-secure-password-schemes&#47;" target="_blank">beschrieben<&#47;a>.</p>
+<p>Dies haben andere nat&Atilde;&frac14;rlich auch schon wesentlich genauer und auf englisch <a href="http://www.matasano.com/log/958/enough-with-the-rainbow-tables-what-you-need-to-know-about-secure-password-schemes/" target="_blank">beschrieben</a>.</p>
 <p>Mann kann nun anfangen dies alles selbst zu implementieren. Das sollte nicht so schwierig sein, aber man kann auch einfach einen fertig implementierten Algorithmus nehmen.</p>
 <p>Zu guter letzt noch eine Warnung: Ich bin kein Kryptologe oder dergleichen. Ich habe nur ein wenig Internetrecherche betrieben als ich den letzten Log On Dialog gebaut habe. Wenn ihr etwas baut, was wirklich sicherheitskritisch ist, konsultiert jemanden, der sich damit auskennt.</p>

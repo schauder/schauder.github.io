@@ -43,22 +43,22 @@ comments:
     That's the point. It is code duplication and it is dead code, but it reduces the
     amount of code we had to write for the next test to pass.
 ---
-<p>Last Week I was for two days at the <a href="http:&#47;&#47;xpdays.de&#47;twiki&#47;bin&#47;view&#47;XPDays2012&#47;WebHome">XP-Days Germany<&#47;a>. A great fun conference. Highly recommended. Especially if you prefer highly interactive sessions over somebody telling you how to do your day job right.</p>
-<p>One of the highlights for me was the session <a href="http:&#47;&#47;xpdays.de&#47;twiki&#47;bin&#47;view&#47;XPDays2012&#47;TakingBabySteps">Taking Baby Steps<&#47;a> by <a href="http:&#47;&#47;www.mozaicworks.com&#47;trainers-_coaches&#47;adrian-bolboaca&#47;">Adrian Bolboaca<&#47;a>. It was a hands on sessions and worked like this:</p>
+<p>Last Week I was for two days at the <a href="http://xpdays.de/twiki/bin/view/XPDays2012/WebHome">XP-Days Germany</a>. A great fun conference. Highly recommended. Especially if you prefer highly interactive sessions over somebody telling you how to do your day job right.</p>
+<p>One of the highlights for me was the session <a href="http://xpdays.de/twiki/bin/view/XPDays2012/TakingBabySteps">Taking Baby Steps</a> by <a href="http://www.mozaicworks.com/trainers-_coaches/adrian-bolboaca/">Adrian Bolboaca</a>. It was a hands on sessions and worked like this:</p>
 <p>We got a little programming task (Tic-Tac-Toe, actually it didn't matter what we implemented as long as it was done in Pairs and using TDD). Nothing special so far. </p>
 <p>But there was more: We used git and a timer (dual core with a touch screen, also known as smartphone). The timer got set to 2 minutes. You are allowed to commit when all the tests are green. If you commit you are also reset the timer to 2 minutes. But when the timer goes off you have to revert to your latest commit. You can also do some refactoring and commit when all tests are green again.</p>
 <p>So what are the effects of this crazy approach?</p>
 <ul>
 <li>
 You'll learn that two minutes are really short and there is very little you can get done in two minutes.<br />
-<&#47;li></p>
+</li></p>
 <li>
 You'll learn to refactor really aggressively in the areas you work on, because its the only way to get anything done at all.<br />
-<&#47;li></p>
+</li></p>
 <li>
 After some getting used to it, you actually get into some nice steady flow: Think about the next test you want to write; Think about the refactoring you need BEFORE you write the test in order to squeeze the test and the implementation into the time slot; You discuss it with your pairing partner and then you go for it.<br />
-<&#47;li></p>
-<li>It took us some time to realize that we can think and discuss without rushing, as long as we do it BEFORE we write some code, since to rollback 0 changes doesn't hurt.<&#47;li>
+</li></p>
+<li>It took us some time to realize that we can think and discuss without rushing, as long as we do it BEFORE we write some code, since to rollback 0 changes doesn't hurt.</li>
 <li>
 We came up with something that I call 'Reverse Refactorings': Refactorings most of the time reduce duplication or other code smells in order to make working with the code easier. Due to the extreme time constraint, we actually introduced duplicated or dead code into the code base, in order to make the implementation for the next test fast and easy. For example at some stage we had the logic in place to put an X on the playing field and to get the information if a spot was empty or taken by an X. The source code looked somewhat like this:</p>
 <pre lang="scala">
@@ -67,8 +67,8 @@ We came up with something that I call 'Reverse Refactorings': Refactorings most 
             Some(X)<br />
         else<br />
             None<br />
-<&#47;pre></p>
-<p>We decided we want to have Os on the field as well. So the obvious next test was to make two moves and check that at the position of the second move we get a Y token. Implementing that behavior would mean: adding knowledge of the current player to the application, implement switching between the players on every move (or at least after the first), adding another condition to the method above. There was no chance for us to get this done in two minutes! So what we did was: We added a <tt>currentPlayer<&#47;tt> to the game and gave it a fixed value -- commit -- same for <tt>oPositions<&#47;tt> -- commit -- we duplicated also all the places where <tt>xPositions<&#47;tt> where used -- commit. For example the method above looked like this, after that change:</p>
+</pre></p>
+<p>We decided we want to have Os on the field as well. So the obvious next test was to make two moves and check that at the position of the second move we get a Y token. Implementing that behavior would mean: adding knowledge of the current player to the application, implement switching between the players on every move (or at least after the first), adding another condition to the method above. There was no chance for us to get this done in two minutes! So what we did was: We added a <tt>currentPlayer</tt> to the game and gave it a fixed value -- commit -- same for <tt>oPositions</tt> -- commit -- we duplicated also all the places where <tt>xPositions</tt> where used -- commit. For example the method above looked like this, after that change:</p>
 <pre lang="scala">
     def token(x : Int, y : Int) =<br />
         if (xPositions((x,y))<br />
@@ -77,9 +77,9 @@ We came up with something that I call 'Reverse Refactorings': Refactorings most 
             Some(X)<br />
         else<br />
             None<br />
-<&#47;pre></p>
+</pre></p>
 <p>And only then did we create the test and created the actual new behavior by changing about half of the Xs to Os.<br />
-<&#47;li><br />
-<&#47;ul></p>
+</li><br />
+</ul></p>
 <p>All this was amazingly interesting. Don't get me wrong. I don't suggest to work like this at your normal work, but I think I will commit way more often in the future. Also I am not sure what to think of this reverse refactoring thing. I certainly see the risc of introducing structure that you end up not needing and forgetting it in your code, but it find it intriguing option to have: Introduce some structure to stay green and to ease an otherwise difficult change. This might be helpful especially with these annoyingly large refactorings that tend to take hours or even days and tend to end in a nightmare.</p>
 <p>I find it also strange that this looks like stuff happening in the DNA, where (if I got it right) a lot of more or less unused or duplicated pieces hang around, ready to become useful by some random mutation. Although I hope there isn't to much random involved in your development process, at least not on the code level.</p>

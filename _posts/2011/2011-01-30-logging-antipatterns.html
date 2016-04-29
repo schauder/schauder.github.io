@@ -60,16 +60,16 @@ comments:
     or wrap it in a new exception and throw that, I don't see how you could possibly
     loose anything."
 ---
-<p>As we hopefully all agree <a href="&#47;2009&#47;09&#47;16&#47;good-logging-practices&#47;">good logging<&#47;a> is a great asset. Yet I come across aweful styles of logging (and sometimes produce them myself). So I guess it is time for a small Antipattern collection.</p>
+<p>As we hopefully all agree <a href="/2009/09/16/good-logging-practices/">good logging</a> is a great asset. Yet I come across aweful styles of logging (and sometimes produce them myself). So I guess it is time for a small Antipattern collection.</p>
 <dl>
-<dt>No Logging at All<&#47;dt></p>
-<dd>Exception Handler without any code are an obvious example of this, but reading a configuration file without giving a hint which whan you are reading and what you found in it also belongs in this category<&#47;dd></p>
-<dt>Wrong Log Level<&#47;dt></p>
-<dd>logging the discovery that you can't connect to the database of the application in DEBUG level, or logging entry and exit points of method with ERROR level are typical examples. Always remember: Once in production the log level will probably risen to WARN or ERROR and you gonna still want to see the important messages, don't you?<&#47;dd></p>
-<dt>Catch Log Throw<&#47;dt></p>
-<dd>In a catch block the exception gets logged and then thrown again, possibly wrapped in a new exception. When this anti pattern is used in many places the result is a log file that contains every stacktrace in a dozen repetitions and variations. A nightmare when you try to understand what is going on.<&#47;dd></p>
-<dt>Logging to stderr or stdout<&#47;dt></p>
-<dd><tt>System.out.println<&#47;tt> and <tt>ex.printStacktrace()<&#47;tt> are easy and fast to write, but their result will probably disappear in &#47;dev&#47;null once your application is running on a production server.<&#47;dd></p>
-<dt>Complex Logging Statements<&#47;dt></p>
-<dd>When the message for logging gets constructed in a convoluted way with lots of function calls, there is a serious risk that you end up with a NullPointerException instead of a proper logging entry. This is especially true when we try to log inside a catch block. After all something went wrong in the first place, so <tt>NULL<&#47;tt> values a everywhere<&#47;dd><br />
-<&#47;dl></p>
+<dt>No Logging at All</dt></p>
+<dd>Exception Handler without any code are an obvious example of this, but reading a configuration file without giving a hint which whan you are reading and what you found in it also belongs in this category</dd></p>
+<dt>Wrong Log Level</dt></p>
+<dd>logging the discovery that you can't connect to the database of the application in DEBUG level, or logging entry and exit points of method with ERROR level are typical examples. Always remember: Once in production the log level will probably risen to WARN or ERROR and you gonna still want to see the important messages, don't you?</dd></p>
+<dt>Catch Log Throw</dt></p>
+<dd>In a catch block the exception gets logged and then thrown again, possibly wrapped in a new exception. When this anti pattern is used in many places the result is a log file that contains every stacktrace in a dozen repetitions and variations. A nightmare when you try to understand what is going on.</dd></p>
+<dt>Logging to stderr or stdout</dt></p>
+<dd><tt>System.out.println</tt> and <tt>ex.printStacktrace()</tt> are easy and fast to write, but their result will probably disappear in /dev/null once your application is running on a production server.</dd></p>
+<dt>Complex Logging Statements</dt></p>
+<dd>When the message for logging gets constructed in a convoluted way with lots of function calls, there is a serious risk that you end up with a NullPointerException instead of a proper logging entry. This is especially true when we try to log inside a catch block. After all something went wrong in the first place, so <tt>NULL</tt> values a everywhere</dd><br />
+</dl></p>

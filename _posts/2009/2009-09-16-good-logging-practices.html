@@ -50,8 +50,8 @@ comments:
     this instrumentation in place so that you can find the problem again quickly if
     it happens again. This is especially true if you&acirc;&euro;&trade;re using a
     logging framework that allows it to be enabled and disabled easily. What&acirc;&euro;&trade;s
-    not to like?\r\n\r\n<a href=\"http:&#47;&#47;itechcloud.blogspot.com&#47;2010&#47;11&#47;should-i-leave-my-logging-in-code.html\"
-    rel=\"nofollow\">Should I Leave My Logging in the Code?<&#47;a>"
+    not to like?\r\n\r\n<a href=\"http://itechcloud.blogspot.com/2010/11/should-i-leave-my-logging-in-code.html\"
+    rel=\"nofollow\">Should I Leave My Logging in the Code?</a>"
 - id: 8525
   author: Logging Antipatterns - .NET Code Geeks
   author_email: ''
@@ -62,42 +62,42 @@ comments:
     is a great asset. Yet I come across aweful styles of logging (and sometimes produce
     them myself). [...]"
 ---
-<p>Nearly everybody does some kind of logging in their application, but few do it in a well structured way. I'd like to point out some practices that I consider helpful in order to get the most out of your logging. This post will also work as a handout for my <a href="http:&#47;&#47;www.herbstcampus.de&#47;hc09&#47;program&#47;sessions.html#29">talk about logging<&#47;a> at the herbstcampus conference. So here we go:</p>
+<p>Nearly everybody does some kind of logging in their application, but few do it in a well structured way. I'd like to point out some practices that I consider helpful in order to get the most out of your logging. This post will also work as a handout for my <a href="http://www.herbstcampus.de/hc09/program/sessions.html#29">talk about logging</a> at the herbstcampus conference. So here we go:</p>
 <ol>
-<li><strong>Know your audience<&#47;strong>. If you look at the log files of many applications you quickly realize who the intended audience is: Developers. The log is full with technical detail, but not much of it makes sense to anybody else. The groups you probably should have on your list are: <strong>Developers<&#47;strong> on the search for bugs, performance issues, <strong>Administrators<&#47;strong> trying to install, start or shutdown your application and <strong>Support<&#47;strong> personal trying to detect and analyze problems or trying to verify that a problem did not occur. Once you realize there are different audiences you'll understand what kind of information is helpfull in the logs.<&#47;li>
-<li><strong>Use a framework<&#47;strong>. The major options are: <a href="http:&#47;&#47;logging.apache.org&#47;log4j&#47;1.2&#47;index.html">Log4j<&#47;a>, <a href="http:&#47;&#47;www.slf4j.org&#47;">SLF4J<&#47;a>, <a href="http:&#47;&#47;java.sun.com&#47;j2se&#47;1.4.2&#47;docs&#47;guide&#47;util&#47;logging&#47;overview.html">JUL<&#47;a>, <a href="http:&#47;&#47;commons.apache.org&#47;logging&#47;">Commons Logging<&#47;a> or <a href="http:&#47;&#47;logback.qos.ch&#47;">Logback<&#47;a>. Each one has it's pros and cons, but they are all better then System.out.println. They allow you to configure at deploy or runtime, what gets logged where and in what format. If you don't want to do any research, and don't have special requirements, use SLF4J.<&#47;li>
-<li><strong>Logging must be rock solid<&#47;strong>. If a logging causes problems. Throw it out. Don't do experiments like remote logging, if you can avoid it.<&#47;li>
-<li><strong>Define rules, when to use which Log Level<&#47;strong>: I propose the following:
+<li><strong>Know your audience</strong>. If you look at the log files of many applications you quickly realize who the intended audience is: Developers. The log is full with technical detail, but not much of it makes sense to anybody else. The groups you probably should have on your list are: <strong>Developers</strong> on the search for bugs, performance issues, <strong>Administrators</strong> trying to install, start or shutdown your application and <strong>Support</strong> personal trying to detect and analyze problems or trying to verify that a problem did not occur. Once you realize there are different audiences you'll understand what kind of information is helpfull in the logs.</li>
+<li><strong>Use a framework</strong>. The major options are: <a href="http://logging.apache.org/log4j/1.2/index.html">Log4j</a>, <a href="http://www.slf4j.org/">SLF4J</a>, <a href="http://java.sun.com/j2se/1.4.2/docs/guide/util/logging/overview.html">JUL</a>, <a href="http://commons.apache.org/logging/">Commons Logging</a> or <a href="http://logback.qos.ch/">Logback</a>. Each one has it's pros and cons, but they are all better then System.out.println. They allow you to configure at deploy or runtime, what gets logged where and in what format. If you don't want to do any research, and don't have special requirements, use SLF4J.</li>
+<li><strong>Logging must be rock solid</strong>. If a logging causes problems. Throw it out. Don't do experiments like remote logging, if you can avoid it.</li>
+<li><strong>Define rules, when to use which Log Level</strong>: I propose the following:
 <ul>
-<li>DEBUG: Not important, except if you are researching a very specific problem.<&#47;li>
-<li>INFO: General information like startup, shutdown, version and configuration of an application. Information about important decisions in the code or changes in the configuration.<&#47;li>
-<li>WARN: Things that are fishy, but don't represent a problem in themself, but might indicate a problem when appearing very often. E.g. a failed log in attempt is such a candidate. If it happens sometime it is not a problem, but if it happens a lot somebody might want to look into that.<&#47;li>
-<li>ERROR: This should only be used when a problem occurs that somebody needs to look into. Typically but not necessarily relating to an exception in the code. Use this when only a limited part of the application is affected.<&#47;li>
-<li>FATAL: If something goes completely wrong, rendering the application unable to recover this log level is appropriate, very likely accompanied by a shutdown of the application or the session.<&#47;li><br />
-<&#47;ul><br />
-Of course your rules need some tayloring for your context, but absolutely need rules, and every developer must know and understand those.<&#47;li></p>
-<li><strong>Log everything you log exactly once<&#47;strong>: When analyzing log files I often see log messages that always come in groups. This happens often when exceptions get caught, logged, and rethrown. Don't do that. Log at the place where you actually do handle the exception. This is the only way to log an exception exactly once and also being able to decide which log level to use.<&#47;li>
-<li><strong>Include useful information and data<&#47;strong>: The information should typically include answers to the following questions
+<li>DEBUG: Not important, except if you are researching a very specific problem.</li>
+<li>INFO: General information like startup, shutdown, version and configuration of an application. Information about important decisions in the code or changes in the configuration.</li>
+<li>WARN: Things that are fishy, but don't represent a problem in themself, but might indicate a problem when appearing very often. E.g. a failed log in attempt is such a candidate. If it happens sometime it is not a problem, but if it happens a lot somebody might want to look into that.</li>
+<li>ERROR: This should only be used when a problem occurs that somebody needs to look into. Typically but not necessarily relating to an exception in the code. Use this when only a limited part of the application is affected.</li>
+<li>FATAL: If something goes completely wrong, rendering the application unable to recover this log level is appropriate, very likely accompanied by a shutdown of the application or the session.</li><br />
+</ul><br />
+Of course your rules need some tayloring for your context, but absolutely need rules, and every developer must know and understand those.</li></p>
+<li><strong>Log everything you log exactly once</strong>: When analyzing log files I often see log messages that always come in groups. This happens often when exceptions get caught, logged, and rethrown. Don't do that. Log at the place where you actually do handle the exception. This is the only way to log an exception exactly once and also being able to decide which log level to use.</li>
+<li><strong>Include useful information and data</strong>: The information should typically include answers to the following questions
 <ul>
-<li>Why are you logging this, typically the root cause of an exception.<&#47;li>
-<li>What is the affected use case? Did it happen during creation of an order or when importing product data from a remote site?<&#47;li>
-<li>What effect has it on the use case that was executing? Does the user need to repeat the action, or did it succeed? Did the complete batch fail, or just a single step?<&#47;li>
-<li>What instance of the use case was effected? For example an order id.<&#47;li><br />
-<&#47;ul><br />
-In order to make all this information available to your logs <a href="http:&#47;&#47;logback.qos.ch&#47;manual&#47;mdc.html">MDC (Mapped Diagnostic Context)<&#47;a> is tremendously helpful. If you don't know MDC, follow the link and read about it NOW. MDC exists also in <a href="http:&#47;&#47;www.slf4j.org&#47;api&#47;org&#47;slf4j&#47;MDC.html">SLF4J<&#47;a> and <a href="http:&#47;&#47;logging.apache.org&#47;log4j&#47;1.2&#47;apidocs&#47;org&#47;apache&#47;log4j&#47;MDC.html">Log4J<&#47;a> and should be easy to port for other frameworks as well.<&#47;li></p>
-<li><strong>Use <a href="&#47;2009&#47;02&#47;24&#47;logging&#47;">more then one logging hierachy<&#47;a><&#47;strong>: The link contains more information about why. The simple idea is, that you can seperate different aspects you want to log by using different prefixes. This becomes especially usefull when adhering to the following points<&#47;li>
-<li><strong>Log the time needed for stuff which might be intersting for tuning<&#47;strong>: Of course this includes the time used for access to remote resources (e.g. webservices or databases) and execution of complex algorithms, but possibly also the time spend in the various layers in the application. You can use different log level for three categories, a separate logging hierarchy for separating performance logging from other stuff. Performance problems a notorious difficult to hunt down, especially when they appear over time. You'll love this logs, when performance becomes an issue.<&#47;li>
-<li><strong>Log stuff that worked, not only what failed<&#47;strong>: Distributed systems become common place more and more. When debugging distributed system one often has the situation that requests just disappear, and it can be extremely challenging to decide which component failed. After all not everybody does such a fine logging as us, right? So I recommend the following log events:
+<li>Why are you logging this, typically the root cause of an exception.</li>
+<li>What is the affected use case? Did it happen during creation of an order or when importing product data from a remote site?</li>
+<li>What effect has it on the use case that was executing? Does the user need to repeat the action, or did it succeed? Did the complete batch fail, or just a single step?</li>
+<li>What instance of the use case was effected? For example an order id.</li><br />
+</ul><br />
+In order to make all this information available to your logs <a href="http://logback.qos.ch/manual/mdc.html">MDC (Mapped Diagnostic Context)</a> is tremendously helpful. If you don't know MDC, follow the link and read about it NOW. MDC exists also in <a href="http://www.slf4j.org/api/org/slf4j/MDC.html">SLF4J</a> and <a href="http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/MDC.html">Log4J</a> and should be easy to port for other frameworks as well.</li></p>
+<li><strong>Use <a href="/2009/02/24/logging/">more then one logging hierachy</a></strong>: The link contains more information about why. The simple idea is, that you can seperate different aspects you want to log by using different prefixes. This becomes especially usefull when adhering to the following points</li>
+<li><strong>Log the time needed for stuff which might be intersting for tuning</strong>: Of course this includes the time used for access to remote resources (e.g. webservices or databases) and execution of complex algorithms, but possibly also the time spend in the various layers in the application. You can use different log level for three categories, a separate logging hierarchy for separating performance logging from other stuff. Performance problems a notorious difficult to hunt down, especially when they appear over time. You'll love this logs, when performance becomes an issue.</li>
+<li><strong>Log stuff that worked, not only what failed</strong>: Distributed systems become common place more and more. When debugging distributed system one often has the situation that requests just disappear, and it can be extremely challenging to decide which component failed. After all not everybody does such a fine logging as us, right? So I recommend the following log events:
 <ul>
-<li>RECEIVED: The application received a request through the UI, a Webservice or any kind of interface offered.<&#47;li>
-<li>SEND: The application send a request to some other component.<&#47;li>
-<li>GOT ANSWER:&Acirc;&nbsp; The application got a reply to a request it send.<&#47;li>
-<li>ANSWERED: The application answered to a request it received.<&#47;li><br />
-<&#47;ul><br />
-<&#47;li></p>
-<li><strong>Log how often stuff happens<&#47;strong>: One possible reason for decreasing performance is a changed usage pattern. So logging how often per day, hour or minute a certain kind of use case is triggered can help tremendously.<&#47;li><br />
-<&#47;ol><br />
+<li>RECEIVED: The application received a request through the UI, a Webservice or any kind of interface offered.</li>
+<li>SEND: The application send a request to some other component.</li>
+<li>GOT ANSWER:&Acirc;&nbsp; The application got a reply to a request it send.</li>
+<li>ANSWERED: The application answered to a request it received.</li><br />
+</ul><br />
+</li></p>
+<li><strong>Log how often stuff happens</strong>: One possible reason for decreasing performance is a changed usage pattern. So logging how often per day, hour or minute a certain kind of use case is triggered can help tremendously.</li><br />
+</ol><br />
 While obviously I recommend a lot of logging, it isn't free of cost. So when doing some logging you should be sure to avoid it in tight loops that get executed millions of times. Also MDC keeps a reference to everything you put into, so make sure to clear it when you are done and think twice before putting complex objects in. And finally think about data privacy. A lot of people might have access to the log files. They shouldn't find passwords, credit cards or similar information their.</p>
 <p>Probably somewhere around point number 8 you might have started to think: "Man this guy is crazy. I'll have more highly repetitive logging code than anything else in my application!" And if you do everything by hand you are probably right. But if you have cleanly structured code where you can deduct use cases, application layers, access to remote connections and so on from the method signature and the packages involved, most of these logging statement can get injected using AOP. So what is left is to create a framework that handles all this.</p>
-<p>Since I couldn't find an Open Source Solution I started my own: <a href="http:&#47;&#47;code.google.com&#47;p&#47;metalogga&#47;">Meta Logga<&#47;a>. It is still in an extremely early stage, definitely not ready to be used, but possibly ready to understand where I am heading.</p>
-<p>If you agree with me that this is indeed something that would be useful you can help in many extremely easy ways. Comment on this post, <a href="http:&#47;&#47;twitter.com&#47;jensschauder">tweet<&#47;a> it, dzone it, blog about or in any other way make this post more visible to others. All this will help me to keep motivated, thus it will help the project.</p>
+<p>Since I couldn't find an Open Source Solution I started my own: <a href="http://code.google.com/p/metalogga/">Meta Logga</a>. It is still in an extremely early stage, definitely not ready to be used, but possibly ready to understand where I am heading.</p>
+<p>If you agree with me that this is indeed something that would be useful you can help in many extremely easy ways. Comment on this post, <a href="http://twitter.com/jensschauder">tweet</a> it, dzone it, blog about or in any other way make this post more visible to others. All this will help me to keep motivated, thus it will help the project.</p>

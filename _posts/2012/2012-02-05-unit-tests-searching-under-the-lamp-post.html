@@ -30,10 +30,10 @@ comments:
   author_url: http://pboop.wordpress.com
   date: '2012-02-06 00:33:36 +0100'
   date_gmt: '2012-02-05 22:33:36 +0100'
-  content: "Definitely agree. It reminds me of http:&#47;&#47;lisacrispin.com&#47;wordpress&#47;category&#47;agile-testing-quadrants&#47;\r\n\r\nAnother
-    good read concerning this topic is the GOOS book (http:&#47;&#47;www.growing-object-oriented-software.com&#47;)
+  content: "Definitely agree. It reminds me of http://lisacrispin.com/wordpress/category/agile-testing-quadrants/\r\n\r\nAnother
+    good read concerning this topic is the GOOS book (http://www.growing-object-oriented-software.com/)
     They build their Unit Tests hierarchically using mocks for \"dependents\". In
-    my opinion this is &#47;the&#47; structure for good unit tests.\r\n\r\nThis way
+    my opinion this is /the/ structure for good unit tests.\r\n\r\nThis way
     you will cover only Q1 of the quadrants. The other quadrants need not be forgotten."
 - id: 5027
   author: Martin Hauner
@@ -43,8 +43,8 @@ comments:
   date_gmt: '2012-02-12 18:06:03 +0100'
   content: "I'm starting to think that test coverage is not that useful as a guide
     for testing.\r\n\r\nIf bugs are not found by (y)our unit tests, we did not write
-    the right (enough?) tests (did we test all interesting input values etc.) and&#47;or
-    we did not write the tests at the <b>right place<&#47;b>.\r\n\r\nI guess it is
+    the right (enough?) tests (did we test all interesting input values etc.) and/or
+    we did not write the tests at the <b>right place</b>.\r\n\r\nI guess it is
     both, but more interesting is: where is the right place?\r\n\r\nI think it depends
     on the importance of a class (unit). If it is more important than another one
     we should focus more on testing the important class than on the less important
@@ -90,11 +90,11 @@ comments:
 <p>BUT I find it quite disturbing how many bugs make it past my and other peoples unit tests into my code, sometimes even into production code, despite pretty good code coverage. This makes me think that the focus on unit testing is like the drunkard searching his keys under the lamp post. Not because thats where the keys got lost, but because thats where the light is.</p>
 <p>Lets check this theory. What are the reasons for focusing on unit tests?</p>
 <ul>
-<li>Unit tests are easy to setup because you have to deal only with a few dependencies.<&#47;li>
-<li>&Acirc;&nbsp;Unit tests are fast, because they are only concerned with few classes and don't hit the network, the disk or any other slow stuff.<&#47;li>
-<li>If a unit test fails its easy to find the bug causing the test failure because each test exercises only a few lines of code.<&#47;li>
-<li>Its easy to reach high coverage, because the number of parameters to vary are limited.<&#47;li><br />
-<&#47;ul><br />
+<li>Unit tests are easy to setup because you have to deal only with a few dependencies.</li>
+<li>&Acirc;&nbsp;Unit tests are fast, because they are only concerned with few classes and don't hit the network, the disk or any other slow stuff.</li>
+<li>If a unit test fails its easy to find the bug causing the test failure because each test exercises only a few lines of code.</li>
+<li>Its easy to reach high coverage, because the number of parameters to vary are limited.</li><br />
+</ul><br />
 Note that: "They are most effective in finding bugs" isn't among the reasons neither is "They find the worst bugs causing the whole application to crash"</p>
 <p>Actually in my experience one of the most effective tests according to the last two reasons is a simple smoke tests that tries to access the application after it got deployed on an application server.</p>
 <p>So we definitely need to have tests beyond unit tests. Obviously people do write User Acceptance Tests or what ever you call tests, that test the complete application. But these tests suffer from the opposite problems: They tend to be difficult to write, slow to execute and when they fail finding the underlying bug can be difficult.</p>
@@ -103,7 +103,7 @@ Note that: "They are most effective in finding bugs" isn't among the reasons nei
 <p>And since unit tests are the easiest to write and maintain people write unit tests.</p>
 <p>If you look into other industries you often see a hierarchy of structures. Lets take construction: You have your basic building material. Maybe concrete or glass, which provides stability on a small scale, it basically connects neighboring points. For larger structures you embedd maybe a steel structure which connects larger areas (but has lots of holes which need to get covered by your main building material). And on an even larger scale you have big steel beams reaching even further than the small steel structures, but having even bigger holes.</p>
 <p>The same applies to your social network on twitter, facebook or the other life. You have a few very strong connections, to your close family and friends. Than you have coworkers, members of some organization you belong to. These are people that you don't know as well, but there are lots of them. And they may provide abilities far different from you close circle of friends. And than there are the people that you met once on a conference or a vacation.</p>
-<p>Many of these things are thought to behave according to a <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Power_law">power law<&#47;a>, ore are especially efficient when behaving to a power law. So maybe our tests should adhere to a power law as well. Maybe it would make sense to have a distribution of tests, where</p>
-<p><tt>n = ac<sup>-k<&#47;sup><&#47;tt></p>
-<p>With <tt>c<&#47;tt> being the number of classes (or methods or lines of code or layers or modules ...) a test covers, and <tt>n<&#47;tt> being the number of tests with that kind of coverage. <tt>a<&#47;tt> and <tt>k<&#47;tt> a and k would be constants. This would mean one needs very few tests touching almost the complete system, a bunch of tests touching large sets of classes and lots of test testing just a single class, or maybe even just two lines of code.</p>
+<p>Many of these things are thought to behave according to a <a href="http://en.wikipedia.org/wiki/Power_law">power law</a>, ore are especially efficient when behaving to a power law. So maybe our tests should adhere to a power law as well. Maybe it would make sense to have a distribution of tests, where</p>
+<p><tt>n = ac<sup>-k</sup></tt></p>
+<p>With <tt>c</tt> being the number of classes (or methods or lines of code or layers or modules ...) a test covers, and <tt>n</tt> being the number of tests with that kind of coverage. <tt>a</tt> and <tt>k</tt> a and k would be constants. This would mean one needs very few tests touching almost the complete system, a bunch of tests touching large sets of classes and lots of test testing just a single class, or maybe even just two lines of code.</p>
 <p>This of course is just an idea, completely unscientific. Not based on any kind of measurement. But I'm curious about your thoughts. Does this make sense? Do you disagree? Actually if you are living near Braunschweig and looking for an idea for scientific work, let me know, it wouldn't be the first diploma thesis supported by LINEAS. I'd be interested in cooperation.</p>

@@ -35,7 +35,7 @@ comments:
     on others should have as its responsibility only \"integration\", i.e. wiring
     together its dependencies to form a whole.\r\n\r\nIf that&Acirc;&acute;s really
     the only responsibility of an object then it&Acirc;&acute;s only dependent on
-    the syntax&#47;form of the injected objects. It does not have a clue as to what
+    the syntax/form of the injected objects. It does not have a clue as to what
     they are doing. Therefore it&Acirc;&acute;s no problem to be dependent on many
     objects. Like a DI container is dependent on many objects.\r\n\r\n(This is a more
     roundabout statement than what I really mean. But I leave it at that to make it
@@ -57,7 +57,7 @@ comments:
   date: '2012-01-01 15:11:27 +0100'
   date_gmt: '2012-01-01 13:11:27 +0100'
   content: "I agree with using constructor injection wherever possible and was mostly
-    influenced to use it by the teachings of Misko Hevery: http:&#47;&#47;misko.hevery.com&#47;2008&#47;11&#47;11&#47;clean-code-talks-dependency-injection&#47;\r\n\r\nWhat
+    influenced to use it by the teachings of Misko Hevery: http://misko.hevery.com/2008/11/11/clean-code-talks-dependency-injection/\r\n\r\nWhat
     usually bugs me is, that when using the Spring XML configuration you can only
     express the constructor arguments as ordered list instead of expressing them as
     named properties. Constructor dependencies become much nicer to use when using
@@ -84,7 +84,7 @@ comments:
   date_gmt: '2012-01-03 13:19:24 +0100'
   content: "If you were there in mid 2003, this was called type-3 IoC by PicoContainer.
     Hardly any news though. \r\n\r\nThe more I think about it, the less the whole
-    IoC&#47;DI feels like a valid object oriented approach to me.. This leads back
+    IoC/DI feels like a valid object oriented approach to me.. This leads back
     to good old structured programming of the 80's on a straight wide road."
 - id: 4721
   author: Jens Schauder
@@ -93,9 +93,9 @@ comments:
   date: '2012-01-03 15:37:16 +0100'
   date_gmt: '2012-01-03 13:37:16 +0100'
   content: "I certainly don't claim that Constructor Dependency Injection is anything
-    new. Also the insight&#47;opinion that one really should use only constructors
-    for dependency injection isn't new. I think <a href=\"http:&#47;&#47;codemonkeyism.com&#47;\"
-    title=\"Codemonkeyism\" rel=\"nofollow\">Codemonkeyism<&#47;a> tweeted just that
+    new. Also the insight/opinion that one really should use only constructors
+    for dependency injection isn't new. I think <a href=\"http://codemonkeyism.com/\"
+    title=\"Codemonkeyism\" rel=\"nofollow\">Codemonkeyism</a> tweeted just that
     a couple of weeks ago.\r\n\r\nI do think DI is a good idea. I don't understand
     why I need a framework for it though (well  I do understand but I don't like the
     reasons).\r\n\r\nFor the question if OO is a good idea at all ... I leave that
@@ -187,7 +187,7 @@ comments:
     for UI components back in the 1990s were just DLLs with a non-OOP interface (if
     I remember correctly).\r\n\r\nAnd DSLs... I doubt we&Acirc;&acute;ll see much
     use of them above SQL and RegEx. People have a hard time to come up with decend
-    libraries&#47;frameworks. How should they be able to sling their own DSL?\r\n\r\nIt
+    libraries/frameworks. How should they be able to sling their own DSL?\r\n\r\nIt
     would need a very generic DSL to find widespread use. A DSL to help with very
     fundamental stuff - which then probably would replace some of what OOP tried to
     deliver on so far.\r\n\r\nA DSL for integrating functionality maybe. I&Acirc;&acute;d
@@ -222,7 +222,7 @@ comments:
     it, then hope you set all the things it wanted, and try and finally use it. If
     you use the Static Builder, you chain the calls and then build the object. The
     builder can validate whether you have provided what is required.\r\n\r\nLearn
-    something about the state of the art of a language&#47;programming paradigm before
+    something about the state of the art of a language/programming paradigm before
     you personally proclaim its death."
 - id: 4758
   author: Ralf Westphal
@@ -242,8 +242,8 @@ comments:
     book: favor composition over inheritance?\r\n\r\nAs for anecdotal evidence: I&Acirc;&acute;m
     doing team assessments on a regular basis, meaning around once a month. This means
     every month I see a different (!) team and ask them to solve a simple problem
-    using their choice of tools and paradigms - which today means they use Java&#47;C#
-    and Eclipse&#47;IntelliJ&#47;VS.\r\n\r\nAnd guess what: Those teams fail to deliver
+    using their choice of tools and paradigms - which today means they use Java/C#
+    and Eclipse/IntelliJ/VS.\r\n\r\nAnd guess what: Those teams fail to deliver
     90% of the times. They fail to deliver on time (which means within a timeframe
     of 2h). They fail to deliver on quality (which means their code looks like s***).\r\n\r\nHow
     come if all&Acirc;&acute;s well in OOP land? Are those guys just dumb programmers?
@@ -352,7 +352,7 @@ comments:
     go try some of the newer approaches before you conclude that there is no way to
     save objects.\r\n\r\nYou forgot all of the above. Clearly that is your response.
     I am not enraged. You are. You just think the veneer of politesse you are trying
-    to coat your material with masks that. It doesn't. (P&#47;A)"
+    to coat your material with masks that. It doesn't. (P/A)"
 - id: 4765
   author: Oliver Gierke
   author_email: ogierke@vmware.com
@@ -403,7 +403,7 @@ comments:
     all for ctor injection.\r\n\r\nHowever, I&Acirc;&acute;m asking: What&Acirc;&acute;s
     going on if a dependency tree looks like this:\r\n\r\n<pre>\r\nDomainlogicRootClass\r\n
     \ DomainlogicClassA\r\n    DomainlogicClassF\r\n  DomainlogicClassB\r\n    DomainlogicClassK\r\n
-    \   DomainlogicClassL\r\n<&#47;pre>\r\n\r\nOn every level of this hierarchy domain
+    \   DomainlogicClassL\r\n</pre>\r\n\r\nOn every level of this hierarchy domain
     logic resides. That&Acirc;&acute;s how it&Acirc;&acute;s usually done. That&Acirc;&acute;s
     why IoC is used and a DI container is supposed to inject an instance of DomainlogicClassF
     into an instance of DomainlogicClassA etc. That&Acirc;&acute;s what Jens ment,
@@ -417,7 +417,7 @@ comments:
     SRP seriously, which means become eXtreme in comparison to its usual interpretation,
     do xSRP :-)\r\n\r\nKeep all non-leaf classes free of domain logic (or whatever
     concern we&Acirc;&acute;re talking about). Do not let them add value in terms
-    of fulfilling functional&#47;non-functional requirements. No expressions, no control
+    of fulfilling functional/non-functional requirements. No expressions, no control
     statements.\r\n\r\nThis will degenerate those classes. They&Acirc;&acute;ll become
     pure integrators. But that&Acirc;&acute;s ok. No, that&Acirc;&acute;s even highly
     beneficial, I&Acirc;&acute;d say.\r\n\r\nFirstly, this makes all classes much
@@ -470,7 +470,7 @@ comments:
     Hence the example with three pieces of logic\r\n\r\nA: decide between doing b
     or c\r\nB: doing b\r\nC: doing c\r\n\r\nI'd implement it more or less like this:\r\n<pre>\r\nclass
     A(b:B, c:D){\r\n    doSomething(){\r\n        if (some condition)\r\n           b.doSomething()\r\n
-    \       else\r\n           c.doSomething()\r\n    }\r\n}\r\n<&#47;pre>\r\n\r\nHow
+    \       else\r\n           c.doSomething()\r\n    }\r\n}\r\n</pre>\r\n\r\nHow
     would this look after transformation into a form where only leave classes contain
     logic?"
 - id: 4771
@@ -483,8 +483,8 @@ comments:
     e.g.\r\n\r\n<pre>\r\nclass A {\r\n  B b;\r\n  C c;\r\n  ...\r\n  doSomething()
     {\r\n    decide(\r\n      b.doSomething, \r\n      c.doSomething);\r\n  }\r\n\r\n
     \ decide(Action onTrue, Action onFalse) {\r\n    if (some condition)\r\n      onTrue();\r\n
-    \  else\r\n     onFalse();\r\n  }\r\n}\r\n<&#47;pre>\r\n\r\nThis works fine in
-    C# where Action is defined as\r\n\r\n<code>\r\ndelegate void Action();\r\n<&#47;code>\r\n\r\nIt&Acirc;&acute;s
+    \  else\r\n     onFalse();\r\n  }\r\n}\r\n</pre>\r\n\r\nThis works fine in
+    C# where Action is defined as\r\n\r\n<code>\r\ndelegate void Action();\r\n</code>\r\n\r\nIt&Acirc;&acute;s
     a type safe function pointer.\r\n\r\nSee how doSomething() now only does the \"wiring\"?
     It is independent of the condition and also independent of how the decision is
     made, whether an if is used of some other means. As long as the basic structure
@@ -525,7 +525,7 @@ comments:
   author_url: ''
   date: '2012-12-04 15:54:55 +0100'
   date_gmt: '2012-12-04 13:54:55 +0100'
-  content: What do you do when you want to communicate between a View and it's Controller&#47;Producer?
+  content: What do you do when you want to communicate between a View and it's Controller/Producer?
     In that case you need the view injected in the presenter and otherwise.
 - id: 8782
   author: Jens Schauder
@@ -536,15 +536,15 @@ comments:
   content: "@Dan In case of a circular dependency you are right, one has to get injected
     with a setter. BUT this isn't a real dependency in the sense that it should work
     perfectly well without that dependency. Or to put it differently: it is just a
-    listener&#47;oberserver. \r\n\r\nA distinction I failed to make in the article"
+    listener/oberserver. \r\n\r\nA distinction I failed to make in the article"
 - id: 8787
   author: Sebastian
   author_email: sebastian@are-you-ready.de
   author_url: ''
   date: '2012-12-05 09:23:14 +0100'
   date_gmt: '2012-12-05 07:23:14 +0100'
-  content: With CDI&#47;Weld you can inject the View in the Controller and otherwise
-    without getting a cyclic dependency when you "lazy inject" at one side (http:&#47;&#47;stackoverflow.com&#47;questions&#47;8749073&#47;better-way-to-pass-class-reference-to-an-injected-instance?answertab=active#tab-top)
+  content: With CDI/Weld you can inject the View in the Controller and otherwise
+    without getting a cyclic dependency when you "lazy inject" at one side (http://stackoverflow.com/questions/8749073/better-way-to-pass-class-reference-to-an-injected-instance?answertab=active#tab-top)
 - id: 8789
   author: Oliver Gierke
   author_email: info@olivergierke.de
@@ -556,7 +556,7 @@ comments:
     it doesn't mean nothing is wrong. \r\n\r\nField injection actually subverts a
     crucial part of the whole DI story: exposing dependencies. With FI you still cannot
     reason about the dependencies of a class just by looking at it's public interface
-    (aka. JavaDoc, not a Java interface). With constructor&#47;sett injection you
+    (aka. JavaDoc, not a Java interface). With constructor/sett injection you
     actually do. So while the latter two impose a slight overhead in initial coding
     they actually serve an important purpose from an architectural or design perspective.
     \r\n\r\nEspecially constructor injection actually prevents you from introducing
@@ -567,7 +567,7 @@ comments:
     left with quite a few issues. How do you reasonably test the instances in isolation?
     How do you set the dependencies in a unit test at all? Reflection? So you're writing
     the first client for your code and already work around drawbacks of your design?\r\n\r\nActually
-    I've already discussed this in length in this comment: http:&#47;&#47;blog.schauderhaft.de&#47;2012&#47;01&#47;01&#47;the-one-correct-way-to-do-dependency-injection&#47;comment-page-1&#47;#comment-4765\r\n\r\nCheers,\r\nOllie"
+    I've already discussed this in length in this comment: http://blog.schauderhaft.de/2012/01/01/the-one-correct-way-to-do-dependency-injection/comment-page-1/#comment-4765\r\n\r\nCheers,\r\nOllie"
 - id: 8790
   author: Jens Schauder
   author_email: jens@schauderhaft.de
@@ -575,10 +575,10 @@ comments:
   date: '2012-12-05 11:34:06 +0100'
   date_gmt: '2012-12-05 09:34:06 +0100'
   content: "Hi Sebastian,\n<ol>\n\t<li> at runtime you do have a cyclic dependency,
-    which is actually Ok\t<li>\n<&#47;li>\n<li>\n at compile time you don't have a
-    cyclic dependency if you use interfaces (see this article for more details: http:&#47;&#47;blog.schauderhaft.de&#47;2011&#47;07&#47;17&#47;breaking-dependency-cylces&#47;)\n\t<&#47;li><li>\n
+    which is actually Ok\t<li>\n</li>\n<li>\n at compile time you don't have a
+    cyclic dependency if you use interfaces (see this article for more details: http://blog.schauderhaft.de/2011/07/17/breaking-dependency-cylces/)\n\t</li><li>\n
     You can do that with CDI, Spring or simple Java code without a problem. You just
-    can't do it with constructor injection.\n\t<&#47;li>\n<ul>"
+    can't do it with constructor injection.\n\t</li>\n<ul>"
 - id: 8926
   author: Tim Schneider
   author_email: tim@mails.are-you-ready.de
@@ -609,7 +609,7 @@ comments:
   date: '2012-12-30 17:22:29 +0100'
   date_gmt: '2012-12-30 15:22:29 +0100'
   content: "After surviving the armageddon I want to reply to that again.\r\n\r\nThe
-    whole idea came from Adam Bien because of the pragmatism of field injection http:&#47;&#47;www.adam-bien.com&#47;roller&#47;abien&#47;entry&#47;inject_with_package_private_fields
+    whole idea came from Adam Bien because of the pragmatism of field injection http://www.adam-bien.com/roller/abien/entry/inject_with_package_private_fields
     . But as you can see I'm not sure about it and because of that I found your blog.
     \ Thing is that it is obviously less code to write but not at last I'm loosing
     some comfort when I write unit-tests as I can see all my dependencies at instantiation
@@ -658,22 +658,22 @@ comments:
   date: '2015-06-22 12:09:25 +0200'
   date_gmt: '2015-06-22 10:09:25 +0200'
   content: I definitely don&acirc;&euro;&trade;t claim that creator Dependency Injection
-    is something new. conjointly the insight&#47;opinion that one very ought to use
+    is something new. conjointly the insight/opinion that one very ought to use
     solely constructors for dependency injection isn&acirc;&euro;&trade;t new.
 ---
 <p>A couple of weeks ago a coworker told me that they have a little utility in their projects in order to set private fields for tests. He kind of claimed they needed that since they are using Spring, which in production sets the dependency. I was a little confused. But after looking into it I realized that there is an (anti)pattern going on that needs some fighting against. Lets have a look at the pattern.</p>
 <p>Spring (and other DI frameworks) can inject dependencies into private fields. It looks like people like to use this because it combines some compelling properties:</p>
 <ul>
-<li>Very little boilerplate code. All you need is a simple annotation on the field.<&#47;li>
-<li>Since the field is private nobody outside the class can change it.<&#47;li><br />
-<&#47;ul><br />
+<li>Very little boilerplate code. All you need is a simple annotation on the field.</li>
+<li>Since the field is private nobody outside the class can change it.</li><br />
+</ul><br />
 But now when you want to test your class and want to assign e.g. a mock to the field you have to either setup a Spring context in your tests or use reflection in order to access the field (just as Spring does).</p>
 <p>Now something is really starting to smell bad here. One of the purposes of Dependency Injection is to decouple code, which in turn should make the code easier to test. Now that didn't work out to well.</p>
 <p>So how can we clean up this mess? We can write a setter for the field. That solves the testing problem. It adds a little boiler plate code, but hey we are talking Java here, so you should be used to that. But now we have a setter which anybody can call at any time. At the very best that doesn't make any sense at all in the production environment. In the worst case somebody actually uses it and creates some ugly bug.</p>
-<p>So what do you do when you don't want anybody to change a field? Correct you make it final. Great, now you have a compile time error in the setter.You can only set a final field in a constructor. This leads naturally to the solution of all our problems (and possibly to world peace): <strong>Make your dependency a constructor argument!<&#47;strong></p>
+<p>So what do you do when you don't want anybody to change a field? Correct you make it final. Great, now you have a compile time error in the setter.You can only set a final field in a constructor. This leads naturally to the solution of all our problems (and possibly to world peace): <strong>Make your dependency a constructor argument!</strong></p>
 <p>This is the only place where dependencies really belong. If you try to stick to that rule I'd expect you'll encounter the following two problems.</p>
 <ol>
-<li>You'll find classes with lots and lots of constructor arguments. I'll bet that class does a lot of different things and really needs to get broken down into smaller pieces.<&#47;li>
-<li>You'll find cases where a class A needs an instance of B and B needs an instance of&Acirc;&nbsp; A. This is a typical case of a circular dependency and is obviously bad. In my experience the solution is either to make B a part of A when the two are so strongly dependent that they really should be one class. More often though there is at least one more class C hiding in there so that B doesn't need A but only C.<&#47;li><br />
-<&#47;ol><br />
+<li>You'll find classes with lots and lots of constructor arguments. I'll bet that class does a lot of different things and really needs to get broken down into smaller pieces.</li>
+<li>You'll find cases where a class A needs an instance of B and B needs an instance of&Acirc;&nbsp; A. This is a typical case of a circular dependency and is obviously bad. In my experience the solution is either to make B a part of A when the two are so strongly dependent that they really should be one class. More often though there is at least one more class C hiding in there so that B doesn't need A but only C.</li><br />
+</ol><br />
 So really the problems you'll find when doing constructor based dependency injection are problems that are present in your current code already. So don't shoot the messenger, but fix the problems in your code and go for constructor arguments for dependency injection.</p>

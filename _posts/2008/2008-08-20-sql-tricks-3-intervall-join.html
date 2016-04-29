@@ -24,9 +24,9 @@ comments: []
 ---
 <p>Fast jeder Datenbank Entwickler kennt Inner Joins, Outer Joins, Full Joins, Equi Joins, Self Joins und vermutlich die eine oder andere Variante mehr. Ich habe im vorigen Projekt noch eine gefunden, die ich bisher noch nicht kannte. Ich nenne sie Intervall Join oder Logistischer Join. Da jede Zeile als Intervall interpretiert wird und mir diese Art des Joins bei logistischen Problemen besonders n&Atilde;&frac14;tzlich erscheint.</p>
 <p>Prinzipiell geht es bei dem Join darum zwei Folgen von Intervallen so 'nebeneinander zu halten', dass die jeweils &Atilde;&frac14;berlappenden Teilintervalle der beiden Folgen als Ergebniss herauskommen. Ich werde das ganze an einem Beispiel erkl&Atilde;&curren;ren. Wie &Atilde;&frac14;blich bei mir ist alles im Zweifelsfall beliebig Oracle spezifisch.</p>
-<h2>Szenario<&#47;h2><br />
+<h2>Szenario</h2><br />
 Es gibt zwei Tabellen, die eine enth&Atilde;&curren;lt Nachschublieferungen von, die andere Bedarf an einem bestimmten Produkt:</p>
-<p><code><&#47;code></p>
+<p><code></code></p>
 <pre>
 drop table supply;</p>
 <p>drop table demand;create table supply (id number,datum date, menge number);</p>
@@ -41,75 +41,75 @@ drop table supply;</p>
 <p>insert into demand values  (203, sysdate +3, 12);</p>
 <p>insert into demand values  (204, sysdate +4, 20);</p>
 <p>insert into demand values  (205, sysdate +5, 23);</p>
-<p>insert into demand values  (206, sysdate +6, 11);<&#47;pre><br />
+<p>insert into demand values  (206, sysdate +6, 11);</pre><br />
 <code><br />
-Im Klartext: heute werden 10 Einheiten erwartet, morgen 30 und &Atilde;&frac14;bermorgen 5. Entsprechen werden heute 3 Einheiten ben&Atilde;&para;tigt, morgen 15 und &Atilde;&frac14;bermorgen 12.<&#47;code></p>
-<h2>Fragestellung<&#47;h2><br />
+Im Klartext: heute werden 10 Einheiten erwartet, morgen 30 und &Atilde;&frac14;bermorgen 5. Entsprechen werden heute 3 Einheiten ben&Atilde;&para;tigt, morgen 15 und &Atilde;&frac14;bermorgen 12.</code></p>
+<h2>Fragestellung</h2><br />
 Ich m&Atilde;&para;chte nun wissen, welcher Bedarf durch welche Nachschublieferungen versorgt wird. Dies kann interessant sein, da Nachschub der erst noch erwartet wird mit einer gewissen Unsicherheit versehen ist, w&Atilde;&curren;hrend Nachschub in der Vergangenheit schon da und damit sicher ist. Auch k&Atilde;&para;nnte es ja sein, dass der Nachschub, der einen Bedarf versorgt erst nach dem Bedarf eintrifft, was dann wohl auf ein Problem hindeutet. Wenn ich derjenige bin, der den p&Atilde;&frac14;nktlichen Nachschub zu gew&Atilde;&curren;hrleisten hat, sind derartige Fragestellungen sehr interessant.Die folgende Tabelle skizziert den Zusammenhang zwischen den Supply und Demand Datens&Atilde;&curren;tzen (die Zeit verl&Atilde;&curren;uft von unten nach Oben).</p>
 <table border="1">
 <tr>
-<td>Supply<&#47;td></p>
-<td>Demand<&#47;td></p>
-<td>Versorgung<&#47;td><br />
-<&#47;tr></p>
+<td>Supply</td></p>
+<td>Demand</td></p>
+<td>Versorgung</td><br />
+</tr></p>
 <tr>
-<td rowspan="2"><&#47;td></p>
-<td>206, 11<&#47;td></p>
-<td>(*,206), 11<&#47;td><br />
-<&#47;tr></p>
+<td rowspan="2"></td></p>
+<td>206, 11</td></p>
+<td>(*,206), 11</td><br />
+</tr></p>
 <tr>
-<td rowspan="2">205, 23<&#47;td></p>
-<td>(*, 205), 5<&#47;td><br />
-<&#47;tr></p>
+<td rowspan="2">205, 23</td></p>
+<td>(*, 205), 5</td><br />
+</tr></p>
 <tr>
-<td rowspan="2">105, 20<&#47;td></p>
-<td>(105, 205), 18<&#47;td><br />
-<&#47;tr></p>
+<td rowspan="2">105, 20</td></p>
+<td>(105, 205), 18</td><br />
+</tr></p>
 <tr>
-<td rowspan="4">204, 20<&#47;td></p>
-<td>(105, 204), 2<&#47;td><br />
-<&#47;tr></p>
+<td rowspan="4">204, 20</td></p>
+<td>(105, 204), 2</td><br />
+</tr></p>
 <tr>
-<td>104, 3<&#47;td></p>
-<td>(104, 204), 3<&#47;td><br />
-<&#47;tr></p>
+<td>104, 3</td></p>
+<td>(104, 204), 3</td><br />
+</tr></p>
 <tr>
-<td>103, 5<&#47;td></p>
-<td>(103, 204), 5<&#47;td><br />
-<&#47;tr></p>
+<td>103, 5</td></p>
+<td>(103, 204), 5</td><br />
+</tr></p>
 <tr>
-<td rowspan="3">102, 30<&#47;td></p>
-<td>(102, 204), 10<&#47;td><br />
-<&#47;tr></p>
+<td rowspan="3">102, 30</td></p>
+<td>(102, 204), 10</td><br />
+</tr></p>
 <tr>
-<td>203, 12<&#47;td></p>
-<td>(102, 203), 12<&#47;td><br />
-<&#47;tr></p>
+<td>203, 12</td></p>
+<td>(102, 203), 12</td><br />
+</tr></p>
 <tr>
-<td rowspan="2">202, 15<&#47;td></p>
-<td>(102, 202), 8<&#47;td><br />
-<&#47;tr></p>
+<td rowspan="2">202, 15</td></p>
+<td>(102, 202), 8</td><br />
+</tr></p>
 <tr>
-<td rowspan="2">101, 10<&#47;td></p>
-<td>(101, 202), 7<&#47;td><br />
-<&#47;tr></p>
+<td rowspan="2">101, 10</td></p>
+<td>(101, 202), 7</td><br />
+</tr></p>
 <tr>
-<td>201, 3<&#47;td></p>
-<td>(101, 201 ), 3<&#47;td><br />
-<&#47;tr><br />
-<&#47;table><br />
+<td>201, 3</td></p>
+<td>(101, 201 ), 3</td><br />
+</tr><br />
+</table><br />
 In der ersten Spalte ist jeweils die ID und die Menge des Nachschubs angegeben, entsprechend in der zweiten Spalte ID und Menge des Bedarfs. In der dritten Spalte sind die Nachschub- und Bedarfsdatens&Atilde;&curren;tze einander zugeordnet. Man erkennt zum Beispiel, dass der Bedarf 202 aus einer Restmenge (7)&Acirc;&nbsp; von Nachschub 101 und einer Teilmenge (8) von 102 gedeckt wird. Wichtig ist, das die Zeitpunkt der Lieferung, beziehungweise des Bedarfs f&Atilde;&frac14;r die Zuordnung keine Rolle spielt, aber mann k&Atilde;&para;nnte nun in den Versorgungsdatens&Atilde;&curren;tzen pr&Atilde;&frac14;fen, bei welchen Datens&Atilde;&curren;tzen das Datum der Lieferung nach dem des Bedarfes liegt und somit Probleme erkennen.</p>
-<h2>L&Atilde;&para;sung<&#47;h2><br />
-Urspr&Atilde;&frac14;nglich wurde das Problem durch PL&#47;SQL Code gel&Atilde;&para;st. Das hatte die folgenden Nachteile:</p>
+<h2>L&Atilde;&para;sung</h2><br />
+Urspr&Atilde;&frac14;nglich wurde das Problem durch PL/SQL Code gel&Atilde;&para;st. Das hatte die folgenden Nachteile:</p>
 <ul>
-<li>Es war nur schwer zu lesen<&#47;li>
-<li>Es war lang<&#47;li>
-<li>Es war langsam<&#47;li>
-<li>Es war fehleranf&Atilde;&curren;llig beim &Atilde;&bdquo;nderungen<&#47;li>
-<li>Es wurden auch nach l&Atilde;&curren;ngerer Laufzeit immer wieder Fehler gefunden<&#47;li><br />
-<&#47;ul><br />
+<li>Es war nur schwer zu lesen</li>
+<li>Es war lang</li>
+<li>Es war langsam</li>
+<li>Es war fehleranf&Atilde;&curren;llig beim &Atilde;&bdquo;nderungen</li>
+<li>Es wurden auch nach l&Atilde;&curren;ngerer Laufzeit immer wieder Fehler gefunden</li><br />
+</ul><br />
 An dieser Stelle setzte mein 'Das muss doch auch anders gehen' Ehrgeiz ein und ich entwickelte die folgende L&Atilde;&para;sung:</p>
-<p><code><&#47;code></p>
+<p><code></code></p>
 <pre>
 SELECT s.id, s.datum, s.menge, d.id, d.datum, d.menge,<br />
 -- s.werk,<br />
@@ -129,8 +129,8 @@ FROM demand<br />
 ) d<br />
 WHERE s.sum_cum - s.menge < d.sum_cum<br />
 AND s.sum_cum > d.sum_cum - d.menge<br />
--- AND s.werk = d.werk<&#47;pre><br />
-Im Vergleich zum urspr&Atilde;&frac14;nglichen PL&#47;SQL Code ist dies:</p>
+-- AND s.werk = d.werk</pre><br />
+Im Vergleich zum urspr&Atilde;&frac14;nglichen PL/SQL Code ist dies:</p>
 <p>* &Atilde;&curren;hnlich schwer zu lesen<br />
 * kurz<br />
 * recht schnell<br />
@@ -139,7 +139,7 @@ Im Vergleich zum urspr&Atilde;&frac14;nglichen PL&#47;SQL Code ist dies:</p>
 * Wenn das Statement einmal lief lieferte es zuverl&Atilde;&curren;ssig auch in allen Sonderf&Atilde;&curren;llen die richtige L&Atilde;&para;sung</p>
 <p>Typischer Weise muss man nicht nur eine Art Produkt versorgen, sondern viele verschiedene in unterschiedlichen Werken, dies ist im Beispiel durch  die auskommentierten Code Zeilen skizziert. Wie man sieht kann man auch dies einfach bewerkstelleigen.</p>
 <p>Im dem SQL Konstrukt werden zun&Atilde;&curren;chst laufende Summen gebildet (sum_com) die jeweiligen Intervalle, die in der obigen Tabelle dargestellt sind, gehen jeweils von sum_cum-menge bis sum_cum. Von allen Intervallen Paaren, werden dann diejenigen ausgew&Atilde;&curren;hlt, die eine nicht leere Schnittmenge haben. Dies geschieht in der Where Klausel. Schlie&Atilde;&Yuml;lich verbleibt es das Schnittmengenintervall zu bestimmen, dies ist die Differenz in der Spaltenliste. Wenn man sich an die eklige Syntax von Analytischen Funktionen gew&Atilde;&para;hnt hat alles gar nicht mehr so schwer.</p>
-<p>Was die Performance angeht war das Ergebnis auch mit erheblichen Datenmengen sehr befriedigend. Oracle greift auf die beiden Tabellen nur einmal zu und erledigt den Rest im Hauptspeicher. Eventuell ist eine performantere PL&#47;SQL Implementation denkbar, da Oracle kaum erkennen wird, dass sich bei diesem Join ein Merge Join eignen k&Atilde;&para;nnte, den man jedoch manuell implementieren k&Atilde;&para;nnte, aber ich bezweifel, dass es viele Scenarien gibt, in denen sich der erh&Atilde;&para;hte Entwicklungsaufwand lohnt.</p>
+<p>Was die Performance angeht war das Ergebnis auch mit erheblichen Datenmengen sehr befriedigend. Oracle greift auf die beiden Tabellen nur einmal zu und erledigt den Rest im Hauptspeicher. Eventuell ist eine performantere PL/SQL Implementation denkbar, da Oracle kaum erkennen wird, dass sich bei diesem Join ein Merge Join eignen k&Atilde;&para;nnte, den man jedoch manuell implementieren k&Atilde;&para;nnte, aber ich bezweifel, dass es viele Scenarien gibt, in denen sich der erh&Atilde;&para;hte Entwicklungsaufwand lohnt.</p>
 <p>Wie man am Titel erkennt ist dieser Artikel ein Teil einer losen Serie. Die anderen Teile findet ihr hier:</p>
-<p><a href="&#47;2007&#47;11&#47;30&#47;sql-tricks-1-die-unendliche-tabelle&#47;">Die unendliche Tabelle<&#47;a></p>
-<p><a href="&#47;2007&#47;12&#47;26&#47;sql-tricks-2-verwendungen-eines-indexes-bei-like-abfragen&#47;">Verwendungen eines Indexes bei LIKE Abfragen<&#47;a></p>
+<p><a href="/2007/11/30/sql-tricks-1-die-unendliche-tabelle/">Die unendliche Tabelle</a></p>
+<p><a href="/2007/12/26/sql-tricks-2-verwendungen-eines-indexes-bei-like-abfragen/">Verwendungen eines Indexes bei LIKE Abfragen</a></p>

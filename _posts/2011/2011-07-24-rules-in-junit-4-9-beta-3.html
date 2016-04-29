@@ -67,8 +67,8 @@ comments:
     rules? There is a TestWatcher thingie that should be used as " base class for
     Rules that take note of the testing action, without modifying it".
 ---
-<p>Some time ago <a href="http:&#47;&#47;david.saff.net&#47;">David Saff<&#47;a> <a href="http:&#47;&#47;saffgreenbar.blogspot.com&#47;2011&#47;07&#47;junit-49b3-beta-released.html">announced a beta release of JUnit 4.9<&#47;a>. So I guess it is a good point in time to look into <a href="https:&#47;&#47;github.com&#47;KentBeck&#47;junit&#47;blob&#47;master&#47;doc&#47;ReleaseNotes4.9.txt">what is new in this version<&#47;a>.</p>
-<p>One of the most useful innovations in the JUnit realm have been Rules. <a href="&#47;2009&#47;10&#47;04&#47;junit-rules&#47;">I wrote about Rules here<&#47;a>. And I wrote about <a href="&#47;2010&#47;08&#47;15&#47;use-cases-for-junit-rules&#47;">use cases for JUnit Rules here<&#47;a>. Rules are great. And with JUnit 4.9 they get even better.</p>
+<p>Some time ago <a href="http://david.saff.net/">David Saff</a> <a href="http://saffgreenbar.blogspot.com/2011/07/junit-49b3-beta-released.html">announced a beta release of JUnit 4.9</a>. So I guess it is a good point in time to look into <a href="https://github.com/KentBeck/junit/blob/master/doc/ReleaseNotes4.9.txt">what is new in this version</a>.</p>
+<p>One of the most useful innovations in the JUnit realm have been Rules. <a href="/2009/10/04/junit-rules/">I wrote about Rules here</a>. And I wrote about <a href="/2010/08/15/use-cases-for-junit-rules/">use cases for JUnit Rules here</a>. Rules are great. And with JUnit 4.9 they get even better.</p>
 <p>You can think of Rules as a way to encapsulate setup and teardown of a test in one class instead of two methods. But Rules are also a way to modify the way to execute your tests. You can run tests a dozen time instead of once. Or in twenty different threads. Interestingly there were only Rules for single tests. So if you want to stick with the comparison with setup and teardown, aka @Before and @After there wasn't a @BeforeClass and @AfterClass equivalent in Rules.</p>
 <p>Now that has changed. You can now annotate a public static field of type TestRule with the @ClassRule and it will behave just like a Rule that is defined for a whole test class instead of a single test. So it is perfect for the stuff that needs setup once for all the tests instead of for each tests. Lets look at an example.</p>
 <p>The implementation of a Rule might look like this:</p>
@@ -97,10 +97,10 @@ import org.junit.runners.model.Statement;</p>
 		System.out.println("apply: " + name);</p>
 <p>		return new LoggingStatement(statement, name);<br />
 	}</p>
-<p>}<&#47;pre><br />
-Most implementations will consist of two parts: An implementation of the <tt>TestRule<&#47;tt> interface and an implementation of the <tt>Statement<&#47;tt> interface.</p>
-<p><tt>TestRule<&#47;tt> replaces the now deprecated <tt>MethodRule<&#47;tt> interface which was used before. This is because the new interface supports both Rules on class level and on method level, so it had to change a little. <tt>TestRule<&#47;tt> has a single method <tt>apply<&#47;tt> which takes a <tt>Statement<&#47;tt> and returns a <tt>Statement<&#47;tt>. This method gets called before any test in the scope of the Rule gets executed. The <tt>Statement<&#47;tt> passed in actually are the tests that might get executed. Two things to note here: The <tt>Statement<&#47;tt> might and will represent multiple tests, if your Rule gets used with a @ClassRule annotation; And the call to apply doesn't mean the <tt>Statement<&#47;tt> will actually get executed. Since whatever your Rule returns might get passed to other Rules, the Statements might got mangled in various ways before the contained tests get actually executed. The typical thing todo in the <tt>apply<&#47;tt> method is to wrap the <tt>Statement<&#47;tt> in a new <tt>Statement<&#47;tt> which will perform what ever logic is needed for your purpose.</p>
-<p>The <tt>Statement<&#47;tt> interface has a single method <tt>evaluate<&#47;tt> which should execute a test or a bunch of tests in the normal case. So if you go with the typical approach mentioned above you do some setup call <tt>evaluate<&#47;tt> of the contained <tt>Statement<&#47;tt> and do some tear down. In the example provided above I print stuff on the console so one can see in which order stuff gets called. The <tt>Statement<&#47;tt> also gets passed a <tt>Description<&#47;tt> which contains useful meta information about the test(s). It contains the name, the class in which the test is defined, the method name and makes annotations available. So your Rule&#47;Statement can fine tune its behavior based on the test method on which it operates.</p>
+<p>}</pre><br />
+Most implementations will consist of two parts: An implementation of the <tt>TestRule</tt> interface and an implementation of the <tt>Statement</tt> interface.</p>
+<p><tt>TestRule</tt> replaces the now deprecated <tt>MethodRule</tt> interface which was used before. This is because the new interface supports both Rules on class level and on method level, so it had to change a little. <tt>TestRule</tt> has a single method <tt>apply</tt> which takes a <tt>Statement</tt> and returns a <tt>Statement</tt>. This method gets called before any test in the scope of the Rule gets executed. The <tt>Statement</tt> passed in actually are the tests that might get executed. Two things to note here: The <tt>Statement</tt> might and will represent multiple tests, if your Rule gets used with a @ClassRule annotation; And the call to apply doesn't mean the <tt>Statement</tt> will actually get executed. Since whatever your Rule returns might get passed to other Rules, the Statements might got mangled in various ways before the contained tests get actually executed. The typical thing todo in the <tt>apply</tt> method is to wrap the <tt>Statement</tt> in a new <tt>Statement</tt> which will perform what ever logic is needed for your purpose.</p>
+<p>The <tt>Statement</tt> interface has a single method <tt>evaluate</tt> which should execute a test or a bunch of tests in the normal case. So if you go with the typical approach mentioned above you do some setup call <tt>evaluate</tt> of the contained <tt>Statement</tt> and do some tear down. In the example provided above I print stuff on the console so one can see in which order stuff gets called. The <tt>Statement</tt> also gets passed a <tt>Description</tt> which contains useful meta information about the test(s). It contains the name, the class in which the test is defined, the method name and makes annotations available. So your Rule/Statement can fine tune its behavior based on the test method on which it operates.</p>
 <p>A test class using this Rule might look like this:</p>
 <pre lang="java">import org.junit.ClassRule;<br />
 import org.junit.Rule;<br />
@@ -120,8 +120,8 @@ import org.junit.Test;</p>
 		System.out.println("In TestSomethingElse");<br />
 		assertTrue(true);<br />
 	}<br />
-}<&#47;pre><br />
-The only change to JUnit4.8 Rules is the presence of the <tt>@ClassRule<&#47;tt> annotation. Note that the same class is used with <tt>@ClassRule<&#47;tt> and <tt>@Rule<&#47;tt> annotation.</p>
+}</pre><br />
+The only change to JUnit4.8 Rules is the presence of the <tt>@ClassRule</tt> annotation. Note that the same class is used with <tt>@ClassRule</tt> and <tt>@Rule</tt> annotation.</p>
 <p>When executed the output of the test class looks like this:</p>
 <pre>
 apply: classrule<br />
@@ -135,6 +135,6 @@ before: rule<br />
 In TestSomethingElse<br />
 after: rule<br />
 after: classrule<br />
-<&#47;pre><br />
-As you can see first the class level Rule gets applied and the resulting <tt>Statement<&#47;tt> evaluated. Only as part of the evaluation does the method level Rule applied and the resulting <tt>Statement<&#47;tt> evaluated, once for each test.</p>
+</pre><br />
+As you can see first the class level Rule gets applied and the resulting <tt>Statement</tt> evaluated. Only as part of the evaluation does the method level Rule applied and the resulting <tt>Statement</tt> evaluated, once for each test.</p>
 <p>One word of caution: Be careful to use the correct modifiers with your Rules. They must be public and class level Rules must be static. Depending on what you do wrong (and in what environment you are working in) the resulting errors might not be exactly helpful. This is considered a bug and fixes are in the making.</p>

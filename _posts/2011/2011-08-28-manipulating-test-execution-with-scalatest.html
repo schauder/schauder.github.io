@@ -31,7 +31,7 @@ comments:
   author_url: ''
   date: '2011-08-30 11:31:29 +0200'
   date_gmt: '2011-08-30 09:31:29 +0200'
-  content: "Hi Jens,\r\n\r\nhttp:&#47;&#47;blog.schauderhaft.de doesn't link to your
+  content: "Hi Jens,\r\n\r\nhttp://blog.schauderhaft.de doesn't link to your
     current article, but on \"Input Validation with Scala and Swing\"\r\n\r\nI wondered,
     if you were on vacation for the last 2 month ... :)"
 - id: 4143
@@ -83,7 +83,7 @@ comments:
   date: '2011-09-05 10:09:09 +0200'
   date_gmt: '2011-09-05 08:09:09 +0200'
   content: Our proxy now returns the correct page, seems that loading one of the newer
-    pages invalidated the old one :&#47;
+    pages invalidated the old one :/
 - id: 4199
   author: Jens Schauder
   author_email: jens@schauderhaft.de
@@ -101,10 +101,10 @@ comments:
   content: "[&#8230;] you aren&#8217;t sure, what I&#8217;m talking about, check out
     this article about ScalaTest. Something like this should be the standard for [&#8230;]"
 ---
-<p>My favorite feature in the <a href="&#47;2011&#47;07&#47;24&#47;rules-in-junit-4-9-beta-3&#47;">JUnit are Rules<&#47;a>. With Rules you can manipulate the execution of your test, by wrapping your own code around the test execution. I have used this for setting up <a href="&#47;2011&#47;03&#47;13&#47;testing-databases-with-junit-and-hibernate-part-1-one-to-rule-them&#47;">databases for test<&#47;a>, making sure they <a href="&#47;2010&#47;08&#47;15&#47;use-cases-for-junit-rules&#47;">execute in the EDT<&#47;a>, limiting legal test execution time and for set up and tear down of various other resources.</p>
-<p>So naturally when working with <a href="&#47;2010&#47;12&#47;26&#47;testing-with-scala&#47;">ScalaTest<&#47;a> I pretty soon wanted to have something equivalent to Rules. While you find not much when searching for 'Rules ScalaTest', it is actually quite easy to implement.</p>
-<p>No matter what kind of tests you write with ScalaTest, at the end of the day the method <tt>def withFixture(aTest : NoArgTest)<&#47;tt> will get called with your test to execute. 'Your test' means in case of a FunSuite test the stuff between the curly braces that you pass to the <tt>test<&#47;tt> method.</p>
-<p>The implementation of <tt>withFixture<&#47;tt> will finally execute your test. So all you have to do in order to get the equivalent of a JUnit Rule is to override <tt>withFixture<&#47;tt>. Lets give it a try:</p>
+<p>My favorite feature in the <a href="/2011/07/24/rules-in-junit-4-9-beta-3/">JUnit are Rules</a>. With Rules you can manipulate the execution of your test, by wrapping your own code around the test execution. I have used this for setting up <a href="/2011/03/13/testing-databases-with-junit-and-hibernate-part-1-one-to-rule-them/">databases for test</a>, making sure they <a href="/2010/08/15/use-cases-for-junit-rules/">execute in the EDT</a>, limiting legal test execution time and for set up and tear down of various other resources.</p>
+<p>So naturally when working with <a href="/2010/12/26/testing-with-scala/">ScalaTest</a> I pretty soon wanted to have something equivalent to Rules. While you find not much when searching for 'Rules ScalaTest', it is actually quite easy to implement.</p>
+<p>No matter what kind of tests you write with ScalaTest, at the end of the day the method <tt>def withFixture(aTest : NoArgTest)</tt> will get called with your test to execute. 'Your test' means in case of a FunSuite test the stuff between the curly braces that you pass to the <tt>test</tt> method.</p>
+<p>The implementation of <tt>withFixture</tt> will finally execute your test. So all you have to do in order to get the equivalent of a JUnit Rule is to override <tt>withFixture</tt>. Lets give it a try:</p>
 <pre lang="scala">
 class ExampleTest extends FunSuite {</p>
 <p>    override def withFixture(test : NoArgTest){<br />
@@ -121,7 +121,7 @@ class ExampleTest extends FunSuite {</p>
         fail("embrace failure")<br />
     }<br />
 }<br />
-<&#47;pre></p>
+</pre></p>
 <p>This produces the following output on the console:</p>
 <pre>
 <p>before<br />
@@ -129,9 +129,9 @@ succeding test<br />
 after</p>
 <p>before<br />
 failing test<br />
-<&#47;pre></p>
-<p>As you can see, if you want to do stuff after the test, you better put it in a <tt>finally<&#47;tt> block, so it gets executed no matter if the test fails or not.</p>
-<p>While this works, we don't want to explicitly override <tt>withFixture<&#47;tt> every time we need our 'rule'. The solution to this is to extract it into a trait:</p>
+</pre></p>
+<p>As you can see, if you want to do stuff after the test, you better put it in a <tt>finally</tt> block, so it gets executed no matter if the test fails or not.</p>
+<p>While this works, we don't want to explicitly override <tt>withFixture</tt> every time we need our 'rule'. The solution to this is to extract it into a trait:</p>
 <pre lang="scala">
 trait ExampleRule extends AbstractSuite {<br />
     self : Suite =><br />
@@ -154,8 +154,8 @@ trait ExampleRule extends AbstractSuite {<br />
         fail("embrace failure")<br />
     }<br />
 }<br />
-<&#47;pre></p>
-<p>The trait extends AbstractSuite, which makes <tt>withFixture<&#47;tt> available. It has a selftype of Suite, in order to ensure it gets only mixed into test suites.</p>
+</pre></p>
+<p>The trait extends AbstractSuite, which makes <tt>withFixture</tt> available. It has a selftype of Suite, in order to ensure it gets only mixed into test suites.</p>
 <p>So how does this solution compare to the implementation of a JUnit Rule? With a Junit Rule we have to create the actual Rule plus a Statement instance. With ScalaTest we only extend a single trait. Also since all this is standard Scala inheritance an no reflection involved, so it is pretty strait forward to find out how this works. While how and why a Rule gets executed is kind of tricky from the source alone. Finally you can explicitly control the order in which your traits apply, by controlling the order in which you put them in the extends clause:</p>
 <pre lang="scala">
 trait Example3Rule extends AbstractSuite {<br />
@@ -179,7 +179,7 @@ class Example3Test extends FunSuite  with Example3Rule with ExampleRule{<br />
         fail("embrace failure")<br />
     }<br />
 }<br />
-<&#47;pre></p>
+</pre></p>
 <pre>
 before<br />
 3 before<br />
@@ -191,5 +191,5 @@ after</p>
 failing test<br />
 3 after<br />
 after<br />
-<&#47;pre></p>
-<p>With Junit Rules there is currently no ready to use way to do this, but a feature to achieve this <a href="https:&#47;&#47;github.com&#47;stefanbirkner&#47;junit&#47;commit&#47;3584c44bedd8705f30dda4f4213fa45655b998c7">is in development<&#47;a>.</p>
+</pre></p>
+<p>With Junit Rules there is currently no ready to use way to do this, but a feature to achieve this <a href="https://github.com/stefanbirkner/junit/commit/3584c44bedd8705f30dda4f4213fa45655b998c7">is in development</a>.</p>

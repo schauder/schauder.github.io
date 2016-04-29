@@ -51,14 +51,14 @@ comments:
   content: "@Tomek No, Liquibase is fine AFAIK. From their home page:\r\n\r\n\"All
     database changes are stored in a human readable yet trackable form and checked
     into source control.\"\r\n\r\nThis is really important. There are modeling tools
-    that have their own repository&#47;database as part of the application. The effect
+    that have their own repository/database as part of the application. The effect
     is that you can't use the myriads of tools we have for text based files, like
     diff, version control, editors and so on.\r\n\r\nImagine a situation where your
     for example java code is checked into subversion. Now there is no problem to obtain
     a consistent revision of that code. If your database model is stored as sql, xml
     or similar in the same subversion repository, you can get a consistent copy of
     both parts.\r\n\r\nNow imagine data model is stored in a modeling tool instead.
-    You have no link to your svn model. you can't branch&#47;tag properly. Even if
+    You have no link to your svn model. you can't branch/tag properly. Even if
     you just take the complete repository of the modeling tool and put it in svn you
     still have\r\na) a manual process, bound to fail in many instances\r\nb) no reasonable
     way of doing a meaningful diff between two versions\r\nc) a big challange when
@@ -70,7 +70,7 @@ comments:
   author_url: http://alexsotob.blogspot.com
   date: '2012-01-17 10:51:28 +0100'
   date_gmt: '2012-01-17 08:51:28 +0100'
-  content: 'Flyway can help you too. I wrote some time ago in my blog: http:&#47;&#47;alexsotob.blogspot.com&#47;2011&#47;12&#47;far-away-long-ago-glowing-dim-as-ember.html'
+  content: 'Flyway can help you too. I wrote some time ago in my blog: http://alexsotob.blogspot.com/2011/12/far-away-long-ago-glowing-dim-as-ember.html'
 - id: 4824
   author: Brent Tilley
   author_email: brent.tilley@gmail.com
@@ -101,7 +101,7 @@ comments:
     but need to be performed on huge amounts of data are impractical in a non-SQL
     language. In which case you have two options: you delimit the long-running operations
     very clearly, implement them in SQL and wrap them neatly into functions in your
-    Java&#47;C#&#47;whatever code, or, if most of your business logic lends itself
+    Java/C#/whatever code, or, if most of your business logic lends itself
     to such an implementation, you make your non-SQL application a thin wrapper around
     the SQL application. Either way, you still don't need to give up maintaining your
     application's source in a source control system, and can still apply mostly all
@@ -118,7 +118,7 @@ comments:
     becomes part of a deployment should if at all possible reside in you version control
     system, be text based and the process to create the final artifact should be completely
     scriptable. \r\n\r\nAs far as languages are concerned: I agree there are jobs
-    that should be done using PL&#47;SQL or T-SQL or whatever your RDBMSs equivalent
+    that should be done using PL/SQL or T-SQL or whatever your RDBMSs equivalent
     is. But for the majority of application logic the lack of proper tool support
     is just to cumbersome."
 - id: 4832
@@ -173,7 +173,7 @@ comments:
   date: '2012-01-19 16:28:29 +0100'
   date_gmt: '2012-01-19 14:28:29 +0100'
   content: "Hi\r\n\r\nDid you know that you can this all aotomatically (without the
-    manual scripts) using SQL Source Control - http:&#47;&#47;www.red-gate.com&#47;products&#47;sql-development&#47;sql-source-control&#47;\r\n\r\nFree
+    manual scripts) using SQL Source Control - http://www.red-gate.com/products/sql-development/sql-source-control/\r\n\r\nFree
     28-day trial if anyone is interested in taking a look."
 - id: 4868
   author: PAYcast 37 &raquo; PAYcast
@@ -202,11 +202,11 @@ comments:
   author_url: ''
   date: '2012-01-25 12:06:21 +0100'
   date_gmt: '2012-01-25 10:06:21 +0100'
-  content: I have found <a href="http:&#47;&#47;www.liquibase.org&#47;" rel="nofollow">Liquibase<&#47;a>
+  content: I have found <a href="http://www.liquibase.org/" rel="nofollow">Liquibase</a>
     to be an invaluable tool for managing database scripts. It maintains a table which
-    tracks which scripts have&#47;haven't been applied to avoid applying a script
+    tracks which scripts have/haven't been applied to avoid applying a script
     twice. If a script has changed, liquibase can tell by checking a hashsum. If a
-    script has changed it will either fail if a rollback is not possible or rollback&#47;reapply
+    script has changed it will either fail if a rollback is not possible or rollback/reapply
     when a rollback script is provided.
 - id: 4930
   author: Yuliya
@@ -230,7 +230,7 @@ comments:
     coverage and so on\". But it's not my opinion that matters in the real world.
     When I had to deal with hundreds of database requests per second, that could not
     be cached in anyway and required direct communication with the data, the build-in
-    language wins hands down over proper languages (PL&#47;SQL in Oracle). Yes, it's
+    language wins hands down over proper languages (PL/SQL in Oracle). Yes, it's
     far from perfect, but it does its job better. Some modules of the application
     are working better with the proper languages, but when it comes to the data, the
     built-in language has no competitors."
@@ -246,7 +246,7 @@ comments:
     build your database in a CI (continuous integration) environment. If it does not
     build, someone has to change the insert scripts.\r\n\r\nFor this to work, you
     must go one step further than Jens's first item: \"Give every developer her own
-    database.\" This must be \"Give every developer <b>the means to create<&#47;b>
+    database.\" This must be \"Give every developer <b>the means to create</b>
     her own database.\"\r\n\r\nBy this, people changing the database schema and writing
     tests can work in an agile way.\r\n\r\nOf course, there's more to all this: You
     need to keep your schema trackable - so for each and every SQL statement, you
@@ -265,7 +265,7 @@ comments:
   date: '2012-01-30 14:05:57 +0100'
   date_gmt: '2012-01-30 12:05:57 +0100'
   content: "@Harald I agree\r\n\r\n@Yulya I choose the word 'favor' for a reason.
-    There are reasons where PL&#47;SQL or similar languages are the correct choice.
+    There are reasons where PL/SQL or similar languages are the correct choice.
     Very large databases certainly might qualify.\r\n\r\nI don't agree with the approach
     to production data. Yes you need a database with production data (or comparably
     data) for testing performance and such. But that doesn't mean every developer
@@ -393,7 +393,7 @@ comments:
   author_url: http://blog.schauderhaft.de
   date: '2013-02-02 15:41:02 +0100'
   date_gmt: '2013-02-02 13:41:02 +0100'
-  content: Have a look at http:&#47;&#47;tech.dir.groups.yahoo.com&#47;group&#47;agileDatabases&#47;
+  content: Have a look at http://tech.dir.groups.yahoo.com/group/agileDatabases/
 - id: 10953
   author: applicius
   author_email: website@applicius.fr
@@ -401,7 +401,7 @@ comments:
   date: '2014-03-10 11:19:46 +0100'
   date_gmt: '2014-03-10 09:19:46 +0100'
   content: As for testing we suggest to have a look to Java (and Scala) frameworks
-    at http:&#47;&#47;acolyte.eu.org&#47; . Allow to write isolated unit test for
+    at http://acolyte.eu.org/ . Allow to write isolated unit test for
     persistence code.
 - id: 338514
   author: Alex
@@ -417,39 +417,39 @@ comments:
 <p>But everything seems to change when it comes to databases. A lot of stuff in and around databases goes untested. Heck some of the scripts don't even live in version control. If you can't believe that, because you haven't seen it, you are a damn lucky bastard.</p>
 <p>At least one reason for this state of affairs is obviously: It hurts. Database tests tend to be slow, interdependent and hard to maintain. Granted. But you know what: If it hurts, you should do it more often. It will teach you what exactly the things are that cause pain when testing and eventually you'll find approaches to make it less painful. Here are some ideas I found helpful when testing database related code:</p>
 <ul>
-<li>Give every developer her own database. This forces you to find a way to set up the database fast, easy and reliable. If your application lives in a single user&#47;schema&#47;namespace it is sufficient for each developer to have his own user&#47;schema&#47;namespace in a single database. For this to work though ...<&#47;li>
-<li>... the application should be user&#47;schema&#47;namespace agnostic. It makes it much easier to create multiple instances one a single server.<&#47;li>
-<li>Let the application live in a single user&#47;schema&#47;namespace. If you have multiple interdependent namespaces (e.g. for modules) you'll have a hard time making them agnostic of the names.<&#47;li>
-<li>&Acirc;&nbsp;Have separate instances for CI, Demos, QA and so on. Actually ideally it should be trivial to create a fresh instance.<&#47;li>
-<li>Stay away from any tool that comes with its own repository. If have seen about a dozen of such tools and although some looked promising in the beginning, they all completely failed to integrate with other tools on the development side of things. Examples of such tools are tools for code generation from <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Unified_Modeling_Language">UML<&#47;a> or <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Entity-relationship_model">ER<&#47;a> models and <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Extract,_transform,_load">ETL<&#47;a> tools.<&#47;li><br />
-<&#47;ul><br />
+<li>Give every developer her own database. This forces you to find a way to set up the database fast, easy and reliable. If your application lives in a single user/schema/namespace it is sufficient for each developer to have his own user/schema/namespace in a single database. For this to work though ...</li>
+<li>... the application should be user/schema/namespace agnostic. It makes it much easier to create multiple instances one a single server.</li>
+<li>Let the application live in a single user/schema/namespace. If you have multiple interdependent namespaces (e.g. for modules) you'll have a hard time making them agnostic of the names.</li>
+<li>&Acirc;&nbsp;Have separate instances for CI, Demos, QA and so on. Actually ideally it should be trivial to create a fresh instance.</li>
+<li>Stay away from any tool that comes with its own repository. If have seen about a dozen of such tools and although some looked promising in the beginning, they all completely failed to integrate with other tools on the development side of things. Examples of such tools are tools for code generation from <a href="http://en.wikipedia.org/wiki/Unified_Modeling_Language">UML</a> or <a href="http://en.wikipedia.org/wiki/Entity-relationship_model">ER</a> models and <a href="http://en.wikipedia.org/wiki/Extract,_transform,_load">ETL</a> tools.</li><br />
+</ul><br />
 The previous points where about the setup of your database and infrastructure. Lets have a look at the code:</p>
 <ul>
-<li>&Acirc;&nbsp;Favor a proper Language (like Java, C, PHP ...) over database specific languages like T-SQL or PL&#47;SQL. If you are wondering why, make a comparison between your favorite DB language and your all purpose language. For which do you get the better IDE, Unit testing support, code analysis, code coverage and so on. Reconsider your main language if it doesn't win in that comparison.<&#47;li>
-<li>&Acirc;&nbsp;Have a small layer that does all interaction with the database. Make sure no SQL or other database dependent code leaks out. Inject that layer as a dependency into anybody in need of it. This will allow you to test almost everything without worrying about the database. Only the tests for that integration layer actually needs a database for testing.<&#47;li>
-<li>Favor database independent SQL or a library abstracting away the differences of various databases. Back in the time people claimed they needed that in case they have to switch database vendors, which never happened. Now it does. See below.<&#47;li><br />
-<&#47;ul><br />
+<li>&Acirc;&nbsp;Favor a proper Language (like Java, C, PHP ...) over database specific languages like T-SQL or PL/SQL. If you are wondering why, make a comparison between your favorite DB language and your all purpose language. For which do you get the better IDE, Unit testing support, code analysis, code coverage and so on. Reconsider your main language if it doesn't win in that comparison.</li>
+<li>&Acirc;&nbsp;Have a small layer that does all interaction with the database. Make sure no SQL or other database dependent code leaks out. Inject that layer as a dependency into anybody in need of it. This will allow you to test almost everything without worrying about the database. Only the tests for that integration layer actually needs a database for testing.</li>
+<li>Favor database independent SQL or a library abstracting away the differences of various databases. Back in the time people claimed they needed that in case they have to switch database vendors, which never happened. Now it does. See below.</li><br />
+</ul><br />
 The next points will deal with the actual tests:</p>
 <ul>
-<li>Consider an in-memory-database for testing. Many databases can run in an in-memory-mode. They are great for testing, because you can throw them away after the test, and they are way faster then any database writing to disk. This of course is only possible when you work with a database system that can run as a in-memory-database or if your code is database independent. Hence the previous point.<&#47;li>
-<li>If you can't use your database as in memory database, consider putting it on a RAM disk. We got a huge performance gain for our tests with this approach. A solid state disk might be the next best thing although I'm not sure how it would react to the heavy load of continuous database tests.<&#47;li>
-<li>Make test failure messages so explicit that you don't have to look into the database for analyzing test failures.<&#47;li>
-<li>Use code for setting up your test data. Make it nice and concise. If you need a row in a table without special requirements for its values you should be able to create that with a single trivial line of code, no matter how many foreign keys the table contains. I.e. you should have a little <a href="&#47;2011&#47;03&#47;20&#47;testing-databases-with-junit-and-hibernate-part-2-the-mother-of-all-things&#47;">DSL for your test data<&#47;a>. Doing it with plain code will enable all the refactoring power of your IDE for your tests. For load and performance tests other approaches like loading production data or large amounts of generated data might be suitable.<&#47;li>
-<li>Make sure your tests clean up after them selves. There are two approaches I found usable in most cases:<&#47;li><br />
-<&#47;ul></p>
+<li>Consider an in-memory-database for testing. Many databases can run in an in-memory-mode. They are great for testing, because you can throw them away after the test, and they are way faster then any database writing to disk. This of course is only possible when you work with a database system that can run as a in-memory-database or if your code is database independent. Hence the previous point.</li>
+<li>If you can't use your database as in memory database, consider putting it on a RAM disk. We got a huge performance gain for our tests with this approach. A solid state disk might be the next best thing although I'm not sure how it would react to the heavy load of continuous database tests.</li>
+<li>Make test failure messages so explicit that you don't have to look into the database for analyzing test failures.</li>
+<li>Use code for setting up your test data. Make it nice and concise. If you need a row in a table without special requirements for its values you should be able to create that with a single trivial line of code, no matter how many foreign keys the table contains. I.e. you should have a little <a href="/2011/03/20/testing-databases-with-junit-and-hibernate-part-2-the-mother-of-all-things/">DSL for your test data</a>. Doing it with plain code will enable all the refactoring power of your IDE for your tests. For load and performance tests other approaches like loading production data or large amounts of generated data might be suitable.</li>
+<li>Make sure your tests clean up after them selves. There are two approaches I found usable in most cases:</li><br />
+</ul></p>
 <blockquote>
 <ol>
-<li>Recreate the schema for every test. This is slow but really safe.<&#47;li>
-<li>Do a rollback after each test. This only works when there is no commit inside the test. The mean thing is: If a test tries to rollback, but fails because there was a commit inside the test some completely different test will fail. It can be a really frustrating task to find the bad test in such a case.<&#47;li><br />
-<&#47;ol><br />
-<&#47;blockquote><br />
+<li>Recreate the schema for every test. This is slow but really safe.</li>
+<li>Do a rollback after each test. This only works when there is no commit inside the test. The mean thing is: If a test tries to rollback, but fails because there was a commit inside the test some completely different test will fail. It can be a really frustrating task to find the bad test in such a case.</li><br />
+</ol><br />
+</blockquote><br />
 We covered the testing of&Acirc;&nbsp; database related code inside your application. But there is another kind of code we need to deal with: Scripts for deploying your application (or upgrading it)</p>
 <ul>
-<li>The scripts that change your database schema from one version to the next are source code just like everything else. Therefore they belong under version control and should get tested continuously.<&#47;li>
-<li>The testing process is really simple: Create a database as it looks now. Apply your change scripts and verify it looks as desired.<&#47;li>
-<li>For verifying the resulting schema it is useful to have a script that creates your target database (or at least the schema) from scratch, so you compare it with the result of the test.<&#47;li>
-<li>For performance reasons you might want to test this with an empty database first.<&#47;li>
-<li>But don't forget to run it on an instance with realistic data as well. Hint: adding a column to huge tables can take loooooong.<&#47;li><br />
-<&#47;ul><br />
+<li>The scripts that change your database schema from one version to the next are source code just like everything else. Therefore they belong under version control and should get tested continuously.</li>
+<li>The testing process is really simple: Create a database as it looks now. Apply your change scripts and verify it looks as desired.</li>
+<li>For verifying the resulting schema it is useful to have a script that creates your target database (or at least the schema) from scratch, so you compare it with the result of the test.</li>
+<li>For performance reasons you might want to test this with an empty database first.</li>
+<li>But don't forget to run it on an instance with realistic data as well. Hint: adding a column to huge tables can take loooooong.</li><br />
+</ul><br />
 Happy testing everybody.</p>
-<blockquote><p>&nbsp;<&#47;blockquote></p>
+<blockquote><p>&nbsp;</blockquote></p>

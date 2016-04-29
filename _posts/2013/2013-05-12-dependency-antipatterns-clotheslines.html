@@ -31,7 +31,7 @@ comments:
   date: '2013-05-12 07:06:52 +0200'
   date_gmt: '2013-05-12 05:06:52 +0200'
   content: 'Blog: Dependency Antipatterns &acirc;&euro;&ldquo; Clotheslines: This
-    is the third part in my little series about d... http:&#47;&#47;t.co&#47;g3DqGq3frW
+    is the third part in my little series about d... http://t.co/g3DqGq3frW
     @jensschauder'
 - id: 9977
   author: jensschauder
@@ -39,7 +39,7 @@ comments:
   author_url: http://twitter.com/jensschauder
   date: '2013-05-12 08:15:46 +0200'
   date_gmt: '2013-05-12 06:15:46 +0200'
-  content: 'I''m back to blogging. Dependency Antipatterns: Clotheslines http:&#47;&#47;t.co&#47;80dq0ygwYO'
+  content: 'I''m back to blogging. Dependency Antipatterns: Clotheslines http://t.co/80dq0ygwYO'
 - id: 9978
   author: thilko
   author_email: twitter.16831553@example.com
@@ -47,14 +47,14 @@ comments:
   date: '2013-05-12 14:44:22 +0200'
   date_gmt: '2013-05-12 12:44:22 +0200'
   content: 'RT @jensschauder: I''m back to blogging. Dependency Antipatterns: Clotheslines
-    http:&#47;&#47;t.co&#47;80dq0ygwYO'
+    http://t.co/80dq0ygwYO'
 - id: 9979
   author: aveltens
   author_email: twitter.20613727@example.com
   author_url: http://twitter.com/aveltens
   date: '2013-05-12 17:32:36 +0200'
   date_gmt: '2013-05-12 15:32:36 +0200'
-  content: Dependency Antipatterns &acirc;&euro;&ldquo; Clotheslines http:&#47;&#47;t.co&#47;FITl1BSnuf
+  content: Dependency Antipatterns &acirc;&euro;&ldquo; Clotheslines http://t.co/FITl1BSnuf
 - id: 9980
   author: Geek Reading May 13, 2013 | Regular Geek
   author_email: ''
@@ -69,7 +69,7 @@ comments:
   author_url: http://twitter.com/robdiana
   date: '2013-05-13 18:00:11 +0200'
   date_gmt: '2013-05-13 16:00:11 +0200'
-  content: http:&#47;&#47;t.co&#47;KGh1gTKss0 Dependency Antipatterns &acirc;&euro;&ldquo;
+  content: http://t.co/KGh1gTKss0 Dependency Antipatterns &acirc;&euro;&ldquo;
     Clotheslines&acirc;&euro;&ldquo;Schauderhaft
 - id: 9982
   author: iceoverflow
@@ -77,13 +77,13 @@ comments:
   author_url: http://twitter.com/iceoverflow
   date: '2013-05-16 07:18:31 +0200'
   date_gmt: '2013-05-16 05:18:31 +0200'
-  content: "+1 Dependency Antipatterns &acirc;&euro;&ldquo; Clotheslines http:&#47;&#47;t.co&#47;tG9H7ciw4Y"
+  content: "+1 Dependency Antipatterns &acirc;&euro;&ldquo; Clotheslines http://t.co/tG9H7ciw4Y"
 ---
-<p><a href="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2013&#47;05&#47;clothesLines.png"><img class="size-medium wp-image-1388 alignright" alt="clothesLines" src="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2013&#47;05&#47;clothesLines-106x300.png" width="106" height="300" &#47;><&#47;a></p>
-<p>This is the third part in my little series about dependency anti-patterns. The <a href="&#47;2013&#47;03&#47;17&#47;dependency-antipatterns-god-node&#47;">first part was about the God Node<&#47;a>, the <a href="&#47;2013&#47;03&#47;24&#47;dependency-antipatterns-the-bypass&#47;">second one about the Bypass<&#47;a></p>
-<p>Images and <a href="https:&#47;&#47;github.com&#47;schauder&#47;degraph&#47;wiki&#47;Nomenclature">nomenclature<&#47;a> are based on <a href="https:&#47;&#47;github.com&#47;schauder&#47;degraph">Degraph<&#47;a>.</p>
+<p><a href="http://blog.schauderhaft.de/wp-content/uploads/2013/05/clothesLines.png"><img class="size-medium wp-image-1388 alignright" alt="clothesLines" src="http://blog.schauderhaft.de/wp-content/uploads/2013/05/clothesLines-106x300.png" width="106" height="300" /></a></p>
+<p>This is the third part in my little series about dependency anti-patterns. The <a href="/2013/03/17/dependency-antipatterns-god-node/">first part was about the God Node</a>, the <a href="/2013/03/24/dependency-antipatterns-the-bypass/">second one about the Bypass</a></p>
+<p>Images and <a href="https://github.com/schauder/degraph/wiki/Nomenclature">nomenclature</a> are based on <a href="https://github.com/schauder/degraph">Degraph</a>.</p>
 <p>When you have two slices with lots of parallel connections as in the image on the side, you found this patterns. Just as with real clotheslines there might be some crossing in the lines, but the majority is parallel.</p>
 <p>This kind of stuff happens when you split classes into packages (or larger slices) not by the domain they deal with, but by the pattern they implement. An example would be a set of entities and there matching DAOs. If you put all the entities in one package and all the DAOs in another you get exactly this pattern. It is an example of high coupling and low coehesion and in case you are wondering: Yes we normally strive for the opposite.</p>
 <p>You want to avoid clotheslines because the affected nodes are couple so tightly together that you can't really split them, so you might as well throw them in one bag. Which in turn might result in a giant node, you you don't want either.</p>
 <p>The good news is the situation is easy to improve. Just arrange the classes connected by clothesline into one package. Possibly on their own, and if they have cross connections with other pairs, together with those. You'll end up with something that looks more like the image below: More dependencies inside a package, fewer between packages. Also known as high cohesion, low coupling.</p>
-<p><a href="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2013&#47;05&#47;clothesLinesFixed.png"><img class="alignnone size-medium wp-image-1389" alt="clothesLinesFixed" src="http:&#47;&#47;blog.schauderhaft.de&#47;wp-content&#47;uploads&#47;2013&#47;05&#47;clothesLinesFixed-300x151.png" width="300" height="151" &#47;><&#47;a></p>
+<p><a href="http://blog.schauderhaft.de/wp-content/uploads/2013/05/clothesLinesFixed.png"><img class="alignnone size-medium wp-image-1389" alt="clothesLinesFixed" src="http://blog.schauderhaft.de/wp-content/uploads/2013/05/clothesLinesFixed-300x151.png" width="300" height="151" /></a></p>

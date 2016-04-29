@@ -2,7 +2,7 @@
 layout: default
 status: publish
 published: true
-title: Why <tt>static<&#47;tt> is Bad and How to Avoid It
+title: Why <tt>static</tt> is Bad and How to Avoid It
 author:
   display_name: Jens Schauder
   login: admin
@@ -30,7 +30,7 @@ comments:
   date: '2013-07-07 10:51:38 +0200'
   date_gmt: '2013-07-07 08:51:38 +0200'
   content: 'Blog: Why static is Bad and How to Avoid It: Everybody who worked with
-    a project which included ... http:&#47;&#47;t.co&#47;yNHdGln3KQ @jensschauder'
+    a project which included ... http://t.co/yNHdGln3KQ @jensschauder'
 - id: 10050
   author: fabian
   author_email: fake@mailaddress.com
@@ -54,7 +54,7 @@ comments:
   date: '2013-07-07 12:57:32 +0200'
   date_gmt: '2013-07-07 10:57:32 +0200'
   content: "I *don&Acirc;&acute;t* think that static functions(!) are bad....\r\nIf
-    the method shouldn&Acirc;&acute;t need dependencies to other fields&#47;objects
+    the method shouldn&Acirc;&acute;t need dependencies to other fields/objects
     than that that are part of the parameters I&Acirc;&acute;m quite sure using static
     functions is better than instanciating an object on every function call. It also
     helps you to keep your dependencies clean because you can only use static ones.
@@ -80,7 +80,7 @@ comments:
   author_url: https://twitter.com/OC_WIRE
   date: '2013-07-08 13:21:00 +0200'
   date_gmt: '2013-07-08 11:21:00 +0200'
-  content: 'RT @oop_conference: Why static is Bad and How to Avoid It: http:&#47;&#47;t.co&#47;nm5DIq5o17
+  content: 'RT @oop_conference: Why static is Bad and How to Avoid It: http://t.co/nm5DIq5o17
     @jensschauder'
 - id: 10064
   author: carloschacin
@@ -88,46 +88,46 @@ comments:
   author_url: https://twitter.com/carloschacin
   date: '2013-07-10 23:14:27 +0200'
   date_gmt: '2013-07-10 21:14:27 +0200'
-  content: Why static is Bad and How to Avoid It http:&#47;&#47;t.co&#47;Xbw962mDGF
+  content: Why static is Bad and How to Avoid It http://t.co/Xbw962mDGF
 ---
-<p>Everybody who worked with a project which included a <tt>StringUtil(s)<&#47;tt> class with only static methods, raise her hand! Thought so. Are those methods bad? Probably not so much, although I had a word to say about the name, after all if a class is not a utility it isn't useful (<a href="http:&#47;&#47;en.wiktionary.org&#47;wiki&#47;utility">by the definition of Wiktionary<&#47;a>) and we hopefully haven't much of that kind in our projects.</p>
-<p>But static methods turn bad, when they become more complex than the typical content of a <tt>StringUtil<&#47;tt> class. The problem is your code becomes hard wired to that static method. There is no easy way to replace the reference to the static method with something else, and if you are testing your code using automated tests, this is exactly what you want to do.</p>
-<p><a href="&#47;2011&#47;07&#47;31&#47;getting-started-with-testing&#47;">If you don't test your code using automated tests, do something about it NOW!<&#47;a></p>
+<p>Everybody who worked with a project which included a <tt>StringUtil(s)</tt> class with only static methods, raise her hand! Thought so. Are those methods bad? Probably not so much, although I had a word to say about the name, after all if a class is not a utility it isn't useful (<a href="http://en.wiktionary.org/wiki/utility">by the definition of Wiktionary</a>) and we hopefully haven't much of that kind in our projects.</p>
+<p>But static methods turn bad, when they become more complex than the typical content of a <tt>StringUtil</tt> class. The problem is your code becomes hard wired to that static method. There is no easy way to replace the reference to the static method with something else, and if you are testing your code using automated tests, this is exactly what you want to do.</p>
+<p><a href="/2011/07/31/getting-started-with-testing/">If you don't test your code using automated tests, do something about it NOW!</a></p>
 <p>Converting a static method to something easily mocked is straight forward once you've done it once or twice. Lets start with an example:</p>
 <pre lang="java">
 public class Utility{<br />
     public static int doSomething(){<br />
-        &#47;&#47;...<br />
+        //...<br />
     }<br />
 }</p>
 <p>public class Client{<br />
     public void foo(){<br />
-        &#47;&#47;...<br />
+        //...<br />
         Utility.doSomething();<br />
-        &#47;&#47;...<br />
+        //...<br />
     }<br />
 }<br />
-<&#47;pre></p>
-<p>The <tt>Client<&#47;tt> uses a static method in <tt>Utility<&#47;tt> and we want to get rid of that. The first step is to make the <tt>doSomething<&#47;tt> method non-static. It is really as easy as removing the static modifier. Of course now the <tt>Client<&#47;tt> needs and instance of <tt>Utility<&#47;tt>, so we just create one for now:</p>
+</pre></p>
+<p>The <tt>Client</tt> uses a static method in <tt>Utility</tt> and we want to get rid of that. The first step is to make the <tt>doSomething</tt> method non-static. It is really as easy as removing the static modifier. Of course now the <tt>Client</tt> needs and instance of <tt>Utility</tt>, so we just create one for now:</p>
 <pre lang="java">
 public class Utility{<br />
     public int doSomething(){<br />
-        &#47;&#47;...<br />
+        //...<br />
     }<br />
 }</p>
 <p>public class Client{<br />
     public void foo(){<br />
-        &#47;&#47;...<br />
+        //...<br />
         new Utility().doSomething();<br />
-        &#47;&#47;...<br />
+        //...<br />
     }<br />
 }<br />
-<&#47;pre> </p>
-<p>Of course this doesn't improve the situation much. We still have a static reference to the <tt>Utility<&#47;tt> class, since the constructor is  just another static method. But now we can simply inject the dependency from the outside:</p>
+</pre> </p>
+<p>Of course this doesn't improve the situation much. We still have a static reference to the <tt>Utility</tt> class, since the constructor is  just another static method. But now we can simply inject the dependency from the outside:</p>
 <pre lang="java">
 public class Utility{<br />
     public int doSomething(){<br />
-        &#47;&#47;...<br />
+        //...<br />
     }<br />
 }</p>
 <p>public class Client{<br />
@@ -136,10 +136,10 @@ public class Utility{<br />
         utility = aUtility;<br />
     }</p>
 <p>    public void foo(){<br />
-        &#47;&#47;...<br />
+        //...<br />
         utility.doSomething();<br />
-        &#47;&#47;...<br />
+        //...<br />
     }<br />
 }<br />
-<&#47;pre> </p>
-<p>Now you can replace <tt>Utility<&#47;tt> by a mocked instance for tests, you can use a wrapped instance for logging or make it implement an interface and so one. Basically you are back in OO world. Of course you can use your favorite DI-Framework to inject the dependency (<a href="&#47;2012&#47;01&#47;01&#47;the-one-correct-way-to-do-dependency-injection&#47;">just make sure you do it properly<&#47;a>), or if you don't mind the compile time dependency you can create an alternative constructor in the <tt>Client<&#47;tt> which uses the default implementation.</p>
+</pre> </p>
+<p>Now you can replace <tt>Utility</tt> by a mocked instance for tests, you can use a wrapped instance for logging or make it implement an interface and so one. Basically you are back in OO world. Of course you can use your favorite DI-Framework to inject the dependency (<a href="/2012/01/01/the-one-correct-way-to-do-dependency-injection/">just make sure you do it properly</a>), or if you don't mind the compile time dependency you can create an alternative constructor in the <tt>Client</tt> which uses the default implementation.</p>

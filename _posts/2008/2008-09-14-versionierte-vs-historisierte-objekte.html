@@ -46,22 +46,22 @@ comments:
   date_gmt: '2010-03-07 15:08:51 +0100'
   content: "Hi Ingolf,\r\nzum Thema versionierte Objekte gibt es in meinem Kopf einiges
     an Informationen, und in einem Projekt in Form von Quellcode, den kann ich aber
-    leider nicht rausr&Atilde;&frac14;cken.\r\n\r\nIch glaube in dem Buch <a href=\"http:&#47;&#47;www.amazon.de&#47;gp&#47;product&#47;0201895420?ie=UTF8&tag=schauderhafte-21&linkCode=as2&camp=1638&creative=19454&creativeASIN=0201895420\"
-    \  rel=\"nofollow\">t\"Analysis Patterns\"<&#47;a> gab es etwas &Atilde;&curren;hnliches.
+    leider nicht rausr&Atilde;&frac14;cken.\r\n\r\nIch glaube in dem Buch <a href=\"http://www.amazon.de/gp/product/0201895420?ie=UTF8&tag=schauderhafte-21&linkCode=as2&camp=1638&creative=19454&creativeASIN=0201895420\"
+    \  rel=\"nofollow\">t\"Analysis Patterns\"</a> gab es etwas &Atilde;&curren;hnliches.
     Das Buch hab ich aber leider verlegt, so dass ich nicht nachschlagen kann.\r\n\r\nWenn
     es halbwegs konkrete Fragen gibt, stell sie, aber dann wohl besser per email an
     vorname@diesedomainhier\r\n\r\nGru&Atilde;&Yuml;\r\nJens"
 ---
 <p>In vielen Projekten kommt fr&Atilde;&frac14;her oder sp&Atilde;&curren;ter der Wunsch nach Historisierung oder Protokollierung von &Atilde;&bdquo;nderungen auf. Im aktuellen Projekt kommt dazu&Acirc;&nbsp; noch der Wunsch nach geplanten &Atilde;&bdquo;nderungen, d.h. es soll m&Atilde;&para;glich sein Daten so zu &Atilde;&curren;ndern, dass die &Atilde;&bdquo;nderungen erst zu einem Zeitpunkt in der Zukunft in Kraft treten.</p>
 <p>Das Problem mit diesen W&Atilde;&frac14;nschen und Anforderungen ist, dass sie meist nicht wohl definiert sind. Dem entsprechend ist es schwer zu beurteilen, wie die Funktion zu modellieren ist. In diesem Artikel werde ich die verschiedenen mir bekannten Strategien vorstellen und vergleichen. Da ich diese Ans&Atilde;&curren;tze nicht als bekannte, benannte Patterns kenne, habe ich ihnen nach eigenem Gusto Namen gegeben.</p>
-<h3>Audittrail<&#47;h3><br />
+<h3>Audittrail</h3><br />
 Bei jeder &Atilde;&bdquo;nderung eines Objektes wird ein zus&Atilde;&curren;tzliches Objekt als Kopie erzeugt, um einen Timestamp erg&Atilde;&curren;nzt und gespeichert.</p>
 <p>Der Vorteil dieser Strategie ist ihre Einfachheit. Sie ist sogar so einfach, dass sie mit Datenbankmitteln leicht zu implementieren ist, z.B. &Atilde;&frac14;ber Trigger. Mit einem solchen Audit-Log ist zu jedem Objekt der Zustand zu einem bestimmten Zeitpunkt ermittelbar. Ganze Objektstrukturen sind aber nur m&Atilde;&frac14;hselig zu rekonstruieren, da f&Atilde;&frac14;r jedes Element des Objektgraphen an Hand des Zeitstempels die passende Version gefunden werden muss.</p>
-<h3>Change Log<&#47;h3><br />
+<h3>Change Log</h3><br />
 &Atilde;&bdquo;hnlich wie beim Audittrail wird hier bei jeder &Atilde;&bdquo;nderung ein Datensatz weggeschrieben, der beschreibt aber nicht den Zustand vor oder nach der &Atilde;&bdquo;nderung, sondern die &Atilde;&bdquo;nderung selbst, etwa in dem alter und neuer Wert der betrachteten Attribute weggeschrieben werden. Auch dies kann recht einfach automatisiert werden.Ein solches Change Log kann f&Atilde;&frac14;r Analysen sehr interessant sein. Es k&Atilde;&para;nnen Fragen wie 'Wie oft &Atilde;&curren;ndern Kunden ihre E-Mail Adresse' sehr einfach beantwortet werden. Wenn es wirklich vollst&Atilde;&curren;ndig sein soll, wird es aber sehr schnell sehr umfangreich, da f&Atilde;&frac14;r jedes Attribut jeweils der alte und der neue Wert gespeichert werden muss.</p>
-<h3>Snapshots<&#47;h3><br />
-Als Snapshots bezeichne ich Kopien eine Objektgraphen zu einem bestimmten Zeitpunkt. Im Gegensatz zu den ersten beiden Strategien wird hier wirklich ein Objektgraph historisiert, nicht ein einzelnes Objekt beziehungsweise ein einfacher Datensatz. Dabei kann die historisierte Version des Objektgraphen durchaus auch eine ganz andere Struktur haben als der urspr&Atilde;&frac14;ngleiche Objektgraph, da man mit historisierten Informationen oft ganz andere Dinge tun m&Atilde;&para;chte, als mit aktuellen Daten. Der Vorteil dieses Ansatzes liegt in der direkten Navigierbarkeit des Objektgraphen, wie man es bei einem <a href="&#47;2008&#47;03&#47;06&#47;das-beste-buch-uber-software-design&#47;">Dom&Atilde;&curren;nen basierten Design<&#47;a> erwartet. Nachteilig ist, dass die Teile des Objektgraphes, die sich langsamer &Atilde;&curren;ndern immer wieder mit historisiert werden, obwohl sie sich ge&Atilde;&curren;ndert haben. Au&Atilde;&Yuml;erdem muss jeder auf diese Weise historisierbarer Teilgraph einzelnd identifiziert werden.</p>
-<h3>Versionierte Objekte<&#47;h3><br />
+<h3>Snapshots</h3><br />
+Als Snapshots bezeichne ich Kopien eine Objektgraphen zu einem bestimmten Zeitpunkt. Im Gegensatz zu den ersten beiden Strategien wird hier wirklich ein Objektgraph historisiert, nicht ein einzelnes Objekt beziehungsweise ein einfacher Datensatz. Dabei kann die historisierte Version des Objektgraphen durchaus auch eine ganz andere Struktur haben als der urspr&Atilde;&frac14;ngleiche Objektgraph, da man mit historisierten Informationen oft ganz andere Dinge tun m&Atilde;&para;chte, als mit aktuellen Daten. Der Vorteil dieses Ansatzes liegt in der direkten Navigierbarkeit des Objektgraphen, wie man es bei einem <a href="/2008/03/06/das-beste-buch-uber-software-design/">Dom&Atilde;&curren;nen basierten Design</a> erwartet. Nachteilig ist, dass die Teile des Objektgraphes, die sich langsamer &Atilde;&curren;ndern immer wieder mit historisiert werden, obwohl sie sich ge&Atilde;&curren;ndert haben. Au&Atilde;&Yuml;erdem muss jeder auf diese Weise historisierbarer Teilgraph einzelnd identifiziert werden.</p>
+<h3>Versionierte Objekte</h3><br />
 Beim Versionierten Objekt gibt es zu einem Objekt mehrere Versionen, die als Teil des Dom&Atilde;&curren;nen Modells modelliert werden. Etwa so:<br />
 <code><br />
 public class Thing {<br />
@@ -70,13 +70,13 @@ private Set
 public ThingVersion getVersion(Date timestamp){...}<br />
 ...<br />
 }<br />
-<&#47;code><br />
+</code><br />
 <code><br />
 public class ThingVersion {<br />
 private Date validFrom;<br />
 ...<br />
 }<br />
-<&#47;code><br />
+</code><br />
 W&Atilde;&curren;hrend die vorigen Ans&Atilde;&curren;tze nur vergangene Zust&Atilde;&curren;nde protokolliert werden, k&Atilde;&para;nnen mit diesem Ansatz auch geplante &Atilde;&bdquo;nderungen abgebildet werden. Wenn keine zus&Atilde;&curren;tzlichen Einschr&Atilde;&curren;nkungen vornimmt, k&Atilde;&para;nnen auch in der Vergangenheit liegende Informationen auf die gleiche Weise bearbeitet werden, wie zuk&Atilde;&frac14;nftige. F&Atilde;&frac14;r Audit Funktionalit&Atilde;&curren;t, d.h. um bestimmte Sachverhalte im Nachhinein zu belegen ist es daher weniger geeignet.</p>
 <p>Andere Objekte k&Atilde;&para;nnen je nach Bedarf auf ein Thing, d.h. das fragliche Objekt unabh&Atilde;&curren;ngig von Versionen, oder eine ThingVersion verweisen, d.h. auf eine bestimmte Version des Objektes. Am spannendsten ist aber vielleicht die M&Atilde;&para;glichkeit mit einer Referenz auf das Thing + einem Timestamp auf den Zustand des Objektes zu einem bestimmten Zeitpunkt zu verweisen, unabh&Atilde;&curren;ngig davon welchen Zustand das Objekt zu diesem Zeitpunkt hat. D.h. die zu dem Zeitpunkt g&Atilde;&frac14;ltige Version kann sich noch &Atilde;&curren;ndern, ohne dass das referenzierende Objekt aktualisiert werden m&Atilde;&frac14;sste.</p>
 <p>Dieser Ansatz ist extrem m&Atilde;&curren;chtig, allerdings kann die Lage schnell verwirrend werden, wenn versionierte Objekte auf andere versionierte Objekte verweisen, oder wenn ein Objekt auf unterschiedliche Versionen des gleichen Objektes verweist. Wie bei jeder starken Medizin gilt es also auch hier die richtige Dosierung zu ermitteln.</p>

@@ -40,7 +40,7 @@ comments:
   date_gmt: '2010-02-03 00:42:16 +0100'
   content: '[...] Dieser Eintrag wurde auf Twitter von Richard Laksana, Jens Schauder,
     seanparsons, Peter Backx, pembleton und anderen erw&Atilde;&curren;hnt. pembleton
-    sagte: Reading "New Feature of JUnit: Theories" http:&#47;&#47;bit.ly&#47;9F25JH
+    sagte: Reading "New Feature of JUnit: Theories" http://bit.ly/9F25JH
     by @jensschauder [...]'
 - id: 384
   author: Outrospective.org &raquo; Blog Archive &raquo; Junit&#8217;s Theory&#8217;s
@@ -94,7 +94,7 @@ comments:
   author_url: http://www.dominik-mostek.cz/blog/junit-theories/
   date: '2013-01-02 00:56:49 +0100'
   date_gmt: '2013-01-01 22:56:49 +0100'
-  content: "[...] http:&#47;&#47;blog.schauderhaft.de&#47;2010&#47;01&#47;31&#47;new-feature-of-junit-theories&#47;
+  content: "[...] http://blog.schauderhaft.de/2010/01/31/new-feature-of-junit-theories/
     [...]"
 - id: 9118
   author: JUnit and Other Beasts, Part 4 | Softwire | Exceptional Bespoke Software
@@ -125,7 +125,7 @@ comments:
 
     JUnit is open source and I guess you can take the source code and host it anywhere you want.
 
-    Or are any links pointing into the void? This might be because the JUnit repository was migrated from Kent Becks user to the JUnit organization: https:&#47;&#47;github.com&#47;junit-team&#47;junit
+    Or are any links pointing into the void? This might be because the JUnit repository was migrated from Kent Becks user to the JUnit organization: https://github.com/junit-team/junit
 - id: 9974
   author: Jay
   author_email: jayrstubbs@yahoo.com
@@ -149,10 +149,10 @@ comments:
   author_url: http://dominik-mostek.cz/junit-theories/
   date: '2014-10-09 16:52:09 +0200'
   date_gmt: '2014-10-09 14:52:09 +0200'
-  content: "[&#8230;] http:&#47;&#47;blog.schauderhaft.de&#47;2010&#47;01&#47;31&#47;new-feature-of-junit-theories&#47;
+  content: "[&#8230;] http://blog.schauderhaft.de/2010/01/31/new-feature-of-junit-theories/
     [&#8230;]"
 ---
-<p>A couple of months ago I blogged about <a href="&#47;2009&#47;10&#47;04&#47;junit-rules&#47;">JUnit Rules<&#47;a>, one of the new features in JUnit. While fooling around with JUnit Rules, I found a couple more features that you might be interested in. So here it comes: Theories! It turns out Theories are really a piece of cake. Try this:</p>
+<p>A couple of months ago I blogged about <a href="/2009/10/04/junit-rules/">JUnit Rules</a>, one of the new features in JUnit. While fooling around with JUnit Rules, I found a couple more features that you might be interested in. So here it comes: Theories! It turns out Theories are really a piece of cake. Try this:</p>
 <pre lang="java">import static org.junit.Assume.assumeTrue;<br />
 import org.junit.experimental.theories.DataPoint;<br />
 import org.junit.experimental.theories.Theories;<br />
@@ -171,15 +171,15 @@ public class TheorieTest {</p>
 		assumeTrue(x.length() > 1);</p>
 <p>		System.out.println(x + " " + y);<br />
 	}<br />
-}<&#47;pre><br />
+}</pre><br />
 When you run this you'll get this as an output (and one successfull test):</p>
 <pre>bb a<br />
 bb bb<br />
 bb ccc<br />
 ccc a<br />
 ccc bb<br />
-ccc ccc<&#47;pre><br />
-So what is going on? The first thing to note is that this test is executed by a specialized runner of type Theories. This runner executes all the public methods annotated with @Theory. Differently from normal tests theories have parameters. In order to fill these parameters with values, the Theories runner uses all the public fields of matching Type and annotated with @DataPoint. When you take a look at the output, it should be obvious why this is more powerful then <a href="http:&#47;&#47;ourcraft.wordpress.com&#47;2008&#47;08&#47;27&#47;writing-a-parameterized-junit-test&#47;">parameterized Tests<&#47;a>: Every combination of values is tried, thus with e.g. 4 parameters with 4 distinct values each, you end up with 256 test runs.</p>
+ccc ccc</pre><br />
+So what is going on? The first thing to note is that this test is executed by a specialized runner of type Theories. This runner executes all the public methods annotated with @Theory. Differently from normal tests theories have parameters. In order to fill these parameters with values, the Theories runner uses all the public fields of matching Type and annotated with @DataPoint. When you take a look at the output, it should be obvious why this is more powerful then <a href="http://ourcraft.wordpress.com/2008/08/27/writing-a-parameterized-junit-test/">parameterized Tests</a>: Every combination of values is tried, thus with e.g. 4 parameters with 4 distinct values each, you end up with 256 test runs.</p>
 <p>The idea is to specify a theory about the object under test, that holds for a large class of states and parameters.&Acirc;&nbsp; Then you provide those as parameters to the test method which will test the theory.</p>
 <p>A probably very common case is that a theory is known not to be valid for certain cases. You can exclude these from a test using the Assume class. If an assumption doesn't hold, the test is silently ignored. This is used in the example above to prevent 'a' to be used as a first parameter.</p>
-<p>There are some more tweaks to Theories in JUnit, which I will cover in a later blog. Until then enjoy the new feature. But keep in mind the package in which theories reside up to now: <tt>org.junit.<strong>experimental<&#47;strong>.theories <&#47;tt> so I'd expect some changes in the API and at least a change in package name.</p>
+<p>There are some more tweaks to Theories in JUnit, which I will cover in a later blog. Until then enjoy the new feature. But keep in mind the package in which theories reside up to now: <tt>org.junit.<strong>experimental</strong>.theories </tt> so I'd expect some changes in the API and at least a change in package name.</p>

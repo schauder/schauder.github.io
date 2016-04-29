@@ -39,7 +39,7 @@ comments:
   date_gmt: '2009-12-21 09:01:35 +0100'
   content: "[...] Dieser Eintrag wurde auf Twitter von Jens Schauder und A. Ebbert-Karroum,
     Benjamin Winterberg erw&Atilde;&curren;hnt. Benjamin Winterberg sagte: RT @jensschauder:
-    New blog post: Developing for Maintainability http:&#47;&#47;blog.schauderhaft.de&#47;2009&#47;12&#47;20&#47;developing-for-maintainability&#47;
+    New blog post: Developing for Maintainability http://blog.schauderhaft.de/2009/12/20/developing-for-maintainability/
     [...]"
 - id: 333
   author: Stefano Ricciardi
@@ -50,7 +50,7 @@ comments:
   content: "The \"toxicity\" seems like an interesting concept. Are you aware of any
     tool or plugin for Visual Studio can calculate it for C# code?\r\n\r\nUncle Bob
     blogged about a maintainability measure that also takes into account test coverage,
-    called <a href=\"http:&#47;&#47;www.crap4j.org&#47;\" rel=\"nofollow\">CRAP<&#47;a>.
+    called <a href=\"http://www.crap4j.org/\" rel=\"nofollow\">CRAP</a>.
     That is an interestic metric as well."
 - id: 334
   author: Jens Schauder
@@ -64,8 +64,8 @@ comments:
     it is all a matter of taste right now. Interesting combination: toxicity, crap
     and taste ...\r\n\r\nI don't know about Visual Studio Tools. But the only thing
     you realy need is some static code analysis tool like checkstyle. The rest is
-    almost trivial. And a quick search turned up <a href=\"http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;List_of_tools_for_static_code_analysis\"
-    rel=\"nofollow\">this wikipedia page<&#47;a> as a good starting point."
+    almost trivial. And a quick search turned up <a href=\"http://en.wikipedia.org/wiki/List_of_tools_for_static_code_analysis\"
+    rel=\"nofollow\">this wikipedia page</a> as a good starting point."
 - id: 409
   author: Naruto
   author_email: Ciotti@hotmail.com
@@ -75,92 +75,92 @@ comments:
   content: "Hallo\r\nGeniales Post. Da hat mich Yahoo wie schon so oft an einen super
     Blog geschickt.\r\nViele Gr&Atilde;&frac14;&Atilde;&Yuml;e aus Monheim am Rhein"
 ---
-<p>Just as <a href="&#47;2009&#47;12&#47;13&#47;developing-for-supportability&#47;">Supportability<&#47;a>, Maintainability is one of these Non Functional Requirements, that is or should be required from every software development project. So what does that mean? Wikipedia defines it as</p>
+<p>Just as <a href="/2009/12/13/developing-for-supportability/">Supportability</a>, Maintainability is one of these Non Functional Requirements, that is or should be required from every software development project. So what does that mean? Wikipedia defines it as</p>
 <blockquote><p>the ease with which a software product can be modified in order to:</p>
 <ul>
-<li>correct defects<&#47;li>
-<li>meet new requirements<&#47;li>
-<li>make future maintenance easier, or<&#47;li>
-<li>cope with a changed environment;<&#47;li><br />
-<&#47;ul><br />
-<&#47;blockquote><br />
+<li>correct defects</li>
+<li>meet new requirements</li>
+<li>make future maintenance easier, or</li>
+<li>cope with a changed environment;</li><br />
+</ul><br />
+</blockquote><br />
 Wow, that's great. Because it lends itself for an 'easy' test for maintainability. Take the completed product, make up some new requirements and measure how long it takes to implement those. If you do this with different products for same task, you can compare the time needed, thus comparing maintainability. Unfortunately most of the time, the requirement is stated before any software is written. And only one piece of software gets written, so there is nothing to compare to. So what to do?</p>
-<p>Since one can't realistically measure maintainability we once more should concentrate on characteristics making software easier to maintain, i.e. easier to change. There are plenty of measures around that are thought to be linked to maintainability. Cyclomatic Complexity being possibly the best known. I personally prefer <a href="http:&#47;&#47;erik.doernenburg.com&#47;2008&#47;11&#47;how-toxic-is-your-code&#47;">toxicity<&#47;a>, which is based on Cyclomatic Complexity and a couple of other measures, which contribute to the toxicity with the amount they are above a certain threshold:</p>
+<p>Since one can't realistically measure maintainability we once more should concentrate on characteristics making software easier to maintain, i.e. easier to change. There are plenty of measures around that are thought to be linked to maintainability. Cyclomatic Complexity being possibly the best known. I personally prefer <a href="http://erik.doernenburg.com/2008/11/how-toxic-is-your-code/">toxicity</a>, which is based on Cyclomatic Complexity and a couple of other measures, which contribute to the toxicity with the amount they are above a certain threshold:</p>
 <blockquote>
 <table border="0" cellpadding="2">
 <tbody>
 <tr>
-<th>Metric<&#47;th></p>
-<th>Level<&#47;th></p>
-<th>Threshold<&#47;th><br />
-<&#47;tr></p>
+<th>Metric</th></p>
+<th>Level</th></p>
+<th>Threshold</th><br />
+</tr></p>
 <tr>
-<td>File Length<&#47;td></p>
-<td>file<&#47;td></p>
-<td>500<&#47;td><br />
-<&#47;tr></p>
+<td>File Length</td></p>
+<td>file</td></p>
+<td>500</td><br />
+</tr></p>
 <tr>
-<td>Class Fan-Out Complexity<&#47;td></p>
-<td>class<&#47;td></p>
-<td>30<&#47;td><br />
-<&#47;tr></p>
+<td>Class Fan-Out Complexity</td></p>
+<td>class</td></p>
+<td>30</td><br />
+</tr></p>
 <tr>
-<td>Class Data Abstraction Coupling<&#47;td></p>
-<td>class<&#47;td></p>
-<td>10<&#47;td><br />
-<&#47;tr></p>
+<td>Class Data Abstraction Coupling</td></p>
+<td>class</td></p>
+<td>10</td><br />
+</tr></p>
 <tr>
-<td>Anon Inner Length<&#47;td></p>
-<td>inner class<&#47;td></p>
-<td>35<&#47;td><br />
-<&#47;tr></p>
+<td>Anon Inner Length</td></p>
+<td>inner class</td></p>
+<td>35</td><br />
+</tr></p>
 <tr>
-<td>Method Length<&#47;td></p>
-<td>method<&#47;td></p>
-<td>30<&#47;td><br />
-<&#47;tr></p>
+<td>Method Length</td></p>
+<td>method</td></p>
+<td>30</td><br />
+</tr></p>
 <tr>
-<td>Parameter Number<&#47;td></p>
-<td>method<&#47;td></p>
-<td>6<&#47;td><br />
-<&#47;tr></p>
+<td>Parameter Number</td></p>
+<td>method</td></p>
+<td>6</td><br />
+</tr></p>
 <tr>
-<td>Cyclomatic Complexity<&#47;td></p>
-<td>method<&#47;td></p>
-<td>10<&#47;td><br />
-<&#47;tr></p>
+<td>Cyclomatic Complexity</td></p>
+<td>method</td></p>
+<td>10</td><br />
+</tr></p>
 <tr>
-<td>Nested If Depth<&#47;td></p>
-<td>statement<&#47;td></p>
-<td>3<&#47;td><br />
-<&#47;tr></p>
+<td>Nested If Depth</td></p>
+<td>statement</td></p>
+<td>3</td><br />
+</tr></p>
 <tr>
-<td>Nested Try Depth<&#47;td></p>
-<td>statement<&#47;td></p>
-<td>2<&#47;td><br />
-<&#47;tr></p>
+<td>Nested Try Depth</td></p>
+<td>statement</td></p>
+<td>2</td><br />
+</tr></p>
 <tr>
-<td>Boolean Expression Complexity<&#47;td></p>
-<td>statement<&#47;td></p>
-<td>3<&#47;td><br />
-<&#47;tr></p>
+<td>Boolean Expression Complexity</td></p>
+<td>statement</td></p>
+<td>3</td><br />
+</tr></p>
 <tr>
-<td>Missing Switch Default<&#47;td></p>
-<td>statement<&#47;td></p>
-<td>1<&#47;td><br />
-<&#47;tr><br />
-<&#47;tbody><&#47;table><br />
-<&#47;blockquote><br />
+<td>Missing Switch Default</td></p>
+<td>statement</td></p>
+<td>1</td><br />
+</tr><br />
+</tbody></table><br />
+</blockquote><br />
 Compared to a single simple measure, this has the benefit of being less prone to optimization for the measurement, although of course this is still possible.</p>
 <p>So does a low, even zero toxicity guarantee maintainable code? Hell no. For starters there are a couple of different things to consider:</p>
 <ul>
-<li>Is the code well covered with tests?<&#47;li>
-<li>Are the current requirements specified in a suitable manner (e.g. using tests)?<&#47;li>
-<li>Is the code written in a consistent style<&#47;li>
-<li>Is all the code including the documentation under control of a version control system?<&#47;li>
-<li>Is the structure of the application, its architecture defined and documented?<&#47;li>
-<li>Is there an automatic process for building new versions of the software (i.e. ant, maven, make scripts or similar)?<&#47;li>
-<li>Is the code written in a language that is well known and understood and which has a large user community?<&#47;li><br />
-<&#47;ul><br />
-Everything but the last bullet point is pretty much identical with what I consider <a href="&#47;2009&#47;11&#47;01&#47;are-you-a-software-developer-or-a-dabbler&#47;">base practices for any serious software developer<&#47;a>.</p>
+<li>Is the code well covered with tests?</li>
+<li>Are the current requirements specified in a suitable manner (e.g. using tests)?</li>
+<li>Is the code written in a consistent style</li>
+<li>Is all the code including the documentation under control of a version control system?</li>
+<li>Is the structure of the application, its architecture defined and documented?</li>
+<li>Is there an automatic process for building new versions of the software (i.e. ant, maven, make scripts or similar)?</li>
+<li>Is the code written in a language that is well known and understood and which has a large user community?</li><br />
+</ul><br />
+Everything but the last bullet point is pretty much identical with what I consider <a href="/2009/11/01/are-you-a-software-developer-or-a-dabbler/">base practices for any serious software developer</a>.</p>
 <p>So I propose: The next time you encounter the vague requirement of maintainability, replace itybe useful and well testable requirements, based on specific practices and metrics. It still won't guarantee maintainability. But it will increase the chance for it.</p>

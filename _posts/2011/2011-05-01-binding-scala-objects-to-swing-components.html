@@ -61,46 +61,46 @@ public class Person {<br />
 <p>    public String getName(){<br />
         return name;<br />
     }<br />
-<&#47;pre></p>
-<p>Having properties like this you can bind them to Swing components using <a href="http:&#47;&#47;www.jgoodies.com&#47;downloads&#47;libraries.html">JGoodies Binding<&#47;a> like this:</p>
+</pre></p>
+<p>Having properties like this you can bind them to Swing components using <a href="http://www.jgoodies.com/downloads/libraries.html">JGoodies Binding</a> like this:</p>
 <pre lang="java">
       MyBean bean = new MyBean();<br />
       BeanAdapter adapter = new BeanAdapter(bean, true);<br />
       ValueModel stringModel = adapter.getValueModel("name");<br />
       JTextField field = BasicComponentFactory.createTextField(stringModel);<br />
-<&#47;pre></p>
-<p>If you don't know <a href="http:&#47;&#47;www.javalobby.org&#47;java&#47;forums&#47;t17672">JGoodies Binding you should read this article about it asap<&#47;a>.</p>
+</pre></p>
+<p>If you don't know <a href="http://www.javalobby.org/java/forums/t17672">JGoodies Binding you should read this article about it asap</a>.</p>
 <p>If you do form based Swing applications this is the way to go: don't write Listeners, bind components. </p>
 <p>Yet I have a huge problem with this code. Actually multiple problems: </p>
 <ul>
 <li>You have to repeat the name of the property in four places and you will end up in hell if you don't do it in the correct way: In the name of the setter, in the name of the getter, in the first argument to firePropertyChange and in the call to the binding framework.<br />
-<&#47;li></p>
+</li></p>
 <li>
-A trivial property takes 8 lines of code. Thats EIGHT lines of code. Or depending on your code quality probably about 1&#47;100th to 1&#47;10th of a bug, for a trivial property.<br />
-<&#47;li></p>
+A trivial property takes 8 lines of code. Thats EIGHT lines of code. Or depending on your code quality probably about 1/100th to 1/10th of a bug, for a trivial property.<br />
+</li></p>
 <li>
 Apart from being to much code, it also has a high degree of duplication, because it is the same pattern over and over again. Yet their doesn't seem to be a reasonable way to abstract over this kind of thing<br />
-<&#47;li><br />
-<&#47;ul></p>
+</li><br />
+</ul></p>
 <p>If you are willing to switch to another language you actually can abstract over this quite nicely. This of course in no surprise, since it should be easy to write a language that offers support for this kind of property. But that is not what I'm talking about. I'm of course talking about a little Scala goodness. How about this for defining a class with a property:</p>
 <pre lang="scala">
 class Person extends PropertyOwner {<br />
     val name : Property[String] = "smith"<br />
 }<br />
-<&#47;pre></p>
+</pre></p>
 <p>Note that there is only one line defining the property (including setting it to an initial value). So how would binding it to a JTextField look like? Like this:</p>
 <pre lang="scala">
     val p = new Person<br />
     val nameTextField = new JTextField()<br />
     Binder.bind(p.name, nameTextField)<br />
-<&#47;pre></p>
-<p>Note that I don't use the String "name" anywhere. Its all just normal, strongly typed values. If I use firstName instead of name by accident, the compiler will complain. The trick is obviously that I actually use objects of type <tt>Property<&#47;tt>, instead of fields, getters and setters. Yet using this thing looks (almost) perfect natural:</p>
+</pre></p>
+<p>Note that I don't use the String "name" anywhere. Its all just normal, strongly typed values. If I use firstName instead of name by accident, the compiler will complain. The trick is obviously that I actually use objects of type <tt>Property</tt>, instead of fields, getters and setters. Yet using this thing looks (almost) perfect natural:</p>
 <pre lang="scala">
     val p = new Person<br />
     p.name := "Alf"<br />
     println(p.name())<br />
-<&#47;pre></p>
-<p>The code to achieve this is rather simple and short. The key is that a <tt>Property<&#47;tt> has a <tt>apply<&#47;tt> method returning its value and an := operator as replacement for a setter.</p>
+</pre></p>
+<p>The code to achieve this is rather simple and short. The key is that a <tt>Property</tt> has a <tt>apply</tt> method returning its value and an := operator as replacement for a setter.</p>
 <pre lang="scala">
 class Property[T](var value : T) {<br />
     var listeners = List[T => Unit]()</p>
@@ -152,5 +152,5 @@ class Property[T](var value : T) {<br />
         }<br />
     }<br />
 }<br />
-<&#47;pre></p>
+</pre></p>
 <p>This is currently just a little toy, call it proof of concept if you like. It only works with JTextFields, and the event notification might needs tweaking, since it provides just the new value of the property right now. There are many more ideas how to use this as a basis for building nice clean code with a Swing GUI. Watch this blog for more ideas and toys like this.</p>

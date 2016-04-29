@@ -43,7 +43,7 @@ comments:
   content: "THANK YOU for sharing! \r\n\r\nalthough i get an exception when closing
     the session?\r\n<code>\r\norg.hibernate.TransactionException: Transaction not
     successfully started\r\n\tat org.hibernate.transaction.JDBCTransaction.rollback(JDBCTransaction.java:149)\r\n\tat
-    de.schauderhaft.rules.SessionFactoryRule.shutdown(SessionFactoryRule.java:43)\r\n<&#47;code>"
+    de.schauderhaft.rules.SessionFactoryRule.shutdown(SessionFactoryRule.java:43)\r\n</code>"
 - id: 3270
   author: Jens Schauder
   author_email: jens@schauderhaft.de
@@ -63,7 +63,7 @@ comments:
   date_gmt: '2011-03-15 07:55:53 +0100'
   content: "Nice post, and nice exposition of problem, and a possible solution if
     you are using Hibernate. In fact if you are using Spring Framework, JUnit testing
-    is much easier.\r\n\r\n@RunWith(SpringJUnit4ClassRunner.class)\r\n@ContextConfiguration(locations={\"&#47;META-INF&#47;spring&#47;applicationContext.xml\"})\r\n@TransactionConfiguration(transactionManager=\"transactionManager\",
+    is much easier.\r\n\r\n@RunWith(SpringJUnit4ClassRunner.class)\r\n@ContextConfiguration(locations={\"/META-INF/spring/applicationContext.xml\"})\r\n@TransactionConfiguration(transactionManager=\"transactionManager\",
     defaultRollback=false)\r\n@Transactional\r\npublic class OneToManyPerformanceTest
     {\r\n\t\r\n\t@Test\r\n\tpublic void returnsHerosWithMatchingType() {\r\n\t\r\n\t}\r\n\t\r\n}"
 - id: 3281
@@ -89,7 +89,7 @@ comments:
   date_gmt: '2011-03-16 10:36:12 +0100'
   content: "With these kind of tests the tables get created by Hibernate for each
     test a new. t's actually in the code above:\r\n\r\nconfiguration.setProperty(\"hibernate.hbm2ddl.auto\",
-    \"create\");\r\n\r\nThe data gets created inside the test using Java&#47;Hibernate.
+    \"create\");\r\n\r\nThe data gets created inside the test using Java/Hibernate.
     I\r\nI do this because it is friendly to refactoring and makes the tests as small
     as possible.\r\n\r\nWith such small tests I found the sql logging of hibernate
     to be sufficient for debugging.\r\n\r\nOf course there is also a place for tests
@@ -102,8 +102,8 @@ comments:
   date_gmt: '2011-09-08 07:25:24 +0200'
   content: 'Shameless plug: We used the same strategy but found that the time the
     unit tests took on a growing JPA project was increasing exponential because of
-    the dropping&#47;creating of the schema for each test. To solve this  we created
-    a small library that will re-use the same schema for all tests: http:&#47;&#47;markatta.com&#47;jee5unit&#47;index.html'
+    the dropping/creating of the schema for each test. To solve this  we created
+    a small library that will re-use the same schema for all tests: http://markatta.com/jee5unit/index.html'
 - id: 4222
   author: Jens Schauder
   author_email: jens@schauderhaft.de
@@ -157,7 +157,7 @@ comments:
   date: '2012-11-09 22:50:15 +0100'
   date_gmt: '2012-11-09 20:50:15 +0100'
   content: "@Eric You can do the same thing with xml mapped Hibernate Entities. You
-    just need a different Configuration. I think this on is the one you need: http:&#47;&#47;docs.jboss.org&#47;hibernate&#47;core&#47;3.5&#47;api&#47;org&#47;hibernate&#47;cfg&#47;Configuration.html\r\n\r\nIn
+    just need a different Configuration. I think this on is the one you need: http://docs.jboss.org/hibernate/core/3.5/api/org/hibernate/cfg/Configuration.html\r\n\r\nIn
     general use a setup as similar as possible as your production code, so if you
     use Spring you probably best served using the Spring-JUnit-Testing-Support classes."
 - id: 8684
@@ -192,7 +192,7 @@ comments:
   author_url: ''
   date: '2012-11-13 18:51:49 +0100'
   date_gmt: '2012-11-13 16:51:49 +0100'
-  content: "Addendum: I found this posting online, https:&#47;&#47;forum.hibernate.org&#47;viewtopic.php?f=1&amp;t=972729,
+  content: "Addendum: I found this posting online, https://forum.hibernate.org/viewtopic.php?f=1&amp;t=972729,
     which suggested making the call to get the session static. I did this, which got
     rid of the validating casting errors. \r\n\r\nI am now getting an exception initialization
     error at this line: \r\n@Rule\r\n\tpublic final SessionFactoryRule sf = new SessionFactoryRule();\r\n\t\r\nI
@@ -204,13 +204,13 @@ comments:
     catch (ClassNotFoundException e1) {\r\n\t\t\te1.printStackTrace();\r\n\t\t}\r\n\t\ttry
     {\r\n\t\t\tDriverManager.getConnection(\"jdbc:h2:mem:\", \"sa\", \"\");\r\n\t\t}
     catch (SQLException e) {\r\n\t\t\te.printStackTrace();\r\n\t\t}\r\n\t\t\r\n\t\tAnnotationConfiguration
-    configuration = new AnnotationConfiguration();\r\n\t\t&#47;&#47;configuration.addAnnotatedClass(Facility.class);\r\n\t\tconfiguration.setProperty(\"hibernate.dialect\",
+    configuration = new AnnotationConfiguration();\r\n\t\t//configuration.addAnnotatedClass(Facility.class);\r\n\t\tconfiguration.setProperty(\"hibernate.dialect\",
     \"org.hibernate.dialect.H2Dialect\");\r\n\t\tconfiguration.setProperty(\"hibernate.connection.driver_class\",
     \"org.h2.Driver\");\r\n\t\tconfiguration.setProperty(\"hibernate.connection.url\",
     \"jdbc:h2:mem:\");\r\n\t\tconfiguration.setProperty(\"hibernate.hbm2ddl.auto\",
-    \"create\");\r\n\t\t\r\n\t\thibernateSessions = configuration.buildSessionFactory();\r\n\t\t\r\n\t&#47;&#47;\treturn
-    sessionFactory;\t\r\n\t}\r\n\t\r\n\tpublic Session createSession() {\r\n&#47;&#47;\t\tsession
-    \ = sessionFactory.openSession();\r\n&#47;&#47;\t\treturn session;\r\n\t\t\r\n\t\treturn
+    \"create\");\r\n\t\t\r\n\t\thibernateSessions = configuration.buildSessionFactory();\r\n\t\t\r\n\t//\treturn
+    sessionFactory;\t\r\n\t}\r\n\t\r\n\tpublic Session createSession() {\r\n//\t\tsession
+    \ = sessionFactory.openSession();\r\n//\t\treturn session;\r\n\t\t\r\n\t\treturn
     hibernateSessions.openSession();\r\n\t}"
 - id: 8710
   author: Eric
@@ -236,7 +236,7 @@ public class SuperHero extends AbstractEntity {</p>
 <p>	@NotEmpty<br />
 	public String secretIdentity;<br />
 }<br />
-<&#47;pre></p>
+</pre></p>
 <pre lang="java">
 @Entity<br />
 public class SuperPower extends AbstractEntity {</p>
@@ -248,7 +248,7 @@ public class SuperPower extends AbstractEntity {</p>
 <p>	@NotNull<br />
 	@ManyToOne<br />
 	public SuperPowerType type;<br />
-}<&#47;pre></p>
+}</pre></p>
 <pre lang="java">
 @Entity<br />
 public class SuperPowerType extends AbstractEntity {</p>
@@ -259,7 +259,7 @@ public class SuperPowerType extends AbstractEntity {</p>
 	@Length(min = 30)<br />
 	public String description;<br />
 }<br />
-<&#47;pre></p>
+</pre></p>
 <p>As you can see (and if you don't I tell you) a SuperHero references a SuperPower and a SuperPower references a SuperPowerType. All have some mandatory attributes.<br />
 All three entities have a common supertype providing id and version.</p>
 <pre lang="java">
@@ -273,20 +273,20 @@ public class AbstractEntity {</p>
 	@Version<br />
 	private Long version;<br />
 }<br />
-<&#47;pre></p>
+</pre></p>
 <p>For brevity I skipped on getters and setters.</p>
-<p>Finally there is a <tt>SuperHeroRepository<&#47;tt> which I want to test. It has a single method returning a <tt>SuperHero<&#47;tt> based on the a <tt>SuperPower<&#47;tt><br />
+<p>Finally there is a <tt>SuperHeroRepository</tt> which I want to test. It has a single method returning a <tt>SuperHero</tt> based on the a <tt>SuperPower</tt><br />
 A simple test for the SuperHeroRepository might work like this:</p>
-<p>Create a <tt>SuperHero<&#47;tt> and make sure I can retrieve it again using the <tt>SuperHeroRepository<&#47;tt>.</p>
+<p>Create a <tt>SuperHero</tt> and make sure I can retrieve it again using the <tt>SuperHeroRepository</tt>.</p>
 <p>Easy, isn't it? Well ... lets see what you really have to do</p>
 <ul>
-<li> create an empty database<&#47;li>
-<li> create a <tt>SuperPowerType<&#47;tt>, making sure you have all the mandatory fields filled<&#47;li>
-<li> create a <tt>SuperPower<&#47;tt> of that type, making sure you have all the mandatory fields filled<&#47;li>
-<li> create a <tt>SuperHero<&#47;tt>, making sure you have all the mandatory fields filled<&#47;li>
-<li> use the repository to retrieve <tt>SuperHero<&#47;tt>s<&#47;li>
-<li> assert you got the expected result.<&#47;li><br />
-<&#47;ul><br />
+<li> create an empty database</li>
+<li> create a <tt>SuperPowerType</tt>, making sure you have all the mandatory fields filled</li>
+<li> create a <tt>SuperPower</tt> of that type, making sure you have all the mandatory fields filled</li>
+<li> create a <tt>SuperHero</tt>, making sure you have all the mandatory fields filled</li>
+<li> use the repository to retrieve <tt>SuperHero</tt>s</li>
+<li> assert you got the expected result.</li><br />
+</ul><br />
 So we have to fill all the mandatory fields and provide a SuperPowerType (again with all the mandatory fields) although nothing in the test is concerned with SuperPowerTypes. If you still don't believe this results in ugly code have a look at this naive implementation.</p>
 <pre lang="java">
 public class SuperHeroRepository1Test {<br />
@@ -294,7 +294,7 @@ public class SuperHeroRepository1Test {<br />
 	private Session session = null;</p>
 <p>	@Before<br />
 	public void before() {<br />
-		&#47;&#47; setup the session factory<br />
+		// setup the session factory<br />
 		AnnotationConfiguration configuration = new AnnotationConfiguration();<br />
 		configuration.addAnnotatedClass(SuperHero.class)<br />
 				.addAnnotatedClass(SuperPower.class)<br />
@@ -310,7 +310,7 @@ public class SuperHeroRepository1Test {<br />
 	}</p>
 <p>	@Test<br />
 	public void returnsHerosWithMatchingType() {</p>
-<p>		&#47;&#47; create the objects needed for testing<br />
+<p>		// create the objects needed for testing<br />
 		SuperPowerType powerType = new SuperPowerType();<br />
 		powerType.name = "TheType";<br />
 		powerType.description = "12345678901234567890aDescription";</p>
@@ -323,7 +323,7 @@ public class SuperHeroRepository1Test {<br />
 		hero.power = superpower;<br />
 		hero.weakness = "None";<br />
 		hero.secretIdentity = "Mr. Jones";</p>
-<p>		&#47;&#47; storing the objects for the test in the database<br />
+<p>		// storing the objects for the test in the database<br />
 		session.save(powerType);<br />
 		session.save(superpower);<br />
 		session.save(hero);</p>
@@ -338,7 +338,7 @@ public class SuperHeroRepository1Test {<br />
 		sessionFactory.close();<br />
 	}<br />
 }<br />
-<&#47;pre></p>
+</pre></p>
 <p>There is really only one positive thing I can say about this test: it uses H2 in In-Memory mode so it is reasonable fast. There is the first lesson: *Use an in memory database for testing if possible. It's easily 100*faster then a disc based database*</p>
 <p>So obviously we want to refactor this monster, which might after some method extracting result into something like this:</p>
 <pre lang="java">
@@ -400,8 +400,8 @@ public class SuperHeroRepository2Test {</p>
 		return powerType;<br />
 	}<br />
 }<br />
-<&#47;pre></p>
-<p>This would be ok, if this would be the only test of this kind. But other similar test need the SessionFactory as well so I will move all the SessionFactory, Session and Transaction stuff into a <a href="&#47;2009&#47;10&#47;04&#47;junit-rules&#47;">Rule<&#47;a> </p>
+</pre></p>
+<p>This would be ok, if this would be the only test of this kind. But other similar test need the SessionFactory as well so I will move all the SessionFactory, Session and Transaction stuff into a <a href="/2009/10/04/junit-rules/">Rule</a> </p>
 <pre lang="java">
 public class SessionFactoryRule implements MethodRule {<br />
 	private SessionFactory sessionFactory;<br />
@@ -469,7 +469,7 @@ public class SessionFactoryRule implements MethodRule {<br />
 		return session;<br />
 	}<br />
 }<br />
-<&#47;pre></p>
+</pre></p>
 <p>Which leaves the test in a somewhat acceptable state.</p>
 <pre lang="java">
 public class SuperHeroRepository3Test {</p>
@@ -490,7 +490,7 @@ public class SuperHeroRepository3Test {</p>
 <p>		assertNotNull(heroes);<br />
 		assertEquals(1, heroes.size());<br />
 	}</p>
-<p>        &#47;&#47; ... private methods more or less as before<br />
+<p>        // ... private methods more or less as before<br />
 }<br />
-<&#47;pre></p>
-<p>All the <tt>SessionFactory<&#47;tt> creation is now moved out into a Rule and is therefore perfectly reusable. You now can change the way you create your <tt>SessionFactory<&#47;tt> at a single point for all tests in need of a database. This is nice and it shall be enough for today. Next week we'll take care of our <tt>SuperHero<&#47;tt> and her dependencies.</p>
+</pre></p>
+<p>All the <tt>SessionFactory</tt> creation is now moved out into a Rule and is therefore perfectly reusable. You now can change the way you create your <tt>SessionFactory</tt> at a single point for all tests in need of a database. This is nice and it shall be enough for today. Next week we'll take care of our <tt>SuperHero</tt> and her dependencies.</p>

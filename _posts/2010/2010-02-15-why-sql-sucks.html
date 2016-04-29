@@ -90,7 +90,7 @@ comments:
     then you group (aka: define aggregate) then you filter on aggregate results (having
     clause).\r\n\r\n--\r\n\r\nModularization\r\n\r\nWhat about views? inherited tables?
     \ materialized views?  Scalar functions?  Table functions? Custom aggregate functions?
-    \ Triggers?  Relationships (PK&#47;FK)?  Computed columns? \r\n\r\n--\r\n\r\nTarget
+    \ Triggers?  Relationships (PK/FK)?  Computed columns? \r\n\r\n--\r\n\r\nTarget
     environment issue\r\n\r\nYou are complaining that sql can only be tested in same
     database with same schema as your system expects?\r\n\r\nIt is like complaining
     that your JVM class can only be tested in java (not c++), and only if it contains
@@ -122,8 +122,8 @@ comments:
     on a inner select, or replacing a where clause by a having clause after grouping
     on all columns (assuming the rows are unique, which can be achieved by a row counting
     column)\r\n\r\nNo, views do only very little of what I need. For an example consider
-    the sql statement in this article: <a href=\"&#47;2008&#47;08&#47;20&#47;sql-tricks-3-intervall-join\"
-    rel=\"nofollow\">&#47;2008&#47;08&#47;20&#47;sql-tricks-3-intervall-join<&#47;a>
+    the sql statement in this article: <a href=\"/2008/08/20/sql-tricks-3-intervall-join\"
+    rel=\"nofollow\">/2008/08/20/sql-tricks-3-intervall-join</a>
     (don't worry about the german noise around it and sorry for the bad formatting).
     As you can see it contains exactly the same subsqlect just on different tables.
     There are no easy ways to reduce this code duplication. The same applies for joins,
@@ -257,7 +257,7 @@ comments:
   date_gmt: '2010-09-02 08:13:05 +0200'
   content: "If you cant understand that beauty. Try going back to SQL 101. \r\n\r\nThe
     Solution is actually very simple. If you dont like SQL dont use it. If you dont
-    want to use SQL &#47; dont dislike it.  You will very soon find out how easy it
+    want to use SQL / dont dislike it.  You will very soon find out how easy it
     really is comparing to other Database Sotware. Try adding the same effort into
     learning SQL as Complaining about it. It sometimes helps. \r\n\r\nTutorial 1\r\n
     - Making the First Letter of a Word Uppercase. \r\n- Hold in shift and press the
@@ -298,7 +298,7 @@ comments:
   author_url: ''
   date: '2011-05-31 03:12:16 +0200'
   date_gmt: '2011-05-31 01:12:16 +0200'
-  content: "I'm glad everyone is writing about this.  I'm currently starting a PL&#47;SQL
+  content: "I'm glad everyone is writing about this.  I'm currently starting a PL/SQL
     class.\r\nFrankly, it's frustrating and time-consuming to learn.  The entity relationship
     model is easy to understand in an abstract manner.  The language used to articulate
     the model and manipulate its information is difficult.\r\nI have not gotten as
@@ -478,15 +478,15 @@ comments:
     hard to describe with SQL and there is no convenient structure.
 ---
 <p>About two weeks ago at work we discussed different strategies on testing databases. Although there are ways to do it, they are all more or less painful. And finally we all parted in agreeing: (SQL) databases suck, SQL sucks and testing databases and SQL sucks as well. We are only testing this crap because the only thing worse then database tests are untested databases. But complaining doesn't help. I have heard you are supposed to ask 5 times "why?" when faced with a problem. Maybe it was 7 times? Don't know lets start with asking it once:</p>
-<p><strong>Why does SQL suck?<&#47;strong></p>
-<p><strong>Hard to parse for computers<&#47;strong>: I don't know much about parsing, but it seems to be hard for a computer to identify the bits and pieces of a SQL statement, when it is not really SQL but just almost SQL. This results in really crappy IDE support, because the editor doesn't know what you are trying to write, before you finished it.</p>
-<p><strong>Hard to parse for humans<&#47;strong>: One of the ideas behind the design of SQL was to make it look almost like a sentence. While this works for trivial statements, it completely falls a part when you have some serious statement at hand. For an extremely bad example check out the <a href="&#47;2009&#47;06&#47;18&#47;building-a-turing-engine-in-oracle-sql-using-the-model-clause&#47;">turing engine implemented in Oracle SQL<&#47;a>. Side Note: aren't some fluent APIs trying to do just that.</p>
-<p><strong>Not consistent<&#47;strong>:Why does the having clause exist? Why nothing similar for group by? Who came up with the syntax of analytic functions. Why can I reference an expression defined the column list in the where clause, but not in the group by clause?</p>
-<p><strong>(Almost) no modularization<&#47;strong>: You need this real complex where condition in another select? Copy it. You need to join the same bunch of table, just with a tiny change in one condition? Copy it. You want to use the same group by clause in a different select? Copy it. There are few little things you can do to break your SQL code, but it is nothing compared to the power of a modern language like ... e.g. ... <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Fortran_66#FORTRAN_66">Fortran 66<&#47;a>.</p>
-<p><strong>No decent development environment appart from the target environment<&#47;strong> When you write a java application (and you do it the way it is supposed to be done), most of it can get compiled, and executed in a simple JVM. No web server needed, nor application server. Compare that to SQL. The only thing that can properly compile and execute a SQL statement is a database. And not just any database, but a database with all the accessed tables created and filled with data. This does not help when writing SQL code.</p>
+<p><strong>Why does SQL suck?</strong></p>
+<p><strong>Hard to parse for computers</strong>: I don't know much about parsing, but it seems to be hard for a computer to identify the bits and pieces of a SQL statement, when it is not really SQL but just almost SQL. This results in really crappy IDE support, because the editor doesn't know what you are trying to write, before you finished it.</p>
+<p><strong>Hard to parse for humans</strong>: One of the ideas behind the design of SQL was to make it look almost like a sentence. While this works for trivial statements, it completely falls a part when you have some serious statement at hand. For an extremely bad example check out the <a href="/2009/06/18/building-a-turing-engine-in-oracle-sql-using-the-model-clause/">turing engine implemented in Oracle SQL</a>. Side Note: aren't some fluent APIs trying to do just that.</p>
+<p><strong>Not consistent</strong>:Why does the having clause exist? Why nothing similar for group by? Who came up with the syntax of analytic functions. Why can I reference an expression defined the column list in the where clause, but not in the group by clause?</p>
+<p><strong>(Almost) no modularization</strong>: You need this real complex where condition in another select? Copy it. You need to join the same bunch of table, just with a tiny change in one condition? Copy it. You want to use the same group by clause in a different select? Copy it. There are few little things you can do to break your SQL code, but it is nothing compared to the power of a modern language like ... e.g. ... <a href="http://en.wikipedia.org/wiki/Fortran_66#FORTRAN_66">Fortran 66</a>.</p>
+<p><strong>No decent development environment appart from the target environment</strong> When you write a java application (and you do it the way it is supposed to be done), most of it can get compiled, and executed in a simple JVM. No web server needed, nor application server. Compare that to SQL. The only thing that can properly compile and execute a SQL statement is a database. And not just any database, but a database with all the accessed tables created and filled with data. This does not help when writing SQL code.</p>
 <p>Ok, we have some reasons for SQL sucking so badly. What's next. How about asking "Why?" again?</p>
-<p><strong>Why are all these things true about SQL?<&#47;strong></p>
+<p><strong>Why are all these things true about SQL?</strong></p>
 <p>That answer is easy: I have no idea. So let's step right ahead and ask again "Why"</p>
-<p><strong>Why does a curious developer with over 10 years of experience in database development know some reasons why SQL sucks, but can't answer the simple question, why these reasons apply?<&#47;strong></p>
+<p><strong>Why does a curious developer with over 10 years of experience in database development know some reasons why SQL sucks, but can't answer the simple question, why these reasons apply?</strong></p>
 <p>I think it is because nobody really discusses SQL (at least not loud enough for me to hear). I know there is the No-SQL-Movement, but I happen to think that a relational database is a pretty decent solution to many things. There are also things like the Hibernate Criteria API and HQL. But those do not operate on database schemas, but on classes and objects. While this is fine when you wan't to work with classes and objects, it sucks when you just want to process large tables. When processiong 100K database records pulling each out of the database, instanciate an object, manipulating it and writing it back is not an option.</p>
 <p>Yet a way to write queries in a more modular, easy to parse and easy to test way would be highly appreciated.</p>

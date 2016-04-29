@@ -40,7 +40,7 @@ comments:
   content: "In some cases, for example constructors, it is worth making your parameter
     object implement Cloneable so it can be used to represent the internal state of
     the object. This also does away with problems of mutability as a defensive copy
-    can easily be made.\r\n\r\nHere is an example I used recently that uses this pattern:\r\n\r\nhttp:&#47;&#47;java.net&#47;projects&#47;wadl&#47;sources&#47;svn&#47;content&#47;trunk&#47;wadl&#47;wadl-core&#47;src&#47;main&#47;java&#47;org&#47;jvnet&#47;ws&#47;wadl2java&#47;Wadl2Java.java?rev=345\r\n\r\nIn
+    can easily be made.\r\n\r\nHere is an example I used recently that uses this pattern:\r\n\r\nhttp://java.net/projects/wadl/sources/svn/content/trunk/wadl/wadl-core/src/main/java/org/jvnet/ws/wadl2java/Wadl2Java.java?rev=345\r\n\r\nIn
     this case it becomes more like a Memento rather than a Builder pattern."
 - id: 7852
   author: JP
@@ -48,8 +48,8 @@ comments:
   author_url: ''
   date: '2012-08-10 17:21:46 +0200'
   date_gmt: '2012-08-10 15:21:46 +0200'
-  content: my way of using <a href="http:&#47;&#47;goo.gl&#47;NkAhE" rel="nofollow">Builder
-    pattern in Java<&#47;a>
+  content: my way of using <a href="http://goo.gl/NkAhE" rel="nofollow">Builder
+    pattern in Java</a>
 - id: 7865
   author: JavaPins
   author_email: ''
@@ -57,7 +57,7 @@ comments:
   date: '2012-08-14 22:27:45 +0200'
   date_gmt: '2012-08-14 20:27:45 +0200'
   content: |-
-    <strong>Schauderhaft &Acirc;&raquo; Named Parameters in Java &acirc;&euro;&ldquo; an Alternative...<&#47;strong>
+    <strong>Schauderhaft &Acirc;&raquo; Named Parameters in Java &acirc;&euro;&ldquo; an Alternative...</strong>
 
     Thank you for submitting this cool story - Trackback from JavaPins...
 - id: 7866
@@ -89,15 +89,15 @@ comments:
   author_url: ''
   date: '2012-08-15 16:40:10 +0200'
   date_gmt: '2012-08-15 14:40:10 +0200'
-  content: "...another alternative using Initializer block\r\n\r\n<a href=\"https:&#47;&#47;gist.github.com&#47;3360682\"
-    &#47; rel=\"nofollow\">"
+  content: "...another alternative using Initializer block\r\n\r\n<a href=\"https://gist.github.com/3360682\"
+    / rel=\"nofollow\">"
 - id: 7870
   author: gnet
   author_email: nhtgnet@gmail.com
   author_url: ''
   date: '2012-08-15 16:41:37 +0200'
   date_gmt: '2012-08-15 14:41:37 +0200'
-  content: <a href="https:&#47;&#47;gist.github.com&#47;3360682" rel="nofollow">https:&#47;&#47;gist.github.com&#47;3360682<&#47;a>
+  content: <a href="https://gist.github.com/3360682" rel="nofollow">https://gist.github.com/3360682</a>
 - id: 7873
   author: Marino Flores
   author_email: marinoflores@gmail.com
@@ -105,7 +105,7 @@ comments:
   date: '2012-08-15 17:29:53 +0200'
   date_gmt: '2012-08-15 15:29:53 +0200'
   content: Complety agree with you, and acctually this is exactly what Accesors chain
-    do in Lombok http:&#47;&#47;projectlombok.org&#47;api&#47;lombok&#47;experimental&#47;Accessors.html
+    do in Lombok http://projectlombok.org/api/lombok/experimental/Accessors.html
 - id: 7920
   author: Frank
   author_email: frankys.spamschleuder@googlemail.com
@@ -115,7 +115,7 @@ comments:
   content: "a better alternative (with less code) would be the use of generics (and
     a static import):\r\n\r\n\r\npublic final class Param  {\r\n\r\n    public static
     final  T  param(String name, T param) {\r\n        return param;\r\n    }\r\n}\r\n\r\ndoSomething3(\r\n
-    \   param(\"name\", \"Alfred E. Neumann\"),\r\n    param(\"link, \"http:&#47;&#47;blog.schauderhaft.de\"),\r\n
+    \   param(\"name\", \"Alfred E. Neumann\"),\r\n    param(\"link, \"http://blog.schauderhaft.de\"),\r\n
     \   param(\"ultimateAnswer\", 42),\r\n    param(\"tempFile\", \"c:\\\\temp\\\\x.txt\"),\r\n
     \   param(\"zip\", 23)\r\n);"
 - id: 7921
@@ -137,21 +137,21 @@ comments:
     get that type of information in such a perfect means \r\nof writing? I've a presentation
     next week, and I am on the search for such info."
 ---
-<p>In the last installment of this blog I wrote about a way to <a href="&#47;2012&#47;07&#47;29&#47;named-parameters-in-java&#47;">fake Named Parameters in Java<&#47;a>. As so often there are many ways to do this, so here comes another one.</p>
+<p>In the last installment of this blog I wrote about a way to <a href="/2012/07/29/named-parameters-in-java/">fake Named Parameters in Java</a>. As so often there are many ways to do this, so here comes another one.</p>
 <p>Instead of static methods producing value objects for each parameter you can use a single parameter object that happens to be a builder:</p>
 <p>The method signature would look like this: </p>
 <pre lang="java">
 void doSomething3(ParameterBuilder pb)<br />
-<&#47;pre></p>
+</pre></p>
 <p>The usage looks like this:</p>
 <pre lang="java">
 doSomething3(new ParameterBuilder()<br />
     .name("Alfred E. Neumann")<br />
-    .link("http:&#47;&#47;blog.schauderhaft.de")<br />
+    .link("http://blog.schauderhaft.de")<br />
     .ultimateAnswer(42)<br />
     .tempFile("c:\\temp\\x.txt")<br />
     .zip(23)<br />
-);<&#47;pre></p>
+);</pre></p>
 <p>and the builder itself like this:</p>
 <pre lang="java">
 public class ParameterBuilder {</p>
@@ -180,8 +180,8 @@ public class ParameterBuilder {</p>
         file = aFile;<br />
         return this;<br />
     }</p>
-<p>    &#47;&#47; ... getters for the fields omitted.<br />
+<p>    // ... getters for the fields omitted.<br />
 }<br />
-<&#47;pre></p>
+</pre></p>
 <p>In a sense this is even more similar to named parameters, since you can define default values in the builder, thereby making arguments optional. Also the order of arguments does not matter.</p>
 <p>If you want to use the parameter object for more then transfering a bunch of values from one side of a method signature to the other you should consider actually creating an immutable object from you builder (or at least passing it as an implementation of an immutable interface)</p>

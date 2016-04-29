@@ -28,36 +28,36 @@ comments: []
 <p>I just love the assertion syntax of ScalaTest. It's easy to read and easy to write and looks like this:</p>
 <pre lang="scala">
 23 should be >= (12)<br />
-<&#47;pre></p>
+</pre></p>
 <p>Even if you know nothing about ScalaTest it should be easy to understand whats this assertion is about. But what when your assertions get more complex? Like this:</p>
 <pre lang="scala">
 new Frog().color.getGreen() should be >= (80)<br />
-<&#47;pre></p>
+</pre></p>
 <p>Although this assertion certainly isn't rocket science, it is not so easy to see what is getting tested here. How about this?</p>
 <pre lang="scala">
 new Frog() should  be_Greenish<br />
-<&#47;pre></p>
-<p>Now that is nice and clean and perfectly possible with ScalaTest. Of course we have to implement <tt>be_Greenish<&#47;tt> since ScalaTest doesn't care so much about Frogs being green. Luckily the implementation is simple:</p>
+</pre></p>
+<p>Now that is nice and clean and perfectly possible with ScalaTest. Of course we have to implement <tt>be_Greenish</tt> since ScalaTest doesn't care so much about Frogs being green. Luckily the implementation is simple:</p>
 <pre lang="scala">
 object be_Greenish extends Matcher[Frog]{<br />
     def apply (left : Frog) : MatchResult =<br />
         MatchResult(left.color.getGreen >= 80, "The frog is not green enough", "The frog contains to much green" )<br />
 }<br />
-<&#47;pre></p>
-<p><tt>should<&#47;tt> expects a <tt>Matcher<&#47;tt> of what ever comes before should. So <tt>be_greenish<&#47;tt> must be a <tt>Matcher[Frog]<&#47;tt>. The <tt>Matcher<&#47;tt> has one method which we need to implement: <tt>apply<&#47;tt> and it takes a <tt>Frog<&#47;tt> as an argument and returns a <tt>MatchResult<&#47;tt> which we can construct using boolean signifying if the frog passed the test represented by the matcher or not, and the messages to use when the test failed and when the test succeed but actually was supposed fail. This makes it possible to negate assertions using <tt>not<&#47;tt>. There is also a variation of <tt>MessageResult<&#47;tt> which takes two more messages as arguments. Those are used when assertions get combined using <tt>and<&#47;tt> or <tt>or<&#47;tt>. In these cases the failure message of a Matcher are only part of a longer sentence and therefore probably shouldn't start with a capital letter. </p>
+</pre></p>
+<p><tt>should</tt> expects a <tt>Matcher</tt> of what ever comes before should. So <tt>be_greenish</tt> must be a <tt>Matcher[Frog]</tt>. The <tt>Matcher</tt> has one method which we need to implement: <tt>apply</tt> and it takes a <tt>Frog</tt> as an argument and returns a <tt>MatchResult</tt> which we can construct using boolean signifying if the frog passed the test represented by the matcher or not, and the messages to use when the test failed and when the test succeed but actually was supposed fail. This makes it possible to negate assertions using <tt>not</tt>. There is also a variation of <tt>MessageResult</tt> which takes two more messages as arguments. Those are used when assertions get combined using <tt>and</tt> or <tt>or</tt>. In these cases the failure message of a Matcher are only part of a longer sentence and therefore probably shouldn't start with a capital letter. </p>
 <p>This approach would works really nice if we were testing some behavior of our frog. Like its ability to jump. We could create matcher that allow us to write things like:</p>
 <pre lang="scala">
 new Frog() should  jump (far)<br />
-<&#47;pre></p>
-<p><tt>jump<&#47;tt> would be a method taking a <tt>Distance<&#47;tt> as an argument and returning a <tt>Matcher[Frog]<&#47;tt>. <tt>far<&#47;tt> would be an instance of <tt>Distance<&#47;tt>.</p>
-<p>But we really just want to test a property. This causes the weird name 'be_Greenish' with the odd underscore. There is a easier and therefore better way to write these matchers: <tt>BePropertyMatcher<&#47;tt>:</p>
+</pre></p>
+<p><tt>jump</tt> would be a method taking a <tt>Distance</tt> as an argument and returning a <tt>Matcher[Frog]</tt>. <tt>far</tt> would be an instance of <tt>Distance</tt>.</p>
+<p>But we really just want to test a property. This causes the weird name 'be_Greenish' with the odd underscore. There is a easier and therefore better way to write these matchers: <tt>BePropertyMatcher</tt>:</p>
 <pre lang="scala">
 object greenish extends BePropertyMatcher[Frog]{<br />
     def apply(left : Frog) = BePropertyMatchResult(left.color.getGreen >= 80, "greenish")<br />
 }<br />
-<&#47;pre></p>
+</pre></p>
 <p>This allows us to write test like: </p>
 <pre lang="scala">
 new Frog(Color.blue)  should not  be(greenish)<br />
-<&#47;pre></p>
+</pre></p>
 <p>So whenever you write tests where the assertions are not trivial and possibly repeated in multiple tests consider to implement your own matchers. It's easy and makes for way easier to read tests.</p>

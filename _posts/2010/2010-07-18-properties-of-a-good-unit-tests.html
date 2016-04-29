@@ -29,13 +29,13 @@ comments:
   date_gmt: '2010-07-18 13:41:02 +0200'
   content: "Hi,\r\n\r\nAbsolutely, but some additions:\r\n<q>Fast: one thousand tests
     should run in less than a minute. This allows an extensive test suite to run often
-    during development. If your tests are slower, you might be doing integration tests.<&#47;q>\r\n\r\nI
+    during development. If your tests are slower, you might be doing integration tests.</q>\r\n\r\nI
     think this is even too long. In an IDE runner, a thousand tests should not take
     not longer than 5s. An efficient code-test-fix-cycle should be as fast as possible.
     waiting for a test suite to finish will drastically reduce the motivation to do
     TDD.\r\n\r\n<q>Reliable: For the same code base a test should produce the same
     result every time. A test that fails every 10th time will fail for a real bug
-    and you won&acirc;&euro;&trade;t know it.<&#47;q>\r\n\r\nAn even stronger requirement:
+    and you won&acirc;&euro;&trade;t know it.</q>\r\n\r\nAn even stronger requirement:
     A test has to be deterministic. This means no random, no new Date() or whatever.\r\n\r\nAnd
     finally, what i think is most important: A test has to be maintainable. This means
     refactoring a system under test should yield in efficient and small changes in
@@ -93,14 +93,14 @@ comments:
     run a test that fetches some values from server if the connection test didn't
     pass.\r\n\r\n--\r\nCheers,\r\nTomek Kaczanowski"
 ---
-<p><strong>Question:<&#47;strong> what are the properties which make a test a good unit test? If you have a good answer, check out my answer and add to it in the comments. If you don't here is mine.</p>
-<p><strong>Long Descriptive Name:<&#47;strong> For example <tt>returnsNullWhenCalledOnEmptyList<&#47;tt> is a nice name for a test</p>
-<p><strong>Simple Clean Structure:<&#47;strong> A test performs necessary setup, executes the method to be tested and performs its assertions. Not more not less </p>
-<p><strong>Fast:<&#47;strong> one thousand tests should run in less than a minute. This allows an extensive test suite to run often during development. If your tests are slower, you might be doing integration tests.</p>
-<p><strong>Test a Single Feature or behavior:<&#47;strong> This is sometimes phrased as 'one assertion', which I consider misleading. If you need multiple assertion in order to assert one behavior thats OK, although you might consider a new assert method for that. </p>
-<p><strong>Reliable:<&#47;strong> For the same code base a test should produce the same result every time. A test that fails every 10th time will fail for a real bug and you won't know it.</p>
-<p><strong>Stable:<&#47;strong> The test only fails, when the code under test doesn't behave as expected, not because anything else changed.</p>
-<p><strong>Easy to Understand:<&#47;strong> Just as normal code, the intention of a test should be easy to understand. Names help with this. Extracting setup code in a properly named method helps as well.</p>
-<p><strong>Should Not Use Production Classes, Except The Class Under Test:<&#47;strong> This helps with the 'Stable' and the 'Fast' property. It's ok to use simple classes like String or Integer.</p>
-<p><strong>Don't Try to Squeeze All Tests for a Class in a Single Test Class:<&#47;strong> For many classes you will have more then one test class. The different test classes will probably differ in the setup needed for the contained tests.</p>
-<p><strong>Independent:<&#47;strong> No Test should depend on any other Test or on the order of execution.</p>
+<p><strong>Question:</strong> what are the properties which make a test a good unit test? If you have a good answer, check out my answer and add to it in the comments. If you don't here is mine.</p>
+<p><strong>Long Descriptive Name:</strong> For example <tt>returnsNullWhenCalledOnEmptyList</tt> is a nice name for a test</p>
+<p><strong>Simple Clean Structure:</strong> A test performs necessary setup, executes the method to be tested and performs its assertions. Not more not less </p>
+<p><strong>Fast:</strong> one thousand tests should run in less than a minute. This allows an extensive test suite to run often during development. If your tests are slower, you might be doing integration tests.</p>
+<p><strong>Test a Single Feature or behavior:</strong> This is sometimes phrased as 'one assertion', which I consider misleading. If you need multiple assertion in order to assert one behavior thats OK, although you might consider a new assert method for that. </p>
+<p><strong>Reliable:</strong> For the same code base a test should produce the same result every time. A test that fails every 10th time will fail for a real bug and you won't know it.</p>
+<p><strong>Stable:</strong> The test only fails, when the code under test doesn't behave as expected, not because anything else changed.</p>
+<p><strong>Easy to Understand:</strong> Just as normal code, the intention of a test should be easy to understand. Names help with this. Extracting setup code in a properly named method helps as well.</p>
+<p><strong>Should Not Use Production Classes, Except The Class Under Test:</strong> This helps with the 'Stable' and the 'Fast' property. It's ok to use simple classes like String or Integer.</p>
+<p><strong>Don't Try to Squeeze All Tests for a Class in a Single Test Class:</strong> For many classes you will have more then one test class. The different test classes will probably differ in the setup needed for the contained tests.</p>
+<p><strong>Independent:</strong> No Test should depend on any other Test or on the order of execution.</p>

@@ -46,8 +46,8 @@ comments:
   author_url: http://pboop.wordpress.com
   date: '2012-01-24 19:49:47 +0100'
   date_gmt: '2012-01-24 17:49:47 +0100'
-  content: So you mean injecting <em>the instance<&#47;em>? - Then you have the classic
-    Spring&#47;EJB&#47;etc idea. Define a "Bean" and inject it. Then the Bean is the
+  content: So you mean injecting <em>the instance</em>? - Then you have the classic
+    Spring/EJB/etc idea. Define a "Bean" and inject it. Then the Bean is the
     singleton, right?
 - id: 4881
   author: Jens Schauder
@@ -91,14 +91,14 @@ comments:
   date: '2012-02-11 20:13:30 +0100'
   date_gmt: '2012-02-11 18:13:30 +0100'
   content: Thanks for this great post! I've linked it in a new post about this topic!
-    http:&#47;&#47;javapeanuts.blogspot.com&#47;2012&#47;02&#47;singleton-testing-and-dependency.html
+    http://javapeanuts.blogspot.com/2012/02/singleton-testing-and-dependency.html
 - id: 5083
   author: Fixing the Singleton &laquo; vvegh
   author_email: ''
   author_url: http://vvegh.wordpress.com/2012/02/20/fixing-the-singleton/
   date: '2012-02-20 19:21:55 +0100'
   date_gmt: '2012-02-20 17:21:55 +0100'
-  content: "[...] &Acirc;&nbsp;http:&#47;&#47;blog.schauderhaft.de&#47;2012&#47;01&#47;22&#47;fixing-the-singleton&#47;
+  content: "[...] &Acirc;&nbsp;http://blog.schauderhaft.de/2012/01/22/fixing-the-singleton/
     Share this:TwitterFacebookLike this:LikeBe the first to like this post.    This
     entry was posted on Monday, February 20th, 2012 at 5:20 pm and posted in java.
     You can follow any responses to this entry through the RSS 2.0 feed.     &laquo;
@@ -107,11 +107,11 @@ comments:
 <p>When you ask people who know almost, but not completely nothing about patterns, about software design patterns, they probably bring up the singleton pattern. It's extremely easy: Just make sure you have one single instance of a class.</p>
 <p>If you ask more experienced developers about the singleton, they will probably tell you its bad and should be avoided.</p>
 <p>What is so bad about the singleton that it fell from the heavon of patterns into the hell of anti patterns?</p>
-<p>If you check the description of the singleton pattern in the <a href="http:&#47;&#47;www.amazon.de&#47;gp&#47;product&#47;0201633612?ie=UTF8&amp;tag=schauderhafte-21&amp;linkCode=shr&amp;camp=3206&amp;creative=21426&amp;creativeASIN=0201633612&amp;ref_=sr_1_1&amp;qid=1326657640&amp;sr=8-1">Gang of Four book<&#47;a> it talks about two characteristics of the singleton:</p>
+<p>If you check the description of the singleton pattern in the <a href="http://www.amazon.de/gp/product/0201633612?ie=UTF8&amp;tag=schauderhafte-21&amp;linkCode=shr&amp;camp=3206&amp;creative=21426&amp;creativeASIN=0201633612&amp;ref_=sr_1_1&amp;qid=1326657640&amp;sr=8-1">Gang of Four book</a> it talks about two characteristics of the singleton:</p>
 <ul>
-<li>There can be only&Acirc;&nbsp; a single instance<&#47;li>
-<li>There is a central access point to that instance<&#47;li><br />
-<&#47;ul><br />
+<li>There can be only&Acirc;&nbsp; a single instance</li>
+<li>There is a central access point to that instance</li><br />
+</ul><br />
 And there really is nothing wrong about the first point. Sometimes you really can't have more then one instance, but even if multiple instances don't hurt, if they don't give you any benefit (i.e. if they are stateless) you might as well reuse a single instance.</p>
 <p>The problem is really with the central access point. This makes the singleton look and behave like a global variable. And how should we obtain our dependencies? Correct through Dependency injection.</p>
-<p>So the next time you think: "Looks like a singleton to me". Go ahead, create a singleton. But also create an interface which gets implemented by the singleton and make it very clear that nobody may use this singleton except via its interface and <a href="&#47;2012&#47;01&#47;01&#47;the-one-correct-way-to-do-dependency-injection&#47;">dependency injection through constructor<&#47;a>.</p>
+<p>So the next time you think: "Looks like a singleton to me". Go ahead, create a singleton. But also create an interface which gets implemented by the singleton and make it very clear that nobody may use this singleton except via its interface and <a href="/2012/01/01/the-one-correct-way-to-do-dependency-injection/">dependency injection through constructor</a>.</p>
