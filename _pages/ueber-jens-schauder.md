@@ -41,3 +41,9 @@ If you feel the need to contact me, there are plenty of options in the footer of
 If you feel old school or legal, you can write a letter to Jens Schauder, Schiebeweg 42,
 38116 Braunschweig
 
+### <a name="cookies"></a>Cookies
+
+This site uses cookies, for example for the information if you accepted the use of cookies.
+If you don't want this site to use cookies, go to a different site, and remove the cookies we
+already sent you (sorry for that). Or even better, configure your browser not to
+accept cookies.
