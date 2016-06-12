@@ -3,6 +3,10 @@ title: Schauderhaft
 
 include: ['_pages']
 
+email: info@schauderhaft.de
+github_username: schauder
+twitter_username: jensschauder
+
 # Build settings
 markdown: kramdown
 future: true
