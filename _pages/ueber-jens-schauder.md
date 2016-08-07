@@ -19,7 +19,7 @@ categories:
 - article
 tags: []
 comments: []
-order: 1
+order: 2
 ---
 
 I'm Jens Schauder, author of this blog and softwaredeveloper.
@@ -27,8 +27,8 @@ I'm Jens Schauder, author of this blog and softwaredeveloper.
 I love writing software, learning and teaching, playing (mainly boardgames, but also pen and paper
 roleplaying games when I find the time.
 
-This is a website, the usual stuff applies: What I write here is my opionion.
-Not the one of my employer, nor of my family or my dog. If I link to stuff, this means,
+This is a website, the usual stuff applies: What I write here is my opinion.
+Not the one of my employer, nor of my family or my dog (I don't even have a dog). If I link to stuff, this means,
 that at some point I was under the impression it exists under that URL. It doesn't
 mean it is still there. It doesn't mean I endorse it.
 
