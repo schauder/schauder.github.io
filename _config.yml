@@ -13,3 +13,6 @@ future: true
 
 gems:
   - jekyll-feed
+
+feed:
+  path: feed
