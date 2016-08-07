@@ -10,3 +10,6 @@ twitter_username: jensschauder
 # Build settings
 markdown: kramdown
 future: true
+
+gems:
+  - jekyll-feed
