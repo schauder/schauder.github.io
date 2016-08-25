@@ -233,3 +233,15 @@
     clear: both;
 }
 
+.pagenavigation {
+    display: block;
+    width: 100%
+}
+.pagenavigation a {
+    display: block;
+    width: 50%;
+    float: left;
+}
+.pagenavigation a.next {
+    text-align: right;
+}
