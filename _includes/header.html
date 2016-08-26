@@ -10,21 +10,20 @@
               <a href="{{ site.baseurl }}/">
                 <img class="navbar-image" alt="{{ site.title }}" src="{{ site.baseurl }}/assets/brand/ygo-transparent-48x48.png" />
                   <span id="brand" class="navbar-brand">
-                      {% unless page.title %}
                       {{ site.title }}
-                      {% endunless %}
                       </span>
               </a>
-              <span class="navbar-brand">{{ page.title }}</span>
+              <span id="title" class="navbar-brand">{{ page.title }}</span>
             </div>
+
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     {% assign pages = site.pages | sort:"order"  %}
-                    {% for page in pages %}
+                    {% for page in pages %}{% if page.title %}
                     <li>
                         <a href="{{ page.url | prepend: site.baseurl }}" class="navbar-menu-item">{{ page.title }}</a>
                     </li>
-                    {% endfor %}
+                    {% endif %}{% endfor %}
                 </ul>
             </div>
         </div>
