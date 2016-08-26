@@ -2,7 +2,7 @@
 layout: default
 status: publish
 published: true
-title: Hibernate NamingStrategy f&Atilde;&frac14;r Oracle
+title: Hibernate NamingStrategy für Oracle
 author:
   display_name: Jens Schauder
   login: admin
@@ -53,8 +53,8 @@ comments:
   date: '2012-01-19 15:50:24 +0100'
   date_gmt: '2012-01-19 13:50:24 +0100'
   content: 'Vielen Dank, Sie haben mir viel Arbeit abgenommen! Nur einen Verbesserungsvorschlag
-    m&Atilde;&para;chte ich gerne platzieren: Die gezeigte NamingStrategy hat M&Atilde;&frac14;he
-    mit Namen, welche mehrere zusammenh&Atilde;&curren;ngende Grossbuchstaben aufweisen.
+    möchte ich gerne platzieren: Die gezeigte NamingStrategy hat Mühe
+    mit Namen, welche mehrere zusammenhängende Grossbuchstaben aufweisen.
     So wird aus EMailAdresse em_ail_adresse, was nicht sehr leserlich ist.'
 - id: 4844
   author: Dominik S.
@@ -63,9 +63,9 @@ comments:
   date: '2012-01-19 16:33:16 +0100'
   date_gmt: '2012-01-19 14:33:16 +0100'
   content: "Nochmals Nachtrag (bezieht sich auf meinen Post im anderen <a href=\"http://blog.schauderhaft.de/2008/02/22/hibernate-namingstrategy-fur-oracle\"
-    rel=\"nofollow\">Blogeintrag</a>): F&Atilde;&frac14;r mich stimmt's wenn ich
+    rel=\"nofollow\">Blogeintrag</a>): Für mich stimmt's wenn ich
     die Methode isMultipleUpperToLower in addUnderscores rausnehme. Ich habe das Ganze
-    &Atilde;&frac14;brigens auf NHibernate und C# &Atilde;&frac14;bertragen:\r\n\r\n<pre>\r\n
+    übrigens auf NHibernate und C# übertragen:\r\n\r\n<pre>\r\n
     \   public class OracleNamingStrategy : INamingStrategy\r\n    {\r\n        public
     string ClassToTableName(string className)\r\n        {\r\n            return AbbreviateName(TableName(StringHelper.Unqualify(className)));\r\n
     \       }\r\n\r\n        public string PropertyToColumnName(string propertyName)\r\n
@@ -107,7 +107,7 @@ comments:
     i;\r\n                }\r\n            }\r\n            return index;\r\n        }\r\n\r\n
     \   }\r\n</pre>\r\n\r\nEs hat darin noch eine kleine Modifikation: Collection
     tables werden bei uns mit einem vorangestellten \"lt_\" benannt.\r\n\r\nHoffe,
-    das n&Atilde;&frac14;tzt jemandem.\r\n\r\n<b>-- English summary:</b>\r\n\r\nI've
+    das nützt jemandem.\r\n\r\n<b>-- English summary:</b>\r\n\r\nI've
     translated the NamingStrategy for Oracle to NHibernate and C#. Small additions:
     \r\n- I'm not using the IsMultipleUpperToLower() method in AddUnderscores() because
     I'm not happy with the result when there's a bunch of consecutive uppercase characters
@@ -119,7 +119,7 @@ comments:
   author_url: http://blog.schauderhaft.de
   date: '2012-01-19 19:52:21 +0100'
   date_gmt: '2012-01-19 17:52:21 +0100'
-  content: Cool, dass das jemanden geholfen hat. Und danke f&Atilde;&frac14;r die
+  content: Cool, dass das jemanden geholfen hat. Und danke für die
     modifizierte Version.
 - id: 4854
   author: Dominik S.
@@ -128,34 +128,34 @@ comments:
   date: '2012-01-20 13:39:03 +0100'
   date_gmt: '2012-01-20 11:39:03 +0100'
   content: Leider hat WordPress meinen Code-Tag nicht richtig angewandt oder ich bin
-    zu wenig ge&Atilde;&frac14;bt darin, auf WordPress Kommentare mit Code zu schreiben...
-    K&Atilde;&para;nnen Sie die Formatierung meines Kommentars noch beeinflussen?
+    zu wenig geübt darin, auf WordPress Kommentare mit Code zu schreiben...
+    Können Sie die Formatierung meines Kommentars noch beeinflussen?
 - id: 4855
   author: Jens Schauder
   author_email: jens@schauderhaft.de
   author_url: http://blog.schauderhaft.de
   date: '2012-01-20 21:25:12 +0100'
   date_gmt: '2012-01-20 19:25:12 +0100'
-  content: Der Hinweis &Atilde;&frac14;ber dem Kommentarfeld ist leider falsch. Einfach
+  content: Der Hinweis über dem Kommentarfeld ist leider falsch. Einfach
     das <pre> tag verwenden, dann funktioniert es.
 ---
-<p>In dem Projekt in dem ich aktuell arbeite, generieren wir unser Datenbank praktisch vollst&Atilde;&curren;ndig per <a href="http://www.hibernate.org/397.html">Hibernate Annotations</a>. Was die Benennung von Tabellen und Spalten angeht, verlassen wir uns dabei praktisch vollst&Atilde;&curren;ndig auf die Standards von Hibernate, die recht brauchbar sind. Eigentlich gibt es nur zwei echte Probleme und eine kleinere Unanehmlichkeit:</p>
+<p>In dem Projekt in dem ich aktuell arbeite, generieren wir unser Datenbank praktisch vollständig per <a href="http://www.hibernate.org/397.html">Hibernate Annotations</a>. Was die Benennung von Tabellen und Spalten angeht, verlassen wir uns dabei praktisch vollständig auf die Standards von Hibernate, die recht brauchbar sind. Eigentlich gibt es nur zwei echte Probleme und eine kleinere Unanehmlichkeit:</p>
 <ol>
-<li>Oracle unterst&Atilde;&frac14;tzt nur Spaltennamen und Tabellennamen bis zu einer L&Atilde;&curren;nge von 30 Zeichen (<a href="http://blogs.ittoolbox.com/oracle/fahdmirza/archives/history-of-oracle-12771">Ende der 70er</a> war dies vermutlich up-to-date oder sogar fortschrittlich).</li>
-<li>Werden mehrere gleichartige Objekte '<a href="http://www.hibernate.org/hib_docs/ejb3-api/javax/persistence/Embedded.html">Embedded</a>' in einer Entit&Atilde;&curren;t so gibt es einen <a href="http://forum.hibernate.org/viewtopic.php?t=967323&amp;highlight=">Namenskonflikt</a>.</li>
-<li>Standardm&Atilde;&curren;&Atilde;&Yuml;ig geht die Gliederung eines Namens durch CamelCasing verloren, wenn er  in Tabellen und Spaltennamen umgewandelt werden. (z.B. wird aus tollerAttributName einfach TOLLERATTRIBUTNAME. Viele w&Atilde;&frac14;rden TOLLER_ATTRIBUT_NAME bevorzugen.</li><br />
+<li>Oracle unterstützt nur Spaltennamen und Tabellennamen bis zu einer Länge von 30 Zeichen (<a href="http://blogs.ittoolbox.com/oracle/fahdmirza/archives/history-of-oracle-12771">Ende der 70er</a> war dies vermutlich up-to-date oder sogar fortschrittlich).</li>
+<li>Werden mehrere gleichartige Objekte '<a href="http://www.hibernate.org/hib_docs/ejb3-api/javax/persistence/Embedded.html">Embedded</a>' in einer Entität so gibt es einen <a href="http://forum.hibernate.org/viewtopic.php?t=967323&amp;highlight=">Namenskonflikt</a>.</li>
+<li>Standardmäßig geht die Gliederung eines Namens durch CamelCasing verloren, wenn er  in Tabellen und Spaltennamen umgewandelt werden. (z.B. wird aus tollerAttributName einfach TOLLERATTRIBUTNAME. Viele würden TOLLER_ATTRIBUT_NAME bevorzugen.</li><br />
 </ol><br />
-F&Atilde;&frac14;r Problem 2. und 3. gibt es eine fertige L&Atilde;&para;sung: <tt>DefaultComponentSafeNamingStrategy</tt>, die einfach vor der Erzeugung der SessionFactory in der Konfiguration gesetzt wird:</p>
+Für Problem 2. und 3. gibt es eine fertige Lösung: <tt>DefaultComponentSafeNamingStrategy</tt>, die einfach vor der Erzeugung der SessionFactory in der Konfiguration gesetzt wird:</p>
 <p><code>Configuration config = new AnnotationConfiguration().configure();<br />
 config.setNamingStrategy(new DefaultComponentSafeNamingStrategy());<br />
 sessionFactory = config.buildSessionFactory();</code></p>
-<p>Auf der Suche nach dieser L&Atilde;&para;sung bin ich auch bei ein paar Seiten vorbeigekommen, bei denen <a href="http://reverttoconsole.com/archives/97">Namenskonvention </a>mit Hilfe einer Namingstrategy umgesetzt werden.</p>
+<p>Auf der Suche nach dieser Lösung bin ich auch bei ein paar Seiten vorbeigekommen, bei denen <a href="http://reverttoconsole.com/archives/97">Namenskonvention </a>mit Hilfe einer Namingstrategy umgesetzt werden.</p>
 <blockquote><p>we extended the ImprovedNamingStrategy further to handle pluralization of tablenames</blockquote><br />
-Das verletzt zwar das Prinzip: Don't repeat yourself, denn niemand w&Atilde;&frac14;rde wohl erwarten, dass die <tt>CUSTOMER</tt> Tabelle nur einen Kunden enth&Atilde;&curren;lt, aber wer's mag. Immer noch besser als <a href="http://www.jroller.com/mert/date/20060518">Code Obfuscation</a></p>
+Das verletzt zwar das Prinzip: Don't repeat yourself, denn niemand würde wohl erwarten, dass die <tt>CUSTOMER</tt> Tabelle nur einen Kunden enthält, aber wer's mag. Immer noch besser als <a href="http://www.jroller.com/mert/date/20060518">Code Obfuscation</a></p>
 <blockquote><p> class: tr.PopulationCenter &Atilde;&nbsp; table: T_PPLTN_CNTR<br />
 property: upperPopulationCenter &Atilde;&nbsp; column: UPPR_PPLTN_CNTR</blockquote><br />
-Ganz Abseits von der l&Atilde;&curren;nglichen Diskussion &Atilde;&frac14;ber Codeconventionen, so ist die Idee, sie per NamingStrategy umzusetzen, doch definitiv eine Gute. Ich habe mein neu gewonnenes Wissen erstmal ausprobiert um eine Namingstrategy zu konstruieren, die Tabellen und Spaltennamen auf 30 Zeichen k&Atilde;&frac14;rzt, hoffentlich ohne dabei v&Atilde;&para;llig unleserlich zu werden. Der Algorithmus wandelt Namen wie <tt>Auftragsbestaetigung_Rueckantwort_lineitem</tt> um in <tt>Auftragsb_Rueckantw_lineitem</tt>. Der Algorithmus sucht nach dem l&Atilde;&curren;ngsten Teilst&Atilde;&frac14;ck und k&Atilde;&frac14;rzt es um die letzen Vokale inklusive eventuell nachfolgender Konsonanten. Dies wird wiederholt, bis der Name maximal noch 30 Zeichen lang ist.</p>
-<p><tt>Auftragsbestaetigung</tt> aus dem obigen Beispiel wird also der Reihe nach <tt>Auftragsbestaetig</tt>, <tt>Auftragsbestaet</tt>, <tt>Auftragsbest</tt> und schlie&Atilde;&Yuml;lich <tt>Auftragsbest</tt></p>
+Ganz Abseits von der länglichen Diskussion über Codeconventionen, so ist die Idee, sie per NamingStrategy umzusetzen, doch definitiv eine Gute. Ich habe mein neu gewonnenes Wissen erstmal ausprobiert um eine Namingstrategy zu konstruieren, die Tabellen und Spaltennamen auf 30 Zeichen kürzt, hoffentlich ohne dabei völlig unleserlich zu werden. Der Algorithmus wandelt Namen wie <tt>Auftragsbestaetigung_Rueckantwort_lineitem</tt> um in <tt>Auftragsb_Rueckantw_lineitem</tt>. Der Algorithmus sucht nach dem längsten Teilstück und kürzt es um die letzen Vokale inklusive eventuell nachfolgender Konsonanten. Dies wird wiederholt, bis der Name maximal noch 30 Zeichen lang ist.</p>
+<p><tt>Auftragsbestaetigung</tt> aus dem obigen Beispiel wird also der Reihe nach <tt>Auftragsbestaetig</tt>, <tt>Auftragsbestaet</tt>, <tt>Auftragsbest</tt> und schließlich <tt>Auftragsbest</tt></p>
 <pre>
 <p>import java.util.StringTokenizer;</p>
 <p>import org.hibernate.cfg.DefaultComponentSafeNamingStrategy;</p>
@@ -287,4 +287,4 @@ Ganz Abseits von der l&Atilde;&curren;nglichen Diskussion &Atilde;&frac14;ber Co
     return index;<br />
   }<br />
 }</pre><br />
-Das ganze ist im Halbschlaf entstanden und weder gr&Atilde;&frac14;ndlich getestet noch intensiv genutzt worden. Benutzung also auf eigene Gefahr. Sollte es sich aber als praktisch erweisen, so wie es ist, oder in abgewandelter Form so w&Atilde;&frac14;rde ich mich sehr &Atilde;&frac14;ber einen entsprechenden Kommentar freuen</p>
+Das ganze ist im Halbschlaf entstanden und weder gründlich getestet noch intensiv genutzt worden. Benutzung also auf eigene Gefahr. Sollte es sich aber als praktisch erweisen, so wie es ist, oder in abgewandelter Form so würde ich mich sehr über einen entsprechenden Kommentar freuen</p>

@@ -26,15 +26,15 @@ comments:
   author_url: ''
   date: '2009-03-04 14:22:43 +0100'
   date_gmt: '2009-03-04 13:22:43 +0100'
-  content: "Hallom\r\n\r\nauch wenn dieser Beitrag schon ein bisschen &Atilde;&curren;lter
-    ist, scheint das Thema an sich nicht alt zu werden.\r\nWir besch&Atilde;&curren;ftigen
+  content: "Hallom\r\n\r\nauch wenn dieser Beitrag schon ein bisschen älter
+    ist, scheint das Thema an sich nicht alt zu werden.\r\nWir beschäftigen
     uns gerade mit der selben Fragestellung. Rein intuitiv und nach allem was ich
-    bis jetzt zu Hibernate gelesen habe w&Atilde;&frac14;rde ich den selben Ansatz
-    verfolgen den Du in Deiner Antwort pr&Atilde;&curren;sentierst.\r\n\r\nDa der
-    Artikel ja schon ein bisschen &Atilde;&curren;lter ist, hoffe ich das Du jetzt
-    um einige Erfahrungen reicher bist, was die Thematik angeht. Mich w&Atilde;&frac14;rde
-    vor allem interessieren, ob der Weg zum Ziel f&Atilde;&frac14;hrt und &Atilde;&frac14;ber
-    welche Steine man dabei stolpern kann.\r\n\r\nViele Gr&Atilde;&frac14;&Atilde;&Yuml;e\r\nNiels
+    bis jetzt zu Hibernate gelesen habe würde ich den selben Ansatz
+    verfolgen den Du in Deiner Antwort präsentierst.\r\n\r\nDa der
+    Artikel ja schon ein bisschen älter ist, hoffe ich das Du jetzt
+    um einige Erfahrungen reicher bist, was die Thematik angeht. Mich würde
+    vor allem interessieren, ob der Weg zum Ziel führt und über
+    welche Steine man dabei stolpern kann.\r\n\r\nViele Grüße\r\nNiels
     Hoffmann"
 - id: 144
   author: Jens Schauder
@@ -42,30 +42,30 @@ comments:
   author_url: http://blog.schauderhaft.de
   date: '2009-03-04 18:10:10 +0100'
   date_gmt: '2009-03-04 17:10:10 +0100'
-  content: "Hi Niels, \r\nder Weg f&Atilde;&frac14;hrt zum Ziel, Steine zum stolpern
-    gibt es allerdings jede Menge.\r\n\r\n- Die L&Atilde;&para;sung ist durchaus komplex.
+  content: "Hi Niels, \r\nder Weg führt zum Ziel, Steine zum stolpern
+    gibt es allerdings jede Menge.\r\n\r\n- Die Lösung ist durchaus komplex.
     Es gab bei uns immer wieder Situationen, in denen jemand auf die falsche Session
-    zugegriffen hat und dadurch Probleme verursacht wurden. M&Atilde;&para;gliche
-    Abhilfe k&Atilde;&para;nnte hier ein DI Framework (hat jemand Spring gesagt?)
+    zugegriffen hat und dadurch Probleme verursacht wurden. Mögliche
+    Abhilfe könnte hier ein DI Framework (hat jemand Spring gesagt?)
     schaffen, dass immer die Richtige Session injiziert. Da muss ich aber selbst erst
-    noch schlau machen, ob es das h&Atilde;&curren;lt, was ich mir davon verspreche.\r\n-
+    noch schlau machen, ob es das hält, was ich mir davon verspreche.\r\n-
     Caching ist ein echter Schwachpunkt jeder 2 Schichtarchitektur. Jede Form des
-    cachens beim Client kann zu veralteten Daten f&Atilde;&frac14;hren -> Optimistic
+    cachens beim Client kann zu veralteten Daten führen -> Optimistic
     locking exceptions\r\n\r\n\r\nWenn man Probleme vermeiden will ist as Wichtigste,
     dass die Entwickler, oder zumindest ein wesentlicher Anteil, Hibernate wirklich
-    verstanden haben. Und damit meine ich nicht, dass sie alle m&Atilde;&para;glichen
+    verstanden haben. Und damit meine ich nicht, dass sie alle möglichen
     Mappings beherrschen, sondern das klar ist, wann man aus welchem Grund, update,
     load, get, flush oder commit aufruft und welche Auswirkungen das hat.\r\n\r\nUnd
-    man sollte sich der Alternativen bewusst sein:\r\n- Ein Webapp &Atilde;&curren;hnlicher
-    Ansatz, bei dem mit detachten Objekten gearbeitet wird. Sessions w&Atilde;&frac14;rden
-    dabei immer nur kurz ge&Atilde;&para;ffnet, die Daten gelesen und/oder geschrieben
+    man sollte sich der Alternativen bewusst sein:\r\n- Ein Webapp ähnlicher
+    Ansatz, bei dem mit detachten Objekten gearbeitet wird. Sessions würden
+    dabei immer nur kurz geöffnet, die Daten gelesen und/oder geschrieben
     und dann die Session wieder geschlossen werden. Vorteil: einfacher, vermutlich
-    skalierbarer. Nachteil: kein Lazy Loading, was wiederum dazu f&Atilde;&frac14;hrt,
+    skalierbarer. Nachteil: kein Lazy Loading, was wiederum dazu führt,
     dass die Datenzugriffsschicht genau wissen muss was die GUI braucht. Also muss
     die GUI so schlau werden, dass sie dass der Datenzugriffsschicht sagen kann, was
-    sie braucht, oder die Datenzugriffsschicht braucht implizites Wissen &Atilde;&frac14;ber
+    sie braucht, oder die Datenzugriffsschicht braucht implizites Wissen über
     die GUI.\r\n- 3 Schichtarchitektur. Vor und Nachteile wie oben, dazu kommt: Vorteil
-    einfacher Umbau zur Webapp, besser cache M&Atilde;&para;glichkeit. Nachteil: komplexer
+    einfacher Umbau zur Webapp, besser cache Möglichkeit. Nachteil: komplexer
     in der Entwicklung und beim debuggen."
 - id: 146
   author: Niels Hoffmann
@@ -73,16 +73,16 @@ comments:
   author_url: http://www.bgbm.org/BioDivInf/default.htm
   date: '2009-03-05 13:59:37 +0100'
   date_gmt: '2009-03-05 12:59:37 +0100'
-  content: "Hallo Jens,\r\n\r\nvielen Dank f&Atilde;&frac14;r die ausf&Atilde;&frac14;hrliche
-    Antwort und sch&Atilde;&para;n zu h&Atilde;&para;ren, dass der Ansatz im Grunde
-    funktionoiert. \r\n\r\nViele Gr&Atilde;&frac14;&Atilde;&Yuml;e\r\nNiels Hoffmann"
+  content: "Hallo Jens,\r\n\r\nvielen Dank für die ausführliche
+    Antwort und schön zu hören, dass der Ansatz im Grunde
+    funktionoiert. \r\n\r\nViele Grüße\r\nNiels Hoffmann"
 - id: 187
-  author: Michael Gr&Atilde;&frac14;newald
+  author: Michael Grünewald
   author_email: ''
   author_url: ''
   date: '2009-05-11 14:22:34 +0200'
   date_gmt: '2009-05-11 13:22:34 +0200'
-  content: "Hallo Jens,\r\n\r\nwas hat Dein Spring-Ansatz gebracht?\r\n\r\nViele Gr&Atilde;&frac14;&Atilde;&Yuml;e
+  content: "Hallo Jens,\r\n\r\nwas hat Dein Spring-Ansatz gebracht?\r\n\r\nViele Grüße
     Michae"
 - id: 188
   author: Jens Schauder
@@ -91,32 +91,32 @@ comments:
   date: '2009-05-11 14:28:49 +0200'
   date_gmt: '2009-05-11 13:28:49 +0200'
   content: "Hallo Michael,\r\nich bin leider noch nicht dazu gekommen mich ernsthaft
-    mit Spring zu besch&Atilde;&curren;ftigen."
+    mit Spring zu beschäftigen."
 ---
 <p>There is a<a href="/2008/09/28/hibernate-sessions-in-two-tier-rich-client-applications/"> english version of the article</a> available.</p>
-<p>Die meisten Teams setzen Hibernate f&Atilde;&frac14;r Webanwendungen ein. Schon allein, weil wesentlich mehr Webanwendungen erstellt werden, als klassische Client-Server-Systeme. Ich dagegen setze es zur Zeit in einer Swing basierten Zwei-Schichten-Architektur ein. In Webanwendung ist die Interaktion mit der Datenbank und Hibernate stark strukturiert: Der Server erh&Atilde;&curren;lt eine Anfrage, bearbeitet sie und liefert das Ergebnis in Form einer Webseite wieder zur&Atilde;&frac14;ck. F&Atilde;&frac14;r genau diesen Zeitraum wird in Webanwendungen eine <a href="http://www.hibernate.org/hib_docs/v3/api/org/hibernate/Session.html" title="Hibernate Session Javadoc">Hibernate Session</a> verwendet und die Hibernate Session ist so implementiert, dass genau dies <a href="http://www.hibernate.org/42.html" title="Hibernate Artikel zu Session und Transactions">gut funktioniert</a>.</p>
+<p>Die meisten Teams setzen Hibernate für Webanwendungen ein. Schon allein, weil wesentlich mehr Webanwendungen erstellt werden, als klassische Client-Server-Systeme. Ich dagegen setze es zur Zeit in einer Swing basierten Zwei-Schichten-Architektur ein. In Webanwendung ist die Interaktion mit der Datenbank und Hibernate stark strukturiert: Der Server erhält eine Anfrage, bearbeitet sie und liefert das Ergebnis in Form einer Webseite wieder zurück. Für genau diesen Zeitraum wird in Webanwendungen eine <a href="http://www.hibernate.org/hib_docs/v3/api/org/hibernate/Session.html" title="Hibernate Session Javadoc">Hibernate Session</a> verwendet und die Hibernate Session ist so implementiert, dass genau dies <a href="http://www.hibernate.org/42.html" title="Hibernate Artikel zu Session und Transactions">gut funktioniert</a>.</p>
 <ul>
-<li>Die Session repr&Atilde;&curren;sentiert eine 'Unit of Work', also eine Arbeitseinheit. Diese kann identisch mit einer Datenbanktransaktion sein, kann sich aber auch &Atilde;&frac14;ber mehrere Datenbanktransaktionen erstrecken.</li>
-<li>Es ist eine Id-Map Jede Entit&Atilde;&curren;t gibt es in einer  Session nur einmal.</li>
-<li>Eine Session ist ein First Level Cache f&Atilde;&frac14;r die Datenbank: Jede Entit&Atilde;&curren;t die in der Session verwendet wird, wird in der Session gehalten, bis die Session beendet wird.</li>
+<li>Die Session repräsentiert eine 'Unit of Work', also eine Arbeitseinheit. Diese kann identisch mit einer Datenbanktransaktion sein, kann sich aber auch über mehrere Datenbanktransaktionen erstrecken.</li>
+<li>Es ist eine Id-Map Jede Entität gibt es in einer  Session nur einmal.</li>
+<li>Eine Session ist ein First Level Cache für die Datenbank: Jede Entität die in der Session verwendet wird, wird in der Session gehalten, bis die Session beendet wird.</li>
 <li>Um Lazy Loading zu verwenden muss ein Objekt einer Session zugeordnet sein, und ein Objekt kann (im wesentlichen) nur einer Session zugeordnet sein.</li><br />
 </ul><br />
 Die 'Unit of Work' ist in Form eines Requests bei Webapplikationen einleuchtend und eindeutig identifizierbar, wie oben beschrieben.</p>
-<p>In einer Zwei-Schichten-Architektur sieht die Welt jedoch anders aus. Zun&Atilde;&curren;chst einmal ist es verlockend, &Atilde;&curren;hnlich zu arbeiten, wie man es von JDBC Verbindungen gew&Atilde;&para;hnt ist: Man beginnt eine Session und arbeitet mit dieser Session bis zum Ende der Anwendung. Dies hat offensichtliche Vorteile: Die Id-Map stellt sicher, dass jede Entit&Atilde;&curren;t eindeutig in der JVM repr&Atilde;&curren;sentiert wird. Aktualisierung von GUI-Komponenten funktioniert dadurch praktisch von alleine. Aber es hat ebenso offensichtliche Nachteile. Durch das Caching in der Session, w&Atilde;&curren;chst die Session immer weiter an. Fr&Atilde;&frac14;her oder sp&Atilde;&curren;ter f&Atilde;&frac14;hrt dies unweigerlich zu Speicherproblemen. Es gibt Anwendungen, f&Atilde;&frac14;r die dies akzeptabel ist, viele Anwendungen ben&Atilde;&para;tigen aber ein anderes Konzept. Um ein solches Konzept zu entwickeln sollte man sich im klaren sein, was man eigentlich will.</p>
-<p>F&Atilde;&frac14;r uns war dies:</p>
+<p>In einer Zwei-Schichten-Architektur sieht die Welt jedoch anders aus. Zunächst einmal ist es verlockend, ähnlich zu arbeiten, wie man es von JDBC Verbindungen gewöhnt ist: Man beginnt eine Session und arbeitet mit dieser Session bis zum Ende der Anwendung. Dies hat offensichtliche Vorteile: Die Id-Map stellt sicher, dass jede Entität eindeutig in der JVM repräsentiert wird. Aktualisierung von GUI-Komponenten funktioniert dadurch praktisch von alleine. Aber es hat ebenso offensichtliche Nachteile. Durch das Caching in der Session, wächst die Session immer weiter an. Früher oder später führt dies unweigerlich zu Speicherproblemen. Es gibt Anwendungen, für die dies akzeptabel ist, viele Anwendungen benötigen aber ein anderes Konzept. Um ein solches Konzept zu entwickeln sollte man sich im klaren sein, was man eigentlich will.</p>
+<p>Für uns war dies:</p>
 <ol>
-<li>Lazy Loading muss funktionieren, da dies eins der Hauptargumente f&Atilde;&frac14;r, bzw. Vorteile von Hibernate sind, gegen&Atilde;&frac14;ber einer manuell implementierten Variante auf Basis von JDBC</li>
-<li>Verschiedene Ansichten einer Entit&Atilde;&curren;t m&Atilde;&frac14;ssen synchron gehalten werden.</li>
-<li>Das ganze muss muss halbwegs stabil und zuverl&Atilde;&curren;ssig sein, so dass auch Otto Normalentwickler damit umgehen kann.</li><br />
+<li>Lazy Loading muss funktionieren, da dies eins der Hauptargumente für, bzw. Vorteile von Hibernate sind, gegenüber einer manuell implementierten Variante auf Basis von JDBC</li>
+<li>Verschiedene Ansichten einer Entität müssen synchron gehalten werden.</li>
+<li>Das ganze muss muss halbwegs stabil und zuverlässig sein, so dass auch Otto Normalentwickler damit umgehen kann.</li><br />
 </ol><br />
-Anforderung Nr.1 zwingt dazu, das jedes Objekt, welches aus der Datenbank geladen wird, in einer Session verbleibt. Um zu verhindern, dass wir Objekte auf ewig in einer Session sammeln, muss eine Session zu einem definierten Zustand wieder geschlossen werden, nat&Atilde;&frac14;rlich erst, wenn die enthaltenen Objekte nicht mehr verwendet werden.</p>
+Anforderung Nr.1 zwingt dazu, das jedes Objekt, welches aus der Datenbank geladen wird, in einer Session verbleibt. Um zu verhindern, dass wir Objekte auf ewig in einer Session sammeln, muss eine Session zu einem definierten Zustand wieder geschlossen werden, natürlich erst, wenn die enthaltenen Objekte nicht mehr verwendet werden.</p>
 <p>Aber wo ist die Session (oder Unit of Work)? Man stellt sich etwas vor wie: Daten laden, Daten ver- bzw. bearbeiten, Daten speichern.</p>
 <p>Wenn ich eine Liste von Personen anzeige, starte ich damit also wohl eine Session.</p>
-<p>Wenn ich eine Person ausw&Atilde;&curren;hle, editiere und speichere, beende ich damit ein Session. Problem gel&Atilde;&para;st?  Mit nichten! Ich w&Atilde;&curren;hle ein zweite Person zur Bearbeitung aus und schon habe ich eine Session ge&Atilde;&para;ffnet, und zwei beendet?</p>
-<p>Zu einem gegebenen Zeitpunkt kann es beliebig viele Dialoge oder Fenster in der Anwendung geben. Objekte werden per Drag'n'Drop von einem Fenster ins n&Atilde;&curren;chste gezogen. Alles kann zumindest prinzipiell mit allem interagieren. Wo ist da die Session?</p>
-<p>Meine Antwort: Im wesentlichen hat jedes Fenster seine eigene Session, Modale Dialog verwenden die Session ihres &Atilde;&frac14;bergeordneten Fensters, Aktionen die im Hintergrund laufen haben ebenfalls ihre eigene Session. Wird das Fenster geschlossen, oder die Hintergrundaktion abgeschlossen, wird auch die Session geschlossen. Daher ist es wichtig, dass kein Objekt, dass in einem Fenster bearbeitet wird, den Einflussbereich dieses Fensters verl&Atilde;&curren;&Atilde;&Yuml;t.  Es w&Atilde;&frac14;rde ansonsten nicht mehr zu einer aktiven Session geh&Atilde;&para;ren und Lazy Loading w&Atilde;&frac14;rde nicht mehr funktionieren.</p>
-<p>Wie kommen dann Objekte von einem Fenster ins n&Atilde;&curren;chste? Wie bei einer Webanwendung: Es wird die Id &Atilde;&frac14;bergeben und &Atilde;&frac14;ber Session.get() wird das Objekt neu geladen. Ein Second Level Cache  sorgt daf&Atilde;&frac14;r, dass dieses neu Laden nur dann auf die Datenbank trifft, wenn der urspr&Atilde;&frac14;ngliche Ladeprozess schon entsprechend lange her ist.</p>
-<p>Bleibt die Frage, wie ich sicherstellen kann, dass keine veralteten Daten in einem Fenster dargestellt werden, obwohl sie in einem anderen Fenster der Anwendung schon in einer aktualisierten Form dargestellt sind. Dies kann durch erstaunlich wenig Aufwand bewerkstelligt werden. Mit einem Listener an postLoad, postUpdate und commit Events bekommen wir mit, wenn es neue Versionen einer Entit&Atilde;&curren;t in der Datenbank gibt. &Atilde;&oelig;ber Sessions.getSessionStatistics k&Atilde;&para;nnen wir herausfinden, welche Session welche dieser Entit&Atilde;&curren;ten ebenfalls beeinhaltet und k&Atilde;&para;nnen gegebenenfalls Session.refresh() aufrufen, um das Objekt zu aktualisieren. Dies sollte nat&Atilde;&frac14;rlich nur f&Atilde;&frac14;r Sessions geschehen, die nur f&Atilde;&frac14;r Lesezwecke verwendet werden, da der Benutzer wohl kaum begeistert ist, wenn w&Atilde;&curren;hrend er ein Objekt editiert, dies gerade mal unaufgefordert durch eine frische Version aus der Datenbank ersetzt wird.</p>
+<p>Wenn ich eine Person auswähle, editiere und speichere, beende ich damit ein Session. Problem gelöst?  Mit nichten! Ich wähle ein zweite Person zur Bearbeitung aus und schon habe ich eine Session geöffnet, und zwei beendet?</p>
+<p>Zu einem gegebenen Zeitpunkt kann es beliebig viele Dialoge oder Fenster in der Anwendung geben. Objekte werden per Drag'n'Drop von einem Fenster ins nächste gezogen. Alles kann zumindest prinzipiell mit allem interagieren. Wo ist da die Session?</p>
+<p>Meine Antwort: Im wesentlichen hat jedes Fenster seine eigene Session, Modale Dialog verwenden die Session ihres übergeordneten Fensters, Aktionen die im Hintergrund laufen haben ebenfalls ihre eigene Session. Wird das Fenster geschlossen, oder die Hintergrundaktion abgeschlossen, wird auch die Session geschlossen. Daher ist es wichtig, dass kein Objekt, dass in einem Fenster bearbeitet wird, den Einflussbereich dieses Fensters verläßt.  Es würde ansonsten nicht mehr zu einer aktiven Session gehören und Lazy Loading würde nicht mehr funktionieren.</p>
+<p>Wie kommen dann Objekte von einem Fenster ins nächste? Wie bei einer Webanwendung: Es wird die Id übergeben und über Session.get() wird das Objekt neu geladen. Ein Second Level Cache  sorgt dafür, dass dieses neu Laden nur dann auf die Datenbank trifft, wenn der ursprüngliche Ladeprozess schon entsprechend lange her ist.</p>
+<p>Bleibt die Frage, wie ich sicherstellen kann, dass keine veralteten Daten in einem Fenster dargestellt werden, obwohl sie in einem anderen Fenster der Anwendung schon in einer aktualisierten Form dargestellt sind. Dies kann durch erstaunlich wenig Aufwand bewerkstelligt werden. Mit einem Listener an postLoad, postUpdate und commit Events bekommen wir mit, wenn es neue Versionen einer Entität in der Datenbank gibt. &Atilde;&oelig;ber Sessions.getSessionStatistics können wir herausfinden, welche Session welche dieser Entitäten ebenfalls beeinhaltet und können gegebenenfalls Session.refresh() aufrufen, um das Objekt zu aktualisieren. Dies sollte natürlich nur für Sessions geschehen, die nur für Lesezwecke verwendet werden, da der Benutzer wohl kaum begeistert ist, wenn während er ein Objekt editiert, dies gerade mal unaufgefordert durch eine frische Version aus der Datenbank ersetzt wird.</p>
 <p><strong>Andere Quellen zu diesem Thema (mit vielen verschiedenen Meinungen zum Thema):</strong></p>
 <ul>
 <li><a href="http://www.hibernate.org/333.html" title="Best Practices for Thick-Client Applications (i.e., non-web apps.)">Hibernate Wiki Artikel + Diskussion</a></li>

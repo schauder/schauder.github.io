@@ -33,7 +33,7 @@ that at some point I was under the impression it exists under that URL. It doesn
 mean it is still there. It doesn't mean I endorse it.
 
 Jens Schauder ist Teilnehmer des Partnerprogramms von Amazon Europe S.&Atilde;&nbsp; r.l. und
-Partner des Werbeprogramms, das zur Bereitstellung eines Mediums f&Atilde;&frac14;r Websites
+Partner des Werbeprogramms, das zur Bereitstellung eines Mediums für Websites
 konzipiert wurde, mittels dessen durch die Platzierung von Werbeanzeigen und Links zu Amazon.de
 Werbekostenerstattung verdient werden kann.
 

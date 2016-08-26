@@ -2,7 +2,7 @@
 layout: default
 status: publish
 published: true
-title: Hibernate Naming Strategie f&Atilde;&frac14;r Oracle die zweite
+title: Hibernate Naming Strategie für Oracle die zweite
 author:
   display_name: Jens Schauder
   login: admin
@@ -44,9 +44,9 @@ comments:
   date: '2012-01-19 16:41:21 +0100'
   date_gmt: '2012-01-19 14:41:21 +0100'
   content: "Nochmals Nachtrag (bezieht sich auf meinen Post im anderen Blogeintrag
-    zum Thema): F&Atilde;&frac14;r mich stimmt&acirc;&euro;&trade;s wenn ich die Methode
-    isMultipleUpperToLower in addUnderscores rausnehme. Ich habe das Ganze &Atilde;&frac14;brigens
-    auf NHibernate und C# &Atilde;&frac14;bertragen:\r\n\r\n\r\n<pre>\r\n\r\n    public
+    zum Thema): Für mich stimmt&acirc;&euro;&trade;s wenn ich die Methode
+    isMultipleUpperToLower in addUnderscores rausnehme. Ich habe das Ganze übrigens
+    auf NHibernate und C# übertragen:\r\n\r\n\r\n<pre>\r\n\r\n    public
     class OracleNamingStrategy : INamingStrategy\r\n    {\r\n        public string
     ClassToTableName(string className)\r\n        {\r\n            return AbbreviateName(TableName(StringHelper.Unqualify(className)));\r\n
     \       }\r\n\r\n\r\n\r\n        public string PropertyToColumnName(string propertyName)\r\n
@@ -105,7 +105,7 @@ comments:
     i;\r\n                }\r\n            }\r\n            return index;\r\n        }\r\n\r\n\r\n\r\n
     \   }\r\n\r\n\r\n</pre>\r\n\r\nEs hat darin noch eine kleine Modifikation:
     Collection tables werden bei uns mit einem vorangestellten &acirc;&euro;&oelig;lt_&acirc;&euro;\x9D
-    benannt.\r\n\r\nHoffe, das n&Atilde;&frac14;tzt jemandem.\r\n\r\n<b>-- English
+    benannt.\r\n\r\nHoffe, das nützt jemandem.\r\n\r\n<b>-- English
     summary:</b>\r\n\r\nI&acirc;&euro;&trade;ve translated the NamingStrategy
     for Oracle to NHibernate and C#. Small additions:\r\n- I&acirc;&euro;&trade;m
     not using the IsMultipleUpperToLower() method in AddUnderscores() because I&acirc;&euro;&trade;m
@@ -113,8 +113,8 @@ comments:
     uppercase characters present.\r\n- We want our collection tables to be called
     lt_* so the above code reflects that."
 ---
-<p>Vor einiger Zeit habe ich eine einfache <a href="/2008/02/22/hibernate-namingstrategy-fur-oracle/">Naming Strategie</a> vorgestellt, die sicherstellt, dass die generierten Namen sich an die etwas geizigen Beschr&Atilde;&curren;nkungen von Oracle h&Atilde;&curren;lt. Ich habe die Starategie noch einmal ein wenig &Atilde;&frac14;berarbeitet. Sie verteilt jetzt gro&Atilde;&Yuml;z&Atilde;&frac14;giger Underscores, so dass sie mehr Stellen hat, an denen sie einen Namen k&Atilde;&frac14;rzen kann.</p>
-<p>Nat&Atilde;&frac14;rlich gilt wieder: Benutzung auf eigene Gefahr.</p>
+<p>Vor einiger Zeit habe ich eine einfache <a href="/2008/02/22/hibernate-namingstrategy-fur-oracle/">Naming Strategie</a> vorgestellt, die sicherstellt, dass die generierten Namen sich an die etwas geizigen Beschränkungen von Oracle hält. Ich habe die Starategie noch einmal ein wenig überarbeitet. Sie verteilt jetzt großzügiger Underscores, so dass sie mehr Stellen hat, an denen sie einen Namen kürzen kann.</p>
+<p>Natürlich gilt wieder: Benutzung auf eigene Gefahr.</p>
 <pre>
 public class OracleNamingStrategy<br />
         extends DefaultComponentSafeNamingStrategy<br />

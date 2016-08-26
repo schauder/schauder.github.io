@@ -20,18 +20,18 @@ categories:
 tags:
 - projectmanagement
 ---
-<p>Die ist ein weiterer Anfang zu einer Serie. In dieser soll es um MS-Project geht, und wie ich mit diesem Tool meine Projektplanung und Kontrolle unterst&Atilde;&frac14;tzen und dokumentieren kann. Um das von mir vorgeschlagene Vorgehen zu begr&Atilde;&frac14;nden, werde ich auch die eine oder andere theoretische Grundlage schaffen.</p>
+<p>Die ist ein weiterer Anfang zu einer Serie. In dieser soll es um MS-Project geht, und wie ich mit diesem Tool meine Projektplanung und Kontrolle unterstützen und dokumentieren kann. Um das von mir vorgeschlagene Vorgehen zu begründen, werde ich auch die eine oder andere theoretische Grundlage schaffen.</p>
 <p>Alle Teile dieser Serie:<br />
 <a href="/2007/12/07/ms-project-1-der-projektstrukturplan/">Der Projektstrukturplan</a><br />
 <a href="/2008/01/01/ms-project-2-der-ablaufplan/">Der Ablaufplan</a><br />
 <a href="/2008/08/07/ms-project-3-arbeit-und-dauer/">Arbeit und Dauer</a><br />
-<strong>Speichere fr&Atilde;&frac14;h, speichere oft, aber nicht automatisch.</strong></p>
-<p>MS-Project hat diverse Bugs, Unfeatures und fehlende Features. Ein Beispiel daf&Atilde;&frac14;r ist die Undo Funktion. Diese funktioniert oft, aber nicht immer, und so kann es passieren, dass man mit ein paar Mausklicks sein Dokument zerst&Atilde;&para;rt und es mit MS-Project Mitteln nicht wieder hergestellt bekommt.</p>
-<p>Daher sollte in regelm&Atilde;&curren;&Atilde;&Yuml;igen, nicht zu gro&Atilde;&Yuml;en Abst&Atilde;&curren;nden gespeichert werden und zwar so, dass man nicht nur auf die letzte sondern auf alle gespeicherten Versionen zugreifen kann. Dies erreicht man entweder in dem man einen <a href="http://de.wikipedia.org/wiki/Versionsverwaltung">Versionsverwaltung</a>  einsetzt, oder man versieht jede gespeicherte Datei mit einer Versionsnummer, die bei jedem speichern manuell erh&Atilde;&para;ht wird:</p>
+<strong>Speichere früh, speichere oft, aber nicht automatisch.</strong></p>
+<p>MS-Project hat diverse Bugs, Unfeatures und fehlende Features. Ein Beispiel dafür ist die Undo Funktion. Diese funktioniert oft, aber nicht immer, und so kann es passieren, dass man mit ein paar Mausklicks sein Dokument zerstört und es mit MS-Project Mitteln nicht wieder hergestellt bekommt.</p>
+<p>Daher sollte in regelmäßigen, nicht zu großen Abständen gespeichert werden und zwar so, dass man nicht nur auf die letzte sondern auf alle gespeicherten Versionen zugreifen kann. Dies erreicht man entweder in dem man einen <a href="http://de.wikipedia.org/wiki/Versionsverwaltung">Versionsverwaltung</a>  einsetzt, oder man versieht jede gespeicherte Datei mit einer Versionsnummer, die bei jedem speichern manuell erhöht wird:</p>
 <pre>MyProject-V003.mpp</pre><br />
-An dieser Stelle ist man versucht diesen Prozess zu automatisieren, schlie&Atilde;&Yuml;lich sind wir alle faul, nicht war? Die Autosave Option ist daf&Atilde;&frac14;r aber definitiv die falsche Option, da nach <a href="http://de.wikipedia.org/wiki/Murphys_Gesetz">Murphy&acirc;&euro;&trade;s Law</a> Autosave direkt nach einer ungeschickten Aktion aktiv wird, und mit dem Datenm&Atilde;&frac14;ll, den man soeben produziert hat, unwiederbringlich den letzten intakten Arbeitsstand &Atilde;&frac14;berschreibt.</p>
+An dieser Stelle ist man versucht diesen Prozess zu automatisieren, schließlich sind wir alle faul, nicht war? Die Autosave Option ist dafür aber definitiv die falsche Option, da nach <a href="http://de.wikipedia.org/wiki/Murphys_Gesetz">Murphy&acirc;&euro;&trade;s Law</a> Autosave direkt nach einer ungeschickten Aktion aktiv wird, und mit dem Datenmüll, den man soeben produziert hat, unwiederbringlich den letzten intakten Arbeitsstand überschreibt.</p>
 <p>Wenn es eine Standardeinstellungen von Microsoft ist, dient es der Featuredemonstration, nicht dem sinnvollen arbeiten.</p>
-<p>Wenn MS-Project gestartet wird, bietet es einem standardm&Atilde;&curren;&Atilde;&Yuml;ig eine zweigeteilte Ansicht an:</p>
+<p>Wenn MS-Project gestartet wird, bietet es einem standardmäßig eine zweigeteilte Ansicht an:</p>
 <p>Links ist eine Tabelle mit den Spalten:</p>
 <ul>
 <li>i wie Information oder Notiz</li>
@@ -39,7 +39,7 @@ An dieser Stelle ist man versucht diesen Prozess zu automatisieren, schlie&Atild
 <li>Dauer</li>
 <li>Anfang</li>
 <li>Ende</li>
-<li>Vorg&Atilde;&curren;nger</li>
+<li>Vorgänger</li>
 <li> Resourcennamen</li><br />
 </ul><br />
 Dies verleitet dazu viele Dinge auf einmal zu planen:</p>
@@ -47,21 +47,21 @@ Dies verleitet dazu viele Dinge auf einmal zu planen:</p>
 <li>was alles zu tun ist (Vorgangsname)</li>
 <li>wie lange es dauern wird (Dauer)</li>
 <li>wann es getan wird (Anfang, Ende)</li>
-<li>in welcher Reihenfolge es geplant wird (Vorg&Atilde;&curren;nger)</li>
+<li>in welcher Reihenfolge es geplant wird (Vorgänger)</li>
 <li>und wer es tut</li><br />
 </ul><br />
-Die meisten Projektleiter sind erfahrungsgem&Atilde;&curren;&Atilde;&Yuml; m&Atilde;&curren;nnlich und sind per Definition nicht Multitasking f&Atilde;&curren;hig. Sie Sollten sich also lieber auf eine Aufgabe beschr&Atilde;&curren;nken. Bei Frauen bin ich mir nicht so sicher, ich vermute aber, dass es ihnen auch nicht schadet. Also konfigurieren (<a href="http://blog.schauderhaft.de/wp-admin/post.php#konfigurieren">s.u.</a>) wir die Ansicht so um, dass wir nur noch die folgenden Spalten sehen:</p>
+Die meisten Projektleiter sind erfahrungsgemäß männlich und sind per Definition nicht Multitasking fähig. Sie Sollten sich also lieber auf eine Aufgabe beschränken. Bei Frauen bin ich mir nicht so sicher, ich vermute aber, dass es ihnen auch nicht schadet. Also konfigurieren (<a href="http://blog.schauderhaft.de/wp-admin/post.php#konfigurieren">s.u.</a>) wir die Ansicht so um, dass wir nur noch die folgenden Spalten sehen:</p>
 <ul>
 <li>i wie Information (die kann man immer gut gebrauchen)</li>
 <li>Vorgangsname</li>
 <li>Notizen</li>
 <li>PSP-Code (<a href="http://blog.schauderhaft.de/wp-admin/post.php#PSP">s.u.</a>)</li><br />
 </ul><br />
-Hier k&Atilde;&para;nnen wir nun den sogenannten Projektstrukturplan (PSP; engl. Workbreakdownstructure) erstellen. Der PSP ist eine hierarchisch geordnete Sammlung s&Atilde;&curren;mtliche Vorg&Atilde;&curren;nge, die in einem Projekt zu erledigen sind. Dabei entstehen fr&Atilde;&frac14;her oder sp&Atilde;&curren;ter zwei Fragestellungen:</p>
+Hier können wir nun den sogenannten Projektstrukturplan (PSP; engl. Workbreakdownstructure) erstellen. Der PSP ist eine hierarchisch geordnete Sammlung sämtliche Vorgänge, die in einem Projekt zu erledigen sind. Dabei entstehen früher oder später zwei Fragestellungen:</p>
 <p>1. Wie detailliert soll ich planen?<br />
-Die Antwort ist so einfach wie unbefriedigend. Plane genau das, was du kontrollieren kannst und willst. Das hei&Atilde;&Yuml;t, man muss sich eine Vorstellung davon machen, wie oft man den Fortschritt sp&Atilde;&curren;ter im Projekt kontrollieren m&Atilde;&para;chte. Je nach Projekt kann dies extrem unterschiedlich ausfallen: Wenn ich eine gro&Atilde;&Yuml;e Weihnachtsfeier organisiere, kann die Vorbereitung durchaus ein halbes Jahr vorher beginnen, ich werde aber vermutlich nur gelegentlich (einmal pro Monat?) den Status kontrollieren, am Tag der Feier werde ich aber unter Umst&Atilde;&curren;nden st&Atilde;&frac14;ndlich nach dem rechten sehen. Das wichtige Kriterium ist die Frage des tolerierbaren Risikos: Ich muss einen Vorgang so genau im Auge behalten, damit ich noch reagieren kann, wenn ich merke, dass etwas schief geht, ohne dass unakzeptabler Schaden am Projekt entsteht.</p>
+Die Antwort ist so einfach wie unbefriedigend. Plane genau das, was du kontrollieren kannst und willst. Das heißt, man muss sich eine Vorstellung davon machen, wie oft man den Fortschritt später im Projekt kontrollieren möchte. Je nach Projekt kann dies extrem unterschiedlich ausfallen: Wenn ich eine große Weihnachtsfeier organisiere, kann die Vorbereitung durchaus ein halbes Jahr vorher beginnen, ich werde aber vermutlich nur gelegentlich (einmal pro Monat?) den Status kontrollieren, am Tag der Feier werde ich aber unter Umständen stündlich nach dem rechten sehen. Das wichtige Kriterium ist die Frage des tolerierbaren Risikos: Ich muss einen Vorgang so genau im Auge behalten, damit ich noch reagieren kann, wenn ich merke, dass etwas schief geht, ohne dass unakzeptabler Schaden am Projekt entsteht.</p>
 <p>2. Wie strukturiere ich den Projektstrukturplan?<br />
-In Wirklichkeit stellen sich erschreckend wenige Projektleiter diese Frage, was zu Ergebnissen wie dem folgenden f&Atilde;&frac14;hrt (nur die erste Hierarchieebene ist dargestellt):</p>
+In Wirklichkeit stellen sich erschreckend wenige Projektleiter diese Frage, was zu Ergebnissen wie dem folgenden führt (nur die erste Hierarchieebene ist dargestellt):</p>
 <pre>
 Next Killer App<br />
     GUI<br />
@@ -69,31 +69,31 @@ Next Killer App<br />
     Business Logik<br />
     testen<br />
     dokumentieren</pre><br />
-Wem noch nicht aufgefallen ist, was an dieser Struktur falsch ist, &Atilde;&frac14;berlege sich wo denn die Gui dokumentiert wird, und wo die Datenbank getestet wird.</p>
-<p>Das Problem ist, dass unterschiedliche Kriterien verwandt werden: Einerseits Schichten der Anwendung, andererseits T&Atilde;&curren;tigkeiten. Dadurch ist f&Atilde;&frac14;r einen Vorgang nicht klar, wo er indieser Struktur einzuordnen ist. Und dies f&Atilde;&frac14;hrt mindestens zu unn&Atilde;&para;tiger Sucherrei, oft aber zu schlicht vergessenen oder doppelt geplanten Vorg&Atilde;&curren;ngen.</p>
-<p><strong>innerhalb eines Sammelvorgangs, werden die Untervorg&Atilde;&curren;nge nach einem einheitlichen Kriterium strukturiert.</strong></p>
-<p>Kriterien k&Atilde;&para;nnten dabei sein:</p>
+Wem noch nicht aufgefallen ist, was an dieser Struktur falsch ist, überlege sich wo denn die Gui dokumentiert wird, und wo die Datenbank getestet wird.</p>
+<p>Das Problem ist, dass unterschiedliche Kriterien verwandt werden: Einerseits Schichten der Anwendung, andererseits Tätigkeiten. Dadurch ist für einen Vorgang nicht klar, wo er indieser Struktur einzuordnen ist. Und dies führt mindestens zu unnötiger Sucherrei, oft aber zu schlicht vergessenen oder doppelt geplanten Vorgängen.</p>
+<p><strong>innerhalb eines Sammelvorgangs, werden die Untervorgänge nach einem einheitlichen Kriterium strukturiert.</strong></p>
+<p>Kriterien könnten dabei sein:</p>
 <ul>
-<li>Projektphasen (Vorsicht, da Phasen sich meist &Atilde;&frac14;berlappen)</li>
-<li>Objekte, d.h. Teile des zu erstellenden Projektergebnisses. Dies k&Atilde;&para;nnten Geb&Atilde;&curren;udeteile in einem Bauprojekt sein, Module oder Schichten in einer Anwendung.</li>
-<li>T&Atilde;&curren;tigkeiten (entwerfen, analysieren, anstreichen, reinigen, testen ...)</li>
-<li>Personengruppen / Abteilungen, die f&Atilde;&frac14;r die Vorg&Atilde;&curren;nge zust&Atilde;&curren;ndig sind: (Maler, Architekten, Tester)</li><br />
+<li>Projektphasen (Vorsicht, da Phasen sich meist überlappen)</li>
+<li>Objekte, d.h. Teile des zu erstellenden Projektergebnisses. Dies könnten Gebäudeteile in einem Bauprojekt sein, Module oder Schichten in einer Anwendung.</li>
+<li>Tätigkeiten (entwerfen, analysieren, anstreichen, reinigen, testen ...)</li>
+<li>Personengruppen / Abteilungen, die für die Vorgänge zuständig sind: (Maler, Architekten, Tester)</li><br />
 </ul><br />
-Welches das richtige Kriterium ist, h&Atilde;&curren;ngt vom Projekt und vom Geschmack des Projektleiters ab.</p>
-<p>Eine Sonderrolle nimmt h&Atilde;&curren;ufig das Projektmanagement selbst auf der obersten Hierarchieebene ein. Projektmanagement darf (und sollte) auf der obersten Ebene seinen eigenen Zweig bekommen. L&Atilde;&curren;uft dies der ausgew&Atilde;&curren;hlten Strukturierung zuwieder ist es eine zul&Atilde;&curren;ssige Ausnahme, wenn klar definiert ist, dass alle PM-Aufgaben unter diesem Zweig einzuordnen sind.</p>
+Welches das richtige Kriterium ist, hängt vom Projekt und vom Geschmack des Projektleiters ab.</p>
+<p>Eine Sonderrolle nimmt häufig das Projektmanagement selbst auf der obersten Hierarchieebene ein. Projektmanagement darf (und sollte) auf der obersten Ebene seinen eigenen Zweig bekommen. Läuft dies der ausgewählten Strukturierung zuwieder ist es eine zulässige Ausnahme, wenn klar definiert ist, dass alle PM-Aufgaben unter diesem Zweig einzuordnen sind.</p>
 <p><strong><a title="PSP" name="PSP"></a>Der PSP Code</strong><a title="PSP" name="PSP"></a><br />
-Der PSP Code ist ein Schl&Atilde;&frac14;ssel, der jeden Vorgang eindeutig kennzeichnet. Er kann in MS-Project automatisch erzeugt werden, wobei stark beeinflusst werden kann wie der PSP-Code aussieht. Der PSP-Code ist kurz und kompakt, liefert aber dennoch eine Menge Information dar&Atilde;&frac14;ber wo der gekennzeichnete Vorgang im PSP wiederzufinden ist. Daher eignet er sich hervorragend um im Projekt Vorg&Atilde;&curren;nge zu referenzieren.</p>
-<p><a title="PSP" name="PSP"></a>Das Aussehen des PSP-Codes l&Atilde;&curren;sst sich unter<br />
+Der PSP Code ist ein Schlüssel, der jeden Vorgang eindeutig kennzeichnet. Er kann in MS-Project automatisch erzeugt werden, wobei stark beeinflusst werden kann wie der PSP-Code aussieht. Der PSP-Code ist kurz und kompakt, liefert aber dennoch eine Menge Information darüber wo der gekennzeichnete Vorgang im PSP wiederzufinden ist. Daher eignet er sich hervorragend um im Projekt Vorgänge zu referenzieren.</p>
+<p><a title="PSP" name="PSP"></a>Das Aussehen des PSP-Codes lässt sich unter<br />
 <tt>Projekt->PSP-Code->Codedefinition...</tt><br />
-konfigurieren. Ich pers&Atilde;&para;nlich bevorzuge:</p>
+konfigurieren. Ich persönlich bevorzuge:</p>
 <ul>
-<li>ein 3-4 Buchstabenk&Atilde;&frac14;rzel f&Atilde;&frac14;r das Projekt</li>
-<li>2-3 manuell vergebene Gro&Atilde;&Yuml;buchstaben f&Atilde;&frac14;r die oberste Gliederungsebene, die einen Hinweis auf die Gliederungsebene liefern</li>
+<li>ein 3-4 Buchstabenkürzel für das Projekt</li>
+<li>2-3 manuell vergebene Großbuchstaben für die oberste Gliederungsebene, die einen Hinweis auf die Gliederungsebene liefern</li>
 <li>abwechselnd Zahlen und Kleinbuchstaben, automatisch vergeben.</li><br />
 </ul><br />
 <a title="PSP" name="PSP"></a><strong><a title="konfigurieren" name="konfigurieren"></a>Konfiguration der Tabellenansicht in MS-Project</strong><br />
-Per Click auf die Spaltenheader k&Atilde;&para;nnen Spalten zu der Tabelle hinzugef&Atilde;&frac14;gt und entfernt werden. Meist ist es jedoch geschickter einen etwas anderen Weg zu gehen.</p>
-<p>&Atilde;&oelig;ber das Men&Atilde;&frac14;<br />
+Per Click auf die Spaltenheader können Spalten zu der Tabelle hinzugefügt und entfernt werden. Meist ist es jedoch geschickter einen etwas anderen Weg zu gehen.</p>
+<p>&Atilde;&oelig;ber das Menü<br />
 <tt>Ansicht -> Tabelle: xxx -> Weitere Tabellen...</tt><br />
-k&Atilde;&para;nnen die Spalten in einer benannten Tabelle konfiguriert werden, bzw. weitere benannte Tabellen definiert werden. Diese Tabellen k&Atilde;&para;nnen dann per Men&Atilde;&frac14; ausgew&Atilde;&curren;hlt werden. Auf diese Weise m&Atilde;&frac14;ssen nicht st&Atilde;&curren;ndig Spalten hinzugef&Atilde;&frac14;gt und entfernt werden.</p>
-<p>Im n&Atilde;&curren;chsten Teil dieser Serie beschreibe ich, wie aus dem Projektstrukturplan ein <a href="/2008/01/01/ms-project-2-der-ablaufplan/">Ablaufplan erstellt wird</a>.</p>
+können die Spalten in einer benannten Tabelle konfiguriert werden, bzw. weitere benannte Tabellen definiert werden. Diese Tabellen können dann per Menü ausgewählt werden. Auf diese Weise müssen nicht ständig Spalten hinzugefügt und entfernt werden.</p>
+<p>Im nächsten Teil dieser Serie beschreibe ich, wie aus dem Projektstrukturplan ein <a href="/2008/01/01/ms-project-2-der-ablaufplan/">Ablaufplan erstellt wird</a>.</p>
