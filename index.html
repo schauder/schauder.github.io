@@ -9,6 +9,7 @@ layout: default
                 <h3>
                     <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
                 </h3>
+                <div class="post-meta">{{post.date | date: "%Y-%m-%d" }}</div>
                 <div>
                     {{ post.excerpt }}
                 </div>
