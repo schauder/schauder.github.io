@@ -46,7 +46,7 @@ The WBS must be complete by definition. (Note: that nobody says, that it has to 
 This is necessary, because it is used as a basis for estimating the complete project. This means, that very early in 
 the project decisions are made, about what goes into a project and what not. In a good case the decisions get revisited
 and revised later on. In that case they are just a form of waste. But often they are not revised leading to much greater
-waste, but implementing stuff that nobody really needs anymore.
+waste, by implementing stuff that nobody really needs anymore.
 
 2. **The Backlog is linear**
 The WBS is inherently a Tree Structure, or even a multidimensional matrix: Every element is typically assigned things like:
@@ -57,8 +57,9 @@ The WBS is inherently a Tree Structure, or even a multidimensional matrix: Every
     and often many more categories. This makes it nice and easy to slice and dice the elements to your likings. But it doesn't 
     really help that much. The Backlog on the other side focuses on on single bit of information: What should we do next, a.k.a.
     priority. This again is affected mainly by: How much does it cost and what is it's value. Whereby the value explicitely
-    includes things like reduced risk. If done right, this leads to the important stuff getting done early, so when times it
-    up and one has to drop stuff from the scope of the project we loose only stuff of lesser importance. I consider that
+    includes things like reduced risk. If done right, this leads to the important stuff getting done early, so when time
+    is  up and one has to drop stuff from the scope of the project we loose only stuff of lesser importance. 
+    I consider that
     a good thing.
 
 3. **The WBS doesn't care about value**
@@ -82,12 +83,12 @@ of teammembers with the way how work gets structured.
 This is not actually part of the WBS, but build on top of it: The dependencies of all the elements. Stuff like: Before
 we can build X, we have to build Y. There is almost no place for this in a Backlog. Instead one strives to create
 Backlog elements that are indepedent of each other. This approach reduces the amount of dependencies very often in
-such a way that no explicit handling of dependencies is necessary. This actually the one criteria that I found valid,
+such a way that no explicit handling of dependencies is necessary. This is actually the one criteria that I found valid,
  that would make me consider a waterfall based approach to be useful: If the problem to solve has so many dependencies
  that you can't even decide in a short discussion what to do first. But I have never seen this with software. In the
  world of physical stuff this might be pretty normal. When you build an Aircraft Carrier you probably can't start with
- building the flight deck because it produces the most value. If you'd try you learn later on that it is really difficult
- to mount such a big slab of steel on a ship. With software this is exactly the kind of thing you can do.
+ building the flight deck because it produces the most value. If you'd try you'd learn later on that it is really difficult
+ to mount such a big slab of steel on a ship. With properly build software this is exactly the kind of thing you can do.
 
 Since the WBS is at the center of planning in a project it pops up in other areas as well, so we'll mention it
 again in other articles of this series.
