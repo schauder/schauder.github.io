@@ -2,7 +2,7 @@
 layout: default
 status: publish
 published: true
-title: Work Breackdown Structure vs Backlog
+title: Work Breakdown Structure vs Backlog
 author:
   display_name: Jens Schauder
 categories: article
