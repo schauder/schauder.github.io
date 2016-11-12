@@ -2,7 +2,7 @@
 layout: default
 status: publish
 published: true
-title: What's Your Next Language
+title: What's Your Next Language?
 author:
   display_name: Jens Schauder
 categories: article
@@ -20,7 +20,7 @@ tags:
 ---
 
 A common recommendation for software developers is to learn a new language each and every year.
-While I considere this a little over the top, learning a new language from time to time is certainly a good
+While I consider this a little over the top, learning a new language from time to time is certainly a good
 idea, but what language should you pick? 
 
 As so often the answer is "It depends".
@@ -29,7 +29,7 @@ Let's assume you know mainly Java (as the typical reader of this blog probably d
 any other current language. CSS, HTML and SQL aren't considered languages in this context and Fortran, Cobol and 
 Applesoft Basic aren't current.
 
-The answer to the question depends on what is your primary goal is, and your attitude to types.
+The answer to the question depends on what your primary goal is, and your attitude to strong type systems.
 
 If you want a language that you can put to good use immediately, the obvious answer is: Javascript (Doesn't matter
 what type system you prefer, the one of Javascript is broken). It is
@@ -44,7 +44,7 @@ pretty soon (if you can decide on the language used)
 
 If you really want to lean something I recommend a real functional language: Clojure which is a LISP dialect (dynamically typed)
 or Frege a Haskell for the JVM. If you never came in contact with functional language they will make quite some 
-knots in your brain, but that is just the sweet feeling of learning. 
+knots into your brain, but that is just the sweet feeling of learning. 
 
 I personally find Frege extremely interesting right now, because you can do some cool shit with it. Dierk König 
 showed me on a JUG meeting a couple of weeks agao how trying to do side effects on the JavaFX event thread or 
