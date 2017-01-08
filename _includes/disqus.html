@@ -3,7 +3,7 @@
 
 
      var disqus_config = function () {
-     this.page.url = 'http://blog.schauderhaft.de{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}';  // Replace PAGE_URL with your page's canonical URL variable
+     this.page.url = '{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}';  // Replace PAGE_URL with your page's canonical URL variable
      this.page.identifier = this.page.url; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
      };
 
