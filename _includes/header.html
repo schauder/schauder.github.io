@@ -19,11 +19,11 @@
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     {% assign pages = site.pages | sort:"order"  %}
-                    {% for page in pages %}{% if page.title %}
+                    {% for page in pages %}{% if page.order %}{% if page.title %}
                     <li>
                         <a href="{{ page.url | prepend: site.baseurl }}" class="navbar-menu-item">{{ page.title }}</a>
                     </li>
-                    {% endif %}{% endfor %}
+                    {% endif %}{% endif %}{% endfor %}
                 </ul>
             </div>
         </div>

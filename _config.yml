@@ -20,4 +20,3 @@ feed:
 
 collections:
   events:
-    output: true
