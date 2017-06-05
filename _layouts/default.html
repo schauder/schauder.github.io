@@ -10,7 +10,10 @@
         {% if page.date %}
         <div class="post-meta">published: {{page.date | date: "%Y-%m-%d" }}</div>
         {% endif %}
+
         {{ content }}
+
+
       <div class="pagenavigation">
         {% if page.previous.url %}
         <a class="prev" href="{{page.previous.url}}">&laquo; {{page.previous.title}} &laquo;</a>
