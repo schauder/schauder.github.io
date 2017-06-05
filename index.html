@@ -1,24 +1,18 @@
 ---
 layout: default
 ---
-<div class="col-md-9">
-
-    <div class="row overview">
-        <ul class="post-list">
-            {% for post in site.categories.article limit:10 %}
-            <li>
-                <h3>
-                    <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                </h3>
-                <div class="post-meta">{{post.date | date: "%Y-%m-%d" }}</div>
-                <div>
-                    {{ post.excerpt }}
-                </div>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
-<div class="talks" class="col-md-3">
-    {% include sidebar.html %}
+<div class="row overview">
+    <ul class="post-list">
+        {% for post in site.categories.article limit:10 %}
+        <li>
+            <h3>
+                <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+            </h3>
+            <div class="post-meta">{{post.date | date: "%Y-%m-%d" }}</div>
+            <div>
+                {{ post.excerpt }}
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
 </div>

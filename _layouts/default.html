@@ -10,8 +10,12 @@
         {% if page.date %}
         <div class="post-meta">published: {{page.date | date: "%Y-%m-%d" }}</div>
         {% endif %}
-
+        <div class="col-md-9">
         {{ content }}
+        </div>
+        <div class="talks" class="col-md-3">
+          {% include sidebar.html %}
+        </div>
 
 
       <div class="pagenavigation">
