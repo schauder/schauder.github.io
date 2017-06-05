@@ -20,6 +20,8 @@ categories:
 tags: []
 comments: []
 order: 2
+redirect-from: 
+  - /uber-jens-schauder/
 ---
 
 I'm Jens Schauder, author of this blog and softwaredeveloper.
