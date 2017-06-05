@@ -39,13 +39,13 @@ comments:
 <p>I wrote before about how you can emulate named parameters in a Java, either <a href="/2012/07/29/named-parameters-in-java/">using methods</a> or a <a href="/2012/08/05/named-parameters-in-java-an-alternative/">builder</a>. There is another approach, which already got <a href="/2012/08/05/named-parameters-in-java-an-alternative/comment-page-1/#comment-7869">mentioned in the comments</a>.</p>
 <p>On the usage side it looks like this:</p>
 <pre lang="java">
-    doSomething4(new ParameterObject() {{<br />
-        name = "Alfred E. Neumann";<br />
-        link = "http://blog.schauderhaft.de";<br />
-        ultimateAnswer = 42;<br />
-        tempFile = "c:\\temp\\x.txt";<br />
-        zip = 23;<br />
-    }});<br />
+    doSomething4(new ParameterObject() { {
+        name = "Alfred E. Neumann";
+        link = "http://blog.schauderhaft.de";
+        ultimateAnswer = 42;
+        tempFile = "c:\\temp\\x.txt";
+        zip = 23;
+    } });
 </pre></p>
 <p>I find this solution interesting, because it looks seriously weird. At least it did to me when I saw it for the first time, and also to many others who I observed when they encountered it for the first time. So what the heck are we exactly looking at?</p>
 <pre lang="java">
