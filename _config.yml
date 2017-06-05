@@ -17,3 +17,7 @@ gems:
 
 feed:
   path: feed
+
+collections:
+  events:
+    output: true
