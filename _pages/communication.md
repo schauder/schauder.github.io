@@ -3,6 +3,9 @@ layout: default
 title: Communication for Software Developers and all Others
 category: talk
 ---
+
+**[Slides are always the latest version used](/communication-talk/talk.html)**
+
 ### English
 
 *Sorry there is currently no english version of this talk available.*
