@@ -4,7 +4,7 @@ title: Going reactive with Spring Data
 category: talk
 ---
 
-**[Slides are currently not available](#)**
+**[Slides are always the latest version of this talk](http://blog.schauderhaft.de/spring-data-reactive-talk/talk.html)**
 
 ### English
 
