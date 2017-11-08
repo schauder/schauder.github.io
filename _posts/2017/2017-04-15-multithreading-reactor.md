@@ -115,9 +115,9 @@ public void subscribeOnTwice() {
 }
 ```
 
-`publishOn` causes the execution of everything after it to happen on the `Scheduler` past in as an argument, until `publishOn` gets invoked again. Compare that to `suscrieOn` where basically the first call determines which `Scheduler` gets used and the calls afterwards get ignored.
+`publishOn` causes the execution of everything after it to happen on the `Scheduler` passed in as an argument, until `publishOn` gets invoked again. Compare that to `suscribeOn` where basically the first call determines which `Scheduler` gets used and the calls afterwards get ignored.
 
-Well not ignored, but they don't have an effect that is easily visible. To understand this we need to think what actually happens inside a reactive pipeline. If we use "operators" on a `Flux` (_A_) we create a new `Flux` (_B_). When we subscribe to _B_ it in turn subscribes to _A_. _A_ in turn starts to publish events by calling _B_, which in turn calls our `Subscriber`. So we basically go through the stack of `Fluxe`s twice, once on the "subscribe way", and once (or actually for each event) on the "publish way". All the asserting we are doing only happens on the publish way, where also all of the normal functionality in a real call. 
+Well not ignored, but they don't have an effect that is easily visible. To understand this we need to think what actually happens inside a reactive pipeline. If we use "operators" on a `Flux` (_A_) we create a new `Flux` (_B_). When we subscribe to _B_ it in turn subscribes to _A_. _A_ in turn starts to publish events by calling _B_, which in turn calls our `Subscriber`. So we basically go through the stack of `Flux`es twice, once on the "subscribe way", and once (or actually for each event) on the "publish way". All the asserting we are doing only happens on the publish way, where also all of the normal functionality in a real call. 
 
 If we have multiple `subscribeOn`s in the pipeline they affect only the subscribe way but we normally don't see that. Only the last `subscribeOn` affects the publish way. This is the only one we see.
 
