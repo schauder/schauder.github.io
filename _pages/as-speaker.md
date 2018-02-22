@@ -18,9 +18,9 @@ If you want me to speak about a different topic, let me know.
 # Bio #
 ## Deutsch ##
 Jens Schauder hat vor unglaublich langer Zeit auf einem in Assembler programmierbaren Tischrechner angefangen zu programmieren. 
-Nach über 30 Jahren, davon fast 20 als Consultant für meist große Konzerne, hat er es 2017 geschafft sich beim Spring Data Team ein zu schleichen. 
+Nach über 30 Jahren, davon fast 20 als Consultant für meist große Konzerne, hat er es 2017 geschafft sich beim Spring Data Team einzuschleichen. 
 Dort arbeitet er meist an den Modulen Commons, JPA und JDBC, erzählt davon auf Konferenzen oder hilft anderen Entwicklern auf Stackoverflow.
-Wenn er nicht programmiert, spielt er mit seinen Kinder, läuft, macht Freeletics, spielt oder organisiert die JUG Ostfalen.
+Wenn er nicht programmiert, spielt er mit seinen Kindern, läuft, macht Freeletics, spielt oder organisiert die JUG Ostfalen.
 
 ## English ##
 A long long time ago in a city far away Jens Schauder started coding on a desktop calculator programmable in assembly. 
