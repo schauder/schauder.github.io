@@ -19,7 +19,7 @@ Here is why.
 
 Just for those that never discussed software development with me: I'm a huge fan of TDD. 
 I think it is an essential skill.
-And assuming you want to work as a software developer and find yourself in a place where you are not encouraged to do TDD I encourage you to find a new job.
+And assuming you want to work as a software developer, if you find yourself in a place where you are not encouraged to do TDD I encourage you to find a new job.
 The place you are currently at is most probably a dead end career wise.
 
 So why shouldn't you convince your coworkers to do TDD in order to fix quality problems? 
@@ -27,14 +27,14 @@ Two reasons:
 
 1. It is a stereotypical example of "If you only have a hammer every problem looks like a nail."
 
-2. If you push a solution the chances that it will get rejected is really big. And that would be sad for such a powerful tool as TDD.
+2. If you push a solution the chance that it will get rejected is really big. And that would be a sad state for such a powerful tool as TDD.
 
 Instead of proposing your favorite tool to fix the problem, spend the time to find a solution together with the team.
 This starts by finding out if there is a problem. 
 You might think there is a problem. 
 Others might not.
 
-I once was part of a project which was rejected after 1-2 days of testing by the customer as way to buggy and basically not fit for use.
+I once was involved in a software release which was rejected after 1-2 days of testing by the customer as way too buggy and basically not fit for use.
 After the meeting in which the customer explained his opinion to us I drove home together with our test manager. 
 The dialog went something like this:
 
@@ -49,7 +49,7 @@ It's his task to test the software.
 
 Me: ---
 
-I still think the TM was failing at his job badly. 
+I still think the TM was failing at his job, badly. 
 But that is not the point here. 
 The point is that our opinions about if there is a problem differed widely. 
 What you might experience as an embarrassment might be completely normal for the guy next to you.
@@ -61,7 +61,7 @@ Maybe the others agree.
 If so you made a big step forward.
 If everybody acknowledges there is a problem it is much easier to convince people to do something about it.
 
-If your opinions differ you have another discussion upcoming: How do you arrive to so different evaluations and what to do about it.
+If your opinions differ you have another discussion upcoming: How do you arrive to so different evaluations and what to do about it?
 
 Let's assume for now you agree on having a quality problem. 
 Where does it come from?
@@ -85,7 +85,7 @@ The rest is the job of the test team.
 
 **Unclear requirements**
 I once worked in a project where we needed 3 times as long es planned for a task. 
-But not to actually implement it, but to understand what is expected. 
+But not to actually implement it, but just to understand what is expected. 
 Only then could we start with actual coding.
 I guess it doesn't surprise anybody that the quality was abysmal.
 
