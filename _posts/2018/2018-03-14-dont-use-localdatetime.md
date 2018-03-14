@@ -12,9 +12,9 @@ tags:
 ---
 
 A couple of weeks ago I fixed a bug in Spring Data related to date conversions.
-For this I read up on the "new" `java.time` API which I had hardly used so far.
-To my surprise I learned that we used it wrongly in Spring Data.
-And judging from what I saw on Stackoverflow and the rest of the internet many others make the same mistake.
+For this, I read up on the "new" `java.time` API which I had hardly used so far.
+To my surprise, I learned that we used it wrongly in Spring Data.
+And judging from what I saw on StackOverflow and the rest of the internet many others make the same mistake.
 The mistake is to use `LocalDateTime`.
 
 You might think: The new API is based on Joda Time which is awesome.
@@ -27,7 +27,7 @@ The use case is this:
 
 Sure enough `LocalDateTime` doesn't include any time zone information. 
 So what is the problem?
-Lets take a look in the documentation:
+Let's take a look at the documentation:
 
 > `LocalDateTime` is an immutable date-time object that represents a date-time,
     often viewed as year-month-day-hour-minute-second.
@@ -35,7 +35,7 @@ Lets take a look in the documentation:
     This class does not store or represent a time-zone.
     Instead, it is a description of the date, as used for birthdays, combined with
     the local time as seen on a wall clock.
-    It cannot represent an instant on the time-line without additional information
+    It cannot represent an instant on the timeline without additional information
     such as an offset or time-zone.
     
 Let me repeat the important part
@@ -46,9 +46,9 @@ If you invoke `LocalDateTime.now()` an hour apart before and after your default 
 Most likely this is not what you want in most use cases.
 And definitely not in the use case described above.
 What you want instead is `Instant`.
-Lets look into its JavaDoc:
+Let's look into its JavaDoc:
 
-> This class models a single instantaneous point on the time-line.
+> This class models a single instantaneous point on the timeline.
   This might be used to record event time-stamps in the application.
   
 Just what you want.
@@ -62,4 +62,4 @@ So you pick a `LocalDateTime` to represent that like "next Monday 8 am" or "Tues
 Then you can combine that with the time zone based on the physical location of the E-mail recipient to determine the right point in time to send the E-mail out.
 
 I know, it's a contrived example but that is my point: It is hard to come up with a valid and realistic use case for `LocalDateTime`.
-The next time you want to type that class name think twice if this is really what you want.
+The next time you want to type that class name, think twice if this is really what you want.
