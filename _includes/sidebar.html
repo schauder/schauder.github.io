@@ -1,7 +1,7 @@
 <h3>Talks</h3>
 <p>Wan't to meet me in person to tell me how stupid I am? You can find me at the following events:</p>
 <ul class="post-list">
-    {% for event in site.events limit:10 %}
+    {% for event in site.events %}
     {% if site.time < event.date %}
     <li>
         <h4>
