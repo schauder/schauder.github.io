@@ -32,14 +32,14 @@ In his spare time he likes to spend time with his kids, running, bouldering, JUG
 
 ## Spring Data JDBC: The new kid on the block ##
 
-Mit Spring Data erstellt man einfach und schnell Repositories um auf diverse Persistenztechnologien auf konsistente Weise zuzugreifen. 
-Hier werden wir einen Blick auf die neuste Variante werfen: JDBC.
-Wie kann ich das nutzen?
-Ist es ein neues ORM und wird es JPA ablösen?
-Warum sollte man JDBC benutzen, wenn es doch JPA gibt?
-Geht das auch reaktiv?
+Mit Spring Data ist bekannt für seine von Domain Driven Design inspirierte Repository Abstraktion.
+Diese erlaubt den Zugriff auf unterschiedliche Persistenztechnologien wie JPA, MongoDb, Redis und andere mit einer konsistenten API.
+Seit dem Lovelace Release Mitte des Jahres gibt es eine weitere Technologie, die unterstützt wird: JDBC.
 
-Diese Fragen werden wir beleuchten und wenn angemessen mit Live Coding demonstrieren.
+Dieser Talk wird den aktuellen Stand von Spring Data JDBC demonstrieren und erläutern warum JDBC neben JPA Sinn macht.
+Darüber hinaus gibt er Einblick in wesentliche Designgrundlagen und Entscheidungen, die Spring Data JDBC zu Grunde liegen.
+
+Nach dem Vortrag sollten Teilnehmer in der Lage sein, für sich zu entscheiden, ob der Einsatz von Spring Data JDBC für ihre Persistenzbedürfnisse eine Option ist.
 
 ## The new kid on the block: Spring Data JDBC ##
 
