@@ -43,22 +43,11 @@ Diese Fragen werden wir beleuchten und wenn angemessen mit Live Coding demonstri
 
 ## The new kid on the block: Spring Data JDBC ##
 
-Spring Data is mostly known as a way to create Repositories as described in Domain Driven Design (DDD) for persistence technologies like JPA, MongoDB, Redis, and others. Soon there will be another technology supported: JDBC. Spring Data JDBC will be an opinionated library for persisting your data to a relational database. 
-This talk will describe the current state of Spring Data JDBC, its features and the underlying design decisions, especially how the Spring Data team attempts to walk the tightrope of offering a DDD-based API and at the same time allow precise control of each and every SQL statement issued.
-After this talk, the audience will be able to make a well-grounded decision if Spring Data JDBC is the right tool for their specific challenges and what to expect from it.
+Spring Data is mostly known as a way to create Repositories as described in Domain Driven Design (DDD) for persistence technologies like JPA, MongoDB, Redis, and others. We now support another technology: JDBC.
+Spring Data JDBC is an opinionated library for persisting your data to a relational database. 
+This talk will describe the current state of Spring Data JDBC, its features and the underlying design decisions, especially how the Spring Data team attempts to walk the tightrope of offering a DDD-based API and at the same time allow precise control of each and every SQL statement issued to the database. 
 
-
-## Neues von Spring Data ##
-
-Dieser Vortrag ist eine Übersicht darüber, wie sich Spring Data weiterentwickelt hat. Welche neuen Features gibt es? Welche Verbesserungen wurden eingeführt? Zunächst werden die Neuerungen in Spring Data Commons, welches allen anderen Spring Data Modulen zugrunde liegt, vorgestellt. Anschließend gibt es ein Tour durch die Stores mit den jeweiligen Highlights: JPA, MongoDB, Neo4j usw. 
-
-Als kleines Bonbon gibt es noch eine Einführung in Spring Data JDBC, das Nesthäkchen in der Spring Data Familie, welches zum Zeitpunkt des Vortrages hoffentlich in einer ersten Version verfügbar ist.
-
-## News from Spring Data ##
-
-This talk gives an overview of the latest development in Spring Data. What are the new features? Which improvements does it offer?
-We’ll start with improvements in Spring Data Commons, which is the basis of all other modules. Then we’ll take a tour through the various modules (JPA, MongoDB, Neo4J) covering the important changes. An important topic will be the reactive API.
-Finally, we’ll take a look a Spring Data JDBC, the latest addition to the Spring Data family.
+After this talk, the audience will be able to make a well-grounded decision if Spring Data JDBC is worth to look into for their specific challenges and what to expect from it.
 
 ## Kommunikation für Softwareentwickler und alle anderen. ##
 
@@ -84,13 +73,18 @@ Nach dem Vortrag solltet ihr in der Lage sein zu entscheiden, ob OSS Entwicklung
 
 ## Being an OSS Developer - What does it feel like and how do you get there? ##
 
-In February 2017 I joined Pivotal and became part of the Spring Data Team. Coming from a career as a consultant (read software developer) for huge enterprises this was a huge change for me. And certainly a change for the better.  Ever since I can’t get two kinds of questions out of my head:
-Why is working on Open Source Software so different (and so much more fun)?
-How the f*** did I manage to get here?
+In February 2017 I joined Pivotal and became part of the Spring Data Team. 
+Coming from a career as a consultant (read software developer) for huge enterprises this was a huge change for me. 
+And certainly a change for the better. 
+Ever since I can’t get two kinds of questions out of my head: 
+Why is working on Open Source Software so different (and so much more fun)? How the f*** did I manage to get here?
 
-In this talk I’ll try to answer these questions as far as I have answers. As a basis I will explain how working in the Spring Data team does work, and I will tell a good measure of anecdotes from my life.
+In this talk I’ll try to answer these questions as far as I have answers. 
+As a basis I will explain how working in the Spring Data team does work, and I will tell a good measure of anecdotes from my life.
 
-In the end you should be able to decide, if you would like to work on a similar team. You might have some ideas about changing things in your team and possibly how to approach your career. And if nothing else you can funnel hope from the fact that someone doing as many stupid things as I may still end up with something pretty close to the perfect job.
+In the end you should be able to decide, if you would like to work on a similar team. 
+You might have some ideas about changing things in your team and possibly how to approach your career. 
+And if nothing else you may funnel hope from the fact that someone doing as many stupid things as I did, did still end up with something pretty close to the perfect job.
 
 
 
