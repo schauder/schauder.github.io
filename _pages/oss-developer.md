@@ -4,7 +4,7 @@ title: "Being an OSS Developer"
 category: talk
 ---
 
-**[Slides are currently not available](#)**
+**[Slides](http://blog.schauderhaft.de/talk-oss-developer/talk.html)**
 
 ## Das Leben als OSS Entwickler - Wie fühlt sich das an? Und wie wird man einer? ##
 

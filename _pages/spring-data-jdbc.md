@@ -4,7 +4,7 @@ title: "Spring Data JDBC: The new kid on the block"
 category: talk
 ---
 
-**[Slides are currently not available](#)**
+**[Slides](http://blog.schauderhaft.de/talk-spring-data-jdbc/talk.html)**
 
 
 ## Spring Data JDBC: The new kid on the block ##
