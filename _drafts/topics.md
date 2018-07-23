@@ -4,6 +4,8 @@ EmbeddedDatabaseBuilder
 
 Projections
 
-Don't convince your coworkers to write unit tests (understand their problems instead)
+Variableas in Asciidoc
 
-Java Instant vs LocalDateTime
+Footer in Asciidoc
+
+My image style
