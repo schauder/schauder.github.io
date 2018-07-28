@@ -28,7 +28,7 @@ I never thought that anything bad for me would come from my political opinion at
 But still, if you just got basically your dream job you don't want everybody at your employer know you as  "The guy who got sent back at the airport."
 
 And that changed slowly but surely during the last year. 
-I met more of my coworkers, including some of the famous once. I even talked to the CEO. 
+I met more of my coworkers, including some of the famous ones. I even talked to the CEO. 
 And all the interactions turned the knowledge of security I had about a year ago into a feeling of security.
 
 Today I have no problem tweeting my opinion about Trump. 
