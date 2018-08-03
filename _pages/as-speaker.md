@@ -113,4 +113,4 @@ LinkedIn: https://www.linkedin.com/in/jens-schauder/
 
 # Foto #
 
-![Foto of Jens Schauder](/assets/profile.jpg)
+![Foto of Jens Schauder](/assets/profile-small.jpg)
