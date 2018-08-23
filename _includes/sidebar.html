@@ -8,7 +8,7 @@
             <a class="post-link" href="{{ event.site | prepend: site.baseurl }}">{{ event.conference }}</a>
             <div class="post-meta">{{event.date | date: "%Y-%m-%d" }}</div>
         </h4>
-        <a class="post-link" href="{{ event.page | prepend: '_pages/' | prepend: site.baseurl }}">{{ event.title }}</a>
+        <a class="post-link" href="{{ event.page | prepend: '/_pages/' | prepend: site.baseurl }}">{{ event.title }}</a>
 
     </li>
     {% endif %}
