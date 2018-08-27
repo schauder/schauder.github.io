@@ -142,11 +142,11 @@ comments:
   content: "[&#8230;] are all dependency management issues. For these types of dependencies,
     the anti-patterns tend to be well known, as are techniques for managing [&#8230;]"
 ---
-<p><a href="/2013/02/24/introducing-degraph-for-visualizing-package-dependencies/">I wrote before</a> about the <a href="https://github.com/schauder/degraph">dependency analysis and visualization tool Degraph</a>. When you use such a tool to examine various projects you will find some patterns that stick out like a sore thumb. This is a first articles about &Acirc;&nbsp;such antipatterns, including my interpretation of what is going wrong and how to fix it.</p>
+<p><a href="/2013/02/24/introducing-degraph-for-visualizing-package-dependencies/">I wrote before</a> about the <a href="https://github.com/schauder/degraph">dependency analysis and visualization tool Degraph</a>. When you use such a tool to examine various projects you will find some patterns that stick out like a sore thumb. This is a first articles about such antipatterns, including my interpretation of what is going wrong and how to fix it.</p>
 <p>I'm using the somewhat abstract term <strong>node</strong>, which might refer to a class, a package or even to a <strong>slice</strong> that you define, bundling classes according to some rule that you see fit. If you are confused by the terminology you might have a look at the <a href="https://github.com/schauder/degraph/wiki/Nomenclature">wiki page for Degraph, where I try to explain these terms</a>.</p>
 <p><strong>God Node</strong></p>
 <p>When you see a node in a dependency diagram that has tons of in and outgoing connections, you are looking at the death rays emitting from a god node. It does a lot of important things, that's why it depends on many other nodes. It also gets used by many things, which makes it even worse.</p>
-<p><a href="http://blog.schauderhaft.de/wp-content/uploads/2013/03/godObject.png"><img class="alignnone size-medium wp-image-1351" alt="godObject" src="http://blog.schauderhaft.de/wp-content/uploads/2013/03/godObject-160x300.png" width="160" height="300" /></a></p>
+<p><a href="/assets/wp/2013/03/godObject.png"><img class="alignnone size-medium wp-image-1351" alt="godObject" src="/assets/wp/2013/03/godObject.png" width="160" height="300" /></a></p>
 <p>You want to extract stuff from that node! Why? Because when it does so many things and depends on so many things, it is very likely you</p>
 <ol>
 <li>can't properly test it</li>
@@ -154,9 +154,9 @@ comments:
 <li>thereby over and over creating new bugs, that go undetected by your automatic tests.</li><br />
 </ol><br />
 If this is a simple node, i.e. it doesn't represent at least a package or a class with inner classes, may the god class have mercy with your soul. Do some refactoring of that monster, until you can extract some classes. Prefer to extract classes that encapsulate some of the dependencies to other class. This image show how this looks like with the a new class represented by an orange octagon.</p>
-<p><img class="alignnone size-medium wp-image-1350" alt="godObjectDelegate" src="http://blog.schauderhaft.de/wp-content/uploads/2013/03/godObjectDelegate-197x300.png" width="197" height="300" /></p>
+<p><a href="/assets/wp/2013/03/godObjectDelegate.png"><img class="alignnone size-medium wp-image-1351" alt="God Object Delegate" src="/assets/wp/2013/03/godObjectDelegate.png" width="160" height="300" /></a></p>
 <p>An alternative start is to extract interfaces and make other parts of the application depend only on the interfaces. This will move remove some dependencies from the God Node and spread them among the new interface nodes, as sketched in the following image, with the introduced interfaces represented by orange octagons.</p>
-<p><img class="alignnone size-medium wp-image-1349" alt="godObjectInterfaces" src="http://blog.schauderhaft.de/wp-content/uploads/2013/03/godObjectInterfaces-73x300.png" width="73" height="300" /></p>
+<p><a href="/assets/wp/2013/03/godObjectInterfaces.png"><img class="alignnone size-medium wp-image-1351" alt="God Object Interfaces" src="/assets/wp/2013/03/godObjectInterfaces.png" width="160" height="300" /></a></p>
 <p>Note that</p>
 <ol>
 <li><span style="line-height: 13px;">Since the god node 'implements' the interface nodes it depends on them, not the other way round</span></li>
