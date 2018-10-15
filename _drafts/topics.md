@@ -2,12 +2,6 @@
 
 EmbeddedDatabaseBuilder
 
-Projections
-
-Variables in Asciidoc
-
-Footer in Asciidoc
-
 My image style
 
 Presenter in AsciiDoc.
@@ -19,3 +13,8 @@ Almost reacting badly but realizing it early enough resulting in a blockade (sti
 Almost reacting badly but realizing it early enough resulting in a better reaction.
 
 Journaling: Getting stuff out of your head (frustration, anger, fear whatever)
+
+Spring Data JPA
+- Locking
+- Retry
+- queries from property files
