@@ -1,6 +1,6 @@
 ---
 layout: default
-title: My mourning routine.
+title: My morning routine.
 author:
   display_name: Jens Schauder
 categories: article
