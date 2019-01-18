@@ -30,7 +30,27 @@ In his spare time he likes to spend time with his kids, running, bouldering, JUG
 
 # Talks #
 
+## Spring Data JDBC: The new kid on the block ##
+
+Mit Spring Data ist bekannt für seine von Domain Driven Design inspirierte Repository Abstraktion.
+Diese erlaubt den Zugriff auf unterschiedliche Persistenztechnologien wie JPA, MongoDb, Redis und andere mit einer konsistenten API.
+Seit dem Lovelace Release Mitte des Jahres gibt es eine weitere Technologie, die unterstützt wird: JDBC.
+
+Dieser Talk wird den aktuellen Stand von Spring Data JDBC demonstrieren und erläutern warum JDBC neben JPA Sinn macht.
+Darüber hinaus gibt er Einblick in wesentliche Designgrundlagen und Entscheidungen, die Spring Data JDBC zu Grunde liegen.
+
+Nach dem Vortrag sollten Teilnehmer in der Lage sein, für sich zu entscheiden, ob der Einsatz von Spring Data JDBC für ihre Persistenzbedürfnisse eine Option ist.
+
+## The new kid on the block: Spring Data JDBC ##
+
+Spring Data is mostly known as a way to create Repositories as described in Domain Driven Design (DDD) for persistence technologies like JPA, MongoDB, Redis, and others. We now support another technology: JDBC.
+Spring Data JDBC is an opinionated library for persisting your data to a relational database. 
+This talk will describe the current state of Spring Data JDBC, its features and the underlying design decisions, especially how the Spring Data team attempts to walk the tightrope of offering a DDD-based API and at the same time allow precise control of each and every SQL statement issued to the database. 
+
+After this talk, the audience will be able to make a well-grounded decision if Spring Data JDBC is worth to look into for their specific challenges and what to expect from it.
+
 ## Domain Driven Design with Relational Databases using Spring Data JDBC ##
+
 Domain Driven Design introduces the concepts of Aggregate, AggregateRoot, and Repository. 
 If one takes these concepts serious certain habits we picked up while <strikethrough>fighting</strikethrough> working with JPA become unacceptable.
 Even more, a substantial part of the complexity of JPA seems to become superfluous.
