@@ -16,6 +16,8 @@ But it brings up a completely new question:
 
 **How much should I charge for a speaking gig?**
 
+Quick warning: you won't find a Dollar or Euro amount in this article.
+
 My situation is as so often the bright side of the problem. 
 There are many in a less comfortable situation.
 
@@ -29,9 +31,9 @@ This is how I try to think about this:
 No matter if you get paid financially you are selling a service (giving a talk) to someone who wants that service, the conference organizer.
 You need to come up with a price that makes it worthwhile for you. This means: the price you charge is of higher value then your investment.
 
-The organizer should also come up with a price they are willing to pay. If the value of your talk to them should be higher then what they pay for it. If their price is higher than your price you'll be able to strike a deal where both sides profit. This is really the basic of all commerce.
+The organizer should also come up with a price they are willing to pay. The value of your talk to them shouldn't be lower than what they pay for it. If their price is higher than your price you'll be able to strike a deal where both sides profit. This is really the basic underlying principle of all commercial transactions.
 
-In order to come to the right price for your side of this calculation you need to consider your investments. This will consist of the following:
+In order to come up with the right price for your side of this calculation you need to consider your investments. This will consist of the following:
 
 * **Time:** time to prepare and practice the talk. Time to travel. 
 If traveling and speaking is stressful for you it might even include time to recover. 
@@ -57,14 +59,18 @@ Because I had a blog, because I was co organizing a JUG, possibly because I gave
 That certainly turned out to be very valuable.
 The tricky part about exposure is that it's value changes with your experience. 
 If you are relatively new to public speaking and aren't well known within your target audience exposure is extremely valueable, because it gives you access to more opportunities. 
-But if you do multiple talks a month all over the world only very few organizers may offer you a relevant amount of exposure. May TED can or maybe speaking in front of the NATO might qualify, but the afferage conference for your trade? Probably not so much.
+But if you do multiple talks a month all over the world only very few organizers may offer you a relevant amount of exposure. Maybe TED can or maybe speaking in front of the NATO might qualify, but the average conference for your trade? Probably not so much.
 
 * **Access to the conference:** Again this is often very valuable at the beginning of your career because you can learn a lot at conferences. But if you are at a conference every other month, you have seen all the talks, and there is very little value in most conferences. Which brings us to the final measure: 
 
 * **Money**: This basically has to cover everything that isn't covered by the other options.
-What was helpful for me was to compare it to the alternative options I have. 
-One is certainly: My regulare day job. 
-If I do a talk on my own bill I'll have to at least take a day of so that is something to compare it to.
+What was helpful for me was to compare it to what I would do instead. 
+One option is certainly my regular day job. 
+If I do a talk on my own bill I'll have to at least take a day of so the money I earn from the talk should probably be in the same ball park.
+
+The calculation changes is you want to make speaking your main career. 
+I probably won't be able to give you much useful advice in that case but one number you probably should consider is: 
+What amount of money to I have to earn so I won't want to switch to another job instead.
 
 So you end up with a price. 
 The organizer hopefully does something similar.
@@ -76,6 +82,8 @@ Do you get angry if you see a market stand selling apples and you don't want any
 Of course not. 
 Your current price for an apple happens to be lower then the price demanded by the seller. 
 So you don't buy.
-But if you get upset and demand the organizer has to pay you your price or, what seems to happen more often at least in my filter bubble, demand that a speaker accepts only exposure as payment you just demonstrate that you don't understand the very basics of commerce.
-At least to me this is highly embarrassing and I would try to avoid that at all cost. 
+But if you get upset don't demand the organizer has to pay you your price.
+Or as the organizer don't demand that a speaker accepts only exposure as payment.
+By such a behaviour you just demonstrate that you don't understand the very basics of commercial transaction.
+At least to me that would be highly embarrassing and I would try to avoid that at all cost. 
 But hey the chances are it will give you some exposure on twitter or reddit and since you value that so high it might be actually a win for you. 
