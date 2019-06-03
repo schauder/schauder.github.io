@@ -66,11 +66,11 @@ But if you do multiple talks a month all over the world only very few organizers
 * **Money**: This basically has to cover everything that isn't covered by the other options.
 What was helpful for me was to compare it to what I would do instead. 
 One option is certainly my regular day job. 
-If I do a talk on my own bill I'll have to at least take a day of so the money I earn from the talk should probably be in the same ball park.
+If I do a talk on my own bill I'll have to at least take a day off so the money I earn from the talk should probably be in the same ball park.
 
-The calculation changes is you want to make speaking your main career. 
+The calculation changes if you want to make speaking your main career. 
 I probably won't be able to give you much useful advice in that case but one number you probably should consider is: 
-What amount of money to I have to earn so I won't want to switch to another job instead.
+What amount of money do I have to earn so I won't want to switch to another job instead.
 
 So you end up with a price. 
 The organizer hopefully does something similar.
