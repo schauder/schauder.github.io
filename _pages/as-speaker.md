@@ -79,13 +79,13 @@ And I'll even figuratively bring some candy to pacify the Database Admins.
 ## Domain Driven Design mit Relationalen Datenbanken und Spring Data JDBC ##
 
 Domain Driven Design führt die Konzepte Aggregate, Aggregateroot und Repository ein.
-Wenn man diese Konzepte ernst nimmt stellt man fest das viele Dinge, die man sich <strikethrough>im Kampf</strikethrough> in der Arbeit mit JPA angewöhnt hat nicht mehr wirklich akzeptabel sind.
+Wenn man diese Konzepte ernst nimmt stellt man fest, dass viele Dinge, die man sich <strikethrough>im Kampf</strikethrough> in der Arbeit mit JPA angewöhnt hat nicht mehr wirklich akzeptabel sind.
 Mehr noch, es werden sogar ganze Features von JPA überflüssig oder zumindest wesentlich weniger wichtig.
-Und das ganze wird auch noch performant, wartbar und skalierbar.
+Und das Ganze wird auch noch performant, wartbar und skalierbar.
 
 Andererseits könnte es zu einem Streit mit dem Datenbankadministrator kommen, aber man kann nicht alles haben.
 
-Wie sich herausstellt unterstütz Spring Data JDBC diesen Ansatz.
+Wie sich herausstellt unterstützt Spring Data JDBC diesen Ansatz.
 
 In diesem Vortrag stelle ich vor wie man sein Objekt Modell entsprechend DDD entwirft und mit Spring Data JDBC  die dazu passende Datenbankschicht baut.
 
