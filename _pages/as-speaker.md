@@ -76,20 +76,19 @@ In this talk, I'll present how to design an object model the DDD way, why this m
 
 And I'll even figuratively bring some candy to pacify the Database Admins.
 
-## Domain Driven Design mit Relationalen Datenbanken und Spring Data JDBC ##
+## Domain Driven Design mit Relationalen Datenbanken (und Spring Data JDBC) ##
 
-Domain Driven Design führt die Konzepte Aggregate, Aggregateroot und Repository ein.
-Wenn man diese Konzepte ernst nimmt stellt man fest, dass viele Dinge, die man sich <strikethrough>im Kampf</strikethrough> in der Arbeit mit JPA angewöhnt hat nicht mehr wirklich akzeptabel sind.
+Domain Driven Design (DDD) führt die Konzepte Aggregate, Aggregateroot und Repository ein.
+Wenn man diese Konzepte ernst nimmt stellt man fest, dass viele Dinge, die man sich <strikethrough>im Kampf</strikethrough> in der Arbeit mit JPA angewöhnt hat nicht wirklich akzeptabel sind.
 Mehr noch, es werden sogar ganze Features von JPA überflüssig oder zumindest wesentlich weniger wichtig.
-Und das Ganze wird auch noch performant, wartbar und skalierbar.
 
-Andererseits könnte es zu einem Streit mit dem Datenbankadministrator kommen, aber man kann nicht alles haben.
+In diesem Vortrag stelle ich vor welche Auswirkungen DDD auf ein Objekt Modell hat,
+ und wie dies massiv die Komplexität reduziert.
+ Wir werden sehen, wie es Integrationstests vereinfacht und ganze Kategorien von Fehlern vermeidet, die aktuell in sehr vielen Datenbankanwendungen vorhanden sind.
 
-Wie sich herausstellt unterstützt Spring Data JDBC diesen Ansatz.
+Diese Designentscheidungen eröffnen schließlich auch noch die Möglichkeit über die Vor- und Nachteile von Foreignkeys nach zu denken um diese gezielter und bewusster einsetzen zu können.
 
-In diesem Vortrag stelle ich vor wie man sein Objekt Modell entsprechend DDD entwirft und mit Spring Data JDBC  die dazu passende Datenbankschicht baut.
-
-Ich bringe sogar im Übertragenen Sinne Süssigkeiten zur Beruhigung von Datenbankadministratoren mit.
+Das beschriebene Vorgehen ist integraler Bestandteil der Architektur von Spring Data JDBC und in den letzten ca 10 Minuten werden wir dies nutzen um uns das Ganze in der Praxis anzuschauen. 
 
 ## Kommunikation für Softwareentwickler und alle anderen. ##
 
