@@ -30,6 +30,44 @@ In his spare time he likes to spend time with his kids, running, bouldering, JUG
 
 # Talks #
 
+I can do all talks in English or German. 
+Most talks therefore exist twice in the following list. 
+If a talk exists only once it just means I submitted it only in language so far.
+
+## Spring Data JDBC Beyond the Obvious.
+   
+   The Domain Driven Design inspired ORM Spring Data JDBC intentionally puts some strict constraints on the way objects may be constructed in order to keep the concepts easy to understand.
+   But of course nothing comes for free and sometimes these constraints might get in your way.
+   In this talk we'll look at some tricks you might use to solve such challenges.
+   
+   After a short introduction in the basic concepts of Spring Data JDBC and a quick look at new features we'll discuss topics like:
+   
+   * Bidirectional relationships.
+   * ID generation strategies.
+   * Context dependent query strategies.
+   * Tweak the mapping when you don't like what Spring Data is doing.
+   
+   The goal is to have a talk which may serve as a first introduction to Spring Data JDBC but also caters to those already using Spring Data JDBC,
+   deepening their understanding of how Spring Data JDBC works and therefor how to use it.
+   
+   
+## Spring Data JDBC Beyond the Obvious.
+   
+   Das, durch Domain Driven Design inspirierte, ORM Spring Data JDBC limitiert ganz gezielt die Art und Weise wie Objekte modeliert werden können.
+   Dies hat den Zweck Spring Data JDBC konzeptionell einfach zu halten.
+   Dies kann dazu führen, das Spring Data JDBC nicht das tut, was man möchte.
+   In diesem Vortrag teile ich einige Tricks und Strategien, wie man solche Probleme angehen kann.
+   
+   Nach einer kurzen Einführung in die Grundlagen von Spring Data JDBC und Vorstellung der neusten Features werden wir uns Themen wie die folgenden anschauen:
+   
+   * Bidirektionale Beziehungen.
+   * ID Generierung.
+   * Kontextabhängige Abfragestrategien
+   * Fine tunen von mappings.
+   
+   Das Ziel ist, das dieser Vortrag sowohl für Einsteiger geeignet ist, aber auch für erfahrene Spring Data JDBC Nutzer interessant ist,
+   da er ein tieferes Verständnis davon vermittelt, wie Spring Data JDBC funktioniert und wie es genutzt werden kann.
+
 ## Nur ein Quantensprung oder ist es was wirklich Neues?
 
 Was sind Quantencomputer und wird es demnächst ein Spring Quantum geben?
