@@ -24,15 +24,42 @@ Wenn er nicht programmiert, spielt er, läuft, macht Freeletics, bouldert und we
 
 ## English ##
 A long long time ago in a city far away Jens Schauder started coding on a desktop calculator programmable in assembly. 
-Over 30 years later, after almost 20 years as a consultant working mostly with huge enterprises, he managed to sneak into the Spring Data Team. 
-Here he works mainly on the “Commons”, “JPA” and “JDBC” modules and tells about it at conferences or helps other developers on StackOverflow.
-In his spare time he likes to spend time with his kids, running, bouldering, JUG organizing or dying doing Freeletics.
+Over 30 years later, after almost 20 years as a consultant working mostly with huge enterprises, he joined the Spring Data Team. 
+Here he works mainly on the “JPA” and “JDBC” modules and tells about it at conferences or helps other developers on StackOverflow.
+In his spare time he spends time running, bouldering, playing games, torturing himself with Freeletics. And once the pandemic is under control he'll restart the  JUG Ostfalen again.
 
 # Talks #
 
 I can do all talks in English or German. 
 Most talks therefore exist twice in the following list. 
 If a talk exists only once it just means I submitted it only in language so far.
+
+## Interesting Times.
+
+Nightmare of software developers are made out of date and time values.
+Timezones, calendar, point in time, wall clock time, dates with or without time, differences in precission are ingridients of this horror movie.
+Together with many APIs of varying (often low) quality which are guaranteed to be incompatible make for unbearable suspense.
+And when these value go into the dark cellar, also known as "the database" things get gruesome quickly.
+
+We'll face our fears and take a closer look.
+What APIs are relevant for the Java developer, what kinks do they have and how do they get abused.
+What special problems arise beyond timezones when you deal with historic data or when precision is of outmost importance.
+
+When attending this talk you'll improve your knowledge about dates and time and hopefully will have a good time while doing so.
+
+## Interessante Zeiten.
+
+Aus Zeit und Datumswerten werden Albträume von Entwicklern gemacht.
+Zeitzonen, Kalender, Zeitpunkte, Uhrzeit, Datum mit oder ohne Zeitanteil, Unterschiede in der Präzession sind die Stilmittel dieses Horrorfilms.
+Verbunden werden mit APIs, die unterschiedlich gut (meist ehr schlecht) sind, aber auf jeden Fall inkompatibel sind, entsteht ein kaum erträglicher Spannungsbogen.
+Wenn dann die Datumswerte auch noch in den unbeleuchteten Keller gehen, sprich in der Datenbank gespeichert und wieder geladen werden, mag man sich nur noch die Augen zu halten.
+
+Wir stellen uns unserer Angst und schauen uns das Ganze gründlich an.
+Welche APIs gibt es, die für Entwickler relevant sind.
+Welche Fehler sind darin verbaut und welche Fehler werden bei der Benutzung gemacht.
+
+Ihr nehmt eine ordentliche Portion Wissen über die Fallen bei der Arbeit mit Zeit und Datumswerten mit und habt hoffentlich eine vergnügliche Zeit dabei.
+
 
 ## Spring Data JDBC Beyond the Obvious.
    
