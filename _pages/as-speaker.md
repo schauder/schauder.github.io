@@ -74,9 +74,9 @@ Im August 2020 habe ich mich mit einer schweren Depression und detaillierten Pl�
 Ich bin in die Klapse gegangen.
 
 In diesem Vortrag werde ich berichten wie es dazu kam.
-Warum ich diesen Schritt erst so spät gemacht habe.
-Was in der Behandlung passiert ist.
-Wie mir und anderen geholfen wurde.
+* Warum ich diesen Schritt erst so spät gemacht habe.
+* Was in der Behandlung passiert ist.
+* Wie mir und anderen geholfen wurde.
 
 Und vielleicht am wichtigstens: Was ihr tun könnt um euch selbst oder anderen zu helfen.
 
@@ -95,9 +95,9 @@ So let’s talk.
 In August of 2020, I got admitted to the hospital for major depression. At that time, I had specific plans to end my life.
 
 In this talk, I’ll tell you about
-How all this happened
-What happened in the hospital
-What helped me and others
+* How all this happened
+* What happened in the hospital
+* What helped me and others
 
 Most importantly, I’ll talk about what you can do to help yourself or others.
 
