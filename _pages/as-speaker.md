@@ -60,6 +60,47 @@ Welche Fehler sind darin verbaut und welche Fehler werden bei der Benutzung gema
 
 Ihr nehmt eine ordentliche Portion Wissen über die Fallen bei der Arbeit mit Zeit und Datumswerten mit und habt hoffentlich eine vergnügliche Zeit dabei.
 
+## Wir müssen reden - Depression, Suizid und was man tun kann
+
+"Suizid war 2016 die zweithäufigste Todesursache der 15- bis 29-Jährigen." (WHO Fact Sheet)
+
+Wir reden über Verkehrstote, über Krebstote, über Drogentote.
+Dabei ist Suizid die einzige relevante Todesursache, bei der das "darüber reden"
+tatsächlich den Tod verhindern kann.
+
+Also lasst uns darüber reden.
+
+Im August 2020 habe ich mich mit einer schweren Depression und detaillierten Plänen zum Suizid in stationäre psychiatrische Behandlung begeben.
+Ich bin in die Klapse gegangen.
+
+In diesem Vortrag werde ich berichten wie es dazu kam.
+Warum ich diesen Schritt erst so spät gemacht habe.
+Was in der Behandlung passiert ist.
+Wie mir und anderen geholfen wurde.
+
+Und vielleicht am wichtigstens: Was ihr tun könnt um euch selbst oder anderen zu helfen.
+
+Dazu gehört natürlich, was Depression ist, und was sie nicht ist und unterschiedliche Formen, wie sie entstehen kann.
+
+
+## We Need to Talk: Depression, Suicide, and What You Can Do
+
+“Suicide ... was the second leading cause of death among 15-29 year-olds globally in 2016.” - World Health Organization Fact Sheet on Suicide
+
+We talk about death caused by traffic accidents, cancer, or drug abuse.
+Only suicide is  a relevant cause of death that can actually be prevented by “talking about it”.
+
+So let’s talk.
+
+In August of 2020, I got admitted to the hospital for major depression. At that time, I had specific plans to end my life.
+
+In this talk, I’ll tell you about
+How all this happened
+What happened in the hospital
+What helped me and others
+
+Most importantly, I’ll talk about what you can do to help yourself or others.
+
 
 ## Spring Data JDBC Beyond the Obvious.
    
