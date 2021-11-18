@@ -36,29 +36,43 @@ If a talk exists only once it just means I submitted it only in language so far.
 
 ## Interesting Times.
 
-Nightmare of software developers are made out of date and time values.
-Timezones, calendar, point in time, wall clock time, dates with or without time, differences in precission are ingridients of this horror movie.
-Together with many APIs of varying (often low) quality which are guaranteed to be incompatible make for unbearable suspense.
-And when these value go into the dark cellar, also known as "the database" things get gruesome quickly.
+We’ll face our fears and take a closer look. 
 
-We'll face our fears and take a closer look.
-What APIs are relevant for the Java developer, what kinks do they have and how do they get abused.
-What special problems arise beyond timezones when you deal with historic data or when precision is of outmost importance.
+What is time? 
 
-When attending this talk you'll improve your knowledge about dates and time and hopefully will have a good time while doing so.
+Why is it so complicated?
+
+What APIs are relevant for the Java developer? 
+
+What kinks do they have?
+
+And how do they get abused? 
+
+
+When attending this talk you’ll improve your knowledge about dates and time and hopefully will have a good time while doing so.
+
+The practical value is probably limited since I'll show mostly problems and only few solutions.
 
 ## Interessante Zeiten.
 
 Aus Zeit und Datumswerten werden Albträume von Entwicklern gemacht.
 Zeitzonen, Kalender, Zeitpunkte, Uhrzeit, Datum mit oder ohne Zeitanteil, Unterschiede in der Präzession sind die Stilmittel dieses Horrorfilms.
-Verbunden werden mit APIs, die unterschiedlich gut (meist ehr schlecht) sind, aber auf jeden Fall inkompatibel sind, entsteht ein kaum erträglicher Spannungsbogen.
+Verbunden werden sie mit APIs, die unterschiedlich gut (meist ehr schlecht), aber auf jeden Fall inkompatibel sind.
+So entsteht ein kaum erträglicher Spannungsbogen.
 Wenn dann die Datumswerte auch noch in den unbeleuchteten Keller gehen, sprich in der Datenbank gespeichert und wieder geladen werden, mag man sich nur noch die Augen zu halten.
 
 Wir stellen uns unserer Angst und schauen uns das Ganze gründlich an.
+
+Was ist Zeit eigentlich?
+
+Warum ist das so kompliziert?
+
 Welche APIs gibt es, die für Entwickler relevant sind.
+
 Welche Fehler sind darin verbaut und welche Fehler werden bei der Benutzung gemacht.
 
 Ihr nehmt eine ordentliche Portion Wissen über die Fallen bei der Arbeit mit Zeit und Datumswerten mit und habt hoffentlich eine vergnügliche Zeit dabei.
+Praktisch verwendbar wird das vermutlich kaum, da ich mehr Probleme aufzeigen werde als Lösungen.
 
 ## Wir müssen reden - Depression, Suizid und was man tun kann
 
