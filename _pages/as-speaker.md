@@ -17,10 +17,8 @@ If you want me to speak about a different topic, let me know.
 
 # Bio #
 ## Deutsch ##
-Jens Schauder hat vor unglaublich langer Zeit auf einem in Assembler programmierbaren Tischrechner angefangen zu programmieren. 
-Nach über 30 Jahren Arbeit als Softwareentwickler, davon fast 20 als Consultant für meist große Konzerne, hat er 2017 in das Spring Data Team gewechselt. 
-Dort arbeitet er an allem was mit relationalen Datenbanken zu tun hat, erzählt davon auf Konferenzen oder hilft anderen Entwicklern auf Stackoverflow.
-Wenn er nicht programmiert, spielt er, läuft, macht Freeletics, bouldert und wenn die Inzidenz wieder dauerhaft unten ist, organisiert er auch wieder die JUG Ostfalen. Und er schreibt ein Buch über Spring Data JDBC.
+
+Jens Schauder hat vor unglaublich langer Zeit auf einem in Assembler programmierbaren Tischrechner angefangen zu programmieren. 30 Jahre später, davon fast 20 als Consultant für meist große Konzerne, hat er 2017 in das Spring Data Team gewechselt. Dort arbeitet er an allem was mit relationalen Datenbanken zu tun hat, erzählt davon auf Konferenzen oder hilft anderen Entwicklern auf Stackoverflow. Wenn er nicht programmiert, spielt er, läuft, macht Freeletics, bouldert und wenn die Inzidenz wieder dauerhaft unten ist, organisiert er auch wieder die JUG Ostfalen. Und er schreibt ein Buch über Spring Data JDBC.
 
 ## English ##
 A long long time ago in a city far away Jens Schauder started coding on a desktop calculator programmable in assembly. 
