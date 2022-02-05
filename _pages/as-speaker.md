@@ -18,15 +18,15 @@ If you want me to speak about a different topic, let me know.
 # Bio #
 ## Deutsch ##
 Jens Schauder hat vor unglaublich langer Zeit auf einem in Assembler programmierbaren Tischrechner angefangen zu programmieren. 
-Nach über 30 Jahren, davon fast 20 als Consultant für meist große Konzerne, hat er 2017 in das Spring Data Team gewechselt. 
+Nach über 30 Jahren Arbeit als Softwareentwickler, davon fast 20 als Consultant für meist große Konzerne, hat er 2017 in das Spring Data Team gewechselt. 
 Dort arbeitet er an allem was mit relationalen Datenbanken zu tun hat, erzählt davon auf Konferenzen oder hilft anderen Entwicklern auf Stackoverflow.
-Wenn er nicht programmiert, spielt er, läuft, macht Freeletics, bouldert und wenn die Inzidenz wieder dauerhaft unten ist, organisiert er auch wieder die JUG Ostfalen.
+Wenn er nicht programmiert, spielt er, läuft, macht Freeletics, bouldert und wenn die Inzidenz wieder dauerhaft unten ist, organisiert er auch wieder die JUG Ostfalen. Und er schreibt ein Buch über Spring Data JDBC.
 
 ## English ##
 A long long time ago in a city far away Jens Schauder started coding on a desktop calculator programmable in assembly. 
 Over 30 years later, after almost 20 years as a consultant working mostly with huge enterprises, he joined the Spring Data Team. 
 Here he works mainly on the “JPA” and “JDBC” modules and tells about it at conferences or helps other developers on StackOverflow.
-In his spare time he spends time running, bouldering, playing games, torturing himself with Freeletics. And once the pandemic is under control he'll restart the  JUG Ostfalen again.
+In his spare time he spends time running, bouldering, playing games, torturing himself with Freeletics. And once the pandemic is under control he'll restart the  JUG Ostfalen again. And he is writing a book about Spring Data JDBC.
 
 # Talks #
 
