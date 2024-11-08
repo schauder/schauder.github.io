@@ -18,19 +18,56 @@ If you want me to speak about a different topic, let me know.
 # Bio #
 ## Deutsch ##
 
-Jens Schauder hat vor unglaublich langer Zeit auf einem in Assembler programmierbaren Tischrechner angefangen zu programmieren. 30 Jahre später, davon fast 20 als Consultant für meist große Konzerne, hat er 2017 in das Spring Data Team gewechselt. Dort arbeitet er an allem was mit relationalen Datenbanken zu tun hat, erzählt davon auf Konferenzen oder hilft anderen Entwicklern auf Stackoverflow. Wenn er nicht programmiert, spielt er, läuft, macht Freeletics, bouldert und wenn die Inzidenz wieder dauerhaft unten ist, organisiert er auch wieder die JUG Ostfalen. Und er schreibt ein Buch über Spring Data JDBC.
+Jens Schauder hat vor unglaublich langer Zeit auf einem in Assembler programmierbaren Tischrechner angefangen zu programmieren. 30 Jahre später, davon fast 20 als Consultant für meist große Konzerne, hat er 2017 in das Spring Data Team gewechselt. Dort arbeitet er an allem was mit relationalen Datenbanken zu tun hat, erzählt davon auf Konferenzen oder hilft anderen Entwicklern auf Stackoverflow. Wenn er nicht programmiert, spielt er, läuft, macht Freeletics, und bouldert.
 
 ## English ##
 A long long time ago in a city far away Jens Schauder started coding on a desktop calculator programmable in assembly. 
 Over 30 years later, after almost 20 years as a consultant working mostly with huge enterprises, he joined the Spring Data Team. 
 Here he works mainly on the “JPA” and “JDBC” modules and tells about it at conferences or helps other developers on StackOverflow.
-In his spare time he spends time running, bouldering, playing games, torturing himself with Freeletics. And once the pandemic is under control he'll restart the  JUG Ostfalen again. And he is writing a book about Spring Data JDBC.
+In his spare time he spends time running, bouldering, playing games, torturing himself with Freeletics.
 
 # Talks #
 
 I can do all talks in English or German. 
 Most talks therefore exist twice in the following list. 
 If a talk exists only once it just means I submitted it only in language so far.
+
+## Brave New AI World
+
+Major tech companies are investing heavily in artificial intelligence. It seems you can’t even buy a toaster these days without a ChatGPT integration. Everyone is racing to capitalize on AI.
+
+But what exactly is AI?
+Is it truly intelligent, or just advanced pattern recognition?
+What about the legal and environmental implications of this gold rush?
+And how does AI impact society as a whole?
+
+This talk won’t provide all the answers. Instead, it aims to spark conversation, encourage critical thinking, and help us start asking the right questions.
+
+## Schöne neue AI-Welt
+
+Alle großen Tech-Firmen investieren gigantische Summen in künstliche Intelligenz. Mittlerweile scheint es kaum noch möglich, einen Toaster ohne ChatGPT-Integration zu kaufen. Die ganze Branche sucht fieberhaft nach Wegen, mit AI Profit zu machen.
+
+Doch was sind künstliche Intelligenzen eigentlich? Sind sie wirklich intelligent oder erzeugen sie lediglich zufällige Texte? Welche rechtlichen und ökologischen Konsequenzen bringt dieser Goldrausch mit sich? Und wie wird all das unsere Gesellschaft beeinflussen?
+
+Dieser Vortrag wird keine endgültigen Antworten liefern – ganz im Gegenteil. Ziel ist es, gemeinsam Fragen zu stellen, nachzudenken und die wirklich relevanten Themen zu diskutieren.
+
+## Getting Started with Spring AI
+
+Diving into artificial intelligence can feel overwhelming. Terms like models, embeddings, RAG, vector databases, and others may seem cryptic, making it hard to know where to begin.
+
+With Spring AI, integrating AI into your JVM-based application becomes straightforward. Built on the familiar Spring stack, it offers seamless integration and a gentle learning curve.
+
+In this talk, you'll learn how to get started with Spring AI. Along the way, you'll gain a solid understanding of key terminology and concepts, as well as practical insights to kickstart your own AI journey.
+
+## Getting Started mit Spring AI
+
+Der Einstieg in die Welt der Künstlichen Intelligenz (KI) kann einschüchternd wirken. Begriffe wie Modelle, Embeddings, RAG, Vektordatenbanken und viele andere scheinen oft komplex und schwer zugänglich.
+
+Mit Spring AI wird es jedoch einfach, KI in eine JVM-basierte Anwendung zu integrieren. Das Framework baut auf dem bewährten Spring Framework auf und fügt sich nahtlos in bestehende Anwendungen ein.
+
+In diesem Vortrag zeige ich, wie man mit Spring AI Anwendungen entwickelt. Dabei erklären wir die wichtigsten Fachbegriffe und Techniken auf verständliche Weise.
+
+Am Ende des Vortrags wird das Publikum in der Lage sein, eigene Projekte im Bereich KI zu starten.
 
 ## Interesting Times.
 
