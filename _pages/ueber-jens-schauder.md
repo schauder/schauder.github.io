@@ -40,8 +40,8 @@ konzipiert wurde, mittels dessen durch die Platzierung von Werbeanzeigen und Lin
 Werbekostenerstattung verdient werden kann.
 
 If you feel the need to contact me, there are plenty of options in the footer of this page.
-If you feel old school or legal, you can write a letter to Jens Schauder, Schiebeweg 42,
-38116 Braunschweig
+If you feel old school or legal, you can write a letter to Jens Schauder, Hopfengarten 7,
+03044 Cottbus
 
 ### <a name="cookies"></a>Cookies
 
